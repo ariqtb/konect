@@ -1,0 +1,161 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e4]:
+    - generic [ref=f5e5]:
+      - img "SIMKOPDES" [ref=f5e7]
+      - heading "Dashboard Rapat Anggota Tahunan Koperasi" [level=1] [ref=f5e9]
+      - generic [ref=f5e11]:
+        - generic [ref=f5e12]:
+          - generic [ref=f5e13]: Tahun
+          - generic [ref=f5e15]:
+            - textbox "Select year" [ref=f5e16]: "2025"
+            - generic:
+              - img "calendar":
+                - img
+        - generic [ref=f5e17]: 🕐 9 Juli 2026 | 14:04 WIB
+    - generic [ref=f5e18]:
+      - generic [ref=f5e19]:
+        - generic [ref=f5e20]:
+          - generic [ref=f5e21]:
+            - generic [ref=f5e22]:
+              - heading "Total Koperasi Telah Melaksanakan RAT" [level=2] [ref=f5e23]
+              - button "reload" [ref=f5e24] [cursor=pointer]:
+                - img "reload" [ref=f5e26]:
+                  - img [ref=f5e27]
+            - generic [ref=f5e29]:
+              - generic [ref=f5e30]:
+                - paragraph [ref=f5e31]: Total RAT dilaporkan
+                - paragraph [ref=f5e32]: "0"
+              - generic [ref=f5e33]:
+                - paragraph [ref=f5e34]: Total diverifikasi Dinas
+                - paragraph [ref=f5e35]: "0"
+          - generic [ref=f5e36]:
+            - generic [ref=f5e37]:
+              - heading "Koperasi Sedang RAT (draft)" [level=3] [ref=f5e38]
+              - paragraph [ref=f5e39]: "0"
+            - generic [ref=f5e40]:
+              - heading "Koperasi Belum RAT" [level=3] [ref=f5e41]
+              - paragraph [ref=f5e42]: "0"
+        - generic [ref=f5e43]:
+          - generic [ref=f5e44]:
+            - heading "Perkembangan Harian RAT" [level=2] [ref=f5e45]
+            - generic [ref=f5e46]:
+              - textbox "Start date" [ref=f5e48]: 01/01/2026
+              - generic "to" [ref=f5e50]:
+                - img "swap-right" [ref=f5e51]:
+                  - img [ref=f5e52]
+              - textbox "End date" [ref=f5e55]: 10/07/2026
+              - generic:
+                - img "calendar":
+                  - img
+          - generic [ref=f5e58]:
+            - img [ref=f5e59]:
+              - generic [ref=f5e64]:
+                - generic [ref=f5e66]: 02/01
+                - generic [ref=f5e68]: 11/01
+                - generic [ref=f5e70]: 19/01
+                - generic [ref=f5e72]: 28/01
+                - generic [ref=f5e74]: 06/02
+                - generic [ref=f5e76]: 15/02
+                - generic [ref=f5e78]: 24/02
+                - generic [ref=f5e80]: 05/03
+                - generic [ref=f5e82]: 14/03
+                - generic [ref=f5e84]: 23/03
+                - generic [ref=f5e86]: 01/04
+                - generic [ref=f5e88]: 10/04
+                - generic [ref=f5e90]: 19/04
+                - generic [ref=f5e92]: 28/04
+                - generic [ref=f5e94]: 07/05
+                - generic [ref=f5e96]: 16/05
+                - generic [ref=f5e98]: 25/05
+                - generic [ref=f5e100]: 04/06
+                - generic [ref=f5e102]: 13/06
+                - generic [ref=f5e104]: 22/06
+                - generic [ref=f5e106]: 01/07
+                - generic [ref=f5e108]: 10/07
+              - generic [ref=f5e110]:
+                - generic [ref=f5e112]: "0"
+                - generic [ref=f5e114]: "20.000"
+                - generic [ref=f5e116]: "40.000"
+                - generic [ref=f5e118]: "60.000"
+                - generic [ref=f5e120]: "80.000"
+            - list [ref=f5e122]:
+              - listitem [ref=f5e123]:
+                - img [ref=f5e124]
+                - text: Sudah RAT
+              - listitem [ref=f5e126]:
+                - img [ref=f5e127]
+                - text: Terverifikasi
+              - listitem [ref=f5e129]:
+                - img [ref=f5e130]
+                - text: Sedang RAT
+      - generic [ref=f5e133]:
+        - generic [ref=f5e134]:
+          - heading "Data Rapat Anggota Tahunan Berdasarkan Provinsi" [level=2] [ref=f5e135]
+          - button "reload" [ref=f5e136] [cursor=pointer]:
+            - img "reload" [ref=f5e138]:
+              - img [ref=f5e139]
+        - generic [ref=f5e146]:
+          - table [ref=f5e148]:
+            - rowgroup [ref=f5e151]:
+              - row "Provinsi Total koperasi yang telah melaksanakan RAT Koperasi Sedang RAT (draft) Koperasi Belum RAT" [ref=f5e152]:
+                - columnheader "Provinsi" [ref=f5e153]
+                - columnheader "Total koperasi yang telah melaksanakan RAT" [ref=f5e154]
+                - columnheader "Koperasi Sedang RAT (draft)" [ref=f5e155] [cursor=pointer]:
+                  - generic [ref=f5e156]:
+                    - generic [ref=f5e158]: Koperasi Sedang RAT (draft)
+                    - generic [ref=f5e161]:
+                      - img [ref=f5e162]:
+                        - img [ref=f5e163]
+                      - img [ref=f5e165]:
+                        - img [ref=f5e166]
+                - columnheader "Koperasi Belum RAT" [ref=f5e168]
+              - row "Total RAT dilaporkan Total diverifikasi Dinas" [ref=f5e169]:
+                - columnheader "Total RAT dilaporkan" [ref=f5e170] [cursor=pointer]:
+                  - generic [ref=f5e171]:
+                    - generic [ref=f5e172]: Total RAT dilaporkan
+                    - generic [ref=f5e174]:
+                      - img [ref=f5e175]:
+                        - img [ref=f5e176]
+                      - img [ref=f5e178]:
+                        - img [ref=f5e179]
+                - columnheader "Total diverifikasi Dinas" [ref=f5e181] [cursor=pointer]:
+                  - generic [ref=f5e182]:
+                    - generic [ref=f5e183]: Total diverifikasi Dinas
+                    - generic [ref=f5e185]:
+                      - img [ref=f5e186]:
+                        - img [ref=f5e187]
+                      - img [ref=f5e189]:
+                        - img [ref=f5e190]
+          - table [ref=f5e193]:
+            - rowgroup [ref=f5e196]:
+              - generic:
+                - generic: Total RAT dilaporkan
+                - generic:
+                  - generic:
+                    - img:
+                      - img
+                    - img:
+                      - img
+              - generic:
+                - generic: Total diverifikasi Dinas
+                - generic:
+                  - generic:
+                    - img:
+                      - img
+                    - img:
+                      - img
+              - generic:
+                - generic:
+                  - generic: Koperasi Sedang RAT (draft)
+                - generic:
+                  - generic:
+                    - img:
+                      - img
+                    - img:
+                      - img
+              - row "No data No data" [ref=f5e197]:
+                - cell "No data No data" [ref=f5e198]:
+                  - generic [ref=f5e199]:
+                    - img "No data" [ref=f5e201]
+                    - generic [ref=f5e207]: No data
+  - alert [ref=f5e208]

@@ -1,0 +1,38 @@
+- generic [ref=f6e2]:
+  - iframe [ref=f6e5]:
+    - generic [ref=f7e11]:
+      - heading "4 Temuan Kunci" [level=2] [ref=f7e12]
+      - generic [ref=f7e13]:
+        - generic [ref=f7e14]:
+          - generic [ref=f7e15]: "83.382"
+          - generic [ref=f7e16]:
+            - text: Koperasi Terbentuk
+            - text: 104,2% dari target awal
+        - generic [ref=f7e17]:
+          - generic [ref=f7e18]: 91,1%
+          - generic [ref=f7e19]:
+            - text: Tidak Sehat
+            - text: dari 31.265 pelapor
+        - generic [ref=f7e20]:
+          - generic [ref=f7e21]: Rp 85,26 M
+          - generic [ref=f7e22]:
+            - text: Total Pendapatan
+            - text: Rp 2,7 jt/koperasi
+        - generic [ref=f7e23]:
+          - generic [ref=f7e24]: "5"
+          - generic [ref=f7e25]:
+            - text: Korban Jiwa Latsarmil
+            - text: 10 hari pertama
+  - generic [ref=f6e59]:
+    - button "Mute" [ref=f6e60] [cursor=pointer]:
+      - img [ref=f6e61]
+      - text: Mute
+    - button "Previous slide" [ref=f6e66] [cursor=pointer]: ‹ Previous slide
+    - generic "Slide 2 of 10" [ref=f6e67]: 2 / 10
+    - button "Next slide" [ref=f6e68] [cursor=pointer]: › Next slide
+    - button "Present" [ref=f6e70] [cursor=pointer]:
+      - img [ref=f6e71]
+      - text: Present
+    - button "Full screen" [ref=f6e74] [cursor=pointer]:
+      - img [ref=f6e75]
+      - text: Full screen

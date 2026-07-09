@@ -1,0 +1,282 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "Koperasi" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "Koperasi" [ref=e8]
+        - generic [ref=e9]:
+          - generic [ref=e10]:
+            - button "down Beranda" [ref=e11] [cursor=pointer]:
+              - img "down" [ref=e13]:
+                - img [ref=e14]
+              - generic [ref=e16]: Beranda
+            - generic:
+              - button "Kontak"
+              - button "Warta Koperasi"
+              - button "Game"
+          - link "Statistik" [ref=e17] [cursor=pointer]:
+            - /url: /pers/dashboard
+          - link "Corporate University" [ref=e18] [cursor=pointer]:
+            - /url: https://lms.kop.go.id/
+          - link "Coop Trade" [ref=e19] [cursor=pointer]:
+            - /url: https://trade.simkopdes.go.id/
+          - link "Masuk" [ref=e20] [cursor=pointer]:
+            - /url: /masuk
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - heading "Dashboard Statistik" [level=1] [ref=e23]
+        - paragraph [ref=e24]: Seberapa siap Koperasi Desa/Kelurahan Merah Putih menjalankan bisnis?
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e28]:
+            - paragraph [ref=e29]: "0"
+            - paragraph [ref=e30]: Total Koperasi
+          - img "apartment" [ref=e33]:
+            - img [ref=e34]
+        - generic [ref=e36]:
+          - generic [ref=e38]:
+            - paragraph [ref=e39]: "0"
+            - paragraph [ref=e40]: Koperasi Telah Memiliki Akun
+          - img "solution" [ref=e43]:
+            - img [ref=e44]
+        - generic [ref=e46]:
+          - generic [ref=e48]:
+            - paragraph [ref=e49]: "0"
+            - paragraph [ref=e50]: Koperasi Memiliki NPWP
+          - img "fund" [ref=e53]:
+            - img [ref=e54]
+        - generic [ref=e56]:
+          - generic [ref=e58]:
+            - paragraph [ref=e59]: "0"
+            - paragraph [ref=e60]: Koperasi Memiliki NIB
+          - img "shop" [ref=e63]:
+            - img [ref=e64]
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - heading "Persebaran Wilayah" [level=2] [ref=e69]
+            - time [ref=e70]: "Status data: 09/07/2026"
+          - generic [ref=e71]:
+            - button "loading Muat Ulang Data" [ref=e72]:
+              - generic:
+                - img "loading"
+              - generic [ref=e73]: Muat Ulang Data
+            - generic [ref=e74]:
+              - generic [ref=e75]: Auto Refresh (30 menit)
+              - switch [ref=e76] [cursor=pointer]
+        - generic [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e82]: "Level: Provinsi"
+            - generic [ref=e84]: Klik titik Provinsi untuk lihat Kabupaten/Kota
+          - generic [ref=e86]:
+            - generic:
+              - generic [ref=e87]:
+                - button "Zoom in" [ref=e88] [cursor=pointer]: +
+                - button "Zoom out" [disabled] [ref=e89]: −
+              - button "Layers" [ref=e91] [cursor=pointer]
+              - generic:
+                - generic [ref=e92]:
+                  - generic [ref=e93]: Legenda
+                  - generic [ref=e94]:
+                    - generic [ref=e95]: "#"
+                    - generic [ref=e96]: Bubble jumlah koperasi
+                - generic [ref=e97]:
+                  - link "Leaflet" [ref=e98] [cursor=pointer]:
+                    - /url: https://leafletjs.com
+                    - img [ref=e99]
+                    - text: Leaflet
+                  - text: "| Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+      - generic [ref=e111]:
+        - paragraph [ref=e112]: Filter Data Tahunan
+        - generic [ref=e113] [cursor=pointer]:
+          - generic [ref=e115]:
+            - combobox [ref=e117]
+            - generic "2026"
+          - generic:
+            - img:
+              - img
+      - generic [ref=e118]:
+        - heading "Modal Koperasi" [level=3] [ref=e120]
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - img "fund" [ref=e124]:
+              - img [ref=e125]
+            - generic [ref=e127]:
+              - paragraph [ref=e128]: Simpanan Pokok
+              - paragraph [ref=e129]: "0"
+          - generic [ref=e130]:
+            - img "shop" [ref=e132]:
+              - img [ref=e133]
+            - generic [ref=e135]:
+              - paragraph [ref=e136]: Simpanan Wajib
+              - paragraph [ref=e137]: "0"
+      - generic [ref=e138]:
+        - generic [ref=e139]:
+          - heading "Dampak Ekonomi" [level=3] [ref=e141]
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - img "fund" [ref=e145]:
+                - img [ref=e146]
+              - generic [ref=e148]:
+                - paragraph [ref=e149]: Volume Transaksi (2026)
+                - paragraph [ref=e150]: "0"
+            - generic [ref=e151]:
+              - img "shop" [ref=e153]:
+                - img [ref=e154]
+              - generic [ref=e156]:
+                - paragraph [ref=e157]: Nilai Transaksi (2026)
+                - paragraph [ref=e158]: "0"
+          - table [ref=e160]:
+            - rowgroup [ref=e161]:
+              - row "No Nama Produk Volume Transaksi (2026) Nilai Transaksi (2026)" [ref=e162]:
+                - columnheader "No" [ref=e163]
+                - columnheader "Nama Produk" [ref=e164]
+                - columnheader "Volume Transaksi (2026)" [ref=e165]
+                - columnheader "Nilai Transaksi (2026)" [ref=e166]
+            - rowgroup
+        - generic [ref=e167]:
+          - heading "Aktivitas Rapat Anggota Tahunan" [level=3] [ref=e169]
+          - generic [ref=e170]:
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - paragraph [ref=e173]: "0"
+                - paragraph [ref=e174]: Koperasi Telah Melaksanakan RAT
+              - generic [ref=e175]:
+                - paragraph [ref=e176]: Total RAT dilaporkan
+                - paragraph [ref=e177]: 0Laporan
+              - generic [ref=e178]:
+                - paragraph [ref=e179]: Total diverifikasi Dinas
+                - paragraph [ref=e180]: 0Koperasi
+            - generic [ref=e181]:
+              - paragraph [ref=e182]: "0"
+              - paragraph [ref=e183]: Koperasi Sedang RAT (draft)
+            - generic [ref=e184]:
+              - paragraph [ref=e185]: "0"
+              - paragraph [ref=e186]: Koperasi Belum RAT
+      - generic [ref=e187]:
+        - generic [ref=e188]:
+          - heading "Kesiapan Pembangunan Gerai" [level=3] [ref=e189]
+          - link "Selengkapnya right" [ref=e190] [cursor=pointer]:
+            - /url: /pers/asset/statistik
+            - button "Selengkapnya right" [ref=e191]:
+              - generic [ref=e192]: Selengkapnya
+              - img "right" [ref=e193]:
+                - img [ref=e194]
+        - paragraph [ref=e196]: "Data Berdasarkan: -"
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - paragraph
+            - paragraph [ref=e199]: ⁠Lahan yang diajukan
+          - generic [ref=e200]:
+            - paragraph [ref=e201]: NaN
+            - paragraph [ref=e202]: Belum Diverifikasi
+          - generic [ref=e203]:
+            - paragraph
+            - paragraph [ref=e204]: Terverifikasi
+            - generic [ref=e205]:
+              - generic [ref=e206]:
+                - paragraph
+                - paragraph [ref=e207]: Belum Mulai Pembangunan
+              - generic [ref=e208]:
+                - paragraph
+                - paragraph [ref=e209]: Sedang Pembangunan
+          - generic [ref=e210]:
+            - paragraph
+            - paragraph [ref=e211]: Pembangunan 100%
+      - generic [ref=e212]:
+        - generic [ref=e213]:
+          - heading "Data Wilayah Provinsi" [level=3] [ref=e215]
+          - generic [ref=e217]:
+            - searchbox "Cari wilayah..." [ref=e219]
+            - button "search" [ref=e222] [cursor=pointer]:
+              - img "search" [ref=e224]:
+                - img [ref=e225]
+        - generic [ref=e228]:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - table:
+                    - rowgroup:
+                      - row "No Provinsi Jumlah Koperasi Koperasi Memiliki NIB Koperasi Memiliki NPWP Koperasi Telah RAT (2025) Simpanan Pokok Simpanan Wajib Volume Transaksi (2026) Nilai Transaksi (2026) Pemetahaan Lahan Pemetahaan Lahan (%) Pembangunan Gerai (%)":
+                        - columnheader "No"
+                        - columnheader "Provinsi"
+                        - columnheader "Jumlah Koperasi"
+                        - columnheader "Koperasi Memiliki NIB"
+                        - columnheader "Koperasi Memiliki NPWP"
+                        - columnheader "Koperasi Telah RAT (2025)"
+                        - columnheader "Simpanan Pokok"
+                        - columnheader "Simpanan Wajib"
+                        - columnheader "Volume Transaksi (2026)"
+                        - columnheader "Nilai Transaksi (2026)"
+                        - columnheader "Pemetahaan Lahan"
+                        - columnheader "Pemetahaan Lahan (%)"
+                        - columnheader "Pembangunan Gerai (%)"
+                    - rowgroup:
+                      - row "No data No data":
+                        - cell "No data No data":
+                          - generic:
+                            - generic:
+                              - img "No data"
+                            - generic: No data
+    - contentinfo [ref=e236]:
+      - generic [ref=e238]:
+        - generic [ref=e239]:
+          - heading "Tautan Cepat" [level=3] [ref=e240]
+          - list [ref=e241]:
+            - listitem [ref=e242]:
+              - link "Dasbor Simkopdes" [ref=e243] [cursor=pointer]:
+                - /url: /pers/dashboard
+            - listitem [ref=e244]:
+              - link "Unduh Simkopdes Mobile" [ref=e245] [cursor=pointer]:
+                - /url: /apps
+            - listitem [ref=e246]:
+              - link "Kemenkop Corporate University" [ref=e247] [cursor=pointer]:
+                - /url: https://lms.kop.go.id/
+            - listitem [ref=e248]:
+              - link "Coop Trade" [ref=e249] [cursor=pointer]:
+                - /url: https://trade.simkopdes.go.id/
+            - listitem [ref=e250]:
+              - link "Game" [ref=e251] [cursor=pointer]:
+                - /url: /game
+        - generic [ref=e252]:
+          - heading "Informasi" [level=3] [ref=e253]
+          - list [ref=e254]:
+            - listitem [ref=e255]:
+              - link "Kontak Satgas Koperasi Desa/Kelurahan Merah Putih" [ref=e256] [cursor=pointer]:
+                - /url: /kontak
+            - listitem [ref=e257]:
+              - link "Bantuan Simkopdes" [ref=e258] [cursor=pointer]:
+                - /url: https://wa.me/628111500587?text=Halo%20Helpdesk%20SIMKOPDES%20%F0%9F%91%8B%0ASaya%20ingin%20melaporkan%20kendala%20dengan%20detail%20berikut%3A%0ANama%3A%20%0AEmail%3A%20%0ANama%20Koperasi%20%3A%20%0AKendala%3A%20%0ABukti%20(Foto%2FVideo)%3A%20%0A%0ATerima%20kasih
+            - listitem [ref=e259]:
+              - link "Warta Koperasi Desa/Kelurahan Merah Putih" [ref=e260] [cursor=pointer]:
+                - /url: /pers/berita
+            - listitem [ref=e261]:
+              - link "Penyedia Layanan" [ref=e262] [cursor=pointer]:
+                - /url: /technology-provider-member
+            - listitem [ref=e263]:
+              - link "Syarat dan Ketentuan" [ref=e264] [cursor=pointer]:
+                - /url: /syarat-dan-ketentuan
+        - generic [ref=e265]:
+          - heading "Media Sosial" [level=3] [ref=e266]
+          - generic [ref=e269]:
+            - link "TikTok" [ref=e270] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@kemenkopri
+            - link "YouTube" [ref=e271] [cursor=pointer]:
+              - /url: https://www.youtube.com/@KemenkopRI
+            - link "X" [ref=e272] [cursor=pointer]:
+              - /url: https://twitter.com/kemenkop_
+            - link "Facebook" [ref=e273] [cursor=pointer]:
+              - /url: https://www.facebook.com/kemenkopukm
+            - link "Instagram" [ref=e274] [cursor=pointer]:
+              - /url: https://www.instagram.com/kemenkop/
+        - generic [ref=e275]:
+          - heading "Satgas KDKMP" [level=3] [ref=e276]
+          - generic [ref=e277]:
+            - img "Logo mitra Satgas KDKMP" [ref=e279]
+            - generic [ref=e280]:
+              - paragraph [ref=e281]: Alamat
+              - paragraph [ref=e282]: Graha Mandiri Lt.3, Jl. Imam Bonjol No.61, RT.8/RW.4, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310
+      - paragraph [ref=e285]: © 2026. Deputi Bidang Kelembagaan dan Digitalisasi Koperasi Kementerian Koperasi
+  - alert [ref=e286]

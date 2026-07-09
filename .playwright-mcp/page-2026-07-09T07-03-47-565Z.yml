@@ -1,0 +1,1140 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "Koperasi" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "Koperasi" [ref=e8]
+        - generic [ref=e9]:
+          - generic [ref=e10]:
+            - button "down Beranda" [ref=e11] [cursor=pointer]:
+              - img "down" [ref=e13]:
+                - img [ref=e14]
+              - generic [ref=e16]: Beranda
+            - generic:
+              - button "Kontak"
+              - button "Warta Koperasi"
+              - button "Game"
+          - link "Statistik" [ref=e17] [cursor=pointer]:
+            - /url: /pers/dashboard
+          - link "Corporate University" [ref=e18] [cursor=pointer]:
+            - /url: https://lms.kop.go.id/
+          - link "Coop Trade" [ref=e19] [cursor=pointer]:
+            - /url: https://trade.simkopdes.go.id/
+          - link "Masuk" [ref=e20] [cursor=pointer]:
+            - /url: /masuk
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - heading "Dashboard Statistik" [level=1] [ref=e23]
+        - paragraph [ref=e24]: Seberapa siap Koperasi Desa/Kelurahan Merah Putih menjalankan bisnis?
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e28]:
+            - paragraph [ref=e29]: "83.382"
+            - paragraph [ref=e30]: Total Koperasi
+          - img "apartment" [ref=e33]:
+            - img [ref=e34]
+        - generic [ref=e36]:
+          - generic [ref=e38]:
+            - paragraph [ref=e39]: "79.706"
+            - paragraph [ref=e40]: Koperasi Telah Memiliki Akun
+          - img "solution" [ref=e43]:
+            - img [ref=e44]
+        - generic [ref=e46]:
+          - generic [ref=e48]:
+            - paragraph [ref=e49]: "80.978"
+            - paragraph [ref=e50]: Koperasi Memiliki NPWP
+          - img "fund" [ref=e53]:
+            - img [ref=e54]
+        - generic [ref=e56]:
+          - generic [ref=e58]:
+            - paragraph [ref=e59]: "60.773"
+            - paragraph [ref=e60]: Koperasi Memiliki NIB
+          - img "shop" [ref=e63]:
+            - img [ref=e64]
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - heading "Persebaran Wilayah" [level=2] [ref=e69]
+            - time [ref=e70]: "Status data: 09/07/2026"
+          - generic [ref=e71]:
+            - button "Muat Ulang Data" [ref=e287] [cursor=pointer]:
+              - generic [ref=e73]: Muat Ulang Data
+            - generic [ref=e74]:
+              - generic [ref=e75]: Auto Refresh (30 menit)
+              - switch [ref=e76] [cursor=pointer]
+        - generic [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e82]: "Level: Provinsi"
+            - generic [ref=e84]: Klik titik Provinsi untuk lihat Kabupaten/Kota
+          - generic [ref=e86]:
+            - generic:
+              - generic:
+                - button "6534" [ref=e288] [cursor=pointer]:
+                  - generic [ref=e289]: "6534"
+                - button "718" [ref=e290] [cursor=pointer]:
+                  - generic [ref=e291]: "718"
+                - button "1553" [ref=e292] [cursor=pointer]:
+                  - generic [ref=e293]: "1553"
+                - button "1508" [ref=e294] [cursor=pointer]:
+                  - generic [ref=e295]: "1508"
+                - button "438" [ref=e296] [cursor=pointer]:
+                  - generic [ref=e297]: "438"
+                - button "268" [ref=e298] [cursor=pointer]:
+                  - generic [ref=e299]: "268"
+                - button "731" [ref=e300] [cursor=pointer]:
+                  - generic [ref=e301]: "731"
+                - button "1591" [ref=e302] [cursor=pointer]:
+                  - generic [ref=e303]: "1591"
+                - button "5970" [ref=e304] [cursor=pointer]:
+                  - generic [ref=e305]: "5970"
+                - button "8524" [ref=e306] [cursor=pointer]:
+                  - generic [ref=e307]: "8524"
+                - button "8494" [ref=e308] [cursor=pointer]:
+                  - generic [ref=e309]: "8494"
+                - button "2156" [ref=e310] [cursor=pointer]:
+                  - generic [ref=e311]: "2156"
+                - button "2013" [ref=e312] [cursor=pointer]:
+                  - generic [ref=e313]: "2013"
+                - button "1543" [ref=e314] [cursor=pointer]:
+                  - generic [ref=e315]: "1543"
+                - button "1037" [ref=e316] [cursor=pointer]:
+                  - generic [ref=e317]: "1037"
+                - button "411" [ref=e318] [cursor=pointer]:
+                  - generic [ref=e319]: "411"
+                - button "393" [ref=e320] [cursor=pointer]:
+                  - generic [ref=e321]: "393"
+                - button "407" [ref=e322] [cursor=pointer]:
+                  - generic [ref=e323]: "407"
+                - button "2651" [ref=e324] [cursor=pointer]:
+                  - generic [ref=e325]: "2651"
+                - button "1236" [ref=e326] [cursor=pointer]:
+                  - generic [ref=e327]: "1236"
+                - button "1191" [ref=e328] [cursor=pointer]:
+                  - generic [ref=e329]: "1191"
+                - button "1172" [ref=e330] [cursor=pointer]:
+                  - generic [ref=e331]: "1172"
+                - button "3452" [ref=e332] [cursor=pointer]:
+                  - generic [ref=e333]: "3452"
+                - button "985" [ref=e334] [cursor=pointer]:
+                  - generic [ref=e335]: "985"
+                - button "826" [ref=e336] [cursor=pointer]:
+                  - generic [ref=e337]: "826"
+                - button "1024" [ref=e338] [cursor=pointer]:
+                  - generic [ref=e339]: "1024"
+                - button "2387" [ref=e340] [cursor=pointer]:
+                  - generic [ref=e341]: "2387"
+                - button "640" [ref=e342] [cursor=pointer]:
+                  - generic [ref=e343]: "640"
+                - button "1200" [ref=e344] [cursor=pointer]:
+                  - generic [ref=e345]: "1200"
+                - button "1866" [ref=e346] [cursor=pointer]:
+                  - generic [ref=e347]: "1866"
+                - button "648" [ref=e348] [cursor=pointer]:
+                  - generic [ref=e349]: "648"
+                - button "3081" [ref=e350] [cursor=pointer]:
+                  - generic [ref=e351]: "3081"
+                - button "1983" [ref=e352] [cursor=pointer]:
+                  - generic [ref=e353]: "1983"
+                - button "2273" [ref=e354] [cursor=pointer]:
+                  - generic [ref=e355]: "2273"
+                - button "1839" [ref=e356] [cursor=pointer]:
+                  - generic [ref=e357]: "1839"
+                - button "1270" [ref=e358] [cursor=pointer]:
+                  - generic [ref=e359]: "1270"
+                - button "3267" [ref=e360] [cursor=pointer]:
+                  - generic [ref=e361]: "3267"
+                - button "6102" [ref=e362] [cursor=pointer]:
+                  - generic [ref=e363]: "6102"
+            - generic:
+              - generic [ref=e87]:
+                - button "Zoom in" [ref=e88] [cursor=pointer]: +
+                - button "Zoom out" [disabled] [ref=e89]: −
+              - button "Layers" [ref=e91] [cursor=pointer]
+              - generic:
+                - generic [ref=e364]:
+                  - generic [ref=e365]: Legenda
+                  - generic [ref=e366]:
+                    - generic [ref=e367]: "#"
+                    - generic [ref=e368]: Bubble jumlah koperasi
+                - generic [ref=e97]:
+                  - link "Leaflet" [ref=e98] [cursor=pointer]:
+                    - /url: https://leafletjs.com
+                    - img [ref=e99]
+                    - text: Leaflet
+                  - text: "| Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+      - generic [ref=e111]:
+        - paragraph [ref=e112]: Filter Data Tahunan
+        - generic [ref=e113] [cursor=pointer]:
+          - generic [ref=e115]:
+            - combobox [ref=e117]
+            - generic "2026" [ref=e369]
+          - generic:
+            - img:
+              - img
+      - generic [ref=e118]:
+        - heading "Modal Koperasi" [level=3] [ref=e120]
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - img "fund" [ref=e124]:
+              - img [ref=e125]
+            - generic [ref=e127]:
+              - paragraph [ref=e128]: Simpanan Pokok
+              - paragraph [ref=e129]: 41.514.541.015
+          - generic [ref=e130]:
+            - img "shop" [ref=e132]:
+              - img [ref=e133]
+            - generic [ref=e135]:
+              - paragraph [ref=e136]: Simpanan Wajib
+              - paragraph [ref=e137]: 10.374.248.180
+      - generic [ref=e138]:
+        - generic [ref=e139]:
+          - heading "Dampak Ekonomi" [level=3] [ref=e141]
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - img "fund" [ref=e145]:
+                - img [ref=e146]
+              - generic [ref=e148]:
+                - paragraph [ref=e149]: Volume Transaksi (2026)
+                - paragraph [ref=e150]: "53.262"
+            - generic [ref=e151]:
+              - img "shop" [ref=e153]:
+                - img [ref=e154]
+              - generic [ref=e156]:
+                - paragraph [ref=e157]: Nilai Transaksi (2026)
+                - paragraph [ref=e158]: 56.571.080.135
+          - table [ref=e160]:
+            - rowgroup [ref=e161]:
+              - row "No Nama Produk Volume Transaksi (2026) Nilai Transaksi (2026)" [ref=e162]:
+                - columnheader "No" [ref=e163]
+                - columnheader "Nama Produk" [ref=e164]
+                - columnheader "Volume Transaksi (2026)" [ref=e165]
+                - columnheader "Nilai Transaksi (2026)" [ref=e166]
+            - rowgroup [ref=e370]:
+              - row "1 Pupuk NPK Phonska 8.178.733 Rp 15.093.051.120" [ref=e371]:
+                - cell "1" [ref=e372]
+                - cell "Pupuk NPK Phonska" [ref=e373]
+                - cell "8.178.733" [ref=e374]
+                - cell "Rp 15.093.051.120" [ref=e375]
+              - row "2 Pupuk Urea N 46% 6.206.984 Rp 11.272.048.800" [ref=e376]:
+                - cell "2" [ref=e377]
+                - cell "Pupuk Urea N 46%" [ref=e378]
+                - cell "6.206.984" [ref=e379]
+                - cell "Rp 11.272.048.800" [ref=e380]
+              - row "3 BARANG LAINNYA 525.272 Rp 7.900.985.061,25" [ref=e381]:
+                - cell "3" [ref=e382]
+                - cell "BARANG LAINNYA" [ref=e383]
+                - cell "525.272" [ref=e384]
+                - cell "Rp 7.900.985.061,25" [ref=e385]
+              - row "4 MINYAK GORENG BIMOLI 2L 598 Rp 3.627.964.240" [ref=e386]:
+                - cell "4" [ref=e387]
+                - cell "MINYAK GORENG BIMOLI 2L" [ref=e388]
+                - cell "598" [ref=e389]
+                - cell "Rp 3.627.964.240" [ref=e390]
+              - row "5 BERAS MEDIUM SPHP 5 KG 54.549 Rp 2.417.089.253" [ref=e391]:
+                - cell "5" [ref=e392]
+                - cell "BERAS MEDIUM SPHP 5 KG" [ref=e393]
+                - cell "54.549" [ref=e394]
+                - cell "Rp 2.417.089.253" [ref=e395]
+              - row "6 BERAS 26.970 Rp 1.138.097.939,97" [ref=e396]:
+                - cell "6" [ref=e397]
+                - cell "BERAS" [ref=e398]
+                - cell "26.970" [ref=e399]
+                - cell "Rp 1.138.097.939,97" [ref=e400]
+              - row "7 SUNCO MINYAK GORENG POUCH 2L 11.362 Rp 501.741.040,74" [ref=e401]:
+                - cell "7" [ref=e402]
+                - cell "SUNCO MINYAK GORENG POUCH 2L" [ref=e403]
+                - cell "11.362" [ref=e404]
+                - cell "Rp 501.741.040,74" [ref=e405]
+              - row "8 GAS LPG 3 KG 25.423 Rp 476.901.231" [ref=e406]:
+                - cell "8" [ref=e407]
+                - cell "GAS LPG 3 KG" [ref=e408]
+                - cell "25.423" [ref=e409]
+                - cell "Rp 476.901.231" [ref=e410]
+              - row "9 GULA KTM 1KG 16.204 Rp 284.781.730,87" [ref=e411]:
+                - cell "9" [ref=e412]
+                - cell "GULA KTM 1KG" [ref=e413]
+                - cell "16.204" [ref=e414]
+                - cell "Rp 284.781.730,87" [ref=e415]
+              - row "10 FILTER SURYA MERAH 12 10.306 Rp 271.455.224,91" [ref=e416]:
+                - cell "10" [ref=e417]
+                - cell "FILTER SURYA MERAH 12" [ref=e418]
+                - cell "10.306" [ref=e419]
+                - cell "Rp 271.455.224,91" [ref=e420]
+        - generic [ref=e167]:
+          - heading "Aktivitas Rapat Anggota Tahunan" [level=3] [ref=e169]
+          - generic [ref=e170]:
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - paragraph [ref=e173]: "50.264"
+                - paragraph [ref=e174]: Koperasi Telah Melaksanakan RAT
+              - generic [ref=e175]:
+                - paragraph [ref=e176]: Total RAT dilaporkan
+                - paragraph [ref=e177]: 6.037Laporan
+              - generic [ref=e178]:
+                - paragraph [ref=e179]: Total diverifikasi Dinas
+                - paragraph [ref=e180]: 44.227Koperasi
+            - generic [ref=e181]:
+              - paragraph [ref=e182]: "14.346"
+              - paragraph [ref=e183]: Koperasi Sedang RAT (draft)
+            - generic [ref=e184]:
+              - paragraph [ref=e185]: "18.772"
+              - paragraph [ref=e186]: Koperasi Belum RAT
+      - generic [ref=e187]:
+        - generic [ref=e188]:
+          - heading "Kesiapan Pembangunan Gerai" [level=3] [ref=e189]
+          - link "Selengkapnya right" [ref=e190] [cursor=pointer]:
+            - /url: /pers/asset/statistik
+            - button "Selengkapnya right" [ref=e191]:
+              - generic [ref=e192]: Selengkapnya
+              - img "right" [ref=e193]:
+                - img [ref=e194]
+        - paragraph [ref=e196]: "Data Berdasarkan: 09 Juli 2026 pukul 14.03"
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - paragraph [ref=e421]: "38053"
+            - paragraph [ref=e199]: ⁠Lahan yang diajukan
+          - generic [ref=e200]:
+            - paragraph [ref=e201]: "2183"
+            - paragraph [ref=e202]: Belum Diverifikasi
+          - generic [ref=e203]:
+            - paragraph [ref=e422]: "35870"
+            - paragraph [ref=e204]: Terverifikasi
+            - generic [ref=e205]:
+              - generic [ref=e206]:
+                - paragraph [ref=e423]: "492"
+                - paragraph [ref=e207]: Belum Mulai Pembangunan
+              - generic [ref=e208]:
+                - paragraph [ref=e424]: "19845"
+                - paragraph [ref=e209]: Sedang Pembangunan
+          - generic [ref=e210]:
+            - paragraph [ref=e425]: "15533"
+            - paragraph [ref=e211]: Pembangunan 100%
+      - generic [ref=e212]:
+        - generic [ref=e213]:
+          - heading "Data Wilayah Provinsi" [level=3] [ref=e215]
+          - generic [ref=e217]:
+            - searchbox "Cari wilayah..." [ref=e219]
+            - button "search" [ref=e222] [cursor=pointer]:
+              - img "search" [ref=e224]:
+                - img [ref=e225]
+        - generic [ref=e428]:
+          - table [ref=e432]:
+            - rowgroup [ref=e447]:
+              - row "No Provinsi Jumlah Koperasi Koperasi Memiliki NIB Koperasi Memiliki NPWP Koperasi Telah RAT (2025) Simpanan Pokok Simpanan Wajib Volume Transaksi (2026) Nilai Transaksi (2026) Pemetahaan Lahan Pemetahaan Lahan (%) Pembangunan Gerai (%)" [ref=e448]:
+                - columnheader "No" [ref=e449]
+                - columnheader "Provinsi" [ref=e450]
+                - columnheader "Jumlah Koperasi" [ref=e451]
+                - columnheader "Koperasi Memiliki NIB" [ref=e452]
+                - columnheader "Koperasi Memiliki NPWP" [ref=e453]
+                - columnheader "Koperasi Telah RAT (2025)" [ref=e454]
+                - columnheader "Simpanan Pokok" [ref=e455]
+                - columnheader "Simpanan Wajib" [ref=e456]
+                - columnheader "Volume Transaksi (2026)" [ref=e457]
+                - columnheader "Nilai Transaksi (2026)" [ref=e458]
+                - columnheader "Pemetahaan Lahan" [ref=e459]
+                - columnheader "Pemetahaan Lahan (%)" [ref=e460]
+                - columnheader "Pembangunan Gerai (%)" [ref=e461]
+            - rowgroup [ref=e462]:
+              - row "1 ACEH 6.534 4.442 6.529 4.479 329.324.200 98.400.060 183.989 Rp 510.344.540 1818 27.97 64.58" [ref=e463]:
+                - cell "1" [ref=e464]
+                - cell "ACEH" [ref=e465]:
+                  - button "ACEH" [ref=e466] [cursor=pointer]:
+                    - generic [ref=e467]: ACEH
+                - cell "6.534" [ref=e468]
+                - cell "4.442" [ref=e469]
+                - cell "6.529" [ref=e470]
+                - cell "4.479" [ref=e471]
+                - cell "329.324.200" [ref=e472]
+                - cell "98.400.060" [ref=e473]
+                - cell "183.989" [ref=e474]
+                - cell "Rp 510.344.540" [ref=e475]
+                - cell "1818" [ref=e476]:
+                  - button "1818" [ref=e477] [cursor=pointer]
+                - cell "27.97" [ref=e478]:
+                  - button "27.97" [ref=e479] [cursor=pointer]
+                - cell "64.58" [ref=e480]:
+                  - button "64.58" [ref=e481] [cursor=pointer]
+              - row "2 BALI 718 497 716 641 905.365.000 307.288.000 292.953 Rp 1.271.071.062 137 19.13 73.42" [ref=e482]:
+                - cell "2" [ref=e483]
+                - cell "BALI" [ref=e484]:
+                  - button "BALI" [ref=e485] [cursor=pointer]:
+                    - generic [ref=e486]: BALI
+                - cell "718" [ref=e487]
+                - cell "497" [ref=e488]
+                - cell "716" [ref=e489]
+                - cell "641" [ref=e490]
+                - cell "905.365.000" [ref=e491]
+                - cell "307.288.000" [ref=e492]
+                - cell "292.953" [ref=e493]
+                - cell "Rp 1.271.071.062" [ref=e494]
+                - cell "137" [ref=e495]:
+                  - button "137" [ref=e496] [cursor=pointer]
+                - cell "19.13" [ref=e497]:
+                  - button "19.13" [ref=e498] [cursor=pointer]
+                - cell "73.42" [ref=e499]:
+                  - button "73.42" [ref=e500] [cursor=pointer]
+              - row "3 BANTEN 1.553 1.342 1.553 868 2.672.237.700 392.606.320 27.624 Rp 496.937.002 738 47.55 69.32" [ref=e501]:
+                - cell "3" [ref=e502]
+                - cell "BANTEN" [ref=e503]:
+                  - button "BANTEN" [ref=e504] [cursor=pointer]:
+                    - generic [ref=e505]: BANTEN
+                - cell "1.553" [ref=e506]
+                - cell "1.342" [ref=e507]
+                - cell "1.553" [ref=e508]
+                - cell "868" [ref=e509]
+                - cell "2.672.237.700" [ref=e510]
+                - cell "392.606.320" [ref=e511]
+                - cell "27.624" [ref=e512]
+                - cell "Rp 496.937.002" [ref=e513]
+                - cell "738" [ref=e514]:
+                  - button "738" [ref=e515] [cursor=pointer]
+                - cell "47.55" [ref=e516]:
+                  - button "47.55" [ref=e517] [cursor=pointer]
+                - cell "69.32" [ref=e518]:
+                  - button "69.32" [ref=e519] [cursor=pointer]
+              - row "4 BENGKULU 1.508 1.001 1.506 900 146.286.400 56.566.285 168.235 Rp 306.708.880 772 51.02 67.67" [ref=e520]:
+                - cell "4" [ref=e521]
+                - cell "BENGKULU" [ref=e522]:
+                  - button "BENGKULU" [ref=e523] [cursor=pointer]:
+                    - generic [ref=e524]: BENGKULU
+                - cell "1.508" [ref=e525]
+                - cell "1.001" [ref=e526]
+                - cell "1.506" [ref=e527]
+                - cell "900" [ref=e528]
+                - cell "146.286.400" [ref=e529]
+                - cell "56.566.285" [ref=e530]
+                - cell "168.235" [ref=e531]
+                - cell "Rp 306.708.880" [ref=e532]
+                - cell "772" [ref=e533]:
+                  - button "772" [ref=e534] [cursor=pointer]
+                - cell "51.02" [ref=e535]:
+                  - button "51.02" [ref=e536] [cursor=pointer]
+                - cell "67.67" [ref=e537]:
+                  - button "67.67" [ref=e538] [cursor=pointer]
+              - row "5 DAERAH ISTIMEWA YOGYAKARTA 438 403 438 398 390.665.000 149.496.000 558.924 Rp 1.009.756.240 191 43.61 47.28" [ref=e539]:
+                - cell "5" [ref=e540]
+                - cell "DAERAH ISTIMEWA YOGYAKARTA" [ref=e541]:
+                  - button "DAERAH ISTIMEWA YOGYAKARTA" [ref=e542] [cursor=pointer]:
+                    - generic [ref=e543]: DAERAH ISTIMEWA YOGYAKARTA
+                - cell "438" [ref=e544]
+                - cell "403" [ref=e545]
+                - cell "438" [ref=e546]
+                - cell "398" [ref=e547]
+                - cell "390.665.000" [ref=e548]
+                - cell "149.496.000" [ref=e549]
+                - cell "558.924" [ref=e550]
+                - cell "Rp 1.009.756.240" [ref=e551]
+                - cell "191" [ref=e552]:
+                  - button "191" [ref=e553] [cursor=pointer]
+                - cell "43.61" [ref=e554]:
+                  - button "43.61" [ref=e555] [cursor=pointer]
+                - cell "47.28" [ref=e556]:
+                  - button "47.28" [ref=e557] [cursor=pointer]
+              - row "6 DKI JAKARTA 268 266 267 266 296.100.000 221.335.000 18.678 Rp 272.360.777 8 3 87.26" [ref=e558]:
+                - cell "6" [ref=e559]
+                - cell "DKI JAKARTA" [ref=e560]:
+                  - button "DKI JAKARTA" [ref=e561] [cursor=pointer]:
+                    - generic [ref=e562]: DKI JAKARTA
+                - cell "268" [ref=e563]
+                - cell "266" [ref=e564]
+                - cell "267" [ref=e565]
+                - cell "266" [ref=e566]
+                - cell "296.100.000" [ref=e567]
+                - cell "221.335.000" [ref=e568]
+                - cell "18.678" [ref=e569]
+                - cell "Rp 272.360.777" [ref=e570]
+                - cell "8" [ref=e571]:
+                  - button "8" [ref=e572] [cursor=pointer]
+                - cell "3" [ref=e573]:
+                  - button "3" [ref=e574] [cursor=pointer]
+                - cell "87.26" [ref=e575]:
+                  - button "87.26" [ref=e576] [cursor=pointer]
+              - row "7 GORONTALO 731 637 731 431 176.765.000 34.795.025 2.399 Rp 66.207.250 252 34.57 69.25" [ref=e577]:
+                - cell "7" [ref=e578]
+                - cell "GORONTALO" [ref=e579]:
+                  - button "GORONTALO" [ref=e580] [cursor=pointer]:
+                    - generic [ref=e581]: GORONTALO
+                - cell "731" [ref=e582]
+                - cell "637" [ref=e583]
+                - cell "731" [ref=e584]
+                - cell "431" [ref=e585]
+                - cell "176.765.000" [ref=e586]
+                - cell "34.795.025" [ref=e587]
+                - cell "2.399" [ref=e588]
+                - cell "Rp 66.207.250" [ref=e589]
+                - cell "252" [ref=e590]:
+                  - button "252" [ref=e591] [cursor=pointer]
+                - cell "34.57" [ref=e592]:
+                  - button "34.57" [ref=e593] [cursor=pointer]
+                - cell "69.25" [ref=e594]:
+                  - button "69.25" [ref=e595] [cursor=pointer]
+              - row "8 JAMBI 1.591 1.058 1.586 812 444.756.600 167.055.380 15.289 Rp 43.022.200 849 53.56 54.22" [ref=e596]:
+                - cell "8" [ref=e597]
+                - cell "JAMBI" [ref=e598]:
+                  - button "JAMBI" [ref=e599] [cursor=pointer]:
+                    - generic [ref=e600]: JAMBI
+                - cell "1.591" [ref=e601]
+                - cell "1.058" [ref=e602]
+                - cell "1.586" [ref=e603]
+                - cell "812" [ref=e604]
+                - cell "444.756.600" [ref=e605]
+                - cell "167.055.380" [ref=e606]
+                - cell "15.289" [ref=e607]
+                - cell "Rp 43.022.200" [ref=e608]
+                - cell "849" [ref=e609]:
+                  - button "849" [ref=e610] [cursor=pointer]
+                - cell "53.56" [ref=e611]:
+                  - button "53.56" [ref=e612] [cursor=pointer]
+                - cell "54.22" [ref=e613]:
+                  - button "54.22" [ref=e614] [cursor=pointer]
+              - row "9 JAWA BARAT 5.970 5.261 5.964 3.469 3.551.417.085 2.863.929.414 828.739 Rp 3.530.265.249 3473 58.3 68.95" [ref=e615]:
+                - cell "9" [ref=e616]
+                - cell "JAWA BARAT" [ref=e617]:
+                  - button "JAWA BARAT" [ref=e618] [cursor=pointer]:
+                    - generic [ref=e619]: JAWA BARAT
+                - cell "5.970" [ref=e620]
+                - cell "5.261" [ref=e621]
+                - cell "5.964" [ref=e622]
+                - cell "3.469" [ref=e623]
+                - cell "3.551.417.085" [ref=e624]
+                - cell "2.863.929.414" [ref=e625]
+                - cell "828.739" [ref=e626]
+                - cell "Rp 3.530.265.249" [ref=e627]
+                - cell "3473" [ref=e628]:
+                  - button "3473" [ref=e629] [cursor=pointer]
+                - cell "58.3" [ref=e630]:
+                  - button "58.3" [ref=e631] [cursor=pointer]
+                - cell "68.95" [ref=e632]:
+                  - button "68.95" [ref=e633] [cursor=pointer]
+              - row "10 JAWA TENGAH 8.524 8.150 8.523 6.827 4.357.444.650 1.464.624.760 2.501.261 Rp 5.745.086.783 6297 73.54 87.8" [ref=e634]:
+                - cell "10" [ref=e635]
+                - cell "JAWA TENGAH" [ref=e636]:
+                  - button "JAWA TENGAH" [ref=e637] [cursor=pointer]:
+                    - generic [ref=e638]: JAWA TENGAH
+                - cell "8.524" [ref=e639]
+                - cell "8.150" [ref=e640]
+                - cell "8.523" [ref=e641]
+                - cell "6.827" [ref=e642]
+                - cell "4.357.444.650" [ref=e643]
+                - cell "1.464.624.760" [ref=e644]
+                - cell "2.501.261" [ref=e645]
+                - cell "Rp 5.745.086.783" [ref=e646]
+                - cell "6297" [ref=e647]:
+                  - button "6297" [ref=e648] [cursor=pointer]
+                - cell "73.54" [ref=e649]:
+                  - button "73.54" [ref=e650] [cursor=pointer]
+                - cell "87.8" [ref=e651]:
+                  - button "87.8" [ref=e652] [cursor=pointer]
+              - row "11 JAWA TIMUR 8.494 7.874 8.494 6.363 15.457.725.700 1.309.045.670 4.449.560 Rp 21.484.751.078 6542 77.02 81.84" [ref=e653]:
+                - cell "11" [ref=e654]
+                - cell "JAWA TIMUR" [ref=e655]:
+                  - button "JAWA TIMUR" [ref=e656] [cursor=pointer]:
+                    - generic [ref=e657]: JAWA TIMUR
+                - cell "8.494" [ref=e658]
+                - cell "7.874" [ref=e659]
+                - cell "8.494" [ref=e660]
+                - cell "6.363" [ref=e661]
+                - cell "15.457.725.700" [ref=e662]
+                - cell "1.309.045.670" [ref=e663]
+                - cell "4.449.560" [ref=e664]
+                - cell "Rp 21.484.751.078" [ref=e665]
+                - cell "6542" [ref=e666]:
+                  - button "6542" [ref=e667] [cursor=pointer]
+                - cell "77.02" [ref=e668]:
+                  - button "77.02" [ref=e669] [cursor=pointer]
+                - cell "81.84" [ref=e670]:
+                  - button "81.84" [ref=e671] [cursor=pointer]
+              - row "12 KALIMANTAN BARAT 2.156 1.405 2.151 646 295.795.050 107.475.020 91.375 Rp 400.736.431 694 32.35 69.75" [ref=e672]:
+                - cell "12" [ref=e673]
+                - cell "KALIMANTAN BARAT" [ref=e674]:
+                  - button "KALIMANTAN BARAT" [ref=e675] [cursor=pointer]:
+                    - generic [ref=e676]: KALIMANTAN BARAT
+                - cell "2.156" [ref=e677]
+                - cell "1.405" [ref=e678]
+                - cell "2.151" [ref=e679]
+                - cell "646" [ref=e680]
+                - cell "295.795.050" [ref=e681]
+                - cell "107.475.020" [ref=e682]
+                - cell "91.375" [ref=e683]
+                - cell "Rp 400.736.431" [ref=e684]
+                - cell "694" [ref=e685]:
+                  - button "694" [ref=e686] [cursor=pointer]
+                - cell "32.35" [ref=e687]:
+                  - button "32.35" [ref=e688] [cursor=pointer]
+                - cell "69.75" [ref=e689]:
+                  - button "69.75" [ref=e690] [cursor=pointer]
+              - row "13 KALIMANTAN SELATAN 2.013 1.651 2.013 1.650 2.785.016.110 335.704.000 847.250 Rp 1.663.455.580 565 28.01 55.86" [ref=e691]:
+                - cell "13" [ref=e692]
+                - cell "KALIMANTAN SELATAN" [ref=e693]:
+                  - button "KALIMANTAN SELATAN" [ref=e694] [cursor=pointer]:
+                    - generic [ref=e695]: KALIMANTAN SELATAN
+                - cell "2.013" [ref=e696]
+                - cell "1.651" [ref=e697]
+                - cell "2.013" [ref=e698]
+                - cell "1.650" [ref=e699]
+                - cell "2.785.016.110" [ref=e700]
+                - cell "335.704.000" [ref=e701]
+                - cell "847.250" [ref=e702]
+                - cell "Rp 1.663.455.580" [ref=e703]
+                - cell "565" [ref=e704]:
+                  - button "565" [ref=e705] [cursor=pointer]
+                - cell "28.01" [ref=e706]:
+                  - button "28.01" [ref=e707] [cursor=pointer]
+                - cell "55.86" [ref=e708]:
+                  - button "55.86" [ref=e709] [cursor=pointer]
+              - row "14 KALIMANTAN TENGAH 1.543 741 1.543 465 248.095.000 122.905.000 1.196.939 Rp 2.165.019.960 483 30.74 50.07" [ref=e710]:
+                - cell "14" [ref=e711]
+                - cell "KALIMANTAN TENGAH" [ref=e712]:
+                  - button "KALIMANTAN TENGAH" [ref=e713] [cursor=pointer]:
+                    - generic [ref=e714]: KALIMANTAN TENGAH
+                - cell "1.543" [ref=e715]
+                - cell "741" [ref=e716]
+                - cell "1.543" [ref=e717]
+                - cell "465" [ref=e718]
+                - cell "248.095.000" [ref=e719]
+                - cell "122.905.000" [ref=e720]
+                - cell "1.196.939" [ref=e721]
+                - cell "Rp 2.165.019.960" [ref=e722]
+                - cell "483" [ref=e723]:
+                  - button "483" [ref=e724] [cursor=pointer]
+                - cell "30.74" [ref=e725]:
+                  - button "30.74" [ref=e726] [cursor=pointer]
+                - cell "50.07" [ref=e727]:
+                  - button "50.07" [ref=e728] [cursor=pointer]
+              - row "15 KALIMANTAN TIMUR 1.037 707 1.036 564 344.400.000 175.537.000 46.051 Rp 206.142.014 503 48.46 68.19" [ref=e729]:
+                - cell "15" [ref=e730]
+                - cell "KALIMANTAN TIMUR" [ref=e731]:
+                  - button "KALIMANTAN TIMUR" [ref=e732] [cursor=pointer]:
+                    - generic [ref=e733]: KALIMANTAN TIMUR
+                - cell "1.037" [ref=e734]
+                - cell "707" [ref=e735]
+                - cell "1.036" [ref=e736]
+                - cell "564" [ref=e737]
+                - cell "344.400.000" [ref=e738]
+                - cell "175.537.000" [ref=e739]
+                - cell "46.051" [ref=e740]
+                - cell "Rp 206.142.014" [ref=e741]
+                - cell "503" [ref=e742]:
+                  - button "503" [ref=e743] [cursor=pointer]
+                - cell "48.46" [ref=e744]:
+                  - button "48.46" [ref=e745] [cursor=pointer]
+                - cell "68.19" [ref=e746]:
+                  - button "68.19" [ref=e747] [cursor=pointer]
+              - row "16 KALIMANTAN UTARA 411 311 411 195 19.020.450 37.880.000 9 Rp 921.458.000 124 25.73 49.35" [ref=e748]:
+                - cell "16" [ref=e749]
+                - cell "KALIMANTAN UTARA" [ref=e750]:
+                  - button "KALIMANTAN UTARA" [ref=e751] [cursor=pointer]:
+                    - generic [ref=e752]: KALIMANTAN UTARA
+                - cell "411" [ref=e753]
+                - cell "311" [ref=e754]
+                - cell "411" [ref=e755]
+                - cell "195" [ref=e756]
+                - cell "19.020.450" [ref=e757]
+                - cell "37.880.000" [ref=e758]
+                - cell "9" [ref=e759]
+                - cell "Rp 921.458.000" [ref=e760]
+                - cell "124" [ref=e761]:
+                  - button "124" [ref=e762] [cursor=pointer]
+                - cell "25.73" [ref=e763]:
+                  - button "25.73" [ref=e764] [cursor=pointer]
+                - cell "49.35" [ref=e765]:
+                  - button "49.35" [ref=e766] [cursor=pointer]
+              - row "17 KEPULAUAN BANGKA BELITUNG 393 385 393 324 64.410.200 32.840.030 225 Rp 414.000 281 71.5 69.73" [ref=e767]:
+                - cell "17" [ref=e768]
+                - cell "KEPULAUAN BANGKA BELITUNG" [ref=e769]:
+                  - button "KEPULAUAN BANGKA BELITUNG" [ref=e770] [cursor=pointer]:
+                    - generic [ref=e771]: KEPULAUAN BANGKA BELITUNG
+                - cell "393" [ref=e772]
+                - cell "385" [ref=e773]
+                - cell "393" [ref=e774]
+                - cell "324" [ref=e775]
+                - cell "64.410.200" [ref=e776]
+                - cell "32.840.030" [ref=e777]
+                - cell "225" [ref=e778]
+                - cell "Rp 414.000" [ref=e779]
+                - cell "281" [ref=e780]:
+                  - button "281" [ref=e781] [cursor=pointer]
+                - cell "71.5" [ref=e782]:
+                  - button "71.5" [ref=e783] [cursor=pointer]
+                - cell "69.73" [ref=e784]:
+                  - button "69.73" [ref=e785] [cursor=pointer]
+              - row "18 KEPULAUAN RIAU 407 305 407 181 82.200.000 28.500.000 0 Rp 0 205 48.93 51.68" [ref=e786]:
+                - cell "18" [ref=e787]
+                - cell "KEPULAUAN RIAU" [ref=e788]:
+                  - button "KEPULAUAN RIAU" [ref=e789] [cursor=pointer]:
+                    - generic [ref=e790]: KEPULAUAN RIAU
+                - cell "407" [ref=e791]
+                - cell "305" [ref=e792]
+                - cell "407" [ref=e793]
+                - cell "181" [ref=e794]
+                - cell "82.200.000" [ref=e795]
+                - cell "28.500.000" [ref=e796]
+                - cell "0" [ref=e797]
+                - cell "Rp 0" [ref=e798]
+                - cell "205" [ref=e799]:
+                  - button "205" [ref=e800] [cursor=pointer]
+                - cell "48.93" [ref=e801]:
+                  - button "48.93" [ref=e802] [cursor=pointer]
+                - cell "51.68" [ref=e803]:
+                  - button "51.68" [ref=e804] [cursor=pointer]
+              - row "19 LAMPUNG 2.651 2.106 2.651 1.786 1.145.409.400 359.864.701 3.627.210 Rp 6.743.253.880 1526 57.54 75.16" [ref=e805]:
+                - cell "19" [ref=e806]
+                - cell "LAMPUNG" [ref=e807]:
+                  - button "LAMPUNG" [ref=e808] [cursor=pointer]:
+                    - generic [ref=e809]: LAMPUNG
+                - cell "2.651" [ref=e810]
+                - cell "2.106" [ref=e811]
+                - cell "2.651" [ref=e812]
+                - cell "1.786" [ref=e813]
+                - cell "1.145.409.400" [ref=e814]
+                - cell "359.864.701" [ref=e815]
+                - cell "3.627.210" [ref=e816]
+                - cell "Rp 6.743.253.880" [ref=e817]
+                - cell "1526" [ref=e818]:
+                  - button "1526" [ref=e819] [cursor=pointer]
+                - cell "57.54" [ref=e820]:
+                  - button "57.54" [ref=e821] [cursor=pointer]
+                - cell "75.16" [ref=e822]:
+                  - button "75.16" [ref=e823] [cursor=pointer]
+              - row "20 MALUKU 1.236 682 1.236 574 53.290.000 18.400.000 127.279 Rp 196.965.360 433 35.06 26.37" [ref=e824]:
+                - cell "20" [ref=e825]
+                - cell "MALUKU" [ref=e826]:
+                  - button "MALUKU" [ref=e827] [cursor=pointer]:
+                    - generic [ref=e828]: MALUKU
+                - cell "1.236" [ref=e829]
+                - cell "682" [ref=e830]
+                - cell "1.236" [ref=e831]
+                - cell "574" [ref=e832]
+                - cell "53.290.000" [ref=e833]
+                - cell "18.400.000" [ref=e834]
+                - cell "127.279" [ref=e835]
+                - cell "Rp 196.965.360" [ref=e836]
+                - cell "433" [ref=e837]:
+                  - button "433" [ref=e838] [cursor=pointer]
+                - cell "35.06" [ref=e839]:
+                  - button "35.06" [ref=e840] [cursor=pointer]
+                - cell "26.37" [ref=e841]:
+                  - button "26.37" [ref=e842] [cursor=pointer]
+              - row "21 MALUKU UTARA 1.191 616 1.187 289 117.600.000 72.310.000 900 Rp 29.805.000 154 13 27.86" [ref=e843]:
+                - cell "21" [ref=e844]
+                - cell "MALUKU UTARA" [ref=e845]:
+                  - button "MALUKU UTARA" [ref=e846] [cursor=pointer]:
+                    - generic [ref=e847]: MALUKU UTARA
+                - cell "1.191" [ref=e848]
+                - cell "616" [ref=e849]
+                - cell "1.187" [ref=e850]
+                - cell "289" [ref=e851]
+                - cell "117.600.000" [ref=e852]
+                - cell "72.310.000" [ref=e853]
+                - cell "900" [ref=e854]
+                - cell "Rp 29.805.000" [ref=e855]
+                - cell "154" [ref=e856]:
+                  - button "154" [ref=e857] [cursor=pointer]
+                - cell "13" [ref=e858]:
+                  - button "13" [ref=e859] [cursor=pointer]
+                - cell "27.86" [ref=e860]:
+                  - button "27.86" [ref=e861] [cursor=pointer]
+              - row "22 NUSA TENGGARA BARAT 1.172 984 1.170 892 767.890.200 213.432.280 31.413 Rp 3.978.631.511 553 47.43 49.5" [ref=e862]:
+                - cell "22" [ref=e863]
+                - cell "NUSA TENGGARA BARAT" [ref=e864]:
+                  - button "NUSA TENGGARA BARAT" [ref=e865] [cursor=pointer]:
+                    - generic [ref=e866]: NUSA TENGGARA BARAT
+                - cell "1.172" [ref=e867]
+                - cell "984" [ref=e868]
+                - cell "1.170" [ref=e869]
+                - cell "892" [ref=e870]
+                - cell "767.890.200" [ref=e871]
+                - cell "213.432.280" [ref=e872]
+                - cell "31.413" [ref=e873]
+                - cell "Rp 3.978.631.511" [ref=e874]
+                - cell "553" [ref=e875]:
+                  - button "553" [ref=e876] [cursor=pointer]
+                - cell "47.43" [ref=e877]:
+                  - button "47.43" [ref=e878] [cursor=pointer]
+                - cell "49.5" [ref=e879]:
+                  - button "49.5" [ref=e880] [cursor=pointer]
+              - row "23 NUSA TENGGARA TIMUR 3.452 2.218 3.451 2.051 2.011.428.493 280.565.930 50.314 Rp 188.417.968 1867 54.23 31.83" [ref=e881]:
+                - cell "23" [ref=e882]
+                - cell "NUSA TENGGARA TIMUR" [ref=e883]:
+                  - button "NUSA TENGGARA TIMUR" [ref=e884] [cursor=pointer]:
+                    - generic [ref=e885]: NUSA TENGGARA TIMUR
+                - cell "3.452" [ref=e886]
+                - cell "2.218" [ref=e887]
+                - cell "3.451" [ref=e888]
+                - cell "2.051" [ref=e889]
+                - cell "2.011.428.493" [ref=e890]
+                - cell "280.565.930" [ref=e891]
+                - cell "50.314" [ref=e892]
+                - cell "Rp 188.417.968" [ref=e893]
+                - cell "1867" [ref=e894]:
+                  - button "1867" [ref=e895] [cursor=pointer]
+                - cell "54.23" [ref=e896]:
+                  - button "54.23" [ref=e897] [cursor=pointer]
+                - cell "31.83" [ref=e898]:
+                  - button "31.83" [ref=e899] [cursor=pointer]
+              - row "24 PAPUA 985 255 881 373 48.070.050 16.255.000 107.359 Rp 286.084.600 24 2.4 42.88" [ref=e900]:
+                - cell "24" [ref=e901]
+                - cell "PAPUA" [ref=e902]:
+                  - button "PAPUA" [ref=e903] [cursor=pointer]:
+                    - generic [ref=e904]: PAPUA
+                - cell "985" [ref=e905]
+                - cell "255" [ref=e906]
+                - cell "881" [ref=e907]
+                - cell "373" [ref=e908]
+                - cell "48.070.050" [ref=e909]
+                - cell "16.255.000" [ref=e910]
+                - cell "107.359" [ref=e911]
+                - cell "Rp 286.084.600" [ref=e912]
+                - cell "24" [ref=e913]:
+                  - button "24" [ref=e914] [cursor=pointer]
+                - cell "2.4" [ref=e915]:
+                  - button "2.4" [ref=e916] [cursor=pointer]
+                - cell "42.88" [ref=e917]:
+                  - button "42.88" [ref=e918] [cursor=pointer]
+              - row "25 PAPUA BARAT 826 209 667 274 10.010.000 2.070.000 59.406 Rp 108.326.000 145 17.6 46.94" [ref=e919]:
+                - cell "25" [ref=e920]
+                - cell "PAPUA BARAT" [ref=e921]:
+                  - button "PAPUA BARAT" [ref=e922] [cursor=pointer]:
+                    - generic [ref=e923]: PAPUA BARAT
+                - cell "826" [ref=e924]
+                - cell "209" [ref=e925]
+                - cell "667" [ref=e926]
+                - cell "274" [ref=e927]
+                - cell "10.010.000" [ref=e928]
+                - cell "2.070.000" [ref=e929]
+                - cell "59.406" [ref=e930]
+                - cell "Rp 108.326.000" [ref=e931]
+                - cell "145" [ref=e932]:
+                  - button "145" [ref=e933] [cursor=pointer]
+                - cell "17.6" [ref=e934]:
+                  - button "17.6" [ref=e935] [cursor=pointer]
+                - cell "46.94" [ref=e936]:
+                  - button "46.94" [ref=e937] [cursor=pointer]
+              - row "26 PAPUA BARAT DAYA 1.024 209 956 218 16.611.000 5.470.000 0 Rp 0 48 4.74 39.13" [ref=e938]:
+                - cell "26" [ref=e939]
+                - cell "PAPUA BARAT DAYA" [ref=e940]:
+                  - button "PAPUA BARAT DAYA" [ref=e941] [cursor=pointer]:
+                    - generic [ref=e942]: PAPUA BARAT DAYA
+                - cell "1.024" [ref=e943]
+                - cell "209" [ref=e944]
+                - cell "956" [ref=e945]
+                - cell "218" [ref=e946]
+                - cell "16.611.000" [ref=e947]
+                - cell "5.470.000" [ref=e948]
+                - cell "0" [ref=e949]
+                - cell "Rp 0" [ref=e950]
+                - cell "48" [ref=e951]:
+                  - button "48" [ref=e952] [cursor=pointer]
+                - cell "4.74" [ref=e953]:
+                  - button "4.74" [ref=e954] [cursor=pointer]
+                - cell "39.13" [ref=e955]:
+                  - button "39.13" [ref=e956] [cursor=pointer]
+              - row "27 PAPUA PEGUNUNGAN 2.387 133 954 145 140.000 40.000 0 Rp 0 2 0.08 17.67" [ref=e957]:
+                - cell "27" [ref=e958]
+                - cell "PAPUA PEGUNUNGAN" [ref=e959]:
+                  - button "PAPUA PEGUNUNGAN" [ref=e960] [cursor=pointer]:
+                    - generic [ref=e961]: PAPUA PEGUNUNGAN
+                - cell "2.387" [ref=e962]
+                - cell "133" [ref=e963]
+                - cell "954" [ref=e964]
+                - cell "145" [ref=e965]
+                - cell "140.000" [ref=e966]
+                - cell "40.000" [ref=e967]
+                - cell "0" [ref=e968]
+                - cell "Rp 0" [ref=e969]
+                - cell "2" [ref=e970]:
+                  - button "2" [ref=e971] [cursor=pointer]
+                - cell "0.08" [ref=e972]:
+                  - button "0.08" [ref=e973] [cursor=pointer]
+                - cell "17.67" [ref=e974]:
+                  - button "17.67" [ref=e975] [cursor=pointer]
+              - row "28 PAPUA SELATAN 640 41 260 104 2.240.000 680.000 0 Rp 0 34 4.93 31.57" [ref=e976]:
+                - cell "28" [ref=e977]
+                - cell "PAPUA SELATAN" [ref=e978]:
+                  - button "PAPUA SELATAN" [ref=e979] [cursor=pointer]:
+                    - generic [ref=e980]: PAPUA SELATAN
+                - cell "640" [ref=e981]
+                - cell "41" [ref=e982]
+                - cell "260" [ref=e983]
+                - cell "104" [ref=e984]
+                - cell "2.240.000" [ref=e985]
+                - cell "680.000" [ref=e986]
+                - cell "0" [ref=e987]
+                - cell "Rp 0" [ref=e988]
+                - cell "34" [ref=e989]:
+                  - button "34" [ref=e990] [cursor=pointer]
+                - cell "4.93" [ref=e991]:
+                  - button "4.93" [ref=e992] [cursor=pointer]
+                - cell "31.57" [ref=e993]:
+                  - button "31.57" [ref=e994] [cursor=pointer]
+              - row "29 PAPUA TENGAH 1.200 143 1.041 277 11.145.000 3.540.000 0 Rp 0 20 1.66 35.92" [ref=e995]:
+                - cell "29" [ref=e996]
+                - cell "PAPUA TENGAH" [ref=e997]:
+                  - button "PAPUA TENGAH" [ref=e998] [cursor=pointer]:
+                    - generic [ref=e999]: PAPUA TENGAH
+                - cell "1.200" [ref=e1000]
+                - cell "143" [ref=e1001]
+                - cell "1.041" [ref=e1002]
+                - cell "277" [ref=e1003]
+                - cell "11.145.000" [ref=e1004]
+                - cell "3.540.000" [ref=e1005]
+                - cell "0" [ref=e1006]
+                - cell "Rp 0" [ref=e1007]
+                - cell "20" [ref=e1008]:
+                  - button "20" [ref=e1009] [cursor=pointer]
+                - cell "1.66" [ref=e1010]:
+                  - button "1.66" [ref=e1011] [cursor=pointer]
+                - cell "35.92" [ref=e1012]:
+                  - button "35.92" [ref=e1013] [cursor=pointer]
+              - row "30 RIAU 1.866 1.107 1.864 1.061 626.247.978 114.530.000 39.776 Rp 89.912.000 1090 58.54 67.22" [ref=e1014]:
+                - cell "30" [ref=e1015]
+                - cell "RIAU" [ref=e1016]:
+                  - button "RIAU" [ref=e1017] [cursor=pointer]:
+                    - generic [ref=e1018]: RIAU
+                - cell "1.866" [ref=e1019]
+                - cell "1.107" [ref=e1020]
+                - cell "1.864" [ref=e1021]
+                - cell "1.061" [ref=e1022]
+                - cell "626.247.978" [ref=e1023]
+                - cell "114.530.000" [ref=e1024]
+                - cell "39.776" [ref=e1025]
+                - cell "Rp 89.912.000" [ref=e1026]
+                - cell "1090" [ref=e1027]:
+                  - button "1090" [ref=e1028] [cursor=pointer]
+                - cell "58.54" [ref=e1029]:
+                  - button "58.54" [ref=e1030] [cursor=pointer]
+                - cell "67.22" [ref=e1031]:
+                  - button "67.22" [ref=e1032] [cursor=pointer]
+              - row "31 SULAWESI BARAT 648 510 648 547 184.925.000 50.455.060 3.260 Rp 73.245.300 475 73.3 58.11" [ref=e1033]:
+                - cell "31" [ref=e1034]
+                - cell "SULAWESI BARAT" [ref=e1035]:
+                  - button "SULAWESI BARAT" [ref=e1036] [cursor=pointer]:
+                    - generic [ref=e1037]: SULAWESI BARAT
+                - cell "648" [ref=e1038]
+                - cell "510" [ref=e1039]
+                - cell "648" [ref=e1040]
+                - cell "547" [ref=e1041]
+                - cell "184.925.000" [ref=e1042]
+                - cell "50.455.060" [ref=e1043]
+                - cell "3.260" [ref=e1044]
+                - cell "Rp 73.245.300" [ref=e1045]
+                - cell "475" [ref=e1046]:
+                  - button "475" [ref=e1047] [cursor=pointer]
+                - cell "73.3" [ref=e1048]:
+                  - button "73.3" [ref=e1049] [cursor=pointer]
+                - cell "58.11" [ref=e1050]:
+                  - button "58.11" [ref=e1051] [cursor=pointer]
+              - row "32 SULAWESI SELATAN 3.081 2.517 3.074 2.245 768.886.115 278.728.945 446.042 Rp 1.138.175.100 1134 37.07 68.31" [ref=e1052]:
+                - cell "32" [ref=e1053]
+                - cell "SULAWESI SELATAN" [ref=e1054]:
+                  - button "SULAWESI SELATAN" [ref=e1055] [cursor=pointer]:
+                    - generic [ref=e1056]: SULAWESI SELATAN
+                - cell "3.081" [ref=e1057]
+                - cell "2.517" [ref=e1058]
+                - cell "3.074" [ref=e1059]
+                - cell "2.245" [ref=e1060]
+                - cell "768.886.115" [ref=e1061]
+                - cell "278.728.945" [ref=e1062]
+                - cell "446.042" [ref=e1063]
+                - cell "Rp 1.138.175.100" [ref=e1064]
+                - cell "1134" [ref=e1065]:
+                  - button "1134" [ref=e1066] [cursor=pointer]
+                - cell "37.07" [ref=e1067]:
+                  - button "37.07" [ref=e1068] [cursor=pointer]
+                - cell "68.31" [ref=e1069]:
+                  - button "68.31" [ref=e1070] [cursor=pointer]
+              - row "33 SULAWESI TENGAH 1.983 1.284 1.982 1.244 336.390.000 52.160.860 64.696 Rp 155.493.760 784 38.87 43.07" [ref=e1071]:
+                - cell "33" [ref=e1072]
+                - cell "SULAWESI TENGAH" [ref=e1073]:
+                  - button "SULAWESI TENGAH" [ref=e1074] [cursor=pointer]:
+                    - generic [ref=e1075]: SULAWESI TENGAH
+                - cell "1.983" [ref=e1076]
+                - cell "1.284" [ref=e1077]
+                - cell "1.982" [ref=e1078]
+                - cell "1.244" [ref=e1079]
+                - cell "336.390.000" [ref=e1080]
+                - cell "52.160.860" [ref=e1081]
+                - cell "64.696" [ref=e1082]
+                - cell "Rp 155.493.760" [ref=e1083]
+                - cell "784" [ref=e1084]:
+                  - button "784" [ref=e1085] [cursor=pointer]
+                - cell "38.87" [ref=e1086]:
+                  - button "38.87" [ref=e1087] [cursor=pointer]
+                - cell "43.07" [ref=e1088]:
+                  - button "43.07" [ref=e1089] [cursor=pointer]
+              - row "34 SULAWESI TENGGARA 2.273 1.556 2.270 1.124 623.164.050 163.680.080 1.055 Rp 25.220.100 856 37.45 50.72" [ref=e1090]:
+                - cell "34" [ref=e1091]
+                - cell "SULAWESI TENGGARA" [ref=e1092]:
+                  - button "SULAWESI TENGGARA" [ref=e1093] [cursor=pointer]:
+                    - generic [ref=e1094]: SULAWESI TENGGARA
+                - cell "2.273" [ref=e1095]
+                - cell "1.556" [ref=e1096]
+                - cell "2.270" [ref=e1097]
+                - cell "1.124" [ref=e1098]
+                - cell "623.164.050" [ref=e1099]
+                - cell "163.680.080" [ref=e1100]
+                - cell "1.055" [ref=e1101]
+                - cell "Rp 25.220.100" [ref=e1102]
+                - cell "856" [ref=e1103]:
+                  - button "856" [ref=e1104] [cursor=pointer]
+                - cell "37.45" [ref=e1105]:
+                  - button "37.45" [ref=e1106] [cursor=pointer]
+                - cell "50.72" [ref=e1107]:
+                  - button "50.72" [ref=e1108] [cursor=pointer]
+              - row "35 SULAWESI UTARA 1.839 1.145 1.838 1.159 400.700.950 105.475.840 24.450 Rp 232.867.000 275 14.95 53.08" [ref=e1109]:
+                - cell "35" [ref=e1110]
+                - cell "SULAWESI UTARA" [ref=e1111]:
+                  - button "SULAWESI UTARA" [ref=e1112] [cursor=pointer]:
+                    - generic [ref=e1113]: SULAWESI UTARA
+                - cell "1.839" [ref=e1114]
+                - cell "1.145" [ref=e1115]
+                - cell "1.838" [ref=e1116]
+                - cell "1.159" [ref=e1117]
+                - cell "400.700.950" [ref=e1118]
+                - cell "105.475.840" [ref=e1119]
+                - cell "24.450" [ref=e1120]
+                - cell "Rp 232.867.000" [ref=e1121]
+                - cell "275" [ref=e1122]:
+                  - button "275" [ref=e1123] [cursor=pointer]
+                - cell "14.95" [ref=e1124]:
+                  - button "14.95" [ref=e1125] [cursor=pointer]
+                - cell "53.08" [ref=e1126]:
+                  - button "53.08" [ref=e1127] [cursor=pointer]
+              - row "36 SUMATERA BARAT 1.270 1.149 1.270 1.256 496.217.100 190.548.000 446.596 Rp 1.129.645.510 322 25.45 61.4" [ref=e1128]:
+                - cell "36" [ref=e1129]
+                - cell "SUMATERA BARAT" [ref=e1130]:
+                  - button "SUMATERA BARAT" [ref=e1131] [cursor=pointer]:
+                    - generic [ref=e1132]: SUMATERA BARAT
+                - cell "1.270" [ref=e1133]
+                - cell "1.149" [ref=e1134]
+                - cell "1.270" [ref=e1135]
+                - cell "1.256" [ref=e1136]
+                - cell "496.217.100" [ref=e1137]
+                - cell "190.548.000" [ref=e1138]
+                - cell "446.596" [ref=e1139]
+                - cell "Rp 1.129.645.510" [ref=e1140]
+                - cell "322" [ref=e1141]:
+                  - button "322" [ref=e1142] [cursor=pointer]
+                - cell "25.45" [ref=e1143]:
+                  - button "25.45" [ref=e1144] [cursor=pointer]
+                - cell "61.4" [ref=e1145]:
+                  - button "61.4" [ref=e1146] [cursor=pointer]
+              - row "37 SUMATERA SELATAN 3.267 2.655 3.263 2.431 810.788.559 370.878.120 852.352 Rp 1.755.749.900 1961 60.17 70.41" [ref=e1147]:
+                - cell "37" [ref=e1148]
+                - cell "SUMATERA SELATAN" [ref=e1149]:
+                  - button "SUMATERA SELATAN" [ref=e1150] [cursor=pointer]:
+                    - generic [ref=e1151]: SUMATERA SELATAN
+                - cell "3.267" [ref=e1152]
+                - cell "2.655" [ref=e1153]
+                - cell "3.263" [ref=e1154]
+                - cell "2.431" [ref=e1155]
+                - cell "810.788.559" [ref=e1156]
+                - cell "370.878.120" [ref=e1157]
+                - cell "852.352" [ref=e1158]
+                - cell "Rp 1.755.749.900" [ref=e1159]
+                - cell "1961" [ref=e1160]:
+                  - button "1961" [ref=e1161] [cursor=pointer]
+                - cell "60.17" [ref=e1162]:
+                  - button "60.17" [ref=e1163] [cursor=pointer]
+                - cell "70.41" [ref=e1164]:
+                  - button "70.41" [ref=e1165] [cursor=pointer]
+              - row "38 SUMATERA UTARA 6.102 4.818 6.054 2.735 516.362.975 169.180.400 176.098 Rp 345.550.100 2418 39.57 61.43" [ref=e1166]:
+                - cell "38" [ref=e1167]
+                - cell "SUMATERA UTARA" [ref=e1168]:
+                  - button "SUMATERA UTARA" [ref=e1169] [cursor=pointer]:
+                    - generic [ref=e1170]: SUMATERA UTARA
+                - cell "6.102" [ref=e1171]
+                - cell "4.818" [ref=e1172]
+                - cell "6.054" [ref=e1173]
+                - cell "2.735" [ref=e1174]
+                - cell "516.362.975" [ref=e1175]
+                - cell "169.180.400" [ref=e1176]
+                - cell "176.098" [ref=e1177]
+                - cell "Rp 345.550.100" [ref=e1178]
+                - cell "2418" [ref=e1179]:
+                  - button "2418" [ref=e1180] [cursor=pointer]
+                - cell "39.57" [ref=e1181]:
+                  - button "39.57" [ref=e1182] [cursor=pointer]
+                - cell "61.43" [ref=e1183]:
+                  - button "61.43" [ref=e1184] [cursor=pointer]
+          - list [ref=e1185]:
+            - listitem [ref=e1186]: 1-38 dari 38 data
+            - listitem "Previous Page" [ref=e1187]:
+              - button "left" [disabled] [ref=e1188]:
+                - img "left" [ref=e1189]:
+                  - img [ref=e1190]
+            - listitem "1" [ref=e1192] [cursor=pointer]:
+              - generic [ref=e1193]: "1"
+            - listitem "Next Page" [ref=e1194]:
+              - button "right" [disabled] [ref=e1195]:
+                - img "right" [ref=e1196]:
+                  - img [ref=e1197]
+            - listitem [ref=e1199]:
+              - generic "Page Size" [ref=e1200] [cursor=pointer]:
+                - generic [ref=e1202]:
+                  - combobox "Page Size" [ref=e1204]
+                  - generic "50 / page" [ref=e1205]
+                - generic:
+                  - img:
+                    - img
+    - contentinfo [ref=e236]:
+      - generic [ref=e238]:
+        - generic [ref=e239]:
+          - heading "Tautan Cepat" [level=3] [ref=e240]
+          - list [ref=e241]:
+            - listitem [ref=e242]:
+              - link "Dasbor Simkopdes" [ref=e243] [cursor=pointer]:
+                - /url: /pers/dashboard
+            - listitem [ref=e244]:
+              - link "Unduh Simkopdes Mobile" [ref=e245] [cursor=pointer]:
+                - /url: /apps
+            - listitem [ref=e246]:
+              - link "Kemenkop Corporate University" [ref=e247] [cursor=pointer]:
+                - /url: https://lms.kop.go.id/
+            - listitem [ref=e248]:
+              - link "Coop Trade" [ref=e249] [cursor=pointer]:
+                - /url: https://trade.simkopdes.go.id/
+            - listitem [ref=e250]:
+              - link "Game" [ref=e251] [cursor=pointer]:
+                - /url: /game
+        - generic [ref=e252]:
+          - heading "Informasi" [level=3] [ref=e253]
+          - list [ref=e254]:
+            - listitem [ref=e255]:
+              - link "Kontak Satgas Koperasi Desa/Kelurahan Merah Putih" [ref=e256] [cursor=pointer]:
+                - /url: /kontak
+            - listitem [ref=e257]:
+              - link "Bantuan Simkopdes" [ref=e258] [cursor=pointer]:
+                - /url: https://wa.me/628111500587?text=Halo%20Helpdesk%20SIMKOPDES%20%F0%9F%91%8B%0ASaya%20ingin%20melaporkan%20kendala%20dengan%20detail%20berikut%3A%0ANama%3A%20%0AEmail%3A%20%0ANama%20Koperasi%20%3A%20%0AKendala%3A%20%0ABukti%20(Foto%2FVideo)%3A%20%0A%0ATerima%20kasih
+            - listitem [ref=e259]:
+              - link "Warta Koperasi Desa/Kelurahan Merah Putih" [ref=e260] [cursor=pointer]:
+                - /url: /pers/berita
+            - listitem [ref=e261]:
+              - link "Penyedia Layanan" [ref=e262] [cursor=pointer]:
+                - /url: /technology-provider-member
+            - listitem [ref=e263]:
+              - link "Syarat dan Ketentuan" [ref=e264] [cursor=pointer]:
+                - /url: /syarat-dan-ketentuan
+        - generic [ref=e265]:
+          - heading "Media Sosial" [level=3] [ref=e266]
+          - generic [ref=e269]:
+            - link "TikTok" [ref=e270] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@kemenkopri
+            - link "YouTube" [ref=e271] [cursor=pointer]:
+              - /url: https://www.youtube.com/@KemenkopRI
+            - link "X" [ref=e272] [cursor=pointer]:
+              - /url: https://twitter.com/kemenkop_
+            - link "Facebook" [ref=e273] [cursor=pointer]:
+              - /url: https://www.facebook.com/kemenkopukm
+            - link "Instagram" [ref=e274] [cursor=pointer]:
+              - /url: https://www.instagram.com/kemenkop/
+        - generic [ref=e275]:
+          - heading "Satgas KDKMP" [level=3] [ref=e276]
+          - generic [ref=e277]:
+            - img "Logo mitra Satgas KDKMP" [ref=e279]
+            - generic [ref=e280]:
+              - paragraph [ref=e281]: Alamat
+              - paragraph [ref=e282]: Graha Mandiri Lt.3, Jl. Imam Bonjol No.61, RT.8/RW.4, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310
+      - paragraph [ref=e285]: © 2026. Deputi Bidang Kelembagaan dan Digitalisasi Koperasi Kementerian Koperasi
+  - alert [ref=e286]

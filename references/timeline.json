@@ -1,0 +1,341 @@
+{
+  "schema": {
+    "version": "1.1",
+    "exported_at": "2026-07-09T12:00:00+07:00",
+    "exported_by": "sisyphus",
+    "description": "Kronologi peristiwa terkait Koperasi Desa Merah Putih"
+  },
+  "type": "timeline",
+  "data": [
+    {
+      "id": "tl-001",
+      "date": "2025-09-01",
+      "category": "kebijakan",
+      "title": "Presiden Prabowo Canangkan Program Kopdes",
+      "description": "Presiden Prabowo mengumumkan program pembentukan 80.000 Koperasi Desa Merah Putih di seluruh Indonesia",
+      "tags": ["kebijakan", "pencanangan", "80.000"]
+    },
+    {
+      "id": "tl-002",
+      "date": "2025-10-01",
+      "category": "kebijakan",
+      "title": "Inpres No. 9/2025 Diterbitkan",
+      "description": "Instruksi Presiden No. 9/2025 tentang pembentukan Koperasi Desa Merah Putih diterbitkan sebagai landasan hukum program",
+      "tags": ["kebijakan", "inpres", "landasan hukum"],
+      "sources_supporting": ["src-fh-ugm-policy"]
+    },
+    {
+      "id": "tl-003",
+      "date": "2025-10-01",
+      "category": "riset",
+      "title": "CELIOS Mulai Riset Kopdes",
+      "description": "CELIOS mulai melakukan riset dan survei terkait program Kopdes, mencakup 108 responden perangkat desa di 34 provinsi",
+      "tags": ["riset", "celios", "survei"]
+    },
+    {
+      "id": "tl-004",
+      "date": "2025-12-10",
+      "category": "riset",
+      "title": "CELIOS Publikasi 'Ko Peras Desa Merah Putih'",
+      "description": "CELIOS mempublikasikan laporan lengkap yang mengungkap 76% perangkat desa tolak skema pinjaman, 65% lihat celah korupsi, risiko fiskal Rp85,96 triliun",
+      "tags": ["riset", "celios", "publikasi", "temuan"],
+      "sources_supporting": ["src-celios-full"]
+    },
+    {
+      "id": "tl-005",
+      "date": "2026-01-01",
+      "category": "kebijakan",
+      "title": "PMK No. 7/2026: Alokasi 58% Dana Desa untuk Kopdes",
+      "description": "PMK No. 7/2026 mewajibkan 58,03% Dana Desa (Rp34,57 triliun) dialokasikan untuk program Kopdes. Total pagu Rp60,57 triliun",
+      "tags": ["kebijakan", "pmk", "dana desa", "alokasi"],
+      "sources_supporting": ["src-pmk-7-2026"]
+    },
+    {
+      "id": "tl-006",
+      "date": "2026-01-15",
+      "category": "media",
+      "title": "BBC Liput Kontroversi Pemangkasan Dana Desa",
+      "description": "BBC Indonesia meliput dampak pemangkasan Dana Desa 58%, kepala desa di Lombok Barat alami potongan 70-80%",
+      "tags": ["media", "bbc", "dana desa", "lombok"],
+      "sources_supporting": ["src-bbc-2026"]
+    },
+    {
+      "id": "tl-007",
+      "date": "2026-02-01",
+      "category": "riset",
+      "title": "FH UGM Terbitkan Policy Paper",
+      "description": "Fakultas Hukum UGM menerbitkan policy paper yang menyimpulkan program Kopdes memiliki risiko hukum serius dan melanggar Putusan MK",
+      "tags": ["riset", "ugm", "hukum", "policy paper"],
+      "sources_supporting": ["src-fh-ugm-policy"]
+    },
+    {
+      "id": "tl-008",
+      "date": "2026-02-18",
+      "category": "kritik",
+      "title": "Dekopin Kritik Pendekatan Top-Down",
+      "description": "Dewan Koperasi Indonesia (Dekopin) menyatakan keterlibatan masyarakat terbatas dan keputusan top-down tidak sesuai prinsip koperasi",
+      "tags": ["kritik", "dekopin", "top-down"],
+      "sources_supporting": ["src-dekopin-kritik"]
+    },
+    {
+      "id": "tl-009",
+      "date": "2026-02-20",
+      "category": "dukungan",
+      "title": "Bakom RI Klaim Potensi Hemat Rp33 Triliun",
+      "description": "Bakom RI menyampaikan potensi penghematan LPG dan minyak goreng Rp33 triliun per tahun melalui Kopdes",
+      "tags": ["dukungan", "bakom", "penghematan"],
+      "sources_supporting": ["src-bakom-ri"]
+    },
+    {
+      "id": "tl-010",
+      "date": "2026-02-25",
+      "category": "kritik",
+      "title": "Apdesi NTB: Potongan 70-80% Rusak Infrastruktur",
+      "description": "Apdesi NTB melaporkan potongan dana desa mencapai 70-80% di NTB, infrastruktur desa terhenti",
+      "tags": ["kritik", "apdesi", "ntb", "potongan"],
+      "sources_supporting": ["src-apdesi-ntb"]
+    },
+    {
+      "id": "tl-011",
+      "date": "2026-03-05",
+      "category": "kritik",
+      "title": "KPPOD: Tidak Ada Studi Kelayakan",
+      "description": "KPPOD mengkritik tidak adanya studi kelayakan yang memadai untuk program sebesar Kopdes",
+      "tags": ["kritik", "kppod", "studi kelayakan"],
+      "sources_supporting": ["src-kppod"]
+    },
+    {
+      "id": "tl-012",
+      "date": "2026-03-15",
+      "category": "kritik",
+      "title": "GMNI DKI: Bancakan Kebijakan",
+      "description": "GMNI DKI mengecam program sebagai 'bancakan kebijakan berkedok pemberdayaan' dan militerisasi ruang ekonomi sipil",
+      "tags": ["kritik", "gmni", "sekuritisasi"],
+      "sources_supporting": ["src-gmni-dki"]
+    },
+    {
+      "id": "tl-013",
+      "date": "2026-03-20",
+      "category": "insiden",
+      "title": "YLBHI Beberkan 5 Peserta Meninggal",
+      "description": "YLBHI mengungkap 5 calon manajer SPPI meninggal saat Latihan Dasar Militer (Latsarmil) karena heat stroke, TBC, dan henti jantung",
+      "tags": ["insiden", "ylbhi", "korban jiwa", "latsarmil"],
+      "sources_supporting": ["src-idn-times-ylbhi"]
+    },
+    {
+      "id": "tl-014",
+      "date": "2026-03-25",
+      "category": "kebijakan",
+      "title": "Aturan Denda Rp100 Juta Dicabut",
+      "description": "Aturan denda Rp100 juta bagi calon manajer yang mundur dari pelatihan dicabut setelah viral dan mendapat tekanan publik",
+      "tags": ["kebijakan", "denda", "dicabut", "viral"],
+      "sources_supporting": ["src-cnn-pencabutan-denda"]
+    },
+    {
+      "id": "tl-015",
+      "date": "2026-03-28",
+      "category": "media",
+      "title": "TB Hasanuddin Ungkap Biaya Pelatihan Rp45 Juta/Orang",
+      "description": "Anggota Komisi I DPR TB Hasanuddin membeberkan rincian biaya pelatihan Rp45 juta/orang dengan 30 hari militer dan 15 hari koperasi",
+      "tags": ["dpr", "biaya", "pelatihan", "rincian"],
+      "sources_supporting": ["src-komisi1-dpr-biaya"]
+    },
+    {
+      "id": "tl-016",
+      "date": "2026-03-28",
+      "category": "media",
+      "title": "Puncak Percakapan Kopdes di Media Sosial",
+      "description": "BeData Technology mencatat puncak percakapan publik tentang Kopdes di TikTok dan X",
+      "tags": ["media sosial", "puncak", "percakapan"],
+      "sources_supporting": ["src-bedata-sentimen"]
+    },
+    {
+      "id": "tl-017",
+      "date": "2026-04-01",
+      "category": "kebijakan",
+      "title": "Kemhan Hentikan Latsarmil",
+      "description": "Kemhan menghentikan Latihan Dasar Militer dan menggantinya dengan 'Latihan Pembekalan Bela Negara dan Manajerial'",
+      "tags": ["kebijakan", "kemhan", "latsarmil", "dihentikan"],
+      "sources_supporting": ["src-kemhan-latsarmil"]
+    },
+    {
+      "id": "tl-018",
+      "date": "2026-04-05",
+      "category": "kontroversi",
+      "title": "Rencana Impor 105.000 Pikap India Dikritik",
+      "description": "Rencana impor 105.000 pikap India untuk Kopdes ditolak Menteri Perindustrian dan ICW karena penunjukan langsung tanpa tender",
+      "tags": ["kontroversi", "impor", "pikap", "india"],
+      "sources_supporting": ["src-detik-impor-pikap"]
+    },
+    {
+      "id": "tl-019",
+      "date": "2026-04-07",
+      "category": "riset",
+      "title": "BeData Rilis Analisis Sentimen",
+      "description": "BeData Technology merilis analisis sentimen: 59% negatif di TikTok, konten negatif paling cepat menyebar",
+      "tags": ["riset", "sentimen", "bedata", "tiktok"],
+      "sources_supporting": ["src-bedata-sentimen"]
+    },
+    {
+      "id": "tl-020",
+      "date": "2026-04-10",
+      "category": "kontroversi",
+      "title": "Viral Lokasi Kopdes di Tempat Tidak Strategis",
+      "description": "Berita viral tentang lokasi Kopdes di tengah hutan (Tanggamus), dekat kuburan, atas bukit, tepi jurang",
+      "tags": ["kontroversi", "lokasi", "viral", "hutan"],
+      "sources_supporting": ["src-tribun-lokasi"]
+    },
+    {
+      "id": "tl-021",
+      "date": "2026-05-16",
+      "category": "kebijakan",
+      "title": "Presiden Resmikan 1.061 Kopdes di Nganjuk",
+      "description": "Presiden Prabowo meresmikan 1.061 unit Kopdes di Nganjuk, Jawa Timur. Program tetap berjalan meski kritik",
+      "tags": ["kebijakan", "peresmian", "nganjuk", "presiden"],
+      "sources_supporting": ["src-presiden-nganjuk"]
+    },
+    {
+      "id": "tl-022",
+      "date": "2026-07-09",
+      "category": "riset",
+      "title": "Riset Awal oleh Sisyphus / Konect",
+      "description": "Riset multi-platform komprehensif dilakukan: artikel berita, jurnal akademik, analisis sentimen, data kuantitatif dipetakan",
+      "tags": ["riset", "konect", "sisyphus", "referensi"]
+    },
+    {
+      "id": "tl-023",
+      "date": "2026-06-11",
+      "category": "kebijakan",
+      "title": "Target Dipangkas: 40.000 Kopdes Akhir 2026",
+      "description": "Menkop Ferry perkirakan maksimal 40.000 Kopdes beroperasi akhir 2026. 12.533 unit selesai, 22.737 masih dibangun. 1.061 sudah diluncurkan",
+      "tags": ["target", "40.000", "menkop", "pemangkasan"],
+      "sources_supporting": ["src-antara-40k-2026"]
+    },
+    {
+      "id": "tl-024",
+      "date": "2026-06-11",
+      "category": "kritik",
+      "title": "DPR Wanti-Wanti Kopdes Bisa Mangkrak",
+      "description": "Komisi VI DPR minta Kemenkop perkuat perencanaan, studi kelayakan, KPI, road map bisnis. Pagu indikatif 2027: Rp542,89 miliar",
+      "tags": ["dpr", "komisi VI", "mangkrak", "pengawasan"],
+      "sources_supporting": ["src-kontan-dpr-wanti"]
+    },
+    {
+      "id": "tl-025",
+      "date": "2026-06-17",
+      "category": "insiden",
+      "title": "Pertama: Yonanda Meninggal di Baturaja",
+      "description": "Yonanda Muhammad Taufiq, calon manajer SPPI, meninggal karena cardiac arrest di Puslatpur Baturaja. Korban pertama dari 5 peserta",
+      "tags": ["insiden", "korban", "yonanda", "baturaja"],
+      "sources_supporting": ["src-merdeka-mitigasi", "src-kompas-2-meninggal"]
+    },
+    {
+      "id": "tl-026",
+      "date": "2026-06-18",
+      "category": "insiden",
+      "title": "Anisa Meninggal Heat Stroke di Balikpapan",
+      "description": "Anisa Muyassaroh meninggal karena heat stroke saat Latsarmil di Balikpapan. Korban kedua. Keduanya sudah lolos seleksi kesehatan",
+      "tags": ["insiden", "korban", "anisa", "heat stroke"],
+      "sources_supporting": ["src-kompas-2-meninggal"]
+    },
+    {
+      "id": "tl-027",
+      "date": "2026-06-22",
+      "category": "insiden",
+      "title": "Novia Meninggal TBC di Jakarta",
+      "description": "Novia meninggal karena tuberkulosis saat Latsarmil di Kodiklatau Jakarta. Korban ketiga",
+      "tags": ["insiden", "korban", "novia", "tbc", "jakarta"],
+      "sources_supporting": ["src-merdeka-mitigasi"]
+    },
+    {
+      "id": "tl-028",
+      "date": "2026-06-23",
+      "category": "media",
+      "title": "Bisnis: Target Kopdes Dipangkas Jadi 40.000",
+      "description": "Pemerintah resmi pangkas target dari 80.000 jadi 40.000. Fokus ke kualitas operasional",
+      "tags": ["media", "bisnis", "target", "pemangkasan", "40.000"],
+      "sources_supporting": ["src-bisnis-target-dipangkas"]
+    },
+    {
+      "id": "tl-029",
+      "date": "2026-06-26",
+      "category": "insiden",
+      "title": "Rifki dan Nola Meninggal di Jakarta dan Kalimantan",
+      "description": "Rifki (cardiac arrest, Yon Parako 465 Jakarta) dan Nola (cardiac arrest, Dodik Bela Negara Kalimantan) meninggal di hari yang sama. Total 5 korban",
+      "tags": ["insiden", "korban", "rifki", "nola", "cardiac arrest"],
+      "sources_supporting": ["src-merdeka-mitigasi"]
+    },
+    {
+      "id": "tl-030",
+      "date": "2026-06-26",
+      "category": "kebijakan",
+      "title": "KSP-Menko Evaluasi Kopdes, Perpres Disiapkan",
+      "description": "KSP Dudung pimpin rapat koordinasi dengan Menkop, Agrinas, TNI. Rekomendasi: percepatan Perpres operasionalisasi. Evaluasi 1.061 koperasi percontohan Nganjuk",
+      "tags": ["kebijakan", "ksp", "evaluasi", "perpres"],
+      "sources_supporting": ["src-antara-ksp-evaluasi", "src-tvone-perpres"]
+    },
+    {
+      "id": "tl-031",
+      "date": "2026-06-27",
+      "category": "kritik",
+      "title": "Koalisi Sipil Desak Investigasi Independen",
+      "description": "Koalisi Masyarakat Sipil (KontraS, YLBHI, Amnesty, ICJR, WALHI) desak Komnas HAM investigasi independen 5 kematian. Anggap bukan kecelakaan tapi konsekuensi kebijakan keliru",
+      "tags": ["kritik", "koalisi", "sipil", "komnas ham", "investigasi"],
+      "sources_supporting": ["src-koalisi-sipil"]
+    },
+    {
+      "id": "tl-032",
+      "date": "2026-06-28",
+      "category": "media",
+      "title": "Liputan6: 5 Manajer Meninggal, DPR Desak Hentikan Latsarmil",
+      "description": "TB Hasanuddin dan Oleh Soleh (Komisi I DPR) desak penghentian Latsarmil. 30.000 calon pengelola Kopdes + 5.476 Kampung Nelayan ikut Latsarmil",
+      "tags": ["media", "latsarmil", "dpr", "penghentian"],
+      "sources_supporting": ["src-liputan6-latsarmil"]
+    },
+    {
+      "id": "tl-033",
+      "date": "2026-07-01",
+      "category": "kebijakan",
+      "title": "Investigasi Kemhan-Kemenkes Dibentuk",
+      "description": "Pemerintah bentuk tim investigasi gabungan Kemhan dan Kemenkes. Tracing dan isolasi massal TBC. Verifikasi penyebab 5 kematian",
+      "tags": ["kebijakan", "investigasi", "kemhan", "kemenkes"],
+      "sources_supporting": ["src-viva-tim-investigasi"]
+    },
+    {
+      "id": "tl-034",
+      "date": "2026-07-02",
+      "category": "kebijakan",
+      "title": "KPI Kopdes Dimatangkan, Aturan Operasional Disiapkan",
+      "description": "Kemenkop matangkan KPI sebagai acuan evaluasi kinerja. Perpres operasionalisasi sebagai payung hukum. Target operasional penuh Agustus 2026",
+      "tags": ["kebijakan", "kpi", "perpres", "operasional"],
+      "sources_supporting": ["src-kontan-kpi"]
+    },
+    {
+      "id": "tl-035",
+      "date": "2026-07-02",
+      "category": "media",
+      "title": "Wamenhan Ungkap Penyebab Kematian",
+      "description": "Wamenhan Donny Ermawan: penyebab = kelelahan, perubahan pola hidup, penyakit bawaan. 3 karena jantung, 2 karena TBC. Pemeriksaan kesehatan lebih ketat",
+      "tags": ["media", "wamenhan", "penyebab", "kematian"],
+      "sources_supporting": ["src-tribun-wamenhan"]
+    },
+    {
+      "id": "tl-036",
+      "date": "2026-07-03",
+      "category": "kebijakan",
+      "title": "Santunan Korban Rp92-168 Juta Diumumkan",
+      "description": "Santunan: Rp92 juta (sakit: Rp50jt Kemhan + Rp42jt BPJS) hingga Rp168 juta (kecelakaan: Rp50jt + Rp118jt BPJS). Verifikasi masih berlangsung",
+      "tags": ["kebijakan", "santunan", "korban", "bpjs"],
+      "sources_supporting": ["src-kompas-santunan"]
+    },
+    {
+      "id": "tl-037",
+      "date": "2026-07-04",
+      "category": "kebijakan",
+      "title": "Target 40.000 Kopdes Rampung September, Operasional Oktober",
+      "description": "Zulhas targetkan 40.000 rampung September, operasional penuh Oktober. Sudah mendekati 36.000 lebih. Integrasi PKH, alsintan, listrik, pupuk, gas via Kopdes",
+      "tags": ["kebijakan", "target", "oktober", "zulhas"],
+      "sources_supporting": ["src-mediaindonesia-40k-oktober", "src-harianjogja-zulhas"]
+    }
+  ]
+}

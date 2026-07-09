@@ -1,0 +1,110 @@
+{
+  "schema": {
+    "version": "1.0",
+    "exported_at": "2026-07-09T00:00:00+07:00",
+    "exported_by": "sisyphus",
+    "description": "Index file yang mereferensikan seluruh data riset Koperasi Desa Merah Putih. Gunakan file ini untuk navigasi dan agregasi data."
+  },
+  "type": "index",
+  "research_topic": "Koperasi Desa Merah Putih (KDMP/KKMP) — Observasi Masalah, Sentimen Analisis, dan Analisis Kuantitatif",
+  "files": [
+    {
+      "filename": "sources.json",
+      "type": "sources",
+      "count": 18,
+      "description": "Artikel berita, laporan, dan regulasi dari berbagai sumber (BBC, Kompas, IDN Times, CELIOS, dll)"
+    },
+    {
+      "filename": "journals.json",
+      "type": "journals",
+      "count": 16,
+      "description": "Jurnal akademik untuk literature review, tahun 2025-2026"
+    },
+    {
+      "filename": "issues.json",
+      "type": "issues",
+      "count": 14,
+      "description": "Isu utama dan kontroversi dengan severity rating dan sumber pendukung"
+    },
+    {
+      "filename": "data_points.json",
+      "type": "data_points",
+      "count": 35,
+      "description": "Data kuantitatif untuk analisis statistik (fiskal, survei, operasional)"
+    },
+    {
+      "filename": "stakeholders.json",
+      "type": "stakeholders",
+      "count": 22,
+      "description": "Pemetaan pemangku kepentingan dengan posisi, pengaruh, dan sumber"
+    },
+    {
+      "filename": "timeline.json",
+      "type": "timeline",
+      "count": 22,
+      "description": "Kronologi peristiwa dari pencanangan hingga riset"
+    },
+    {
+      "filename": "sentiment.json",
+      "type": "sentiment",
+      "count": 5,
+      "description": "Analisis sentimen dari TikTok, X/Twitter, survei, dan media"
+    },
+    {
+      "filename": "simkopdes_national.json",
+      "type": "simkopdes_official",
+      "count": 1,
+      "description": "Data agregat nasional dari dashboard resmi SIMKOPDES per 9 Juli 2026"
+    },
+    {
+      "filename": "simkopdes_province.json",
+      "type": "simkopdes_official",
+      "count": 38,
+      "description": "Data Koperasi Desa Merah Putih per 38 provinsi (jumlah, NIB, NPWP, RAT, simpanan, transaksi, pembangunan)"
+    },
+    {
+      "filename": "simkopdes_ews_keuangan.json",
+      "type": "simkopdes_official",
+      "count": 1,
+      "description": "Laporan Kesehatan Keuangan EWS Nasional tahun 2025 (91.1% tidak sehat)"
+    },
+    {
+      "filename": "simkopdes_transaksi.json",
+      "type": "simkopdes_official",
+      "count": 1,
+      "description": "Data transaksi KDKMP per produk dan per koperasi (total Rp 56,57 Milyar)"
+    },
+    {
+      "filename": "simkopdes_kelembagaan.json",
+      "type": "simkopdes_official",
+      "count": 1,
+      "description": "Data kelembagaan KDKMP per provinsi (total 83.382 koperasi berbadan hukum)"
+    },
+    {
+      "filename": "analysis_insights.json",
+      "type": "analysis",
+      "count": 1,
+      "description": "Analisis kritis berbasis data resmi SIMKOPDES (10 key observations + rekomendasi)"
+    }
+  ],
+  "total_entries": 175,
+  "aggregation_notes": [
+    "Gunakan field 'id' sebagai foreign key antar file (contoh: sources.json[].id == issues.json[].sources_supporting[])",
+    "Data_points.json memiliki field 'source_id' yang mereferensi sources.json[].id",
+    "Sentiment.json memiliki field 'source_id' yang mereferensi sources.json[].id",
+    "File simkopdes_* adalah data resmi yang dapat divalidasi silang dengan data CELIOS dan media",
+    "File analysis_insights.json berisi observasi kritis yang siap pakai untuk problem observation",
+    "Field 'tags' konsisten digunakan untuk filtering dan kategorisasi"
+  ],
+  "data_summary": {
+    "total_koperasi_resmi": 83382,
+    "persentase_sehat": 2.2,
+    "persentase_tidak_sehat": 91.1,
+    "persentase_belum_lapor_keuangan": 62.5,
+    "total_transaksi_nasional": 56571080135,
+    "total_pendapatan_nasional": 85260000000,
+    "total_aset_nasional": 453890000000,
+    "pembangunan_100_persen": 15533,
+    "pembangunan_100_persen_persen": 43.3
+  }
+}

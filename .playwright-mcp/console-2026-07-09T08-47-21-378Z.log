@@ -1,0 +1,5 @@
+[     114ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ http://localhost:3004/composition/index.html:0
+[     115ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3004/composition/sfx/advance.mp3:0
+[     116ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3004/composition/sfx/fragment.mp3:0
+[     118ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3004/composition/sfx/branch-enter.mp3:0
+[     118ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3004/composition/sfx/back.mp3:0

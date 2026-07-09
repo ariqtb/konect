@@ -1,0 +1,192 @@
+{
+  "schema": {
+    "version": "1.1",
+    "exported_at": "2026-07-09T12:00:00+07:00",
+    "exported_by": "sisyphus",
+    "description": "Analisis kritis berbasis data resmi SIMKOPDES yang dapat digunakan untuk problem observation dan observasi masalah program Kopdes Merah Putih"
+  },
+  "type": "analysis_insights",
+  "source_basis": [
+    "https://simkopdes.go.id/pers/dashboard",
+    "https://simkopdes.go.id/pers/rat",
+    "https://simkopdes.go.id/pers/transaksi/bisnis",
+    "https://simkopdes.go.id/pers/ews/kesehatan-keuangan",
+    "https://simkopdes.go.id/pers/kelembagaan"
+  ],
+  "as_of": "2026-07-09",
+  "data": {
+    "key_observations": [
+      {
+        "id": "obs-001",
+        "title": "Target vs Realisasi: 83.382 Koperasi (104.2% dari target 80.000)",
+        "description": "Total Koperasi Berbadan Hukum: 83.382 unit (melebihi target awal 80.000 unit). Capaian 104.2% dari target awal. Bahkan beberapa provinsi melebihi 100% dari target mereka (terutama di Sulawesi, NTB, DIY).",
+        "source": "simkopdes_nasional.json + simkopdes_kelembagaan.json",
+        "analysis": "Angka 83.382 lebih besar dari target 80.000 yang dipublikasi pemerintah. Ini bisa menunjukkan: (1) Target awal 80.000 terlalu rendah, (2) Ada koperasi yang terbentuk tapi tidak sesuai kriteria, (3) Perhitungan desa/kelurahan sudah over karena DOB baru. Dari sumber sebelumnya (CELIOS) target 80.000 disebut 'unit' yang artinya berbeda dengan jumlah desa/kelurahan.",
+        "tags": ["target", "realisasi", "kelembagaan"]
+      },
+      {
+        "id": "obs-002",
+        "title": "Kesenjangan Jawa vs Papua: 32x lipat perbedaan jumlah koperasi",
+        "description": "Jawa Tengah (8.524) vs DKI Jakarta (268) vs Papua Pegunungan (2.387). Ada disparitas besar antar provinsi. Jawa (Jawa Barat+Tengah+Timur) memiliki total 22.988 koperasi (27.6% dari total nasional).",
+        "source": "simkopdes_province.json",
+        "analysis": "Distribusi tidak merata. Papua Pegunungan & Papua Selatan baru mencapai ~90% target. Hal ini bisa menjadi indikator: (1) Keterlambatan di DOB baru, (2) Keterbatasan sumber daya di Timur Indonesia, (3) Mungkin ada indikasi program difokuskan di Jawa.",
+        "tags": ["disparitas", "regional", "Jawa", "Papua"]
+      },
+      {
+        "id": "obs-003",
+        "title": "91.1% Koperasi yang Lapor Masuk Kategori TIDAK SEHAT",
+        "description": "Dari 31.265 koperasi yang sudah lapor keuangan (37.5% dari total), 28.495 (91.1%) dikategorikan TIDAK SEHAT. Hanya 683 (2.2%) yang SEHAT.",
+        "source": "simkopdes_ews_keuangan.json",
+        "analysis": "Ini data paling kritis: mayoritas koperasi yang berhasil lapor ternyata tidak sehat secara keuangan. 62.5% lainnya belum lapor, menunjukkan banyak koperasi belum operasional atau tidak memiliki pembukuan. Temuan ini mengkonfirmasi laporan CELIOS bahwa 65% perangkat desa melihat celah korupsi.",
+        "tags": ["kesehatan", "kritis", "keuangan", "fraud"]
+      },
+      {
+        "id": "obs-004",
+        "title": "Total Pendapatan Nasional Rp 85,26 M sangat kecil",
+        "description": "Total pendapatan nasional dari 31.265 koperasi yang lapor hanya Rp 85,26 Milyar. Jika dibagi rata, setiap koperasi hanya menghasilkan Rp 2,7 juta/tahun.",
+        "source": "simkopdes_ews_keuangan.json",
+        "analysis": "Sangat timpang dibanding estimasi biaya Rp3-5 miliar per unit. Total aset nasional Rp 453,89 Milyar juga sangat kecil. Program senilai Rp240 Triliun ternyata menghasilkan transaksi/pendapatan sangat minim.",
+        "tags": ["pendapatan", "skala", "kecil"]
+      },
+      {
+        "id": "obs-005",
+        "title": "Transaksi didominasi Pupuk (46% dari total nilai)",
+        "description": "Pupuk NPK Phonska + Pupuk Urea = Rp 26,37 Milyar dari total Rp 56,57 Milyar (46.6%). Top 10 produk = 100% kebutuhan pokok (pupuk, beras, minyak goreng, LPG, gula, filter rokok).",
+        "source": "simkopdes_transaksi.json",
+        "analysis": "Fakta: Kopdes bukan ritel/grocery store, melainkan SALURAN DISTRIBUSI PUPUK dan kebutuhan pokok strategis. Temuan ini KONTRAS dengan narasi 'Kopdes = minimarket/toko kelontong' yang dikritik media. Pelanggaran terhadap Pasal 33 UUD 1945 tentang ekonomi kerakyatan.",
+        "tags": ["produk", "pupuk", "distribusi", "strategis"]
+      },
+      {
+        "id": "obs-006",
+        "title": "Jawa Timur mendominasi 38% transaksi nasional",
+        "description": "Jawa Timur memiliki nilai transaksi Rp 21,48 Milyar dari total Rp 56,57 Milyar (38%). 3 dari 10 koperasi teraktif ada di Kabupaten Tuban, Jatim.",
+        "source": "simkopdes_transaksi.json",
+        "analysis": "Sentralisasi di Jawa. Kab. Tuban (Jatim) muncul 3x di top 10 koperasi. Fenomena konsentrasi geografis menunjukkan program tidak merata dan ada efek 'keteladanan' lokal.",
+        "tags": ["Jawa Timur", "Tuban", "konsentrasi", "sentralisasi"]
+      },
+      {
+        "id": "obs-007",
+        "title": "Pembangunan Gerai: baru 43.3% selesai",
+        "description": "Dari 35.870 lahan terverifikasi, hanya 15.533 (43.3%) yang sudah Pembangunan 100%. 19.845 (55.3%) sedang dibangun, 492 (1.4%) belum mulai.",
+        "source": "simkopdes_nasional.json",
+        "analysis": "Hampir setengah unit (56.7%) belum selesai dibangun. Padahal program sudah berlangsung >6 bulan. Ini mengindikasikan keterlambatan signifikan dibanding target operasional.",
+        "tags": ["pembangunan", "target", "keterlambatan"]
+      },
+      {
+        "id": "obs-008",
+        "title": "Pelaksanaan RAT rendah: hanya 50.264 dari 83.382 (60.3%)",
+        "description": "Koperasi yang sudah RAT 2025: 50.264 (60.3%). Yang diverifikasi dinas: 44.227 (53%). Sedang RAT draft: 14.346 (17.2%). Belum RAT: 18.772 (22.5%).",
+        "source": "simkopdes_nasional.json + simkopdes_rat.json",
+        "analysis": "RAT adalah kewajiban fundamental koperasi sesuai UU 25/1992. 22.5% belum RAT dan 17.2% masih draft setelah berbulan-bulan menunjukkan lemahnya tata kelola internal. Beberapa provinsi nol RAT (Bali, DIY, DKI, Sumbar).",
+        "tags": ["RAT", "tata kelola", "kepatuhan", "UU 25/1992"]
+      },
+      {
+        "id": "obs-009",
+        "title": "Simpanan Pokok > Simpanan Wajib (4x lipat)",
+        "description": "Simpanan Pokok total: Rp 41,51 Milyar. Simpanan Wajib: Rp 10,37 Milyar. Rasio 4:1.",
+        "source": "simkopdes_nasional.json",
+        "analysis": "Bias: koperasi yang baru berdiri biasanya hanya mengumpulkan simpanan pokok (uang masuk awal). Belum ada simpanan wajib rutin anggota menunjukkan KELEMAHAN recurring revenue dan partisipasi aktif anggota.",
+        "tags": ["simpanan", "partisipasi", "anggota"]
+      },
+      {
+        "id": "obs-010",
+        "title": "60.773 (72.9%) Koperasi Sudah Punya NIB",
+        "description": "Dari 83.382 koperasi, 60.773 sudah memiliki NIB (Nomor Induk Berusaha). Tapi 22.609 (27.1%) belum.",
+        "source": "simkopdes_nasional.json",
+        "analysis": "NIB = izin usaha. 27.1% belum punya NIB = belum bisa beroperasi resmi sebagai usaha. Ini konsisten dengan fakta bahwa hanya 31.265 yang sudah lapor keuangan.",
+        "tags": ["NIB", "izin usaha", "operasional"]
+      },
+      {
+        "id": "obs-011",
+        "title": "Target Dipangkas dari 80.000 ke 40.000 — Pengakuan Implisit Kegagalan",
+        "description": "Pemerintah secara resmi memangkas target operasional dari 80.000 menjadi 40.000 unit (Juni 2026). Target Oktober 2026 operasional penuh. Perubahan sikap drastis dari kuantitas ke kualitas",
+        "source": "Multiple media (Bisnis, ANTARA, Media Indonesia)",
+        "analysis": "Pemangkasan 50% target adalah pengakuan implisit bahwa target awal tidak realistis. Ini konsisten dengan data SIMKOPDES: baru 43.3% pembangunan selesai, 91.1% tidak sehat. Pemerintah berusaha 'menyelamatkan muka' dengan membingkai ulang sebagai fokus kualitas. Tersirat: program lebih bermasalah dari yang diakui publik.",
+        "tags": ["target", "pemangkasan", "40.000", "kualitas", "pengakuan"]
+      },
+      {
+        "id": "obs-012",
+        "title": "Perbandingan China: Peringatan 43% Koperasi Cangkang",
+        "description": "Tiongkok rata-rata 43% koperasi cangkang per tahun (2015-2022), puncak 64% di 2021. Indonesia menggunakan pendekatan DISINSENTIF (Dana Desa tidak cair jika Kopdes tidak dibentuk) yang lebih keras dari insentif China",
+        "source": "Batuah News + jurnal perbandingan",
+        "analysis": "Pendekatan disinsentif Indonesia (dana desa dipotong paksa 58%) jauh lebih keras dari pendekatan insentif China (bantuan negara, lalu masyarakat dirikan koperasi). Ironisnya, China dengan pendekatan lebih lunak saja masih mengalami 43% koperasi cangkang. Potensi koperasi cangkang di Indonesia diperkirakan lebih besar. Program principal-agent problem sudah inheren sejak Inpres No. 9/2025.",
+        "tags": ["china", "koperasi cangkang", "disinsentif", "perbandingan", "43%"]
+      },
+      {
+        "id": "obs-013",
+        "title": "Tragedi 5 Kematian: Resiko Sistemik Pendekatan Militer",
+        "description": "5 peserta SPPI meninggal dalam 10 hari pertama Latsarmil gelombang I (17-26 Juni 2026). Penyebab: cardiac arrest (3), heat stroke (1), TBC (1). 35.476 total peserta. Tim investigasi dibentuk.",
+        "source": "Merdeka, Kompas, Bisnisia, Tribun, Viva",
+        "analysis": "Tragedi ini bukan insiden terisolasi — melainkan konsekuensi langsung dari keputusan mendesain pelatihan 30 hari militer + 15 hari koperasi untuk sipil. Rasio 2:1 (militer:koperasi) menunjukkan prioritas yang salah. Biaya Rp45jt/orang = Rp1,35T total. Perbandingan mengerikan: biaya pelatihan per orang setara 16.7x pendapatan rata-rata koperasi/tahun (Rp2,7jt). DPR dari lintas fraksi (PDIP, Golkar) kompak desak evaluasi — sinyal politik langka.",
+        "tags": ["tragedi", "kematian", "latsarmil", "sistemik", "militerisasi", "55 nyawa"]
+      },
+      {
+        "id": "obs-014",
+        "title": "Formalitas vs Realitas: Kesenjangan Kesiapan dan Kinerja",
+        "description": "Jurnal multidimensi (STKIP PGRI Jombang) temukan: KDMP punya fondasi kelembagaan formal kuat (legalitas, struktur, SOP) tapi lemah di layanan, infrastruktur, kapasitas SDM, dan dampak ekonomi",
+        "source": "Jurnal STKIP PGRI Jombang + perbandingan KUD",
+        "analysis": "Ini menjelaskan paradoks data SIMKOPDES: 104.2% target tercapai (formal), tapi 91.1% tidak sehat (realitas). Koperasi ada 'di atas kertas' tapi tidak berfungsi. Jurnal perbandingan KUD era Orde Baru juga konfirmasi KDMP lebih adaptif dan diversifikasi lebih luas, tapi tantangan pengawasan independen tetap menjadi masalah utama.",
+        "tags": ["formalitas", "kinerja", "jurnal", "kesenjangan", "kelembagaan"]
+      },
+      {
+        "id": "obs-015",
+        "title": "Konsolidasi Kekuasaan: Perpres, KPI, dan Target Oktober 2026",
+        "description": "Pemerintah percepat operasionalisasi: Perpres disiapkan, KPI dimatangkan, target 40.000 rampung September dan operasional Oktober 2026. KSP pimpin koordinasi dengan Agrinas dan TNI",
+        "source": "Kontan, ANTARA, tvOne, Media Indonesia",
+        "analysis": "Ada percepatan signifikan pasca evaluasi Juni 2026. Perpres akan jadi payung hukum yang lebih kuat dari Inpres. KPI sebagai alat ukur — tapi belum dipublikasikan secara transparan (PDIP desak publikasi KPI). Target Oktober 2026 agresif: dari 36.000 mendekati selesai ke 40.000 operasional dalam 3 bulan. Integrasi PKH, alsintan, listrik, pupuk, gas via Kopdes menunjukkan program semakin menjadi 'satu atap' layanan desa — sentralisasi ekstrem.",
+        "tags": ["perpres", "kpi", "target", "oktober", "konsolidasi", "sentralisasi"]
+      },
+      {
+        "id": "obs-016",
+        "title": "Prediksi 99% Gagal dan Desakan Audit Total",
+        "description": "Agus Pambagio prediksi 99% koperasi tidak akan hidup. Tribun desak audit investigatif KPK/BPK/KPPU. PSPK UGM tuntut evaluasi total. Koalisi sipil desak investigasi Komnas HAM",
+        "source": "Kontan, Tribun, PSPK UGM, independen.id",
+        "analysis": "Konsolidasi perlawanan dari berbagai front: akademisi (UI, UGM), pengamat kebijakan (Agus Pambagio), organisasi sipil (KontraS, YLBHI, WALHI), dan media (Tribun, Kontan). Agus Pambagio memberi batas waktu 2-3 tahun untuk membuktikan prediksinya. Desakan audit KPK/BPK/KPPU adalah eskalasi — tidak lagi sekedar kritik akademis tapi tuntutan investigasi hukum formal.",
+        "tags": ["prediksi", "99%", "gagal", "audit", "kpk", "bpks", "evaluasi total"]
+      }
+    ],
+    "disparity_metrics": {
+      "rasio_provinsi_max_min": "32x (Jawa Tengah 8.524 vs DKI Jakarta 268)",
+      "konsentrasi_jawa": "27.6% koperasi ada di 3 provinsi Jawa (Jabar+Jateng+Jatim)",
+      "konsentrasi_nilai_transaksi_jatim": "38% nilai transaksi di Jawa Timur",
+      "koperasi_belum_nib": 22609,
+      "koperasi_belum_lapor_keuangan": 52117,
+      "koperasi_tidak_sehat_persen": 91.1,
+      "koperasi_sehat_persen": 2.2
+    },
+    "gap_analysis": {
+      "target_80000": {
+        "current": 83382,
+        "persentase": 104.2
+      },
+      "laporan_keuangan_2025": {
+        "target_100_persen": 83382,
+        "current": 31265,
+        "persentase": 37.5
+      },
+      "pembangunan_gerai": {
+        "target_100_persen": 35870,
+        "current_100_persen": 15533,
+        "persentase": 43.3
+      },
+      "rat_2025": {
+        "target_100_persen": 83382,
+        "current": 50264,
+        "persentase": 60.3
+      }
+      }
+    },
+    "rekomendasi_analisis": [
+    "Bandingkan data SIMKOPDES dengan survei CELIOS (76% perangkat desa tolak) untuk validasi gap",
+    "Hitung ulang efisiensi: biaya input (Rp3M/unit) vs output (pendapatan Rp2,7jt/koperasi/tahun)",
+    "Analisis disparitas Jawa vs Timur Indonesia sebagai indikator pemerataan",
+    "Bandingkan data Dashboard (83.382) dengan klaim pemerintah (30.000) untuk cek konsistensi",
+    "Studi kasus: kenapa Kabupaten Tuban (Jatim) bisa 3x di top 10? Replikasi model?",
+    "Identifikasi koperasi yang SEHAT (2.2%) untuk studi kasus praktik baik",
+    "Investigasi mengapa 91.1% tidak sehat: fraud, kelemahan pembukuan, atau model bisnis yang salah?",
+    "Analisis perbandingan dengan China: prediksi tingkat koperasi cangkang Indonesia berdasarkan pendekatan disinsentif",
+    "Kaji dampak pemangkasan target 80.000→40.000 terhadap serapan tenaga kerja dan dampak fiskal",
+    "Tracking implementasi Perpres dan KPI sebagai indikator serius/tidaknya pemerintah"
+  ],
+  "tags": ["simkopdes", "analisis", "insights", "data driven", "9 juli 2026"]
+}

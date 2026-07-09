@@ -1,0 +1,16 @@
+- generic [active] [ref=f15e1]:
+  - generic [ref=f15e3]:
+    - generic [ref=f15e4]:
+      - img "SIMKOPDES" [ref=f15e6]
+      - heading "Laporan Kesehatan Keuangan Koperasi" [level=1] [ref=f15e8]
+      - generic [ref=f15e9]:
+        - generic [ref=f15e10]: Tahun
+        - generic [ref=f15e11] [cursor=pointer]:
+          - generic [ref=f15e13]:
+            - combobox [ref=f15e15]
+            - generic "2025" [ref=f15e16]
+          - generic:
+            - img:
+              - img
+    - generic [ref=f15e25]: Memuat data dashboard...
+  - alert [ref=f15e26]

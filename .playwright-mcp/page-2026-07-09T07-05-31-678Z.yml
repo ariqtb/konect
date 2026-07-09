@@ -1,0 +1,772 @@
+- generic [active] [ref=f20e1]:
+  - generic [ref=f20e4]:
+    - generic [ref=f20e5]:
+      - img "SIMKOPDES" [ref=f20e7]
+      - heading "Dashboard Statistik Kelembagaan Koperasi" [level=1] [ref=f20e9]
+      - generic [ref=f20e11]:
+        - generic [ref=f20e13]: Live Data
+        - generic [ref=f20e42]: 🕐 9 Juli 2026 | 14:05 WIB
+    - generic [ref=f20e44]:
+      - generic [ref=f20e46]:
+        - generic [ref=f20e48]:
+          - generic [ref=f20e50]:
+            - generic [ref=f20e51]: Peta Sebaran Koperasi
+            - generic [ref=f20e52]: Klik bubble untuk drill-down wilayah
+          - button "reload" [ref=f20e54] [cursor=pointer]:
+            - img "reload" [ref=f20e56]:
+              - img [ref=f20e57]
+        - generic [ref=f20e59]:
+          - generic [ref=f20e61]: "Level: Provinsi"
+          - generic [ref=f20e63]:
+            - generic:
+              - generic:
+                - button "8494" [ref=f20e64] [cursor=pointer]:
+                  - generic [ref=f20e65]: "8494"
+                - button "1508" [ref=f20e66] [cursor=pointer]:
+                  - generic [ref=f20e67]: "1508"
+                - button "5968" [ref=f20e68] [cursor=pointer]:
+                  - generic [ref=f20e69]: "5968"
+                - button "2155" [ref=f20e70] [cursor=pointer]:
+                  - generic [ref=f20e71]: "2155"
+                - button "2651" [ref=f20e72] [cursor=pointer]:
+                  - generic [ref=f20e73]: "2651"
+                - button "393" [ref=f20e74] [cursor=pointer]:
+                  - generic [ref=f20e75]: "393"
+                - button "8524" [ref=f20e76] [cursor=pointer]:
+                  - generic [ref=f20e77]: "8524"
+                - button "731" [ref=f20e78] [cursor=pointer]:
+                  - generic [ref=f20e79]: "731"
+                - button "1839" [ref=f20e80] [cursor=pointer]:
+                  - generic [ref=f20e81]: "1839"
+                - button "718" [ref=f20e82] [cursor=pointer]:
+                  - generic [ref=f20e83]: "718"
+                - button "6102" [ref=f20e84] [cursor=pointer]:
+                  - generic [ref=f20e85]: "6102"
+                - button "3267" [ref=f20e86] [cursor=pointer]:
+                  - generic [ref=f20e87]: "3267"
+                - button "1037" [ref=f20e88] [cursor=pointer]:
+                  - generic [ref=f20e89]: "1037"
+                - button "3080" [ref=f20e90] [cursor=pointer]:
+                  - generic [ref=f20e91]: "3080"
+                - button "438" [ref=f20e92] [cursor=pointer]:
+                  - generic [ref=f20e93]: "438"
+                - button "628" [ref=f20e94] [cursor=pointer]:
+                  - generic [ref=f20e95]: "628"
+                - button "1866" [ref=f20e96] [cursor=pointer]:
+                  - generic [ref=f20e97]: "1866"
+                - button "1270" [ref=f20e98] [cursor=pointer]:
+                  - generic [ref=f20e99]: "1270"
+                - button "648" [ref=f20e100] [cursor=pointer]:
+                  - generic [ref=f20e101]: "648"
+                - button "3452" [ref=f20e102] [cursor=pointer]:
+                  - generic [ref=f20e103]: "3452"
+                - button "1543" [ref=f20e104] [cursor=pointer]:
+                  - generic [ref=f20e105]: "1543"
+                - button "1553" [ref=f20e106] [cursor=pointer]:
+                  - generic [ref=f20e107]: "1553"
+                - button "6534" [ref=f20e108] [cursor=pointer]:
+                  - generic [ref=f20e109]: "6534"
+                - button "1172" [ref=f20e110] [cursor=pointer]:
+                  - generic [ref=f20e111]: "1172"
+                - button "2366" [ref=f20e112] [cursor=pointer]:
+                  - generic [ref=f20e113]: "2366"
+                - button "407" [ref=f20e114] [cursor=pointer]:
+                  - generic [ref=f20e115]: "407"
+                - button "411" [ref=f20e116] [cursor=pointer]:
+                  - generic [ref=f20e117]: "411"
+                - button "1236" [ref=f20e118] [cursor=pointer]:
+                  - generic [ref=f20e119]: "1236"
+                - button "2273" [ref=f20e120] [cursor=pointer]:
+                  - generic [ref=f20e121]: "2273"
+                - button "1983" [ref=f20e122] [cursor=pointer]:
+                  - generic [ref=f20e123]: "1983"
+                - button "1591" [ref=f20e124] [cursor=pointer]:
+                  - generic [ref=f20e125]: "1591"
+                - button "1191" [ref=f20e126] [cursor=pointer]:
+                  - generic [ref=f20e127]: "1191"
+                - button "1024" [ref=f20e128] [cursor=pointer]:
+                  - generic [ref=f20e129]: "1024"
+                - button "1200" [ref=f20e130] [cursor=pointer]:
+                  - generic [ref=f20e131]: "1200"
+                - button "2013" [ref=f20e132] [cursor=pointer]:
+                  - generic [ref=f20e133]: "2013"
+                - button "984" [ref=f20e134] [cursor=pointer]:
+                  - generic [ref=f20e135]: "984"
+                - button "826" [ref=f20e136] [cursor=pointer]:
+                  - generic [ref=f20e137]: "826"
+                - button "268" [ref=f20e138] [cursor=pointer]:
+                  - generic [ref=f20e139]: "268"
+            - generic:
+              - generic [ref=f20e24]:
+                - button "Zoom in" [ref=f20e25] [cursor=pointer]: +
+                - button "Zoom out" [disabled] [ref=f20e26]: −
+              - button "Layers" [ref=f20e28] [cursor=pointer]
+              - generic:
+                - generic [ref=f20e140]:
+                  - generic [ref=f20e141]: Legenda
+                  - generic [ref=f20e142]:
+                    - generic [ref=f20e143]: "#"
+                    - generic [ref=f20e144]: Bubble jumlah koperasi
+                - generic [ref=f20e34]:
+                  - link "Leaflet" [ref=f20e35] [cursor=pointer]:
+                    - /url: https://leafletjs.com
+                    - img [ref=f20e36]
+                    - text: Leaflet
+                  - text: "| Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+          - generic [ref=f20e145]:
+            - generic [ref=f20e146]:
+              - generic [ref=f20e147]: Statistik Provinsi
+              - generic [ref=f20e148]: Persentase koperasi berbadan hukum per provinsi
+            - img [ref=f20e153]:
+              - generic [ref=f20e157]:
+                - generic [ref=f20e159]: PAPUA BARAT DAYA
+                - generic [ref=f20e161]: SULAWESI SELATAN
+                - generic [ref=f20e163]: ACEH
+                - generic [ref=f20e165]: KALIMANTAN BARAT
+                - generic [ref=f20e167]: MALUKU UTARA
+                - generic [ref=f20e169]: NUSA TENGGARA BARAT
+                - generic [ref=f20e171]: SUMATERA BARAT
+                - generic [ref=f20e173]: JAMBI
+                - generic [ref=f20e175]: DKI JAKARTA
+                - generic [ref=f20e177]: NUSA TENGGARA TIMUR
+                - generic [ref=f20e179]: BALI
+                - generic [ref=f20e181]: GORONTALO
+                - generic [ref=f20e183]: SULAWESI TENGGARA
+                - generic [ref=f20e185]: SUMATERA SELATAN
+                - generic [ref=f20e187]: PAPUA BARAT
+                - generic [ref=f20e189]: JAWA BARAT
+                - generic [ref=f20e191]: RIAU
+                - generic [ref=f20e193]: SULAWESI TENGAH
+                - generic [ref=f20e195]: MALUKU
+                - generic [ref=f20e197]: BANTEN
+                - generic [ref=f20e199]: LAMPUNG
+                - generic [ref=f20e201]: JAWA TENGAH
+                - generic [ref=f20e203]: JAWA TIMUR
+                - generic [ref=f20e205]: SULAWESI UTARA
+                - generic [ref=f20e207]: SULAWESI BARAT
+                - generic [ref=f20e209]: DAERAH ISTIMEWA YOGYAKARTA
+                - generic [ref=f20e211]: KEPULAUAN BANGKA BELITUNG
+                - generic [ref=f20e213]: KALIMANTAN SELATAN
+                - generic [ref=f20e215]: KALIMANTAN TIMUR
+                - generic [ref=f20e217]: SUMATERA UTARA
+                - generic [ref=f20e219]: BENGKULU
+                - generic [ref=f20e221]: KALIMANTAN UTARA
+                - generic [ref=f20e223]: PAPUA TENGAH
+                - generic [ref=f20e225]: PAPUA
+                - generic [ref=f20e227]: KALIMANTAN TENGAH
+                - generic [ref=f20e229]: KEPULAUAN RIAU
+                - generic [ref=f20e231]: PAPUA SELATAN
+                - generic [ref=f20e233]: PAPUA PEGUNUNGAN
+              - generic [ref=f20e235]:
+                - generic [ref=f20e237]: 25%
+                - generic [ref=f20e239]: 100%
+      - generic [ref=f20e318]:
+        - generic [ref=f20e319]:
+          - generic [ref=f20e322]:
+            - generic [ref=f20e323]:
+              - generic [ref=f20e324]:
+                - generic [ref=f20e325]: Ringkasan Koperasi
+                - generic [ref=f20e326]: Per 08/07/2026 08:15:32
+              - button "reload" [ref=f20e327] [cursor=pointer]:
+                - img "reload" [ref=f20e329]:
+                  - img [ref=f20e330]
+            - generic [ref=f20e332]:
+              - generic [ref=f20e333]:
+                - generic [ref=f20e334]: Kelurahan Berbadan Hukum
+                - generic [ref=f20e335]: "8.576"
+              - generic [ref=f20e336]:
+                - generic [ref=f20e337]: Desa Berbadan Hukum
+                - generic [ref=f20e338]: "74.805"
+              - generic [ref=f20e339]:
+                - generic [ref=f20e340]: Total Berbadan Hukum
+                - generic [ref=f20e341]: "83.382"
+              - generic [ref=f20e342]:
+                - generic [ref=f20e343]: Telah Memiliki Akun
+                - generic [ref=f20e344]: "79.706"
+              - generic [ref=f20e345]:
+                - generic [ref=f20e346]: Telah Memiliki NPWP
+                - generic [ref=f20e347]: "80.978"
+              - generic [ref=f20e348]:
+                - generic [ref=f20e349]: Telah Memiliki NIB
+                - generic [ref=f20e350]: "60.771"
+          - generic [ref=f20e352]:
+            - generic [ref=f20e354]:
+              - generic [ref=f20e356]:
+                - generic [ref=f20e357]: Grafik Satgas Nasional
+                - generic [ref=f20e358]: Perbandingan musyawarah dan total koperasi
+              - button "reload" [ref=f20e360] [cursor=pointer]:
+                - img "reload" [ref=f20e362]:
+                  - img [ref=f20e363]
+            - generic [ref=f20e368]:
+              - img [ref=f20e369]:
+                - generic [ref=f20e373]:
+                  - generic [ref=f20e375]: SATUAN TUGAS WILAYAH 3
+                  - generic [ref=f20e377]: SATUAN TUGAS WILAYAH 4
+                  - generic [ref=f20e379]: SATUAN TUGAS WILAYAH 2
+                  - generic [ref=f20e381]: SATUAN TUGAS WILAYAH 1
+                - generic [ref=f20e383]:
+                  - generic [ref=f20e385]: "0"
+                  - generic [ref=f20e387]: "8000"
+                  - generic [ref=f20e389]: "16000"
+                  - generic [ref=f20e391]: "24000"
+                  - generic [ref=f20e393]: "32000"
+              - list [ref=f20e415]:
+                - listitem [ref=f20e416]:
+                  - img [ref=f20e417]
+                  - text: Musdesus
+                - listitem [ref=f20e419]:
+                  - img [ref=f20e420]
+                  - text: Koperasi
+        - generic [ref=f20e422]:
+          - generic [ref=f20e424]:
+            - generic [ref=f20e426]:
+              - generic [ref=f20e427]: Statistik Koperasi Berbadan Hukum
+              - generic [ref=f20e428]: Klik nama provinsi untuk melihat detail kabupaten/kota
+            - button "reload" [ref=f20e430] [cursor=pointer]:
+              - img "reload" [ref=f20e432]:
+                - img [ref=f20e433]
+          - generic [ref=f20e440]:
+            - table [ref=f20e442]:
+              - rowgroup [ref=f20e449]:
+                - row "No Provinsi Kel. Desa Total" [ref=f20e450]:
+                  - columnheader "No" [ref=f20e451]
+                  - columnheader "Provinsi" [ref=f20e452]
+                  - columnheader "Kel." [ref=f20e453]
+                  - columnheader "Desa" [ref=f20e454]
+                  - columnheader "Total" [ref=f20e455]
+            - table [ref=f20e457]:
+              - rowgroup [ref=f20e464]:
+                - row "1 Logo JAWA TENGAH JAWA TENGAH Detail kab/kota 760 7.764 8.524 100.01%" [ref=f20e465] [cursor=pointer]:
+                  - cell "1" [ref=f20e466]
+                  - cell "Logo JAWA TENGAH JAWA TENGAH Detail kab/kota" [ref=f20e467]:
+                    - generic [ref=f20e468]:
+                      - img "Logo JAWA TENGAH" [ref=f20e470]
+                      - generic [ref=f20e471]:
+                        - generic [ref=f20e472]: JAWA TENGAH
+                        - generic [ref=f20e473]: Detail kab/kota
+                  - cell "760" [ref=f20e474]
+                  - cell "7.764" [ref=f20e475]
+                  - cell "8.524 100.01%" [ref=f20e476]:
+                    - generic [ref=f20e477]:
+                      - generic [ref=f20e478]: "8.524"
+                      - generic [ref=f20e479]: 100.01%
+                - row "2 Logo JAWA TIMUR JAWA TIMUR Detail kab/kota 775 7.719 8.494 100.00%" [ref=f20e480] [cursor=pointer]:
+                  - cell "2" [ref=f20e481]
+                  - cell "Logo JAWA TIMUR JAWA TIMUR Detail kab/kota" [ref=f20e482]:
+                    - generic [ref=f20e483]:
+                      - img "Logo JAWA TIMUR" [ref=f20e485]
+                      - generic [ref=f20e486]:
+                        - generic [ref=f20e487]: JAWA TIMUR
+                        - generic [ref=f20e488]: Detail kab/kota
+                  - cell "775" [ref=f20e489]
+                  - cell "7.719" [ref=f20e490]
+                  - cell "8.494 100.00%" [ref=f20e491]:
+                    - generic [ref=f20e492]:
+                      - generic [ref=f20e493]: "8.494"
+                      - generic [ref=f20e494]: 100.00%
+                - row "3 Logo ACEH ACEH Detail kab/kota 12 6.522 6.534 100.52%" [ref=f20e495] [cursor=pointer]:
+                  - cell "3" [ref=f20e496]
+                  - cell "Logo ACEH ACEH Detail kab/kota" [ref=f20e497]:
+                    - generic [ref=f20e498]:
+                      - img "Logo ACEH" [ref=f20e500]
+                      - generic [ref=f20e501]:
+                        - generic [ref=f20e502]: ACEH
+                        - generic [ref=f20e503]: Detail kab/kota
+                  - cell "12" [ref=f20e504]
+                  - cell "6.522" [ref=f20e505]
+                  - cell "6.534 100.52%" [ref=f20e506]:
+                    - generic [ref=f20e507]:
+                      - generic [ref=f20e508]: "6.534"
+                      - generic [ref=f20e509]: 100.52%
+                - row "4 Logo SUMATERA UTARA SUMATERA UTARA Detail kab/kota 699 5.403 6.102 99.87%" [ref=f20e510] [cursor=pointer]:
+                  - cell "4" [ref=f20e511]
+                  - cell "Logo SUMATERA UTARA SUMATERA UTARA Detail kab/kota" [ref=f20e512]:
+                    - generic [ref=f20e513]:
+                      - img "Logo SUMATERA UTARA" [ref=f20e515]
+                      - generic [ref=f20e516]:
+                        - generic [ref=f20e517]: SUMATERA UTARA
+                        - generic [ref=f20e518]: Detail kab/kota
+                  - cell "699" [ref=f20e519]
+                  - cell "5.403" [ref=f20e520]
+                  - cell "6.102 99.87%" [ref=f20e521]:
+                    - generic [ref=f20e522]:
+                      - generic [ref=f20e523]: "6.102"
+                      - generic [ref=f20e524]: 99.87%
+                - row "5 Logo JAWA BARAT JAWA BARAT Detail kab/kota 652 5.318 5.970 100.22%" [ref=f20e525] [cursor=pointer]:
+                  - cell "5" [ref=f20e526]
+                  - cell "Logo JAWA BARAT JAWA BARAT Detail kab/kota" [ref=f20e527]:
+                    - generic [ref=f20e528]:
+                      - img "Logo JAWA BARAT" [ref=f20e530]
+                      - generic [ref=f20e531]:
+                        - generic [ref=f20e532]: JAWA BARAT
+                        - generic [ref=f20e533]: Detail kab/kota
+                  - cell "652" [ref=f20e534]
+                  - cell "5.318" [ref=f20e535]
+                  - cell "5.970 100.22%" [ref=f20e536]:
+                    - generic [ref=f20e537]:
+                      - generic [ref=f20e538]: "5.970"
+                      - generic [ref=f20e539]: 100.22%
+                - row "6 Logo NUSA TENGGARA TIMUR NUSA TENGGARA TIMUR Detail kab/kota 312 3.140 3.452 100.29%" [ref=f20e540] [cursor=pointer]:
+                  - cell "6" [ref=f20e541]
+                  - cell "Logo NUSA TENGGARA TIMUR NUSA TENGGARA TIMUR Detail kab/kota" [ref=f20e542]:
+                    - generic [ref=f20e543]:
+                      - img "Logo NUSA TENGGARA TIMUR" [ref=f20e545]
+                      - generic [ref=f20e546]:
+                        - generic [ref=f20e547]: NUSA TENGGARA TIMUR
+                        - generic [ref=f20e548]: Detail kab/kota
+                  - cell "312" [ref=f20e549]
+                  - cell "3.140" [ref=f20e550]
+                  - cell "3.452 100.29%" [ref=f20e551]:
+                    - generic [ref=f20e552]:
+                      - generic [ref=f20e553]: "3.452"
+                      - generic [ref=f20e554]: 100.29%
+                - row "7 Logo SUMATERA SELATAN SUMATERA SELATAN Detail kab/kota 408 2.859 3.267 100.25%" [ref=f20e555] [cursor=pointer]:
+                  - cell "7" [ref=f20e556]
+                  - cell "Logo SUMATERA SELATAN SUMATERA SELATAN Detail kab/kota" [ref=f20e557]:
+                    - generic [ref=f20e558]:
+                      - img "Logo SUMATERA SELATAN" [ref=f20e560]
+                      - generic [ref=f20e561]:
+                        - generic [ref=f20e562]: SUMATERA SELATAN
+                        - generic [ref=f20e563]: Detail kab/kota
+                  - cell "408" [ref=f20e564]
+                  - cell "2.859" [ref=f20e565]
+                  - cell "3.267 100.25%" [ref=f20e566]:
+                    - generic [ref=f20e567]:
+                      - generic [ref=f20e568]: "3.267"
+                      - generic [ref=f20e569]: 100.25%
+                - row "8 Logo SULAWESI SELATAN SULAWESI SELATAN Detail kab/kota 798 2.282 3.081 100.72%" [ref=f20e570] [cursor=pointer]:
+                  - cell "8" [ref=f20e571]
+                  - cell "Logo SULAWESI SELATAN SULAWESI SELATAN Detail kab/kota" [ref=f20e572]:
+                    - generic [ref=f20e573]:
+                      - img "Logo SULAWESI SELATAN" [ref=f20e575]
+                      - generic [ref=f20e576]:
+                        - generic [ref=f20e577]: SULAWESI SELATAN
+                        - generic [ref=f20e578]: Detail kab/kota
+                  - cell "798" [ref=f20e579]
+                  - cell "2.282" [ref=f20e580]
+                  - cell "3.081 100.72%" [ref=f20e581]:
+                    - generic [ref=f20e582]:
+                      - generic [ref=f20e583]: "3.081"
+                      - generic [ref=f20e584]: 100.72%
+                - row "9 Logo LAMPUNG LAMPUNG Detail kab/kota 207 2.444 2.651 100.04%" [ref=f20e585] [cursor=pointer]:
+                  - cell "9" [ref=f20e586]
+                  - cell "Logo LAMPUNG LAMPUNG Detail kab/kota" [ref=f20e587]:
+                    - generic [ref=f20e588]:
+                      - img "Logo LAMPUNG" [ref=f20e590]
+                      - generic [ref=f20e591]:
+                        - generic [ref=f20e592]: LAMPUNG
+                        - generic [ref=f20e593]: Detail kab/kota
+                  - cell "207" [ref=f20e594]
+                  - cell "2.444" [ref=f20e595]
+                  - cell "2.651 100.04%" [ref=f20e596]:
+                    - generic [ref=f20e597]:
+                      - generic [ref=f20e598]: "2.651"
+                      - generic [ref=f20e599]: 100.04%
+                - row "10 Logo PAPUA PEGUNUNGAN PAPUA PEGUNUNGAN Detail kab/kota 9 2.378 2.387 90.86%" [ref=f20e600] [cursor=pointer]:
+                  - cell "10" [ref=f20e601]
+                  - cell "Logo PAPUA PEGUNUNGAN PAPUA PEGUNUNGAN Detail kab/kota" [ref=f20e602]:
+                    - generic [ref=f20e603]:
+                      - img "Logo PAPUA PEGUNUNGAN" [ref=f20e605]
+                      - generic [ref=f20e606]:
+                        - generic [ref=f20e607]: PAPUA PEGUNUNGAN
+                        - generic [ref=f20e608]: Detail kab/kota
+                  - cell "9" [ref=f20e609]
+                  - cell "2.378" [ref=f20e610]
+                  - cell "2.387 90.86%" [ref=f20e611]:
+                    - generic [ref=f20e612]:
+                      - generic [ref=f20e613]: "2.387"
+                      - generic [ref=f20e614]: 90.86%
+                - row "11 Logo SULAWESI TENGGARA SULAWESI TENGGARA Detail kab/kota 381 1.892 2.273 100.26%" [ref=f20e615] [cursor=pointer]:
+                  - cell "11" [ref=f20e616]
+                  - cell "Logo SULAWESI TENGGARA SULAWESI TENGGARA Detail kab/kota" [ref=f20e617]:
+                    - generic [ref=f20e618]:
+                      - img "Logo SULAWESI TENGGARA" [ref=f20e620]
+                      - generic [ref=f20e621]:
+                        - generic [ref=f20e622]: SULAWESI TENGGARA
+                        - generic [ref=f20e623]: Detail kab/kota
+                  - cell "381" [ref=f20e624]
+                  - cell "1.892" [ref=f20e625]
+                  - cell "2.273 100.26%" [ref=f20e626]:
+                    - generic [ref=f20e627]:
+                      - generic [ref=f20e628]: "2.273"
+                      - generic [ref=f20e629]: 100.26%
+                - row "12 Logo KALIMANTAN BARAT KALIMANTAN BARAT Detail kab/kota 101 2.055 2.156 100.51%" [ref=f20e630] [cursor=pointer]:
+                  - cell "12" [ref=f20e631]
+                  - cell "Logo KALIMANTAN BARAT KALIMANTAN BARAT Detail kab/kota" [ref=f20e632]:
+                    - generic [ref=f20e633]:
+                      - img "Logo KALIMANTAN BARAT" [ref=f20e635]
+                      - generic [ref=f20e636]:
+                        - generic [ref=f20e637]: KALIMANTAN BARAT
+                        - generic [ref=f20e638]: Detail kab/kota
+                  - cell "101" [ref=f20e639]
+                  - cell "2.055" [ref=f20e640]
+                  - cell "2.156 100.51%" [ref=f20e641]:
+                    - generic [ref=f20e642]:
+                      - generic [ref=f20e643]: "2.156"
+                      - generic [ref=f20e644]: 100.51%
+                - row "13 Logo KALIMANTAN SELATAN KALIMANTAN SELATAN Detail kab/kota 142 1.871 2.013 99.90%" [ref=f20e645] [cursor=pointer]:
+                  - cell "13" [ref=f20e646]
+                  - cell "Logo KALIMANTAN SELATAN KALIMANTAN SELATAN Detail kab/kota" [ref=f20e647]:
+                    - generic [ref=f20e648]:
+                      - img "Logo KALIMANTAN SELATAN" [ref=f20e650]
+                      - generic [ref=f20e651]:
+                        - generic [ref=f20e652]: KALIMANTAN SELATAN
+                        - generic [ref=f20e653]: Detail kab/kota
+                  - cell "142" [ref=f20e654]
+                  - cell "1.871" [ref=f20e655]
+                  - cell "2.013 99.90%" [ref=f20e656]:
+                    - generic [ref=f20e657]:
+                      - generic [ref=f20e658]: "2.013"
+                      - generic [ref=f20e659]: 99.90%
+                - row "14 Logo SULAWESI TENGAH SULAWESI TENGAH Detail kab/kota 178 1.805 1.983 100.10%" [ref=f20e660] [cursor=pointer]:
+                  - cell "14" [ref=f20e661]
+                  - cell "Logo SULAWESI TENGAH SULAWESI TENGAH Detail kab/kota" [ref=f20e662]:
+                    - generic [ref=f20e663]:
+                      - img "Logo SULAWESI TENGAH" [ref=f20e665]
+                      - generic [ref=f20e666]:
+                        - generic [ref=f20e667]: SULAWESI TENGAH
+                        - generic [ref=f20e668]: Detail kab/kota
+                  - cell "178" [ref=f20e669]
+                  - cell "1.805" [ref=f20e670]
+                  - cell "1.983 100.10%" [ref=f20e671]:
+                    - generic [ref=f20e672]:
+                      - generic [ref=f20e673]: "1.983"
+                      - generic [ref=f20e674]: 100.10%
+                - row "15 Logo RIAU RIAU Detail kab/kota 270 1.596 1.866 100.21%" [ref=f20e675] [cursor=pointer]:
+                  - cell "15" [ref=f20e676]
+                  - cell "Logo RIAU RIAU Detail kab/kota" [ref=f20e677]:
+                    - generic [ref=f20e678]:
+                      - img "Logo RIAU" [ref=f20e680]
+                      - generic [ref=f20e681]:
+                        - generic [ref=f20e682]: RIAU
+                        - generic [ref=f20e683]: Detail kab/kota
+                  - cell "270" [ref=f20e684]
+                  - cell "1.596" [ref=f20e685]
+                  - cell "1.866 100.21%" [ref=f20e686]:
+                    - generic [ref=f20e687]:
+                      - generic [ref=f20e688]: "1.866"
+                      - generic [ref=f20e689]: 100.21%
+                - row "16 Logo SULAWESI UTARA SULAWESI UTARA Detail kab/kota 335 1.504 1.839 100.00%" [ref=f20e690] [cursor=pointer]:
+                  - cell "16" [ref=f20e691]
+                  - cell "Logo SULAWESI UTARA SULAWESI UTARA Detail kab/kota" [ref=f20e692]:
+                    - generic [ref=f20e693]:
+                      - img "Logo SULAWESI UTARA" [ref=f20e695]
+                      - generic [ref=f20e696]:
+                        - generic [ref=f20e697]: SULAWESI UTARA
+                        - generic [ref=f20e698]: Detail kab/kota
+                  - cell "335" [ref=f20e699]
+                  - cell "1.504" [ref=f20e700]
+                  - cell "1.839 100.00%" [ref=f20e701]:
+                    - generic [ref=f20e702]:
+                      - generic [ref=f20e703]: "1.839"
+                      - generic [ref=f20e704]: 100.00%
+                - row "17 Logo JAMBI JAMBI Detail kab/kota 172 1.419 1.591 100.38%" [ref=f20e705] [cursor=pointer]:
+                  - cell "17" [ref=f20e706]
+                  - cell "Logo JAMBI JAMBI Detail kab/kota" [ref=f20e707]:
+                    - generic [ref=f20e708]:
+                      - img "Logo JAMBI" [ref=f20e710]
+                      - generic [ref=f20e711]:
+                        - generic [ref=f20e712]: JAMBI
+                        - generic [ref=f20e713]: Detail kab/kota
+                  - cell "172" [ref=f20e714]
+                  - cell "1.419" [ref=f20e715]
+                  - cell "1.591 100.38%" [ref=f20e716]:
+                    - generic [ref=f20e717]:
+                      - generic [ref=f20e718]: "1.591"
+                      - generic [ref=f20e719]: 100.38%
+                - row "18 Logo BANTEN BANTEN Detail kab/kota 314 1.239 1.553 100.06%" [ref=f20e720] [cursor=pointer]:
+                  - cell "18" [ref=f20e721]
+                  - cell "Logo BANTEN BANTEN Detail kab/kota" [ref=f20e722]:
+                    - generic [ref=f20e723]:
+                      - img "Logo BANTEN" [ref=f20e725]
+                      - generic [ref=f20e726]:
+                        - generic [ref=f20e727]: BANTEN
+                        - generic [ref=f20e728]: Detail kab/kota
+                  - cell "314" [ref=f20e729]
+                  - cell "1.239" [ref=f20e730]
+                  - cell "1.553 100.06%" [ref=f20e731]:
+                    - generic [ref=f20e732]:
+                      - generic [ref=f20e733]: "1.553"
+                      - generic [ref=f20e734]: 100.06%
+                - row "19 Logo KALIMANTAN TENGAH KALIMANTAN TENGAH Detail kab/kota 135 1.408 1.543 98.22%" [ref=f20e735] [cursor=pointer]:
+                  - cell "19" [ref=f20e736]
+                  - cell "Logo KALIMANTAN TENGAH KALIMANTAN TENGAH Detail kab/kota" [ref=f20e737]:
+                    - generic [ref=f20e738]:
+                      - img "Logo KALIMANTAN TENGAH" [ref=f20e740]
+                      - generic [ref=f20e741]:
+                        - generic [ref=f20e742]: KALIMANTAN TENGAH
+                        - generic [ref=f20e743]: Detail kab/kota
+                  - cell "135" [ref=f20e744]
+                  - cell "1.408" [ref=f20e745]
+                  - cell "1.543 98.22%" [ref=f20e746]:
+                    - generic [ref=f20e747]:
+                      - generic [ref=f20e748]: "1.543"
+                      - generic [ref=f20e749]: 98.22%
+                - row "20 Logo BENGKULU BENGKULU Detail kab/kota 169 1.339 1.508 99.74%" [ref=f20e750] [cursor=pointer]:
+                  - cell "20" [ref=f20e751]
+                  - cell "Logo BENGKULU BENGKULU Detail kab/kota" [ref=f20e752]:
+                    - generic [ref=f20e753]:
+                      - img "Logo BENGKULU" [ref=f20e755]
+                      - generic [ref=f20e756]:
+                        - generic [ref=f20e757]: BENGKULU
+                        - generic [ref=f20e758]: Detail kab/kota
+                  - cell "169" [ref=f20e759]
+                  - cell "1.339" [ref=f20e760]
+                  - cell "1.508 99.74%" [ref=f20e761]:
+                    - generic [ref=f20e762]:
+                      - generic [ref=f20e763]: "1.508"
+                      - generic [ref=f20e764]: 99.74%
+                - row "21 Logo SUMATERA BARAT SUMATERA BARAT Detail kab/kota 234 1.036 1.270 100.40%" [ref=f20e765] [cursor=pointer]:
+                  - cell "21" [ref=f20e766]
+                  - cell "Logo SUMATERA BARAT SUMATERA BARAT Detail kab/kota" [ref=f20e767]:
+                    - generic [ref=f20e768]:
+                      - img "Logo SUMATERA BARAT" [ref=f20e770]
+                      - generic [ref=f20e771]:
+                        - generic [ref=f20e772]: SUMATERA BARAT
+                        - generic [ref=f20e773]: Detail kab/kota
+                  - cell "234" [ref=f20e774]
+                  - cell "1.036" [ref=f20e775]
+                  - cell "1.270 100.40%" [ref=f20e776]:
+                    - generic [ref=f20e777]:
+                      - generic [ref=f20e778]: "1.270"
+                      - generic [ref=f20e779]: 100.40%
+                - row "22 Logo MALUKU MALUKU Detail kab/kota 37 1.199 1.236 100.08%" [ref=f20e780] [cursor=pointer]:
+                  - cell "22" [ref=f20e781]
+                  - cell "Logo MALUKU MALUKU Detail kab/kota" [ref=f20e782]:
+                    - generic [ref=f20e783]:
+                      - img "Logo MALUKU" [ref=f20e785]
+                      - generic [ref=f20e786]:
+                        - generic [ref=f20e787]: MALUKU
+                        - generic [ref=f20e788]: Detail kab/kota
+                  - cell "37" [ref=f20e789]
+                  - cell "1.199" [ref=f20e790]
+                  - cell "1.236 100.08%" [ref=f20e791]:
+                    - generic [ref=f20e792]:
+                      - generic [ref=f20e793]: "1.236"
+                      - generic [ref=f20e794]: 100.08%
+                - row "23 Logo PAPUA TENGAH PAPUA TENGAH Detail kab/kota 28 1.172 1.200 99.34%" [ref=f20e795] [cursor=pointer]:
+                  - cell "23" [ref=f20e796]
+                  - cell "Logo PAPUA TENGAH PAPUA TENGAH Detail kab/kota" [ref=f20e797]:
+                    - generic [ref=f20e798]:
+                      - img "Logo PAPUA TENGAH" [ref=f20e800]
+                      - generic [ref=f20e801]:
+                        - generic [ref=f20e802]: PAPUA TENGAH
+                        - generic [ref=f20e803]: Detail kab/kota
+                  - cell "28" [ref=f20e804]
+                  - cell "1.172" [ref=f20e805]
+                  - cell "1.200 99.34%" [ref=f20e806]:
+                    - generic [ref=f20e807]:
+                      - generic [ref=f20e808]: "1.200"
+                      - generic [ref=f20e809]: 99.34%
+                - row "24 Logo MALUKU UTARA MALUKU UTARA Detail kab/kota 123 1.068 1.191 100.51%" [ref=f20e810] [cursor=pointer]:
+                  - cell "24" [ref=f20e811]
+                  - cell "Logo MALUKU UTARA MALUKU UTARA Detail kab/kota" [ref=f20e812]:
+                    - generic [ref=f20e813]:
+                      - img "Logo MALUKU UTARA" [ref=f20e815]
+                      - generic [ref=f20e816]:
+                        - generic [ref=f20e817]: MALUKU UTARA
+                        - generic [ref=f20e818]: Detail kab/kota
+                  - cell "123" [ref=f20e819]
+                  - cell "1.068" [ref=f20e820]
+                  - cell "1.191 100.51%" [ref=f20e821]:
+                    - generic [ref=f20e822]:
+                      - generic [ref=f20e823]: "1.191"
+                      - generic [ref=f20e824]: 100.51%
+                - row "25 Logo NUSA TENGGARA BARAT NUSA TENGGARA BARAT Detail kab/kota 150 1.022 1.172 100.51%" [ref=f20e825] [cursor=pointer]:
+                  - cell "25" [ref=f20e826]
+                  - cell "Logo NUSA TENGGARA BARAT NUSA TENGGARA BARAT Detail kab/kota" [ref=f20e827]:
+                    - generic [ref=f20e828]:
+                      - img "Logo NUSA TENGGARA BARAT" [ref=f20e830]
+                      - generic [ref=f20e831]:
+                        - generic [ref=f20e832]: NUSA TENGGARA BARAT
+                        - generic [ref=f20e833]: Detail kab/kota
+                  - cell "150" [ref=f20e834]
+                  - cell "1.022" [ref=f20e835]
+                  - cell "1.172 100.51%" [ref=f20e836]:
+                    - generic [ref=f20e837]:
+                      - generic [ref=f20e838]: "1.172"
+                      - generic [ref=f20e839]: 100.51%
+                - row "26 Logo KALIMANTAN TIMUR KALIMANTAN TIMUR Detail kab/kota 199 838 1.037 99.90%" [ref=f20e840] [cursor=pointer]:
+                  - cell "26" [ref=f20e841]
+                  - cell "Logo KALIMANTAN TIMUR KALIMANTAN TIMUR Detail kab/kota" [ref=f20e842]:
+                    - generic [ref=f20e843]:
+                      - img "Logo KALIMANTAN TIMUR" [ref=f20e845]
+                      - generic [ref=f20e846]:
+                        - generic [ref=f20e847]: KALIMANTAN TIMUR
+                        - generic [ref=f20e848]: Detail kab/kota
+                  - cell "199" [ref=f20e849]
+                  - cell "838" [ref=f20e850]
+                  - cell "1.037 99.90%" [ref=f20e851]:
+                    - generic [ref=f20e852]:
+                      - generic [ref=f20e853]: "1.037"
+                      - generic [ref=f20e854]: 99.90%
+                - row "27 Logo PAPUA BARAT DAYA PAPUA BARAT DAYA Detail kab/kota 78 946 1.024 101.09%" [ref=f20e855] [cursor=pointer]:
+                  - cell "27" [ref=f20e856]
+                  - cell "Logo PAPUA BARAT DAYA PAPUA BARAT DAYA Detail kab/kota" [ref=f20e857]:
+                    - generic [ref=f20e858]:
+                      - img "Logo PAPUA BARAT DAYA" [ref=f20e860]
+                      - generic [ref=f20e861]:
+                        - generic [ref=f20e862]: PAPUA BARAT DAYA
+                        - generic [ref=f20e863]: Detail kab/kota
+                  - cell "78" [ref=f20e864]
+                  - cell "946" [ref=f20e865]
+                  - cell "1.024 101.09%" [ref=f20e866]:
+                    - generic [ref=f20e867]:
+                      - generic [ref=f20e868]: "1.024"
+                      - generic [ref=f20e869]: 101.09%
+                - row "28 Logo PAPUA PAPUA Detail kab/kota 52 933 985 98.60%" [ref=f20e870] [cursor=pointer]:
+                  - cell "28" [ref=f20e871]
+                  - cell "Logo PAPUA PAPUA Detail kab/kota" [ref=f20e872]:
+                    - generic [ref=f20e873]:
+                      - img "Logo PAPUA" [ref=f20e875]
+                      - generic [ref=f20e876]:
+                        - generic [ref=f20e877]: PAPUA
+                        - generic [ref=f20e878]: Detail kab/kota
+                  - cell "52" [ref=f20e879]
+                  - cell "933" [ref=f20e880]
+                  - cell "985 98.60%" [ref=f20e881]:
+                    - generic [ref=f20e882]:
+                      - generic [ref=f20e883]: "985"
+                      - generic [ref=f20e884]: 98.60%
+                - row "29 Logo PAPUA BARAT PAPUA BARAT Detail kab/kota 32 794 826 100.24%" [ref=f20e885] [cursor=pointer]:
+                  - cell "29" [ref=f20e886]
+                  - cell "Logo PAPUA BARAT PAPUA BARAT Detail kab/kota" [ref=f20e887]:
+                    - generic [ref=f20e888]:
+                      - img "Logo PAPUA BARAT" [ref=f20e890]
+                      - generic [ref=f20e891]:
+                        - generic [ref=f20e892]: PAPUA BARAT
+                        - generic [ref=f20e893]: Detail kab/kota
+                  - cell "32" [ref=f20e894]
+                  - cell "794" [ref=f20e895]
+                  - cell "826 100.24%" [ref=f20e896]:
+                    - generic [ref=f20e897]:
+                      - generic [ref=f20e898]: "826"
+                      - generic [ref=f20e899]: 100.24%
+                - row "30 Logo GORONTALO GORONTALO Detail kab/kota 72 659 731 100.27%" [ref=f20e900] [cursor=pointer]:
+                  - cell "30" [ref=f20e901]
+                  - cell "Logo GORONTALO GORONTALO Detail kab/kota" [ref=f20e902]:
+                    - generic [ref=f20e903]:
+                      - img "Logo GORONTALO" [ref=f20e905]
+                      - generic [ref=f20e906]:
+                        - generic [ref=f20e907]: GORONTALO
+                        - generic [ref=f20e908]: Detail kab/kota
+                  - cell "72" [ref=f20e909]
+                  - cell "659" [ref=f20e910]
+                  - cell "731 100.27%" [ref=f20e911]:
+                    - generic [ref=f20e912]:
+                      - generic [ref=f20e913]: "731"
+                      - generic [ref=f20e914]: 100.27%
+                - row "31 Logo BALI BALI Detail kab/kota 80 638 718 100.28%" [ref=f20e915] [cursor=pointer]:
+                  - cell "31" [ref=f20e916]
+                  - cell "Logo BALI BALI Detail kab/kota" [ref=f20e917]:
+                    - generic [ref=f20e918]:
+                      - img "Logo BALI" [ref=f20e920]
+                      - generic [ref=f20e921]:
+                        - generic [ref=f20e922]: BALI
+                        - generic [ref=f20e923]: Detail kab/kota
+                  - cell "80" [ref=f20e924]
+                  - cell "638" [ref=f20e925]
+                  - cell "718 100.28%" [ref=f20e926]:
+                    - generic [ref=f20e927]:
+                      - generic [ref=f20e928]: "718"
+                      - generic [ref=f20e929]: 100.28%
+                - row "32 Logo SULAWESI BARAT SULAWESI BARAT Detail kab/kota 75 573 648 100.00%" [ref=f20e930] [cursor=pointer]:
+                  - cell "32" [ref=f20e931]
+                  - cell "Logo SULAWESI BARAT SULAWESI BARAT Detail kab/kota" [ref=f20e932]:
+                    - generic [ref=f20e933]:
+                      - img "Logo SULAWESI BARAT" [ref=f20e935]
+                      - generic [ref=f20e936]:
+                        - generic [ref=f20e937]: SULAWESI BARAT
+                        - generic [ref=f20e938]: Detail kab/kota
+                  - cell "75" [ref=f20e939]
+                  - cell "573" [ref=f20e940]
+                  - cell "648 100.00%" [ref=f20e941]:
+                    - generic [ref=f20e942]:
+                      - generic [ref=f20e943]: "648"
+                      - generic [ref=f20e944]: 100.00%
+                - row "33 Logo PAPUA SELATAN PAPUA SELATAN Detail kab/kota 10 630 640 92.75%" [ref=f20e945] [cursor=pointer]:
+                  - cell "33" [ref=f20e946]
+                  - cell "Logo PAPUA SELATAN PAPUA SELATAN Detail kab/kota" [ref=f20e947]:
+                    - generic [ref=f20e948]:
+                      - img "Logo PAPUA SELATAN" [ref=f20e950]
+                      - generic [ref=f20e951]:
+                        - generic [ref=f20e952]: PAPUA SELATAN
+                        - generic [ref=f20e953]: Detail kab/kota
+                  - cell "10" [ref=f20e954]
+                  - cell "630" [ref=f20e955]
+                  - cell "640 92.75%" [ref=f20e956]:
+                    - generic [ref=f20e957]:
+                      - generic [ref=f20e958]: "640"
+                      - generic [ref=f20e959]: 92.75%
+                - row "34 Logo DAERAH ISTIMEWA YOGYAKARTA DAERAH ISTIMEWA YOGYAKARTA Detail kab/kota 46 392 438 100.00%" [ref=f20e960] [cursor=pointer]:
+                  - cell "34" [ref=f20e961]
+                  - cell "Logo DAERAH ISTIMEWA YOGYAKARTA DAERAH ISTIMEWA YOGYAKARTA Detail kab/kota" [ref=f20e962]:
+                    - generic [ref=f20e963]:
+                      - img "Logo DAERAH ISTIMEWA YOGYAKARTA" [ref=f20e965]
+                      - generic [ref=f20e966]:
+                        - generic [ref=f20e967]: DAERAH ISTIMEWA YOGYAKARTA
+                        - generic [ref=f20e968]: Detail kab/kota
+                  - cell "46" [ref=f20e969]
+                  - cell "392" [ref=f20e970]
+                  - cell "438 100.00%" [ref=f20e971]:
+                    - generic [ref=f20e972]:
+                      - generic [ref=f20e973]: "438"
+                      - generic [ref=f20e974]: 100.00%
+                - row "35 Logo KALIMANTAN UTARA KALIMANTAN UTARA Detail kab/kota 36 375 411 99.52%" [ref=f20e975] [cursor=pointer]:
+                  - cell "35" [ref=f20e976]
+                  - cell "Logo KALIMANTAN UTARA KALIMANTAN UTARA Detail kab/kota" [ref=f20e977]:
+                    - generic [ref=f20e978]:
+                      - img "Logo KALIMANTAN UTARA" [ref=f20e980]
+                      - generic [ref=f20e981]:
+                        - generic [ref=f20e982]: KALIMANTAN UTARA
+                        - generic [ref=f20e983]: Detail kab/kota
+                  - cell "36" [ref=f20e984]
+                  - cell "375" [ref=f20e985]
+                  - cell "411 99.52%" [ref=f20e986]:
+                    - generic [ref=f20e987]:
+                      - generic [ref=f20e988]: "411"
+                      - generic [ref=f20e989]: 99.52%
+                - row "36 Logo KEPULAUAN RIAU KEPULAUAN RIAU Detail kab/kota 144 263 407 97.14%" [ref=f20e990] [cursor=pointer]:
+                  - cell "36" [ref=f20e991]
+                  - cell "Logo KEPULAUAN RIAU KEPULAUAN RIAU Detail kab/kota" [ref=f20e992]:
+                    - generic [ref=f20e993]:
+                      - img "Logo KEPULAUAN RIAU" [ref=f20e995]
+                      - generic [ref=f20e996]:
+                        - generic [ref=f20e997]: KEPULAUAN RIAU
+                        - generic [ref=f20e998]: Detail kab/kota
+                  - cell "144" [ref=f20e999]
+                  - cell "263" [ref=f20e1000]
+                  - cell "407 97.14%" [ref=f20e1001]:
+                    - generic [ref=f20e1002]:
+                      - generic [ref=f20e1003]: "407"
+                      - generic [ref=f20e1004]: 97.14%
+                - row "37 Logo KEPULAUAN BANGKA BELITUNG KEPULAUAN BANGKA BELITUNG Detail kab/kota 84 309 393 100.00%" [ref=f20e1005] [cursor=pointer]:
+                  - cell "37" [ref=f20e1006]
+                  - cell "Logo KEPULAUAN BANGKA BELITUNG KEPULAUAN BANGKA BELITUNG Detail kab/kota" [ref=f20e1007]:
+                    - generic [ref=f20e1008]:
+                      - img "Logo KEPULAUAN BANGKA BELITUNG" [ref=f20e1010]
+                      - generic [ref=f20e1011]:
+                        - generic [ref=f20e1012]: KEPULAUAN BANGKA BELITUNG
+                        - generic [ref=f20e1013]: Detail kab/kota
+                  - cell "84" [ref=f20e1014]
+                  - cell "309" [ref=f20e1015]
+                  - cell "393 100.00%" [ref=f20e1016]:
+                    - generic [ref=f20e1017]:
+                      - generic [ref=f20e1018]: "393"
+                      - generic [ref=f20e1019]: 100.00%
+                - row "38 Logo DKI JAKARTA DKI JAKARTA Detail kab/kota 267 1 268 100.37%" [ref=f20e1020] [cursor=pointer]:
+                  - cell "38" [ref=f20e1021]
+                  - cell "Logo DKI JAKARTA DKI JAKARTA Detail kab/kota" [ref=f20e1022]:
+                    - generic [ref=f20e1023]:
+                      - img "Logo DKI JAKARTA" [ref=f20e1025]
+                      - generic [ref=f20e1026]:
+                        - generic [ref=f20e1027]: DKI JAKARTA
+                        - generic [ref=f20e1028]: Detail kab/kota
+                  - cell "267" [ref=f20e1029]
+                  - cell "1" [ref=f20e1030]
+                  - cell "268 100.37%" [ref=f20e1031]:
+                    - generic [ref=f20e1032]:
+                      - generic [ref=f20e1033]: "268"
+                      - generic [ref=f20e1034]: 100.37%
+  - alert [ref=f20e40]
+  - generic [ref=f20e41]: "32000"

@@ -1,0 +1,451 @@
+- generic [active] [ref=f10e1]:
+  - generic [ref=f10e4]:
+    - navigation [ref=f10e5]:
+      - generic [ref=f10e6]:
+        - link "Koperasi" [ref=f10e7] [cursor=pointer]:
+          - /url: /
+          - img "Koperasi" [ref=f10e9]
+        - generic [ref=f10e10]:
+          - generic [ref=f10e11]:
+            - button "down Beranda" [ref=f10e12] [cursor=pointer]:
+              - img "down" [ref=f10e14]:
+                - img [ref=f10e15]
+              - generic [ref=f10e17]: Beranda
+            - generic:
+              - button "Kontak"
+              - button "Warta Koperasi"
+              - button "Game"
+          - link "Statistik" [ref=f10e18] [cursor=pointer]:
+            - /url: /pers/dashboard
+          - link "Corporate University" [ref=f10e19] [cursor=pointer]:
+            - /url: https://lms.kop.go.id/
+          - link "Coop Trade" [ref=f10e20] [cursor=pointer]:
+            - /url: https://trade.simkopdes.go.id/
+          - link "Masuk" [ref=f10e21] [cursor=pointer]:
+            - /url: /masuk
+    - generic [ref=f10e22]:
+      - generic [ref=f10e23]:
+        - heading "Dashboard Transaksi Koperasi Desa/Kelurahan Merah Putih" [level=1] [ref=f10e24]
+        - paragraph [ref=f10e25]: "Status Data: 09/07/2026"
+      - generic [ref=f10e26]:
+        - generic [ref=f10e27]:
+          - textbox "Tanggal Awal" [ref=f10e29]
+          - generic "to" [ref=f10e31]:
+            - img "swap-right" [ref=f10e32]:
+              - img [ref=f10e33]
+          - textbox "Tanggal Akhir" [ref=f10e36]
+          - generic:
+            - img "calendar":
+              - img
+        - button "Hari Ini" [ref=f10e37] [cursor=pointer]:
+          - generic [ref=f10e38]: Hari Ini
+        - button "7 Hari" [ref=f10e39] [cursor=pointer]:
+          - generic [ref=f10e40]: 7 Hari
+        - button "30 Hari" [ref=f10e41] [cursor=pointer]:
+          - generic [ref=f10e42]: 30 Hari
+        - button "Bulan Ini" [ref=f10e43] [cursor=pointer]:
+          - generic [ref=f10e44]: Bulan Ini
+        - button "Reset" [ref=f10e45] [cursor=pointer]:
+          - generic [ref=f10e46]: Reset
+      - generic [ref=f10e48]:
+        - generic [ref=f10e49]:
+          - generic [ref=f10e50]:
+            - generic [ref=f10e51]:
+              - img "file-text" [ref=f10e53]:
+                - img [ref=f10e54]
+              - generic [ref=f10e56]:
+                - paragraph [ref=f10e57]: Total Transaksi
+                - paragraph [ref=f10e58]: "53.262"
+            - generic [ref=f10e59]:
+              - img "wallet" [ref=f10e61]:
+                - img [ref=f10e62]
+              - generic [ref=f10e64]:
+                - paragraph [ref=f10e65]: Nilai Transaksi (Rupiah)
+                - paragraph [ref=f10e66]: 56.571.080.135
+          - generic [ref=f10e67]:
+            - heading "Data Transaksi Produk Koperasi Desa/Kelurahan Merah Putih" [level=2] [ref=f10e68]
+            - generic [ref=f10e69]:
+              - table [ref=f10e77]:
+                - rowgroup [ref=f10e81]:
+                  - row "Nilai Transaksi Nilai Transaksi" [ref=f10e82]:
+                    - columnheader "Nilai Transaksi" [ref=f10e83] [cursor=pointer]: Nama Produk
+                    - columnheader "Nilai Transaksi" [ref=f10e84] [cursor=pointer]:
+                      - generic [ref=f10e85]:
+                        - generic [ref=f10e86]: Nilai Transaksi
+                        - generic [ref=f10e88]:
+                          - img [ref=f10e89]:
+                            - img [ref=f10e90]
+                          - img [ref=f10e92]:
+                            - img [ref=f10e93]
+                - rowgroup [ref=f10e95]:
+                  - 'row "Pupuk NPK Phonska SKU : SKU0010 Rp 15.093.051.120" [ref=f10e96]':
+                    - 'cell "Pupuk NPK Phonska SKU : SKU0010" [ref=f10e97]':
+                      - generic [ref=f10e98]:
+                        - paragraph [ref=f10e99]: Pupuk NPK Phonska
+                        - generic [ref=f10e100]:
+                          - generic [ref=f10e101]: "SKU :"
+                          - generic [ref=f10e102]: SKU0010
+                    - cell "Rp 15.093.051.120" [ref=f10e103]:
+                      - generic [ref=f10e104]: Rp 15.093.051.120
+                  - 'row "Pupuk Urea N 46% SKU : SKU0011 Rp 11.272.048.800" [ref=f10e105]':
+                    - 'cell "Pupuk Urea N 46% SKU : SKU0011" [ref=f10e106]':
+                      - generic [ref=f10e107]:
+                        - paragraph [ref=f10e108]: Pupuk Urea N 46%
+                        - generic [ref=f10e109]:
+                          - generic [ref=f10e110]: "SKU :"
+                          - generic [ref=f10e111]: SKU0011
+                    - cell "Rp 11.272.048.800" [ref=f10e112]:
+                      - generic [ref=f10e113]: Rp 11.272.048.800
+                  - 'row "BARANG LAINNYA SKU : SKU999999999 Rp 7.900.985.061,25" [ref=f10e114]':
+                    - 'cell "BARANG LAINNYA SKU : SKU999999999" [ref=f10e115]':
+                      - generic [ref=f10e116]:
+                        - paragraph [ref=f10e117]: BARANG LAINNYA
+                        - generic [ref=f10e118]:
+                          - generic [ref=f10e119]: "SKU :"
+                          - generic [ref=f10e120]: SKU999999999
+                    - cell "Rp 7.900.985.061,25" [ref=f10e121]:
+                      - generic [ref=f10e122]: Rp 7.900.985.061,25
+                  - 'row "MINYAK GORENG BIMOLI 2L SKU : GWM3EZJ Rp 3.627.964.240" [ref=f10e123]':
+                    - 'cell "MINYAK GORENG BIMOLI 2L SKU : GWM3EZJ" [ref=f10e124]':
+                      - generic [ref=f10e125]:
+                        - paragraph [ref=f10e126]: MINYAK GORENG BIMOLI 2L
+                        - generic [ref=f10e127]:
+                          - generic [ref=f10e128]: "SKU :"
+                          - generic [ref=f10e129]: GWM3EZJ
+                    - cell "Rp 3.627.964.240" [ref=f10e130]:
+                      - generic [ref=f10e131]: Rp 3.627.964.240
+                  - 'row "BERAS MEDIUM SPHP 5 KG SKU : SKU0021 Rp 2.417.089.253" [ref=f10e132]':
+                    - 'cell "BERAS MEDIUM SPHP 5 KG SKU : SKU0021" [ref=f10e133]':
+                      - generic [ref=f10e134]:
+                        - paragraph [ref=f10e135]: BERAS MEDIUM SPHP 5 KG
+                        - generic [ref=f10e136]:
+                          - generic [ref=f10e137]: "SKU :"
+                          - generic [ref=f10e138]: SKU0021
+                    - cell "Rp 2.417.089.253" [ref=f10e139]:
+                      - generic [ref=f10e140]: Rp 2.417.089.253
+                  - 'row "BERAS SKU : SKU0002 Rp 1.138.097.939,97" [ref=f10e141]':
+                    - 'cell "BERAS SKU : SKU0002" [ref=f10e142]':
+                      - generic [ref=f10e143]:
+                        - paragraph [ref=f10e144]: BERAS
+                        - generic [ref=f10e145]:
+                          - generic [ref=f10e146]: "SKU :"
+                          - generic [ref=f10e147]: SKU0002
+                    - cell "Rp 1.138.097.939,97" [ref=f10e148]:
+                      - generic [ref=f10e149]: Rp 1.138.097.939,97
+                  - 'row "SUNCO MINYAK GORENG POUCH 2L SKU : MVQ8RQV Rp 501.741.040,74" [ref=f10e150]':
+                    - 'cell "SUNCO MINYAK GORENG POUCH 2L SKU : MVQ8RQV" [ref=f10e151]':
+                      - generic [ref=f10e152]:
+                        - paragraph [ref=f10e153]: SUNCO MINYAK GORENG POUCH 2L
+                        - generic [ref=f10e154]:
+                          - generic [ref=f10e155]: "SKU :"
+                          - generic [ref=f10e156]: MVQ8RQV
+                    - cell "Rp 501.741.040,74" [ref=f10e157]:
+                      - generic [ref=f10e158]: Rp 501.741.040,74
+                  - 'row "GAS LPG 3 KG SKU : SKU0006 Rp 476.901.231" [ref=f10e159]':
+                    - 'cell "GAS LPG 3 KG SKU : SKU0006" [ref=f10e160]':
+                      - generic [ref=f10e161]:
+                        - paragraph [ref=f10e162]: GAS LPG 3 KG
+                        - generic [ref=f10e163]:
+                          - generic [ref=f10e164]: "SKU :"
+                          - generic [ref=f10e165]: SKU0006
+                    - cell "Rp 476.901.231" [ref=f10e166]:
+                      - generic [ref=f10e167]: Rp 476.901.231
+                  - 'row "GULA KTM 1KG SKU : EFZ4CDY Rp 284.781.730,87" [ref=f10e168]':
+                    - 'cell "GULA KTM 1KG SKU : EFZ4CDY" [ref=f10e169]':
+                      - generic [ref=f10e170]:
+                        - paragraph [ref=f10e171]: GULA KTM 1KG
+                        - generic [ref=f10e172]:
+                          - generic [ref=f10e173]: "SKU :"
+                          - generic [ref=f10e174]: EFZ4CDY
+                    - cell "Rp 284.781.730,87" [ref=f10e175]:
+                      - generic [ref=f10e176]: Rp 284.781.730,87
+                  - 'row "FILTER SURYA MERAH 12 SKU : AOG8ANP Rp 271.455.224,91" [ref=f10e177]':
+                    - 'cell "FILTER SURYA MERAH 12 SKU : AOG8ANP" [ref=f10e178]':
+                      - generic [ref=f10e179]:
+                        - paragraph [ref=f10e180]: FILTER SURYA MERAH 12
+                        - generic [ref=f10e181]:
+                          - generic [ref=f10e182]: "SKU :"
+                          - generic [ref=f10e183]: AOG8ANP
+                    - cell "Rp 271.455.224,91" [ref=f10e184]:
+                      - generic [ref=f10e185]: Rp 271.455.224,91
+              - generic [ref=f10e187]:
+                - generic [ref=f10e188]: Total Data
+                - generic [ref=f10e189]: "10"
+        - generic [ref=f10e190]:
+          - heading "Data Transaksi Koperasi Desa/Kelurahan Merah Putih" [level=2] [ref=f10e191]
+          - generic [ref=f10e193]:
+            - searchbox "Cari koperasi ..." [ref=f10e194]
+            - button "search" [ref=f10e196] [cursor=pointer]:
+              - img "search" [ref=f10e198]:
+                - img [ref=f10e199]
+          - generic [ref=f10e201]:
+            - table [ref=f10e209]:
+              - rowgroup [ref=f10e213]:
+                - row "Koperasi Nilai Transaksi" [ref=f10e214]:
+                  - columnheader "Koperasi" [ref=f10e215]
+                  - columnheader "Nilai Transaksi" [ref=f10e216]
+              - rowgroup [ref=f10e217]:
+                - row "KOPERASI DESA MERAH PUTIH PUCANGAN KECAMATAN MONTONG environment Pucangan, Montong, KAB. TUBAN, JAWA TIMUR Rp 5.426.137.037" [ref=f10e218] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH PUCANGAN KECAMATAN MONTONG environment Pucangan, Montong, KAB. TUBAN, JAWA TIMUR" [ref=f10e219]:
+                    - generic [ref=f10e220]:
+                      - paragraph [ref=f10e221]: KOPERASI DESA MERAH PUTIH PUCANGAN KECAMATAN MONTONG
+                      - generic [ref=f10e222]:
+                        - img "environment" [ref=f10e223]:
+                          - img [ref=f10e224]
+                        - paragraph [ref=f10e226]: Pucangan, Montong, KAB. TUBAN, JAWA TIMUR
+                  - cell "Rp 5.426.137.037" [ref=f10e227]:
+                    - generic [ref=f10e228]: Rp 5.426.137.037
+                - row "KOPERASI DESA MERAH PUTIH PRINGGAJURANG environment Pringga Jurang, Montong Gading, KAB. LOMBOK TIMUR, NUSA TENGGARA BARAT Rp 3.618.000.000" [ref=f10e229] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH PRINGGAJURANG environment Pringga Jurang, Montong Gading, KAB. LOMBOK TIMUR, NUSA TENGGARA BARAT" [ref=f10e230]:
+                    - generic [ref=f10e231]:
+                      - paragraph [ref=f10e232]: KOPERASI DESA MERAH PUTIH PRINGGAJURANG
+                      - generic [ref=f10e233]:
+                        - img "environment" [ref=f10e234]:
+                          - img [ref=f10e235]
+                        - paragraph [ref=f10e237]: Pringga Jurang, Montong Gading, KAB. LOMBOK TIMUR, NUSA TENGGARA BARAT
+                  - cell "Rp 3.618.000.000" [ref=f10e238]:
+                    - generic [ref=f10e239]: Rp 3.618.000.000
+                - row "KOPERASI DESA MERAH PUTIH JAYA MAKMUR KECAMATAN KATINGAN KUALA environment Jaya Makmur, Katingan Kuala, KAB. KATINGAN, KALIMANTAN TENGAH Rp 2.057.007.000" [ref=f10e240] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH JAYA MAKMUR KECAMATAN KATINGAN KUALA environment Jaya Makmur, Katingan Kuala, KAB. KATINGAN, KALIMANTAN TENGAH" [ref=f10e241]:
+                    - generic [ref=f10e242]:
+                      - paragraph [ref=f10e243]: KOPERASI DESA MERAH PUTIH JAYA MAKMUR KECAMATAN KATINGAN KUALA
+                      - generic [ref=f10e244]:
+                        - img "environment" [ref=f10e245]:
+                          - img [ref=f10e246]
+                        - paragraph [ref=f10e248]: Jaya Makmur, Katingan Kuala, KAB. KATINGAN, KALIMANTAN TENGAH
+                  - cell "Rp 2.057.007.000" [ref=f10e249]:
+                    - generic [ref=f10e250]: Rp 2.057.007.000
+                - row "KOPERASI DESA MERAH PUTIH KARANGAGUNG KECAMATAN PALANG environment Karangagung, Palang, KAB. TUBAN, JAWA TIMUR Rp 1.757.695.722" [ref=f10e251] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH KARANGAGUNG KECAMATAN PALANG environment Karangagung, Palang, KAB. TUBAN, JAWA TIMUR" [ref=f10e252]:
+                    - generic [ref=f10e253]:
+                      - paragraph [ref=f10e254]: KOPERASI DESA MERAH PUTIH KARANGAGUNG KECAMATAN PALANG
+                      - generic [ref=f10e255]:
+                        - img "environment" [ref=f10e256]:
+                          - img [ref=f10e257]
+                        - paragraph [ref=f10e259]: Karangagung, Palang, KAB. TUBAN, JAWA TIMUR
+                  - cell "Rp 1.757.695.722" [ref=f10e260]:
+                    - generic [ref=f10e261]: Rp 1.757.695.722
+                - row "KOPERASI DESA MERAH PUTIH RENGEL environment Rengel, Rengel, KAB. TUBAN, JAWA TIMUR Rp 1.325.200.632" [ref=f10e262] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH RENGEL environment Rengel, Rengel, KAB. TUBAN, JAWA TIMUR" [ref=f10e263]:
+                    - generic [ref=f10e264]:
+                      - paragraph [ref=f10e265]: KOPERASI DESA MERAH PUTIH RENGEL
+                      - generic [ref=f10e266]:
+                        - img "environment" [ref=f10e267]:
+                          - img [ref=f10e268]
+                        - paragraph [ref=f10e270]: Rengel, Rengel, KAB. TUBAN, JAWA TIMUR
+                  - cell "Rp 1.325.200.632" [ref=f10e271]:
+                    - generic [ref=f10e272]: Rp 1.325.200.632
+                - row "KOPERASI DESA MERAH PUTIH MEKAR JAYA KECAMATAN BANDAR SRIBHAWONO environment Mekar Jaya, Bandar Sribhawono, KAB. LAMPUNG TIMUR, LAMPUNG Rp 1.313.044.000" [ref=f10e273] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH MEKAR JAYA KECAMATAN BANDAR SRIBHAWONO environment Mekar Jaya, Bandar Sribhawono, KAB. LAMPUNG TIMUR, LAMPUNG" [ref=f10e274]:
+                    - generic [ref=f10e275]:
+                      - paragraph [ref=f10e276]: KOPERASI DESA MERAH PUTIH MEKAR JAYA KECAMATAN BANDAR SRIBHAWONO
+                      - generic [ref=f10e277]:
+                        - img "environment" [ref=f10e278]:
+                          - img [ref=f10e279]
+                        - paragraph [ref=f10e281]: Mekar Jaya, Bandar Sribhawono, KAB. LAMPUNG TIMUR, LAMPUNG
+                  - cell "Rp 1.313.044.000" [ref=f10e282]:
+                    - generic [ref=f10e283]: Rp 1.313.044.000
+                - row "KOPERASI DESA MERAH PUTIH PUTAT NUTUG KECAMATAN CISEENG environment Putat Nutug, Ciseeng, KAB. BOGOR, JAWA BARAT Rp 1.086.512.500" [ref=f10e284] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH PUTAT NUTUG KECAMATAN CISEENG environment Putat Nutug, Ciseeng, KAB. BOGOR, JAWA BARAT" [ref=f10e285]:
+                    - generic [ref=f10e286]:
+                      - paragraph [ref=f10e287]: KOPERASI DESA MERAH PUTIH PUTAT NUTUG KECAMATAN CISEENG
+                      - generic [ref=f10e288]:
+                        - img "environment" [ref=f10e289]:
+                          - img [ref=f10e290]
+                        - paragraph [ref=f10e292]: Putat Nutug, Ciseeng, KAB. BOGOR, JAWA BARAT
+                  - cell "Rp 1.086.512.500" [ref=f10e293]:
+                    - generic [ref=f10e294]: Rp 1.086.512.500
+                - row "KOPERASI DESA MERAH PUTIH TETABAN environment Tetaban, Sebuku, KAB. NUNUKAN, KALIMANTAN UTARA Rp 921.398.000" [ref=f10e295] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH TETABAN environment Tetaban, Sebuku, KAB. NUNUKAN, KALIMANTAN UTARA" [ref=f10e296]:
+                    - generic [ref=f10e297]:
+                      - paragraph [ref=f10e298]: KOPERASI DESA MERAH PUTIH TETABAN
+                      - generic [ref=f10e299]:
+                        - img "environment" [ref=f10e300]:
+                          - img [ref=f10e301]
+                        - paragraph [ref=f10e303]: Tetaban, Sebuku, KAB. NUNUKAN, KALIMANTAN UTARA
+                  - cell "Rp 921.398.000" [ref=f10e304]:
+                    - generic [ref=f10e305]: Rp 921.398.000
+                - row "KOPERASI DESA MERAH PUTIH BAKALANWRINGINPITU environment Bakalanwringinpitu, Balongbendo, KAB. SIDOARJO, JAWA TIMUR Rp 783.075.200" [ref=f10e306] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH BAKALANWRINGINPITU environment Bakalanwringinpitu, Balongbendo, KAB. SIDOARJO, JAWA TIMUR" [ref=f10e307]:
+                    - generic [ref=f10e308]:
+                      - paragraph [ref=f10e309]: KOPERASI DESA MERAH PUTIH BAKALANWRINGINPITU
+                      - generic [ref=f10e310]:
+                        - img "environment" [ref=f10e311]:
+                          - img [ref=f10e312]
+                        - paragraph [ref=f10e314]: Bakalanwringinpitu, Balongbendo, KAB. SIDOARJO, JAWA TIMUR
+                  - cell "Rp 783.075.200" [ref=f10e315]:
+                    - generic [ref=f10e316]: Rp 783.075.200
+                - row "KOPERASI DESA MERAH PUTIH ASAHAN JABUNG environment Asahan, Jabung, KAB. LAMPUNG TIMUR, LAMPUNG Rp 708.344.000" [ref=f10e317] [cursor=pointer]:
+                  - cell "KOPERASI DESA MERAH PUTIH ASAHAN JABUNG environment Asahan, Jabung, KAB. LAMPUNG TIMUR, LAMPUNG" [ref=f10e318]:
+                    - generic [ref=f10e319]:
+                      - paragraph [ref=f10e320]: KOPERASI DESA MERAH PUTIH ASAHAN JABUNG
+                      - generic [ref=f10e321]:
+                        - img "environment" [ref=f10e322]:
+                          - img [ref=f10e323]
+                        - paragraph [ref=f10e325]: Asahan, Jabung, KAB. LAMPUNG TIMUR, LAMPUNG
+                  - cell "Rp 708.344.000" [ref=f10e326]:
+                    - generic [ref=f10e327]: Rp 708.344.000
+            - generic [ref=f10e328]:
+              - generic [ref=f10e329]:
+                - generic [ref=f10e330]: Total Data
+                - generic [ref=f10e331]: "1.140"
+              - generic [ref=f10e332]:
+                - button "left" [disabled] [ref=f10e333]:
+                  - generic:
+                    - img "left":
+                      - img
+                - generic [ref=f10e334]: 1/114
+                - button "right" [ref=f10e335] [cursor=pointer]:
+                  - img "right" [ref=f10e337]:
+                    - img [ref=f10e338]
+        - generic [ref=f10e340]:
+          - heading "Data Transaksi Berdasarkan Provinsi" [level=2] [ref=f10e341]
+          - generic [ref=f10e342]:
+            - table [ref=f10e350]:
+              - rowgroup [ref=f10e354]:
+                - row "Nilai Transaksi Nilai Transaksi" [ref=f10e355]:
+                  - columnheader "Nilai Transaksi" [ref=f10e356] [cursor=pointer]: Provinsi
+                  - columnheader "Nilai Transaksi" [ref=f10e357] [cursor=pointer]
+              - rowgroup [ref=f10e358]:
+                - 'row "JAWA TIMUR Total Transaksi : 23.276 Rp 21.484.751.078" [ref=f10e359] [cursor=pointer]':
+                  - 'cell "JAWA TIMUR Total Transaksi : 23.276" [ref=f10e360]':
+                    - generic [ref=f10e361]:
+                      - paragraph [ref=f10e362]: JAWA TIMUR
+                      - generic [ref=f10e363]:
+                        - generic [ref=f10e364]: "Total Transaksi :"
+                        - generic [ref=f10e365]: "23.276"
+                  - cell "Rp 21.484.751.078" [ref=f10e366]
+                - 'row "LAMPUNG Total Transaksi : 1.116 Rp 6.743.253.880" [ref=f10e367] [cursor=pointer]':
+                  - 'cell "LAMPUNG Total Transaksi : 1.116" [ref=f10e368]':
+                    - generic [ref=f10e369]:
+                      - paragraph [ref=f10e370]: LAMPUNG
+                      - generic [ref=f10e371]:
+                        - generic [ref=f10e372]: "Total Transaksi :"
+                        - generic [ref=f10e373]: "1.116"
+                  - cell "Rp 6.743.253.880" [ref=f10e374]
+                - 'row "JAWA TENGAH Total Transaksi : 9.301 Rp 5.745.086.783" [ref=f10e375] [cursor=pointer]':
+                  - 'cell "JAWA TENGAH Total Transaksi : 9.301" [ref=f10e376]':
+                    - generic [ref=f10e377]:
+                      - paragraph [ref=f10e378]: JAWA TENGAH
+                      - generic [ref=f10e379]:
+                        - generic [ref=f10e380]: "Total Transaksi :"
+                        - generic [ref=f10e381]: "9.301"
+                  - cell "Rp 5.745.086.783" [ref=f10e382]
+                - 'row "NUSA TENGGARA BARAT Total Transaksi : 409 Rp 3.978.631.511" [ref=f10e383] [cursor=pointer]':
+                  - 'cell "NUSA TENGGARA BARAT Total Transaksi : 409" [ref=f10e384]':
+                    - generic [ref=f10e385]:
+                      - paragraph [ref=f10e386]: NUSA TENGGARA BARAT
+                      - generic [ref=f10e387]:
+                        - generic [ref=f10e388]: "Total Transaksi :"
+                        - generic [ref=f10e389]: "409"
+                  - cell "Rp 3.978.631.511" [ref=f10e390]
+                - 'row "JAWA BARAT Total Transaksi : 2.778 Rp 3.530.265.249" [ref=f10e391] [cursor=pointer]':
+                  - 'cell "JAWA BARAT Total Transaksi : 2.778" [ref=f10e392]':
+                    - generic [ref=f10e393]:
+                      - paragraph [ref=f10e394]: JAWA BARAT
+                      - generic [ref=f10e395]:
+                        - generic [ref=f10e396]: "Total Transaksi :"
+                        - generic [ref=f10e397]: "2.778"
+                  - cell "Rp 3.530.265.249" [ref=f10e398]
+                - 'row "KALIMANTAN TENGAH Total Transaksi : 75 Rp 2.165.019.960" [ref=f10e399] [cursor=pointer]':
+                  - 'cell "KALIMANTAN TENGAH Total Transaksi : 75" [ref=f10e400]':
+                    - generic [ref=f10e401]:
+                      - paragraph [ref=f10e402]: KALIMANTAN TENGAH
+                      - generic [ref=f10e403]:
+                        - generic [ref=f10e404]: "Total Transaksi :"
+                        - generic [ref=f10e405]: "75"
+                  - cell "Rp 2.165.019.960" [ref=f10e406]
+                - 'row "SUMATERA SELATAN Total Transaksi : 761 Rp 1.755.749.900" [ref=f10e407] [cursor=pointer]':
+                  - 'cell "SUMATERA SELATAN Total Transaksi : 761" [ref=f10e408]':
+                    - generic [ref=f10e409]:
+                      - paragraph [ref=f10e410]: SUMATERA SELATAN
+                      - generic [ref=f10e411]:
+                        - generic [ref=f10e412]: "Total Transaksi :"
+                        - generic [ref=f10e413]: "761"
+                  - cell "Rp 1.755.749.900" [ref=f10e414]
+                - 'row "KALIMANTAN SELATAN Total Transaksi : 1.259 Rp 1.663.455.580" [ref=f10e415] [cursor=pointer]':
+                  - 'cell "KALIMANTAN SELATAN Total Transaksi : 1.259" [ref=f10e416]':
+                    - generic [ref=f10e417]:
+                      - paragraph [ref=f10e418]: KALIMANTAN SELATAN
+                      - generic [ref=f10e419]:
+                        - generic [ref=f10e420]: "Total Transaksi :"
+                        - generic [ref=f10e421]: "1.259"
+                  - cell "Rp 1.663.455.580" [ref=f10e422]
+                - 'row "BALI Total Transaksi : 952 Rp 1.271.071.062" [ref=f10e423] [cursor=pointer]':
+                  - 'cell "BALI Total Transaksi : 952" [ref=f10e424]':
+                    - generic [ref=f10e425]:
+                      - paragraph [ref=f10e426]: BALI
+                      - generic [ref=f10e427]:
+                        - generic [ref=f10e428]: "Total Transaksi :"
+                        - generic [ref=f10e429]: "952"
+                  - cell "Rp 1.271.071.062" [ref=f10e430]
+                - 'row "SULAWESI SELATAN Total Transaksi : 1.096 Rp 1.138.175.100" [ref=f10e431] [cursor=pointer]':
+                  - 'cell "SULAWESI SELATAN Total Transaksi : 1.096" [ref=f10e432]':
+                    - generic [ref=f10e433]:
+                      - paragraph [ref=f10e434]: SULAWESI SELATAN
+                      - generic [ref=f10e435]:
+                        - generic [ref=f10e436]: "Total Transaksi :"
+                        - generic [ref=f10e437]: "1.096"
+                  - cell "Rp 1.138.175.100" [ref=f10e438]
+            - generic [ref=f10e439]:
+              - generic [ref=f10e440]:
+                - generic [ref=f10e441]: Total Data
+                - generic [ref=f10e442]: "38"
+              - generic [ref=f10e443]:
+                - button "left" [disabled] [ref=f10e444]:
+                  - generic:
+                    - img "left":
+                      - img
+                - generic [ref=f10e445]: 1/4
+                - button "right" [ref=f10e446] [cursor=pointer]:
+                  - img "right" [ref=f10e448]:
+                    - img [ref=f10e449]
+      - generic [ref=f10e451]:
+        - heading "Nilai Transaksi (dalam Rupiah)" [level=2] [ref=f10e453]
+        - img [ref=f10e459]:
+          - generic [ref=f10e463]:
+            - generic [ref=f10e465]: Rp. 100jt
+            - generic [ref=f10e467]: Rp. 1m
+            - generic [ref=f10e469]: Rp. 10m
+            - generic [ref=f10e471]: Rp. 21.484.751.078
+          - generic [ref=f10e473]:
+            - generic [ref=f10e475]: JAWA TIMUR
+            - generic [ref=f10e477]: LAMPUNG
+            - generic [ref=f10e479]: JAWA TENGAH
+            - generic [ref=f10e481]: NUSATENGGARABARAT
+            - generic [ref=f10e483]: JAWA BARAT
+            - generic [ref=f10e485]: KALIMANTANTENGAH
+            - generic [ref=f10e487]: SUMATERASELATAN
+            - generic [ref=f10e489]: KALIMANTANSELATAN
+            - generic [ref=f10e491]: BALI
+            - generic [ref=f10e493]: SULAWESISELATAN
+            - generic [ref=f10e495]: SUMATERABARAT
+            - generic [ref=f10e497]: DAERAHISTIMEWAYOGYAKARTA
+            - generic [ref=f10e499]: KALIMANTANUTARA
+            - generic [ref=f10e501]: ACEH
+            - generic [ref=f10e503]: BANTEN
+            - generic [ref=f10e505]: KALIMANTANBARAT
+            - generic [ref=f10e507]: SUMATERAUTARA
+            - generic [ref=f10e509]: BENGKULU
+            - generic [ref=f10e511]: PAPUA
+            - generic [ref=f10e513]: DKI JAKARTA
+            - generic [ref=f10e515]: SULAWESIUTARA
+            - generic [ref=f10e517]: KALIMANTANTIMUR
+            - generic [ref=f10e519]: MALUKU
+            - generic [ref=f10e521]: NUSATENGGARATIMUR
+            - generic [ref=f10e523]: SULAWESITENGAH
+            - generic [ref=f10e525]: PAPUA BARAT
+            - generic [ref=f10e527]: RIAU
+            - generic [ref=f10e529]: SULAWESIBARAT
+            - generic [ref=f10e531]: GORONTALO
+            - generic [ref=f10e533]: JAMBI
+            - generic [ref=f10e535]: MALUKUUTARA
+            - generic [ref=f10e537]: SULAWESITENGGARA
+            - generic [ref=f10e539]: KEPULAUANBANGKABELITUNG
+            - generic [ref=f10e541]: KEPULAUANRIAU
+            - generic [ref=f10e543]: PAPUA BARATDAYA
+            - generic [ref=f10e545]: PAPUAPEGUNUNGAN
+            - generic [ref=f10e547]: PAPUASELATAN
+            - generic [ref=f10e549]: PAPUATENGAH
+  - alert [ref=f10e457]
+  - generic [ref=f10e618]: 100jt

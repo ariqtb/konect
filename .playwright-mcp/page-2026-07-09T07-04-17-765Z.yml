@@ -1,0 +1,498 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e4]:
+    - generic [ref=f5e5]:
+      - img "SIMKOPDES" [ref=f5e7]
+      - heading "Dashboard Rapat Anggota Tahunan Koperasi" [level=1] [ref=f5e9]
+      - generic [ref=f5e11]:
+        - generic [ref=f5e12]:
+          - generic [ref=f5e13]: Tahun
+          - generic [ref=f5e15]:
+            - textbox "Select year" [ref=f5e16]: "2025"
+            - generic:
+              - img "calendar":
+                - img
+        - generic [ref=f5e210]: 🕐 9 Juli 2026 | 14:04 WIB
+    - generic [ref=f5e18]:
+      - generic [ref=f5e19]:
+        - generic [ref=f5e20]:
+          - generic [ref=f5e21]:
+            - generic [ref=f5e22]:
+              - heading "Total Koperasi Telah Melaksanakan RAT" [level=2] [ref=f5e23]
+              - button "reload" [ref=f5e24] [cursor=pointer]:
+                - img "reload" [ref=f5e26]:
+                  - img [ref=f5e27]
+            - generic [ref=f5e29]:
+              - generic [ref=f5e30]:
+                - paragraph [ref=f5e31]: Total RAT dilaporkan
+                - paragraph [ref=f5e32]: "6.037"
+              - generic [ref=f5e33]:
+                - paragraph [ref=f5e34]: Total diverifikasi Dinas
+                - paragraph [ref=f5e35]: "44.227"
+          - generic [ref=f5e36]:
+            - generic [ref=f5e37]:
+              - heading "Koperasi Sedang RAT (draft)" [level=3] [ref=f5e38]
+              - paragraph [ref=f5e39]: "14.346"
+            - generic [ref=f5e40]:
+              - heading "Koperasi Belum RAT" [level=3] [ref=f5e41]
+              - paragraph [ref=f5e42]: "18.772"
+        - generic [ref=f5e43]:
+          - generic [ref=f5e44]:
+            - heading "Perkembangan Harian RAT" [level=2] [ref=f5e45]
+            - generic [ref=f5e46]:
+              - textbox "Start date" [ref=f5e48]: 01/01/2026
+              - generic "to" [ref=f5e50]:
+                - img "swap-right" [ref=f5e51]:
+                  - img [ref=f5e52]
+              - textbox "End date" [ref=f5e55]: 10/07/2026
+              - generic:
+                - img "calendar":
+                  - img
+          - generic [ref=f5e58]:
+            - img [ref=f5e59]:
+              - generic [ref=f5e64]:
+                - generic [ref=f5e66]: 02/01
+                - generic [ref=f5e68]: 11/01
+                - generic [ref=f5e70]: 19/01
+                - generic [ref=f5e72]: 28/01
+                - generic [ref=f5e74]: 06/02
+                - generic [ref=f5e76]: 15/02
+                - generic [ref=f5e78]: 24/02
+                - generic [ref=f5e80]: 05/03
+                - generic [ref=f5e82]: 14/03
+                - generic [ref=f5e84]: 23/03
+                - generic [ref=f5e86]: 01/04
+                - generic [ref=f5e88]: 10/04
+                - generic [ref=f5e90]: 19/04
+                - generic [ref=f5e92]: 28/04
+                - generic [ref=f5e94]: 07/05
+                - generic [ref=f5e96]: 16/05
+                - generic [ref=f5e98]: 25/05
+                - generic [ref=f5e100]: 04/06
+                - generic [ref=f5e102]: 13/06
+                - generic [ref=f5e104]: 22/06
+                - generic [ref=f5e106]: 01/07
+                - generic [ref=f5e108]: 10/07
+              - generic [ref=f5e110]:
+                - generic [ref=f5e112]: "0"
+                - generic [ref=f5e114]: "20.000"
+                - generic [ref=f5e116]: "40.000"
+                - generic [ref=f5e118]: "60.000"
+                - generic [ref=f5e120]: "80.000"
+            - list [ref=f5e122]:
+              - listitem [ref=f5e123]:
+                - img [ref=f5e124]
+                - text: Sudah RAT
+              - listitem [ref=f5e126]:
+                - img [ref=f5e127]
+                - text: Terverifikasi
+              - listitem [ref=f5e129]:
+                - img [ref=f5e130]
+                - text: Sedang RAT
+      - generic [ref=f5e133]:
+        - generic [ref=f5e134]:
+          - heading "Data Rapat Anggota Tahunan Berdasarkan Provinsi" [level=2] [ref=f5e135]
+          - button "reload" [ref=f5e136] [cursor=pointer]:
+            - img "reload" [ref=f5e138]:
+              - img [ref=f5e139]
+        - generic [ref=f5e146]:
+          - table [ref=f5e148]:
+            - rowgroup [ref=f5e151]:
+              - row "Provinsi Total koperasi yang telah melaksanakan RAT Koperasi Sedang RAT (draft) Koperasi Belum RAT" [ref=f5e152]:
+                - columnheader "Provinsi" [ref=f5e153]
+                - columnheader "Total koperasi yang telah melaksanakan RAT" [ref=f5e154]
+                - columnheader "Koperasi Sedang RAT (draft)" [ref=f5e155] [cursor=pointer]:
+                  - generic [ref=f5e156]:
+                    - generic [ref=f5e158]: Koperasi Sedang RAT (draft)
+                    - generic [ref=f5e161]:
+                      - img [ref=f5e162]:
+                        - img [ref=f5e163]
+                      - img [ref=f5e165]:
+                        - img [ref=f5e166]
+                - columnheader "Koperasi Belum RAT" [ref=f5e168]
+              - row "Total RAT dilaporkan Total diverifikasi Dinas" [ref=f5e169]:
+                - columnheader "Total RAT dilaporkan" [ref=f5e170] [cursor=pointer]:
+                  - generic [ref=f5e171]:
+                    - generic [ref=f5e172]: Total RAT dilaporkan
+                    - generic [ref=f5e174]:
+                      - img [ref=f5e175]:
+                        - img [ref=f5e176]
+                      - img [ref=f5e178]:
+                        - img [ref=f5e179]
+                - columnheader "Total diverifikasi Dinas" [ref=f5e181] [cursor=pointer]:
+                  - generic [ref=f5e182]:
+                    - generic [ref=f5e183]: Total diverifikasi Dinas
+                    - generic [ref=f5e185]:
+                      - img [ref=f5e186]:
+                        - img [ref=f5e187]
+                      - img [ref=f5e189]:
+                        - img [ref=f5e190]
+          - table [ref=f5e193]:
+            - rowgroup [ref=f5e196]:
+              - generic:
+                - generic: Total RAT dilaporkan
+                - generic:
+                  - generic:
+                    - img:
+                      - img
+                    - img:
+                      - img
+              - generic:
+                - generic: Total diverifikasi Dinas
+                - generic:
+                  - generic:
+                    - img:
+                      - img
+                    - img:
+                      - img
+              - generic:
+                - generic:
+                  - generic: Koperasi Sedang RAT (draft)
+                - generic:
+                  - generic:
+                    - img:
+                      - img
+                    - img:
+                      - img
+              - row "ACEH Lihat Kabupaten/Kota 332 4147 946 1109" [ref=f5e221]:
+                - cell "ACEH Lihat Kabupaten/Kota" [ref=f5e222]:
+                  - generic [ref=f5e223] [cursor=pointer]:
+                    - generic [ref=f5e224]: ACEH
+                    - generic [ref=f5e225]: Lihat Kabupaten/Kota
+                - cell "332" [ref=f5e226]
+                - cell "4147" [ref=f5e227]
+                - cell "946" [ref=f5e228]
+                - cell "1109" [ref=f5e229]
+              - row "BALI Lihat Kabupaten/Kota 0 641 30 47" [ref=f5e230]:
+                - cell "BALI Lihat Kabupaten/Kota" [ref=f5e231]:
+                  - generic [ref=f5e232] [cursor=pointer]:
+                    - generic [ref=f5e233]: BALI
+                    - generic [ref=f5e234]: Lihat Kabupaten/Kota
+                - cell "0" [ref=f5e235]
+                - cell "641" [ref=f5e236]
+                - cell "30" [ref=f5e237]
+                - cell "47" [ref=f5e238]
+              - row "BANTEN Lihat Kabupaten/Kota 350 518 477 208" [ref=f5e239]:
+                - cell "BANTEN Lihat Kabupaten/Kota" [ref=f5e240]:
+                  - generic [ref=f5e241] [cursor=pointer]:
+                    - generic [ref=f5e242]: BANTEN
+                    - generic [ref=f5e243]: Lihat Kabupaten/Kota
+                - cell "350" [ref=f5e244]
+                - cell "518" [ref=f5e245]
+                - cell "477" [ref=f5e246]
+                - cell "208" [ref=f5e247]
+              - row "BENGKULU Lihat Kabupaten/Kota 210 690 281 327" [ref=f5e248]:
+                - cell "BENGKULU Lihat Kabupaten/Kota" [ref=f5e249]:
+                  - generic [ref=f5e250] [cursor=pointer]:
+                    - generic [ref=f5e251]: BENGKULU
+                    - generic [ref=f5e252]: Lihat Kabupaten/Kota
+                - cell "210" [ref=f5e253]
+                - cell "690" [ref=f5e254]
+                - cell "281" [ref=f5e255]
+                - cell "327" [ref=f5e256]
+              - row "DAERAH ISTIMEWA YOGYAKARTA Lihat Kabupaten/Kota 1 397 31 9" [ref=f5e257]:
+                - cell "DAERAH ISTIMEWA YOGYAKARTA Lihat Kabupaten/Kota" [ref=f5e258]:
+                  - generic [ref=f5e259] [cursor=pointer]:
+                    - generic [ref=f5e260]: DAERAH ISTIMEWA YOGYAKARTA
+                    - generic [ref=f5e261]: Lihat Kabupaten/Kota
+                - cell "1" [ref=f5e262]
+                - cell "397" [ref=f5e263]
+                - cell "31" [ref=f5e264]
+                - cell "9" [ref=f5e265]
+              - row "DKI JAKARTA Lihat Kabupaten/Kota 0 266 1 1" [ref=f5e266]:
+                - cell "DKI JAKARTA Lihat Kabupaten/Kota" [ref=f5e267]:
+                  - generic [ref=f5e268] [cursor=pointer]:
+                    - generic [ref=f5e269]: DKI JAKARTA
+                    - generic [ref=f5e270]: Lihat Kabupaten/Kota
+                - cell "0" [ref=f5e271]
+                - cell "266" [ref=f5e272]
+                - cell "1" [ref=f5e273]
+                - cell "1" [ref=f5e274]
+              - row "GORONTALO Lihat Kabupaten/Kota 33 398 193 107" [ref=f5e275]:
+                - cell "GORONTALO Lihat Kabupaten/Kota" [ref=f5e276]:
+                  - generic [ref=f5e277] [cursor=pointer]:
+                    - generic [ref=f5e278]: GORONTALO
+                    - generic [ref=f5e279]: Lihat Kabupaten/Kota
+                - cell "33" [ref=f5e280]
+                - cell "398" [ref=f5e281]
+                - cell "193" [ref=f5e282]
+                - cell "107" [ref=f5e283]
+              - row "JAMBI Lihat Kabupaten/Kota 141 671 364 415" [ref=f5e284]:
+                - cell "JAMBI Lihat Kabupaten/Kota" [ref=f5e285]:
+                  - generic [ref=f5e286] [cursor=pointer]:
+                    - generic [ref=f5e287]: JAMBI
+                    - generic [ref=f5e288]: Lihat Kabupaten/Kota
+                - cell "141" [ref=f5e289]
+                - cell "671" [ref=f5e290]
+                - cell "364" [ref=f5e291]
+                - cell "415" [ref=f5e292]
+              - row "JAWA BARAT Lihat Kabupaten/Kota 802 2667 1605 896" [ref=f5e293]:
+                - cell "JAWA BARAT Lihat Kabupaten/Kota" [ref=f5e294]:
+                  - generic [ref=f5e295] [cursor=pointer]:
+                    - generic [ref=f5e296]: JAWA BARAT
+                    - generic [ref=f5e297]: Lihat Kabupaten/Kota
+                - cell "802" [ref=f5e298]
+                - cell "2667" [ref=f5e299]
+                - cell "1605" [ref=f5e300]
+                - cell "896" [ref=f5e301]
+              - row "JAWA TENGAH Lihat Kabupaten/Kota 458 6369 1258 439" [ref=f5e302]:
+                - cell "JAWA TENGAH Lihat Kabupaten/Kota" [ref=f5e303]:
+                  - generic [ref=f5e304] [cursor=pointer]:
+                    - generic [ref=f5e305]: JAWA TENGAH
+                    - generic [ref=f5e306]: Lihat Kabupaten/Kota
+                - cell "458" [ref=f5e307]
+                - cell "6369" [ref=f5e308]
+                - cell "1258" [ref=f5e309]
+                - cell "439" [ref=f5e310]
+              - row "JAWA TIMUR Lihat Kabupaten/Kota 502 5861 1463 668" [ref=f5e311]:
+                - cell "JAWA TIMUR Lihat Kabupaten/Kota" [ref=f5e312]:
+                  - generic [ref=f5e313] [cursor=pointer]:
+                    - generic [ref=f5e314]: JAWA TIMUR
+                    - generic [ref=f5e315]: Lihat Kabupaten/Kota
+                - cell "502" [ref=f5e316]
+                - cell "5861" [ref=f5e317]
+                - cell "1463" [ref=f5e318]
+                - cell "668" [ref=f5e319]
+              - row "KALIMANTAN BARAT Lihat Kabupaten/Kota 50 596 426 1084" [ref=f5e320]:
+                - cell "KALIMANTAN BARAT Lihat Kabupaten/Kota" [ref=f5e321]:
+                  - generic [ref=f5e322] [cursor=pointer]:
+                    - generic [ref=f5e323]: KALIMANTAN BARAT
+                    - generic [ref=f5e324]: Lihat Kabupaten/Kota
+                - cell "50" [ref=f5e325]
+                - cell "596" [ref=f5e326]
+                - cell "426" [ref=f5e327]
+                - cell "1084" [ref=f5e328]
+              - row "KALIMANTAN SELATAN Lihat Kabupaten/Kota 146 1504 237 126" [ref=f5e329]:
+                - cell "KALIMANTAN SELATAN Lihat Kabupaten/Kota" [ref=f5e330]:
+                  - generic [ref=f5e331] [cursor=pointer]:
+                    - generic [ref=f5e332]: KALIMANTAN SELATAN
+                    - generic [ref=f5e333]: Lihat Kabupaten/Kota
+                - cell "146" [ref=f5e334]
+                - cell "1504" [ref=f5e335]
+                - cell "237" [ref=f5e336]
+                - cell "126" [ref=f5e337]
+              - row "KALIMANTAN TENGAH Lihat Kabupaten/Kota 209 256 260 818" [ref=f5e338]:
+                - cell "KALIMANTAN TENGAH Lihat Kabupaten/Kota" [ref=f5e339]:
+                  - generic [ref=f5e340] [cursor=pointer]:
+                    - generic [ref=f5e341]: KALIMANTAN TENGAH
+                    - generic [ref=f5e342]: Lihat Kabupaten/Kota
+                - cell "209" [ref=f5e343]
+                - cell "256" [ref=f5e344]
+                - cell "260" [ref=f5e345]
+                - cell "818" [ref=f5e346]
+              - row "KALIMANTAN TIMUR Lihat Kabupaten/Kota 27 537 192 281" [ref=f5e347]:
+                - cell "KALIMANTAN TIMUR Lihat Kabupaten/Kota" [ref=f5e348]:
+                  - generic [ref=f5e349] [cursor=pointer]:
+                    - generic [ref=f5e350]: KALIMANTAN TIMUR
+                    - generic [ref=f5e351]: Lihat Kabupaten/Kota
+                - cell "27" [ref=f5e352]
+                - cell "537" [ref=f5e353]
+                - cell "192" [ref=f5e354]
+                - cell "281" [ref=f5e355]
+              - row "KALIMANTAN UTARA Lihat Kabupaten/Kota 19 176 87 129" [ref=f5e356]:
+                - cell "KALIMANTAN UTARA Lihat Kabupaten/Kota" [ref=f5e357]:
+                  - generic [ref=f5e358] [cursor=pointer]:
+                    - generic [ref=f5e359]: KALIMANTAN UTARA
+                    - generic [ref=f5e360]: Lihat Kabupaten/Kota
+                - cell "19" [ref=f5e361]
+                - cell "176" [ref=f5e362]
+                - cell "87" [ref=f5e363]
+                - cell "129" [ref=f5e364]
+              - row "KEPULAUAN BANGKA BELITUNG Lihat Kabupaten/Kota 6 318 53 16" [ref=f5e365]:
+                - cell "KEPULAUAN BANGKA BELITUNG Lihat Kabupaten/Kota" [ref=f5e366]:
+                  - generic [ref=f5e367] [cursor=pointer]:
+                    - generic [ref=f5e368]: KEPULAUAN BANGKA BELITUNG
+                    - generic [ref=f5e369]: Lihat Kabupaten/Kota
+                - cell "6" [ref=f5e370]
+                - cell "318" [ref=f5e371]
+                - cell "53" [ref=f5e372]
+                - cell "16" [ref=f5e373]
+              - row "KEPULAUAN RIAU Lihat Kabupaten/Kota 59 122 78 148" [ref=f5e374]:
+                - cell "KEPULAUAN RIAU Lihat Kabupaten/Kota" [ref=f5e375]:
+                  - generic [ref=f5e376] [cursor=pointer]:
+                    - generic [ref=f5e377]: KEPULAUAN RIAU
+                    - generic [ref=f5e378]: Lihat Kabupaten/Kota
+                - cell "59" [ref=f5e379]
+                - cell "122" [ref=f5e380]
+                - cell "78" [ref=f5e381]
+                - cell "148" [ref=f5e382]
+              - row "LAMPUNG Lihat Kabupaten/Kota 48 1738 604 261" [ref=f5e383]:
+                - cell "LAMPUNG Lihat Kabupaten/Kota" [ref=f5e384]:
+                  - generic [ref=f5e385] [cursor=pointer]:
+                    - generic [ref=f5e386]: LAMPUNG
+                    - generic [ref=f5e387]: Lihat Kabupaten/Kota
+                - cell "48" [ref=f5e388]
+                - cell "1738" [ref=f5e389]
+                - cell "604" [ref=f5e390]
+                - cell "261" [ref=f5e391]
+              - row "MALUKU Lihat Kabupaten/Kota 207 367 257 405" [ref=f5e392]:
+                - cell "MALUKU Lihat Kabupaten/Kota" [ref=f5e393]:
+                  - generic [ref=f5e394] [cursor=pointer]:
+                    - generic [ref=f5e395]: MALUKU
+                    - generic [ref=f5e396]: Lihat Kabupaten/Kota
+                - cell "207" [ref=f5e397]
+                - cell "367" [ref=f5e398]
+                - cell "257" [ref=f5e399]
+                - cell "405" [ref=f5e400]
+              - row "MALUKU UTARA Lihat Kabupaten/Kota 87 202 201 701" [ref=f5e401]:
+                - cell "MALUKU UTARA Lihat Kabupaten/Kota" [ref=f5e402]:
+                  - generic [ref=f5e403] [cursor=pointer]:
+                    - generic [ref=f5e404]: MALUKU UTARA
+                    - generic [ref=f5e405]: Lihat Kabupaten/Kota
+                - cell "87" [ref=f5e406]
+                - cell "202" [ref=f5e407]
+                - cell "201" [ref=f5e408]
+                - cell "701" [ref=f5e409]
+              - row "NUSA TENGGARA BARAT Lihat Kabupaten/Kota 19 873 153 127" [ref=f5e410]:
+                - cell "NUSA TENGGARA BARAT Lihat Kabupaten/Kota" [ref=f5e411]:
+                  - generic [ref=f5e412] [cursor=pointer]:
+                    - generic [ref=f5e413]: NUSA TENGGARA BARAT
+                    - generic [ref=f5e414]: Lihat Kabupaten/Kota
+                - cell "19" [ref=f5e415]
+                - cell "873" [ref=f5e416]
+                - cell "153" [ref=f5e417]
+                - cell "127" [ref=f5e418]
+              - row "NUSA TENGGARA TIMUR Lihat Kabupaten/Kota 326 1725 613 788" [ref=f5e419]:
+                - cell "NUSA TENGGARA TIMUR Lihat Kabupaten/Kota" [ref=f5e420]:
+                  - generic [ref=f5e421] [cursor=pointer]:
+                    - generic [ref=f5e422]: NUSA TENGGARA TIMUR
+                    - generic [ref=f5e423]: Lihat Kabupaten/Kota
+                - cell "326" [ref=f5e424]
+                - cell "1725" [ref=f5e425]
+                - cell "613" [ref=f5e426]
+                - cell "788" [ref=f5e427]
+              - row "PAPUA Lihat Kabupaten/Kota 24 349 139 473" [ref=f5e428]:
+                - cell "PAPUA Lihat Kabupaten/Kota" [ref=f5e429]:
+                  - generic [ref=f5e430] [cursor=pointer]:
+                    - generic [ref=f5e431]: PAPUA
+                    - generic [ref=f5e432]: Lihat Kabupaten/Kota
+                - cell "24" [ref=f5e433]
+                - cell "349" [ref=f5e434]
+                - cell "139" [ref=f5e435]
+                - cell "473" [ref=f5e436]
+              - row "PAPUA BARAT Lihat Kabupaten/Kota 14 260 126 426" [ref=f5e437]:
+                - cell "PAPUA BARAT Lihat Kabupaten/Kota" [ref=f5e438]:
+                  - generic [ref=f5e439] [cursor=pointer]:
+                    - generic [ref=f5e440]: PAPUA BARAT
+                    - generic [ref=f5e441]: Lihat Kabupaten/Kota
+                - cell "14" [ref=f5e442]
+                - cell "260" [ref=f5e443]
+                - cell "126" [ref=f5e444]
+                - cell "426" [ref=f5e445]
+              - row "PAPUA BARAT DAYA Lihat Kabupaten/Kota 169 49 161 645" [ref=f5e446]:
+                - cell "PAPUA BARAT DAYA Lihat Kabupaten/Kota" [ref=f5e447]:
+                  - generic [ref=f5e448] [cursor=pointer]:
+                    - generic [ref=f5e449]: PAPUA BARAT DAYA
+                    - generic [ref=f5e450]: Lihat Kabupaten/Kota
+                - cell "169" [ref=f5e451]
+                - cell "49" [ref=f5e452]
+                - cell "161" [ref=f5e453]
+                - cell "645" [ref=f5e454]
+              - row "PAPUA PEGUNUNGAN Lihat Kabupaten/Kota 145 0 62 2180" [ref=f5e455]:
+                - cell "PAPUA PEGUNUNGAN Lihat Kabupaten/Kota" [ref=f5e456]:
+                  - generic [ref=f5e457] [cursor=pointer]:
+                    - generic [ref=f5e458]: PAPUA PEGUNUNGAN
+                    - generic [ref=f5e459]: Lihat Kabupaten/Kota
+                - cell "145" [ref=f5e460]
+                - cell "0" [ref=f5e461]
+                - cell "62" [ref=f5e462]
+                - cell "2180" [ref=f5e463]
+              - row "PAPUA SELATAN Lihat Kabupaten/Kota 34 70 33 503" [ref=f5e464]:
+                - cell "PAPUA SELATAN Lihat Kabupaten/Kota" [ref=f5e465]:
+                  - generic [ref=f5e466] [cursor=pointer]:
+                    - generic [ref=f5e467]: PAPUA SELATAN
+                    - generic [ref=f5e468]: Lihat Kabupaten/Kota
+                - cell "34" [ref=f5e469]
+                - cell "70" [ref=f5e470]
+                - cell "33" [ref=f5e471]
+                - cell "503" [ref=f5e472]
+              - row "PAPUA TENGAH Lihat Kabupaten/Kota 1 276 30 893" [ref=f5e473]:
+                - cell "PAPUA TENGAH Lihat Kabupaten/Kota" [ref=f5e474]:
+                  - generic [ref=f5e475] [cursor=pointer]:
+                    - generic [ref=f5e476]: PAPUA TENGAH
+                    - generic [ref=f5e477]: Lihat Kabupaten/Kota
+                - cell "1" [ref=f5e478]
+                - cell "276" [ref=f5e479]
+                - cell "30" [ref=f5e480]
+                - cell "893" [ref=f5e481]
+              - row "RIAU Lihat Kabupaten/Kota 120 941 495 310" [ref=f5e482]:
+                - cell "RIAU Lihat Kabupaten/Kota" [ref=f5e483]:
+                  - generic [ref=f5e484] [cursor=pointer]:
+                    - generic [ref=f5e485]: RIAU
+                    - generic [ref=f5e486]: Lihat Kabupaten/Kota
+                - cell "120" [ref=f5e487]
+                - cell "941" [ref=f5e488]
+                - cell "495" [ref=f5e489]
+                - cell "310" [ref=f5e490]
+              - row "SULAWESI BARAT Lihat Kabupaten/Kota 11 536 69 32" [ref=f5e491]:
+                - cell "SULAWESI BARAT Lihat Kabupaten/Kota" [ref=f5e492]:
+                  - generic [ref=f5e493] [cursor=pointer]:
+                    - generic [ref=f5e494]: SULAWESI BARAT
+                    - generic [ref=f5e495]: Lihat Kabupaten/Kota
+                - cell "11" [ref=f5e496]
+                - cell "536" [ref=f5e497]
+                - cell "69" [ref=f5e498]
+                - cell "32" [ref=f5e499]
+              - row "SULAWESI SELATAN Lihat Kabupaten/Kota 190 2055 492 344" [ref=f5e500]:
+                - cell "SULAWESI SELATAN Lihat Kabupaten/Kota" [ref=f5e501]:
+                  - generic [ref=f5e502] [cursor=pointer]:
+                    - generic [ref=f5e503]: SULAWESI SELATAN
+                    - generic [ref=f5e504]: Lihat Kabupaten/Kota
+                - cell "190" [ref=f5e505]
+                - cell "2055" [ref=f5e506]
+                - cell "492" [ref=f5e507]
+                - cell "344" [ref=f5e508]
+              - row "SULAWESI TENGAH Lihat Kabupaten/Kota 44 1200 292 447" [ref=f5e509]:
+                - cell "SULAWESI TENGAH Lihat Kabupaten/Kota" [ref=f5e510]:
+                  - generic [ref=f5e511] [cursor=pointer]:
+                    - generic [ref=f5e512]: SULAWESI TENGAH
+                    - generic [ref=f5e513]: Lihat Kabupaten/Kota
+                - cell "44" [ref=f5e514]
+                - cell "1200" [ref=f5e515]
+                - cell "292" [ref=f5e516]
+                - cell "447" [ref=f5e517]
+              - row "SULAWESI TENGGARA Lihat Kabupaten/Kota 99 1025 473 676" [ref=f5e518]:
+                - cell "SULAWESI TENGGARA Lihat Kabupaten/Kota" [ref=f5e519]:
+                  - generic [ref=f5e520] [cursor=pointer]:
+                    - generic [ref=f5e521]: SULAWESI TENGGARA
+                    - generic [ref=f5e522]: Lihat Kabupaten/Kota
+                - cell "99" [ref=f5e523]
+                - cell "1025" [ref=f5e524]
+                - cell "473" [ref=f5e525]
+                - cell "676" [ref=f5e526]
+              - row "SULAWESI UTARA Lihat Kabupaten/Kota 446 713 277 403" [ref=f5e527]:
+                - cell "SULAWESI UTARA Lihat Kabupaten/Kota" [ref=f5e528]:
+                  - generic [ref=f5e529] [cursor=pointer]:
+                    - generic [ref=f5e530]: SULAWESI UTARA
+                    - generic [ref=f5e531]: Lihat Kabupaten/Kota
+                - cell "446" [ref=f5e532]
+                - cell "713" [ref=f5e533]
+                - cell "277" [ref=f5e534]
+                - cell "403" [ref=f5e535]
+              - row "SUMATERA BARAT Lihat Kabupaten/Kota 0 1256 10 4" [ref=f5e536]:
+                - cell "SUMATERA BARAT Lihat Kabupaten/Kota" [ref=f5e537]:
+                  - generic [ref=f5e538] [cursor=pointer]:
+                    - generic [ref=f5e539]: SUMATERA BARAT
+                    - generic [ref=f5e540]: Lihat Kabupaten/Kota
+                - cell "0" [ref=f5e541]
+                - cell "1256" [ref=f5e542]
+                - cell "10" [ref=f5e543]
+                - cell "4" [ref=f5e544]
+              - row "SUMATERA SELATAN Lihat Kabupaten/Kota 18 2413 481 355" [ref=f5e545]:
+                - cell "SUMATERA SELATAN Lihat Kabupaten/Kota" [ref=f5e546]:
+                  - generic [ref=f5e547] [cursor=pointer]:
+                    - generic [ref=f5e548]: SUMATERA SELATAN
+                    - generic [ref=f5e549]: Lihat Kabupaten/Kota
+                - cell "18" [ref=f5e550]
+                - cell "2413" [ref=f5e551]
+                - cell "481" [ref=f5e552]
+                - cell "355" [ref=f5e553]
+              - row "SUMATERA UTARA Lihat Kabupaten/Kota 690 2045 1396 1971" [ref=f5e554]:
+                - cell "SUMATERA UTARA Lihat Kabupaten/Kota" [ref=f5e555]:
+                  - generic [ref=f5e556] [cursor=pointer]:
+                    - generic [ref=f5e557]: SUMATERA UTARA
+                    - generic [ref=f5e558]: Lihat Kabupaten/Kota
+                - cell "690" [ref=f5e559]
+                - cell "2045" [ref=f5e560]
+                - cell "1396" [ref=f5e561]
+                - cell "1971" [ref=f5e562]
+  - alert [ref=f5e208]

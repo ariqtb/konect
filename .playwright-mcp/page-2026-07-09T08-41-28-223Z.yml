@@ -1,0 +1,21 @@
+- generic [ref=f35e2]:
+  - iframe [ref=f35e5]:
+    - generic [ref=f36e4]:
+      - generic [ref=f36e5]: Riset Data 2026
+      - heading "Koperasi Desa Merah Putih" [level=1] [ref=f36e6]:
+        - text: Koperasi Desa
+        - text: Merah Putih
+      - paragraph [ref=f36e7]: Analisis Data Dashboard SIMKOPDES
+      - paragraph [ref=f36e8]: Per 9 Juli 2026
+  - generic [ref=f35e6]:
+    - button "Mute" [ref=f35e7] [cursor=pointer]:
+      - img [ref=f35e8]
+      - text: Mute
+    - generic "Slide 1 of 10" [ref=f35e13]: 1 / 10
+    - status "Loading slides" [ref=f35e14]
+    - button "Present" [ref=f35e17] [cursor=pointer]:
+      - img [ref=f35e18]
+      - text: Present
+    - button "Full screen" [ref=f35e21] [cursor=pointer]:
+      - img [ref=f35e22]
+      - text: Full screen

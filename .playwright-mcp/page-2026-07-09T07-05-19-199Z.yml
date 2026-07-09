@@ -1,0 +1,821 @@
+- generic [active] [ref=f20e1]:
+  - generic [ref=f20e4]:
+    - generic [ref=f20e5]:
+      - img "SIMKOPDES" [ref=f20e7]
+      - heading "Dashboard Statistik Kelembagaan Koperasi" [level=1] [ref=f20e9]
+      - generic [ref=f20e11]:
+        - generic [ref=f20e13]: Live Data
+        - generic [ref=f20e15]: 🕐 9 Juli 2026 | 14:05 WIB
+    - generic [ref=f20e16]:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Peta Sebaran Koperasi
+                      - generic: Klik bubble untuk drill-down wilayah
+                  - generic:
+                    - button "loading":
+                      - generic:
+                        - img "loading":
+                          - img
+              - generic:
+                - generic:
+                  - generic: "Level: Provinsi"
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic [ref=f20e24]:
+                        - button "Zoom in" [ref=f20e25] [cursor=pointer]: +
+                        - button "Zoom out" [disabled] [ref=f20e26]: −
+                      - button "Layers" [ref=f20e28] [cursor=pointer]
+                      - generic:
+                        - generic [ref=f20e29]:
+                          - generic [ref=f20e30]: Legenda
+                          - generic [ref=f20e31]:
+                            - generic [ref=f20e32]: "#"
+                            - generic [ref=f20e33]: Bubble jumlah koperasi
+                        - generic [ref=f20e34]:
+                          - link "Leaflet" [ref=f20e35] [cursor=pointer]:
+                            - /url: https://leafletjs.com
+                            - img [ref=f20e36]
+                            - text: Leaflet
+                          - text: "| Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+                - generic:
+                  - generic:
+                    - generic: Statistik Provinsi
+                    - generic: Persentase koperasi berbadan hukum per provinsi
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img:
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - generic: PAPUA BARAT DAYA
+                                - generic:
+                                  - generic: SULAWESI SELATAN
+                                - generic:
+                                  - generic: ACEH
+                                - generic:
+                                  - generic: KALIMANTAN BARAT
+                                - generic:
+                                  - generic: MALUKU UTARA
+                                - generic:
+                                  - generic: NUSA TENGGARA BARAT
+                                - generic:
+                                  - generic: SUMATERA BARAT
+                                - generic:
+                                  - generic: JAMBI
+                                - generic:
+                                  - generic: DKI JAKARTA
+                                - generic:
+                                  - generic: NUSA TENGGARA TIMUR
+                                - generic:
+                                  - generic: BALI
+                                - generic:
+                                  - generic: GORONTALO
+                                - generic:
+                                  - generic: SULAWESI TENGGARA
+                                - generic:
+                                  - generic: SUMATERA SELATAN
+                                - generic:
+                                  - generic: PAPUA BARAT
+                                - generic:
+                                  - generic: JAWA BARAT
+                                - generic:
+                                  - generic: RIAU
+                                - generic:
+                                  - generic: SULAWESI TENGAH
+                                - generic:
+                                  - generic: MALUKU
+                                - generic:
+                                  - generic: BANTEN
+                                - generic:
+                                  - generic: LAMPUNG
+                                - generic:
+                                  - generic: JAWA TENGAH
+                                - generic:
+                                  - generic: JAWA TIMUR
+                                - generic:
+                                  - generic: SULAWESI UTARA
+                                - generic:
+                                  - generic: SULAWESI BARAT
+                                - generic:
+                                  - generic: DAERAH ISTIMEWA YOGYAKARTA
+                                - generic:
+                                  - generic: KEPULAUAN BANGKA BELITUNG
+                                - generic:
+                                  - generic: KALIMANTAN SELATAN
+                                - generic:
+                                  - generic: KALIMANTAN TIMUR
+                                - generic:
+                                  - generic: SUMATERA UTARA
+                                - generic:
+                                  - generic: BENGKULU
+                                - generic:
+                                  - generic: KALIMANTAN UTARA
+                                - generic:
+                                  - generic: PAPUA TENGAH
+                                - generic:
+                                  - generic: PAPUA
+                                - generic:
+                                  - generic: KALIMANTAN TENGAH
+                                - generic:
+                                  - generic: KEPULAUAN RIAU
+                                - generic:
+                                  - generic: PAPUA SELATAN
+                                - generic:
+                                  - generic: PAPUA PEGUNUNGAN
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - generic: 25%
+                                - generic:
+                                  - generic: 100%
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Ringkasan Koperasi
+                        - generic: Per 08/07/2026 08:15:32
+                      - button "reload":
+                        - generic:
+                          - img "reload":
+                            - img
+                    - generic:
+                      - generic:
+                        - generic: Kelurahan Berbadan Hukum
+                        - generic: "8.576"
+                      - generic:
+                        - generic: Desa Berbadan Hukum
+                        - generic: "74.805"
+                      - generic:
+                        - generic: Total Berbadan Hukum
+                        - generic: "83.382"
+                      - generic:
+                        - generic: Telah Memiliki Akun
+                        - generic: "79.706"
+                      - generic:
+                        - generic: Telah Memiliki NPWP
+                        - generic: "80.978"
+                      - generic:
+                        - generic: Telah Memiliki NIB
+                        - generic: "60.771"
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: Grafik Satgas Nasional
+                          - generic: Perbandingan musyawarah dan total koperasi
+                      - generic:
+                        - button "reload":
+                          - generic:
+                            - img "reload":
+                              - img
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img:
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - generic: SATUAN TUGAS WILAYAH 3
+                                - generic:
+                                  - generic: SATUAN TUGAS WILAYAH 4
+                                - generic:
+                                  - generic: SATUAN TUGAS WILAYAH 2
+                                - generic:
+                                  - generic: SATUAN TUGAS WILAYAH 1
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - generic: "0"
+                                - generic:
+                                  - generic: "8000"
+                                - generic:
+                                  - generic: "16000"
+                                - generic:
+                                  - generic: "24000"
+                                - generic:
+                                  - generic: "32000"
+                          - generic:
+                            - list:
+                              - listitem:
+                                - img
+                                - text: Musdesus
+                              - listitem:
+                                - img
+                                - text: Koperasi
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Statistik Koperasi Berbadan Hukum
+                      - generic: Klik nama provinsi untuk melihat detail kabupaten/kota
+                  - generic:
+                    - button "reload":
+                      - generic:
+                        - img "reload":
+                          - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - table:
+                              - rowgroup:
+                                - row "No Provinsi Kel. Desa Total":
+                                  - columnheader "No"
+                                  - columnheader "Provinsi"
+                                  - columnheader "Kel."
+                                  - columnheader "Desa"
+                                  - columnheader "Total"
+                          - generic:
+                            - table:
+                              - rowgroup:
+                                - row "1 Logo JAWA TENGAH JAWA TENGAH Detail kab/kota 760 7.764 8.524 100.01%":
+                                  - cell "1"
+                                  - cell "Logo JAWA TENGAH JAWA TENGAH Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo JAWA TENGAH"
+                                      - generic:
+                                        - generic: JAWA TENGAH
+                                        - generic: Detail kab/kota
+                                  - cell "760"
+                                  - cell "7.764"
+                                  - cell "8.524 100.01%":
+                                    - generic:
+                                      - generic: "8.524"
+                                      - generic: 100.01%
+                                - row "2 Logo JAWA TIMUR JAWA TIMUR Detail kab/kota 775 7.719 8.494 100.00%":
+                                  - cell "2"
+                                  - cell "Logo JAWA TIMUR JAWA TIMUR Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo JAWA TIMUR"
+                                      - generic:
+                                        - generic: JAWA TIMUR
+                                        - generic: Detail kab/kota
+                                  - cell "775"
+                                  - cell "7.719"
+                                  - cell "8.494 100.00%":
+                                    - generic:
+                                      - generic: "8.494"
+                                      - generic: 100.00%
+                                - row "3 Logo ACEH ACEH Detail kab/kota 12 6.522 6.534 100.52%":
+                                  - cell "3"
+                                  - cell "Logo ACEH ACEH Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo ACEH"
+                                      - generic:
+                                        - generic: ACEH
+                                        - generic: Detail kab/kota
+                                  - cell "12"
+                                  - cell "6.522"
+                                  - cell "6.534 100.52%":
+                                    - generic:
+                                      - generic: "6.534"
+                                      - generic: 100.52%
+                                - row "4 Logo SUMATERA UTARA SUMATERA UTARA Detail kab/kota 699 5.403 6.102 99.87%":
+                                  - cell "4"
+                                  - cell "Logo SUMATERA UTARA SUMATERA UTARA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo SUMATERA UTARA"
+                                      - generic:
+                                        - generic: SUMATERA UTARA
+                                        - generic: Detail kab/kota
+                                  - cell "699"
+                                  - cell "5.403"
+                                  - cell "6.102 99.87%":
+                                    - generic:
+                                      - generic: "6.102"
+                                      - generic: 99.87%
+                                - row "5 Logo JAWA BARAT JAWA BARAT Detail kab/kota 652 5.318 5.970 100.22%":
+                                  - cell "5"
+                                  - cell "Logo JAWA BARAT JAWA BARAT Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo JAWA BARAT"
+                                      - generic:
+                                        - generic: JAWA BARAT
+                                        - generic: Detail kab/kota
+                                  - cell "652"
+                                  - cell "5.318"
+                                  - cell "5.970 100.22%":
+                                    - generic:
+                                      - generic: "5.970"
+                                      - generic: 100.22%
+                                - row "6 Logo NUSA TENGGARA TIMUR NUSA TENGGARA TIMUR Detail kab/kota 312 3.140 3.452 100.29%":
+                                  - cell "6"
+                                  - cell "Logo NUSA TENGGARA TIMUR NUSA TENGGARA TIMUR Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo NUSA TENGGARA TIMUR"
+                                      - generic:
+                                        - generic: NUSA TENGGARA TIMUR
+                                        - generic: Detail kab/kota
+                                  - cell "312"
+                                  - cell "3.140"
+                                  - cell "3.452 100.29%":
+                                    - generic:
+                                      - generic: "3.452"
+                                      - generic: 100.29%
+                                - row "7 Logo SUMATERA SELATAN SUMATERA SELATAN Detail kab/kota 408 2.859 3.267 100.25%":
+                                  - cell "7"
+                                  - cell "Logo SUMATERA SELATAN SUMATERA SELATAN Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo SUMATERA SELATAN"
+                                      - generic:
+                                        - generic: SUMATERA SELATAN
+                                        - generic: Detail kab/kota
+                                  - cell "408"
+                                  - cell "2.859"
+                                  - cell "3.267 100.25%":
+                                    - generic:
+                                      - generic: "3.267"
+                                      - generic: 100.25%
+                                - row "8 Logo SULAWESI SELATAN SULAWESI SELATAN Detail kab/kota 798 2.282 3.081 100.72%":
+                                  - cell "8"
+                                  - cell "Logo SULAWESI SELATAN SULAWESI SELATAN Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo SULAWESI SELATAN"
+                                      - generic:
+                                        - generic: SULAWESI SELATAN
+                                        - generic: Detail kab/kota
+                                  - cell "798"
+                                  - cell "2.282"
+                                  - cell "3.081 100.72%":
+                                    - generic:
+                                      - generic: "3.081"
+                                      - generic: 100.72%
+                                - row "9 Logo LAMPUNG LAMPUNG Detail kab/kota 207 2.444 2.651 100.04%":
+                                  - cell "9"
+                                  - cell "Logo LAMPUNG LAMPUNG Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo LAMPUNG"
+                                      - generic:
+                                        - generic: LAMPUNG
+                                        - generic: Detail kab/kota
+                                  - cell "207"
+                                  - cell "2.444"
+                                  - cell "2.651 100.04%":
+                                    - generic:
+                                      - generic: "2.651"
+                                      - generic: 100.04%
+                                - row "10 Logo PAPUA PEGUNUNGAN PAPUA PEGUNUNGAN Detail kab/kota 9 2.378 2.387 90.86%":
+                                  - cell "10"
+                                  - cell "Logo PAPUA PEGUNUNGAN PAPUA PEGUNUNGAN Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo PAPUA PEGUNUNGAN"
+                                      - generic:
+                                        - generic: PAPUA PEGUNUNGAN
+                                        - generic: Detail kab/kota
+                                  - cell "9"
+                                  - cell "2.378"
+                                  - cell "2.387 90.86%":
+                                    - generic:
+                                      - generic: "2.387"
+                                      - generic: 90.86%
+                                - row "11 Logo SULAWESI TENGGARA SULAWESI TENGGARA Detail kab/kota 381 1.892 2.273 100.26%":
+                                  - cell "11"
+                                  - cell "Logo SULAWESI TENGGARA SULAWESI TENGGARA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo SULAWESI TENGGARA"
+                                      - generic:
+                                        - generic: SULAWESI TENGGARA
+                                        - generic: Detail kab/kota
+                                  - cell "381"
+                                  - cell "1.892"
+                                  - cell "2.273 100.26%":
+                                    - generic:
+                                      - generic: "2.273"
+                                      - generic: 100.26%
+                                - row "12 Logo KALIMANTAN BARAT KALIMANTAN BARAT Detail kab/kota 101 2.055 2.156 100.51%":
+                                  - cell "12"
+                                  - cell "Logo KALIMANTAN BARAT KALIMANTAN BARAT Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo KALIMANTAN BARAT"
+                                      - generic:
+                                        - generic: KALIMANTAN BARAT
+                                        - generic: Detail kab/kota
+                                  - cell "101"
+                                  - cell "2.055"
+                                  - cell "2.156 100.51%":
+                                    - generic:
+                                      - generic: "2.156"
+                                      - generic: 100.51%
+                                - row "13 Logo KALIMANTAN SELATAN KALIMANTAN SELATAN Detail kab/kota 142 1.871 2.013 99.90%":
+                                  - cell "13"
+                                  - cell "Logo KALIMANTAN SELATAN KALIMANTAN SELATAN Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo KALIMANTAN SELATAN"
+                                      - generic:
+                                        - generic: KALIMANTAN SELATAN
+                                        - generic: Detail kab/kota
+                                  - cell "142"
+                                  - cell "1.871"
+                                  - cell "2.013 99.90%":
+                                    - generic:
+                                      - generic: "2.013"
+                                      - generic: 99.90%
+                                - row "14 Logo SULAWESI TENGAH SULAWESI TENGAH Detail kab/kota 178 1.805 1.983 100.10%":
+                                  - cell "14"
+                                  - cell "Logo SULAWESI TENGAH SULAWESI TENGAH Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo SULAWESI TENGAH"
+                                      - generic:
+                                        - generic: SULAWESI TENGAH
+                                        - generic: Detail kab/kota
+                                  - cell "178"
+                                  - cell "1.805"
+                                  - cell "1.983 100.10%":
+                                    - generic:
+                                      - generic: "1.983"
+                                      - generic: 100.10%
+                                - row "15 Logo RIAU RIAU Detail kab/kota 270 1.596 1.866 100.21%":
+                                  - cell "15"
+                                  - cell "Logo RIAU RIAU Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo RIAU"
+                                      - generic:
+                                        - generic: RIAU
+                                        - generic: Detail kab/kota
+                                  - cell "270"
+                                  - cell "1.596"
+                                  - cell "1.866 100.21%":
+                                    - generic:
+                                      - generic: "1.866"
+                                      - generic: 100.21%
+                                - row "16 Logo SULAWESI UTARA SULAWESI UTARA Detail kab/kota 335 1.504 1.839 100.00%":
+                                  - cell "16"
+                                  - cell "Logo SULAWESI UTARA SULAWESI UTARA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo SULAWESI UTARA"
+                                      - generic:
+                                        - generic: SULAWESI UTARA
+                                        - generic: Detail kab/kota
+                                  - cell "335"
+                                  - cell "1.504"
+                                  - cell "1.839 100.00%":
+                                    - generic:
+                                      - generic: "1.839"
+                                      - generic: 100.00%
+                                - row "17 Logo JAMBI JAMBI Detail kab/kota 172 1.419 1.591 100.38%":
+                                  - cell "17"
+                                  - cell "Logo JAMBI JAMBI Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo JAMBI"
+                                      - generic:
+                                        - generic: JAMBI
+                                        - generic: Detail kab/kota
+                                  - cell "172"
+                                  - cell "1.419"
+                                  - cell "1.591 100.38%":
+                                    - generic:
+                                      - generic: "1.591"
+                                      - generic: 100.38%
+                                - row "18 Logo BANTEN BANTEN Detail kab/kota 314 1.239 1.553 100.06%":
+                                  - cell "18"
+                                  - cell "Logo BANTEN BANTEN Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo BANTEN"
+                                      - generic:
+                                        - generic: BANTEN
+                                        - generic: Detail kab/kota
+                                  - cell "314"
+                                  - cell "1.239"
+                                  - cell "1.553 100.06%":
+                                    - generic:
+                                      - generic: "1.553"
+                                      - generic: 100.06%
+                                - row "19 Logo KALIMANTAN TENGAH KALIMANTAN TENGAH Detail kab/kota 135 1.408 1.543 98.22%":
+                                  - cell "19"
+                                  - cell "Logo KALIMANTAN TENGAH KALIMANTAN TENGAH Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo KALIMANTAN TENGAH"
+                                      - generic:
+                                        - generic: KALIMANTAN TENGAH
+                                        - generic: Detail kab/kota
+                                  - cell "135"
+                                  - cell "1.408"
+                                  - cell "1.543 98.22%":
+                                    - generic:
+                                      - generic: "1.543"
+                                      - generic: 98.22%
+                                - row "20 Logo BENGKULU BENGKULU Detail kab/kota 169 1.339 1.508 99.74%":
+                                  - cell "20"
+                                  - cell "Logo BENGKULU BENGKULU Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo BENGKULU"
+                                      - generic:
+                                        - generic: BENGKULU
+                                        - generic: Detail kab/kota
+                                  - cell "169"
+                                  - cell "1.339"
+                                  - cell "1.508 99.74%":
+                                    - generic:
+                                      - generic: "1.508"
+                                      - generic: 99.74%
+                                - row "21 Logo SUMATERA BARAT SUMATERA BARAT Detail kab/kota 234 1.036 1.270 100.40%":
+                                  - cell "21"
+                                  - cell "Logo SUMATERA BARAT SUMATERA BARAT Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo SUMATERA BARAT"
+                                      - generic:
+                                        - generic: SUMATERA BARAT
+                                        - generic: Detail kab/kota
+                                  - cell "234"
+                                  - cell "1.036"
+                                  - cell "1.270 100.40%":
+                                    - generic:
+                                      - generic: "1.270"
+                                      - generic: 100.40%
+                                - row "22 Logo MALUKU MALUKU Detail kab/kota 37 1.199 1.236 100.08%":
+                                  - cell "22"
+                                  - cell "Logo MALUKU MALUKU Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo MALUKU"
+                                      - generic:
+                                        - generic: MALUKU
+                                        - generic: Detail kab/kota
+                                  - cell "37"
+                                  - cell "1.199"
+                                  - cell "1.236 100.08%":
+                                    - generic:
+                                      - generic: "1.236"
+                                      - generic: 100.08%
+                                - row "23 Logo PAPUA TENGAH PAPUA TENGAH Detail kab/kota 28 1.172 1.200 99.34%":
+                                  - cell "23"
+                                  - cell "Logo PAPUA TENGAH PAPUA TENGAH Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo PAPUA TENGAH"
+                                      - generic:
+                                        - generic: PAPUA TENGAH
+                                        - generic: Detail kab/kota
+                                  - cell "28"
+                                  - cell "1.172"
+                                  - cell "1.200 99.34%":
+                                    - generic:
+                                      - generic: "1.200"
+                                      - generic: 99.34%
+                                - row "24 Logo MALUKU UTARA MALUKU UTARA Detail kab/kota 123 1.068 1.191 100.51%":
+                                  - cell "24"
+                                  - cell "Logo MALUKU UTARA MALUKU UTARA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo MALUKU UTARA"
+                                      - generic:
+                                        - generic: MALUKU UTARA
+                                        - generic: Detail kab/kota
+                                  - cell "123"
+                                  - cell "1.068"
+                                  - cell "1.191 100.51%":
+                                    - generic:
+                                      - generic: "1.191"
+                                      - generic: 100.51%
+                                - row "25 Logo NUSA TENGGARA BARAT NUSA TENGGARA BARAT Detail kab/kota 150 1.022 1.172 100.51%":
+                                  - cell "25"
+                                  - cell "Logo NUSA TENGGARA BARAT NUSA TENGGARA BARAT Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo NUSA TENGGARA BARAT"
+                                      - generic:
+                                        - generic: NUSA TENGGARA BARAT
+                                        - generic: Detail kab/kota
+                                  - cell "150"
+                                  - cell "1.022"
+                                  - cell "1.172 100.51%":
+                                    - generic:
+                                      - generic: "1.172"
+                                      - generic: 100.51%
+                                - row "26 Logo KALIMANTAN TIMUR KALIMANTAN TIMUR Detail kab/kota 199 838 1.037 99.90%":
+                                  - cell "26"
+                                  - cell "Logo KALIMANTAN TIMUR KALIMANTAN TIMUR Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo KALIMANTAN TIMUR"
+                                      - generic:
+                                        - generic: KALIMANTAN TIMUR
+                                        - generic: Detail kab/kota
+                                  - cell "199"
+                                  - cell "838"
+                                  - cell "1.037 99.90%":
+                                    - generic:
+                                      - generic: "1.037"
+                                      - generic: 99.90%
+                                - row "27 Logo PAPUA BARAT DAYA PAPUA BARAT DAYA Detail kab/kota 78 946 1.024 101.09%":
+                                  - cell "27"
+                                  - cell "Logo PAPUA BARAT DAYA PAPUA BARAT DAYA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo PAPUA BARAT DAYA"
+                                      - generic:
+                                        - generic: PAPUA BARAT DAYA
+                                        - generic: Detail kab/kota
+                                  - cell "78"
+                                  - cell "946"
+                                  - cell "1.024 101.09%":
+                                    - generic:
+                                      - generic: "1.024"
+                                      - generic: 101.09%
+                                - row "28 Logo PAPUA PAPUA Detail kab/kota 52 933 985 98.60%":
+                                  - cell "28"
+                                  - cell "Logo PAPUA PAPUA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo PAPUA"
+                                      - generic:
+                                        - generic: PAPUA
+                                        - generic: Detail kab/kota
+                                  - cell "52"
+                                  - cell "933"
+                                  - cell "985 98.60%":
+                                    - generic:
+                                      - generic: "985"
+                                      - generic: 98.60%
+                                - row "29 Logo PAPUA BARAT PAPUA BARAT Detail kab/kota 32 794 826 100.24%":
+                                  - cell "29"
+                                  - cell "Logo PAPUA BARAT PAPUA BARAT Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo PAPUA BARAT"
+                                      - generic:
+                                        - generic: PAPUA BARAT
+                                        - generic: Detail kab/kota
+                                  - cell "32"
+                                  - cell "794"
+                                  - cell "826 100.24%":
+                                    - generic:
+                                      - generic: "826"
+                                      - generic: 100.24%
+                                - row "30 Logo GORONTALO GORONTALO Detail kab/kota 72 659 731 100.27%":
+                                  - cell "30"
+                                  - cell "Logo GORONTALO GORONTALO Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo GORONTALO"
+                                      - generic:
+                                        - generic: GORONTALO
+                                        - generic: Detail kab/kota
+                                  - cell "72"
+                                  - cell "659"
+                                  - cell "731 100.27%":
+                                    - generic:
+                                      - generic: "731"
+                                      - generic: 100.27%
+                                - row "31 Logo BALI BALI Detail kab/kota 80 638 718 100.28%":
+                                  - cell "31"
+                                  - cell "Logo BALI BALI Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo BALI"
+                                      - generic:
+                                        - generic: BALI
+                                        - generic: Detail kab/kota
+                                  - cell "80"
+                                  - cell "638"
+                                  - cell "718 100.28%":
+                                    - generic:
+                                      - generic: "718"
+                                      - generic: 100.28%
+                                - row "32 Logo SULAWESI BARAT SULAWESI BARAT Detail kab/kota 75 573 648 100.00%":
+                                  - cell "32"
+                                  - cell "Logo SULAWESI BARAT SULAWESI BARAT Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo SULAWESI BARAT"
+                                      - generic:
+                                        - generic: SULAWESI BARAT
+                                        - generic: Detail kab/kota
+                                  - cell "75"
+                                  - cell "573"
+                                  - cell "648 100.00%":
+                                    - generic:
+                                      - generic: "648"
+                                      - generic: 100.00%
+                                - row "33 Logo PAPUA SELATAN PAPUA SELATAN Detail kab/kota 10 630 640 92.75%":
+                                  - cell "33"
+                                  - cell "Logo PAPUA SELATAN PAPUA SELATAN Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo PAPUA SELATAN"
+                                      - generic:
+                                        - generic: PAPUA SELATAN
+                                        - generic: Detail kab/kota
+                                  - cell "10"
+                                  - cell "630"
+                                  - cell "640 92.75%":
+                                    - generic:
+                                      - generic: "640"
+                                      - generic: 92.75%
+                                - row "34 Logo DAERAH ISTIMEWA YOGYAKARTA DAERAH ISTIMEWA YOGYAKARTA Detail kab/kota 46 392 438 100.00%":
+                                  - cell "34"
+                                  - cell "Logo DAERAH ISTIMEWA YOGYAKARTA DAERAH ISTIMEWA YOGYAKARTA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo DAERAH ISTIMEWA YOGYAKARTA"
+                                      - generic:
+                                        - generic: DAERAH ISTIMEWA YOGYAKARTA
+                                        - generic: Detail kab/kota
+                                  - cell "46"
+                                  - cell "392"
+                                  - cell "438 100.00%":
+                                    - generic:
+                                      - generic: "438"
+                                      - generic: 100.00%
+                                - row "35 Logo KALIMANTAN UTARA KALIMANTAN UTARA Detail kab/kota 36 375 411 99.52%":
+                                  - cell "35"
+                                  - cell "Logo KALIMANTAN UTARA KALIMANTAN UTARA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo KALIMANTAN UTARA"
+                                      - generic:
+                                        - generic: KALIMANTAN UTARA
+                                        - generic: Detail kab/kota
+                                  - cell "36"
+                                  - cell "375"
+                                  - cell "411 99.52%":
+                                    - generic:
+                                      - generic: "411"
+                                      - generic: 99.52%
+                                - row "36 Logo KEPULAUAN RIAU KEPULAUAN RIAU Detail kab/kota 144 263 407 97.14%":
+                                  - cell "36"
+                                  - cell "Logo KEPULAUAN RIAU KEPULAUAN RIAU Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo KEPULAUAN RIAU"
+                                      - generic:
+                                        - generic: KEPULAUAN RIAU
+                                        - generic: Detail kab/kota
+                                  - cell "144"
+                                  - cell "263"
+                                  - cell "407 97.14%":
+                                    - generic:
+                                      - generic: "407"
+                                      - generic: 97.14%
+                                - row "37 Logo KEPULAUAN BANGKA BELITUNG KEPULAUAN BANGKA BELITUNG Detail kab/kota 84 309 393 100.00%":
+                                  - cell "37"
+                                  - cell "Logo KEPULAUAN BANGKA BELITUNG KEPULAUAN BANGKA BELITUNG Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo KEPULAUAN BANGKA BELITUNG"
+                                      - generic:
+                                        - generic: KEPULAUAN BANGKA BELITUNG
+                                        - generic: Detail kab/kota
+                                  - cell "84"
+                                  - cell "309"
+                                  - cell "393 100.00%":
+                                    - generic:
+                                      - generic: "393"
+                                      - generic: 100.00%
+                                - row "38 Logo DKI JAKARTA DKI JAKARTA Detail kab/kota 267 1 268 100.37%":
+                                  - cell "38"
+                                  - cell "Logo DKI JAKARTA DKI JAKARTA Detail kab/kota":
+                                    - generic:
+                                      - generic:
+                                        - img "Logo DKI JAKARTA"
+                                      - generic:
+                                        - generic: DKI JAKARTA
+                                        - generic: Detail kab/kota
+                                  - cell "267"
+                                  - cell "1"
+                                  - cell "268 100.37%":
+                                    - generic:
+                                      - generic: "268"
+                                      - generic: 100.37%
+  - alert [ref=f20e40]
+  - generic [ref=f20e41]: "32000"
