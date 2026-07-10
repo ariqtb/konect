@@ -1,9 +1,9 @@
 # Architecture — Konect (Koperasi Connect)
 
-> **Author:** alwan
+> **Author:** alwan, sisyphus
 > **Tanggal:** 2026-07-10
 > **Status:** Final
-> **Tags:** `#architecture` `#flutter` `#supabase` `#python` `#ml`
+> **Tags:** `#architecture` `#flutter` `#supabase` `#python` `#ml` `#mvp`
 
 ---
 
@@ -41,9 +41,16 @@
 │  └──────────┘  └──────────┘  └──────────────────┘   │
 └──────────────────────┬──────────────────────────────┘
                        │
-                       ▼ (future)
+                        ▼
 ┌─────────────────────────────────────────────────────┐
-│              PYTHON ML BACKEND                       │
+│              MVP: SUPABASE EDGE FUNCTION (Deno)       │
+│  ┌──────────────────────────────────────────────┐   │
+│  │  compute-score/index.ts                       │   │
+│  │  fetch → openrouter.ai/api/v1/...             │   │
+│  │  → relevance_score 0.0-1.0                   │   │
+│  └──────────────────────────────────────────────┘   │
+│                                                     │
+│              FINAL: PYTHON FASTAPI (nanti)           │
 │  ┌──────────────────────────────────────────────┐   │
 │  │  FastAPI + sentence-transformers              │   │
 │  │  • /api/embed        → Bi-Encoder embedding   │   │
@@ -151,29 +158,45 @@ transaction_type  → 'earn_discussion', 'earn_signup_bonus', 'earn_daily',
 
 ---
 
-## 4. ML Architecture (Future)
+## 4. ML Architecture
 
-### 4.1 Dua Model ML
+### 4.1 MVP (Hackathon) — OpenRouter API via Edge Function
+
+> **Keputusan:** Untuk MVP, skip Python backend. Gunakan OpenRouter API via Supabase Edge Function (Deno).
+
+Kenapa:
+- Setup < 1 jam (vs 2-3 hari untuk Python FastAPI + VPS)
+- Model gratis (Mistral 7B) via OpenRouter
+- Tidak perlu manage server sendiri
+- Embedding / pgvector tidak diperlukan untuk demo scoring
+
+**Alur MVP:**
+
+```
+Flutter → POST opinion → panggil Edge Function → OpenRouter → LLM → score 0.0-1.0
+                                 ↓
+                           UPDATE opinions SET relevance_score
+                                 ↓
+                           GET /graph/{topic_id} → get_topic_graph()
+                                 ↓
+                           return nodes + edges + x,y position
+```
+
+Detail implementasi di `docs/guidances/ml-relevance-ranking.md` dan `docs/memory/ml-relevance-ranking.md`.
+
+### 4.2 Final (Post-Hackathon) — Python FastAPI + Model Lokal
 
 | Model | Fungsi | Output | Kecepatan |
 |---|---|---|---|
-| Bi-Encoder (all-MiniLM-L6-v2) | Generate embedding | Vector(384) | ~10.000 teks/detik |
+| Bi-Encoder (multilingual-e5-small) | Generate embedding | Vector(384) | ~12.000 teks/detik |
 | Cross-Encoder (ms-marco-MiniLM-L6-v2) | Relevance score | 0.0 - 1.0 | ~1.800 pairs/detik |
 
-### 4.2 Relevance yang Dihitung
+### 4.3 Relevance yang Dihitung
 
 | Pair | Makna |
 |---|---|
 | (topic, opinion) | Seberapa relevan pendapat terhadap topik |
 | (opinion, comment) | Seberapa relevan komentar terhadap pendapat |
-
-### 4.3 Arsitektur ML
-
-1. User post opinion → Frontend → Supabase (INSERT opinion)
-2. Webhook/API → Python FastAPI
-3. Python: generate embedding (Bi-Encoder) → simpan ke pgvector
-4. Python: hitung relevance score (Cross-Encoder) → UPDATE `relevance_score`
-5. Frontend graph: `GET /api/graph/{topic_id}` → force-directed graph
 
 ---
 
