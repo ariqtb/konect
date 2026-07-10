@@ -30,7 +30,7 @@ class _CooperativePageState extends State<CooperativePage> {
     // Custom Brand Colors matching Stitch HTML Design
     const Color brandPrimary = Color(0xFFE14242);
     const Color brandSecondary = Color(0xFF1A2E44);
-    const Color brandBg = Color(0xFFFAF8FF);
+    const Color brandBg = Color(0xFFF8FAFC);
 
     return Scaffold(
       backgroundColor: brandBg,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/cooperative/cooperative_detail_bloc.dart';
 import '../../../data/models/cooperative_detail.dart';
+import '../../../core/constants.dart';
 
 class CooperativeDetailPage extends StatefulWidget {
   final String coopId;
@@ -25,10 +26,9 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
   @override
   Widget build(BuildContext context) {
     // Design System Tokens (from documents/design.md)
-    const Color colorSurface = Color(0xFFFAF8FF);
+    const Color colorSurface = Color(0xFFF8FAFC);
     const Color colorSecondaryContainer = Color(0xFFE21E49); // Brand Red/Rose
-    const Color colorNavy = Color(0xFF1E293B);
-    const Color colorContainer = Color(0xFFF2F3FF);
+
 
     return Scaffold(
       backgroundColor: colorSurface,
@@ -207,7 +207,7 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                     style: TextStyle(
                       fontFamily: 'Outfit',
                       fontSize: 14,
-                      color: Colors.white90,
+                      color: Colors.white70,
                     ),
                   ),
                 ],
@@ -221,7 +221,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
 
   Widget _buildRoomsSection(BuildContext context, CooperativeDetailLoaded state) {
     const Color colorNavy = Color(0xFF1E293B);
-    const Color colorSecondaryContainer = Color(0xFFE21E49);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -501,12 +500,11 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
 
   Widget _buildCompletedDiscussionCard(BuildContext context, CoopDiscussionRoom room) {
     const Color colorNavy = Color(0xFF1E293B);
-    const Color colorContainer = Color(0xFFF2F3FF);
 
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: colorContainer,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(32), // rounded-vox (32px)
         border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
@@ -663,13 +661,17 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                     ),
                     // Timeline Card
                     Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF2F3FF),
-                          borderRadius: BorderRadius.circular(32), // rounded-vox
-                          border: Border.all(color: const Color(0xFFF1F5F9)),
-                        ),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, AppConstants.articleDetailRoute);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(32), // rounded-vox
+                            border: Border.all(color: const Color(0xFFF1F5F9)),
+                          ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -706,8 +708,9 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                         ),
                       ),
                     ),
-                  ],
-                );
+                  ),
+                ],
+              );
               },
             ),
           ],
@@ -871,13 +874,12 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
 
   Widget _buildContactSection(BuildContext context, CooperativeDetail details) {
     const Color colorNavy = Color(0xFF1E293B);
-    const Color colorContainer = Color(0xFFF2F3FF);
 
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: colorContainer,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(32), // rounded-vox (32px)
         border: Border.all(color: const Color(0xFFE2E8F0)),
       ),

@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF8FF), // brand.surface
+      backgroundColor: const Color(0xFFF8FAFC), // brand.surface
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.only(bottom: 100), // Space for bottom nav
@@ -61,13 +61,12 @@ class _HomePageState extends State<HomePage> {
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF2F3FF), // brand-container
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: const Color(0xFFE2E8F0)),
+                          color: Colors.white, 
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
-                          Icons.person_pin_outlined, // non-generic profile icon
-                          color: Color(0xFF475569),
+                          Icons.emoji_events_outlined, 
+                          color: Color(0xFFE21E49),
                           size: 22,
                         ),
                       ),
@@ -369,6 +368,48 @@ class _HomePageState extends State<HomePage> {
                                 elevation: 0,
                               ),
                               onPressed: () {
+                                Navigator.pushNamed(context, '/create-room');
+                              },
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.add_circle_outline, size: 20),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Buat Rapat Baru',
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 12.0),
+                            child: Center(
+                              child: Text(
+                                'atau',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xFF94A3B8),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFF1F5F9),
+                                foregroundColor: const Color(0xFF1E293B),
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                elevation: 0,
+                                side: const BorderSide(color: Color(0xFFE2E8F0)),
+                              ),
+                              onPressed: () {
                                 if (_codeController.text.trim().isNotEmpty) {
                                   Navigator.pushNamed(
                                     context,
@@ -516,7 +557,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    const Icon(Icons.map_pin_rounded ?? Icons.location_on_outlined, size: 14, color: Color(0xFF94A3B8)),
+                    const Icon(Icons.location_on_outlined, size: 14, color: Color(0xFF94A3B8)),
                     const SizedBox(width: 4),
                     Text(
                       distance,
