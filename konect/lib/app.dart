@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences_explorer/shared_preferences_explorer.dart';
 import 'core/theme.dart';
 import 'core/constants.dart';
 import 'routes.dart';
@@ -9,6 +11,10 @@ import 'presentation/blocs/forum/forum_bloc.dart';
 import 'presentation/blocs/cooperative/cooperative_bloc.dart';
 import 'presentation/blocs/cooperative/cooperative_detail_bloc.dart';
 import 'presentation/blocs/leaderboard/leaderboard_bloc.dart';
+import 'presentation/blocs/discussion/discussion_room_bloc.dart';
+import 'presentation/blocs/location/location_bloc.dart';
+import 'data/services/location_service.dart';
+import 'presentation/widgets/location_onboarding_sheet.dart';
 import 'presentation/pages/splash_screen.dart';
 import 'presentation/pages/auth/login_page.dart';
 import 'presentation/pages/forum/forum_page.dart';
@@ -25,12 +31,24 @@ import 'presentation/pages/reedem/redeem_history_page.dart';
 import 'presentation/pages/article/article_detail_page.dart';
 import 'presentation/pages/article/create_article_page.dart';
 
-class KonectApp extends StatelessWidget {
+class KonectApp extends StatefulWidget {
   const KonectApp({super.key});
 
   @override
+  State<KonectApp> createState() => _KonectAppState();
+}
+
+class _KonectAppState extends State<KonectApp> {
+  // GlobalKey ke Navigator supaya BlocListener di root (yang konteksnya
+  // di luar Navigator) tetap bisa show modal sheet. Tanpa ini, akan error
+  // "Navigator operation requested with a context that does not include
+  // a Navigator".
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  bool _onboardingShownThisSession = false;
+
+  @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    final app = MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => AuthBloc()..add(AuthCheckRequested())),
         BlocProvider(create: (_) => ForumBloc()),
@@ -38,6 +56,10 @@ class KonectApp extends StatelessWidget {
         BlocProvider(create: (_) => CooperativeBloc()),
         BlocProvider(create: (_) => CooperativeDetailBloc()),
         BlocProvider(create: (_) => LeaderboardBloc()),
+        BlocProvider(create: (_) => DiscussionRoomBloc()),
+        BlocProvider(
+          create: (_) => LocationBloc()..add(const LocationInitialized()),
+        ),
       ],
       child: MaterialApp(
         title: AppConstants.appName,
@@ -45,6 +67,35 @@ class KonectApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
+        initialRoute: AppConstants.homeRoute,
+        navigatorKey: _navigatorKey,
+        // builder: BlocListener di sini berjalan di context YANG MEMILIKI
+        // akses ke Navigator (via navigatorKey), bukan dari luar.
+        builder: (context, child) {
+          return BlocListener<LocationBloc, LocationState>(
+            listenWhen: (prev, curr) =>
+                prev.runtimeType != curr.runtimeType,
+            listener: (context, state) async {
+              // Hanya show onboarding sheet SEKALI per sesi (untuk hindari
+              // loop kalau state bolak-balik).
+              if (_onboardingShownThisSession) return;
+              if (state is LocationPermissionDenied) {
+                if (LocationOnboardingSheet.shouldShow(
+                    permission: LocationPermissionStatus.denied,
+                )) {
+                  _onboardingShownThisSession = true;
+                  // Tunggu initial route selesai render dulu.
+                  await Future.delayed(const Duration(milliseconds: 800));
+                  final navContext = _navigatorKey.currentContext;
+                  if (navContext != null && navContext.mounted) {
+                    await LocationOnboardingSheet.show(navContext);
+                  }
+                }
+              }
+            },
+            child: child ?? const SizedBox.shrink(),
+          );
+        },
         initialRoute: AppConstants.splashRoute,
         onGenerateRoute: (settings) {
           switch (settings.name) {
@@ -92,5 +143,6 @@ class KonectApp extends StatelessWidget {
         },
       ),
     );
+    return kDebugMode ? SharedPreferencesExplorer(child: app) : app;
   }
 }
