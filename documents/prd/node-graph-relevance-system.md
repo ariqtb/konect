@@ -91,11 +91,11 @@ User Posting Pendapat
 
 ### 2.2 Definisi Entity
 
-| Level | Entity | Database Table | Contoh |
-|---|---|---|---|
-| **1** | **Topic** (Topik) | `discussion_rooms` | "Bagaimana distribusi pupuk?" |
-| **2** | **Opinion/Pendapat** (Ide) | `opinions` | "Setiap bulan telat seminggu" |
-| **3** | **Comment** (Komentar) | `discussion_comments` | "Saya juga alami" |
+| Level | Entity                     | Database Table        | Contoh                        |
+| ----- | -------------------------- | --------------------- | ----------------------------- |
+| **1** | **Topic** (Topik)          | `discussion_rooms`    | "Bagaimana distribusi pupuk?" |
+| **2** | **Opinion/Pendapat** (Ide) | `opinions`            | "Setiap bulan telat seminggu" |
+| **3** | **Comment** (Komentar)     | `discussion_comments` | "Saya juga alami"             |
 
 ### 2.3 Aturan Hierarki
 
@@ -121,19 +121,19 @@ Node graph adalah kanvas interaktif 2D dengan:
 
 ### 3.2 Visual Properties per Node
 
-| Node Type | Size | Warna | Border | Posisi |
-|---|---|---|---|---|
-| **Topic** | 20px | Solid (sesuai tema kopdes) | Tebal 3px | **Pusat graph** (fixed) |
-| **Opinion** | 12px | Lebih muda dari topic | Tipis 1px | Radial: semakin tinggi score, semakin dekat ke topic |
-| **Comment** | 7px | Paling muda, senada dengan opinion induk | None | Mengelilingi opinion induk |
+| Node Type   | Size | Warna                                    | Border    | Posisi                                               |
+| ----------- | ---- | ---------------------------------------- | --------- | ---------------------------------------------------- |
+| **Topic**   | 20px | Solid (sesuai tema kopdes)               | Tebal 3px | **Pusat graph** (fixed)                              |
+| **Opinion** | 12px | Lebih muda dari topic                    | Tipis 1px | Radial: semakin tinggi score, semakin dekat ke topic |
+| **Comment** | 7px  | Paling muda, senada dengan opinion induk | None      | Mengelilingi opinion induk                           |
 
 ### 3.3 Edge Properties
 
-| Edge Type | Source → Target | Ketebalan | Style |
-|---|---|---|---|
-| **Topic → Opinion** | Topic → Pendapat | `weight * 4` px | Solid line |
-| **Opinion → Comment** | Pendapat → Komentar | `weight * 3` px | Solid line |
-| **Outlier** | Tidak ada edge | — | Node di pinggir tanpa koneksi |
+| Edge Type             | Source → Target     | Ketebalan       | Style                         |
+| --------------------- | ------------------- | --------------- | ----------------------------- |
+| **Topic → Opinion**   | Topic → Pendapat    | `weight * 4` px | Solid line                    |
+| **Opinion → Comment** | Pendapat → Komentar | `weight * 3` px | Solid line                    |
+| **Outlier**           | Tidak ada edge      | —               | Node di pinggir tanpa koneksi |
 
 ### 3.4 Scoring → Visual Mapping
 
@@ -169,15 +169,15 @@ sehingga antar topic bisa dibedakan.
 
 ### 3.7 Interaksi User
 
-| Aksi | Hasil |
-|---|---|
-| **Klik node** | Buka detail panel (preview konten + score) |
-| **Double klik opinion** | Navigasi ke halaman opinion detail |
-| **Hover edge** | Tooltip "relevance: 0.87" |
-| **Drag node** | Sementara, force simulation akan menarik kembali |
-| **Zoom scroll** | Zoom in/out |
-| **Toggle outlier** | Sembunyikan / tampilkan node outlier |
-| **Search** | Filter node berdasarkan teks |
+| Aksi                    | Hasil                                            |
+| ----------------------- | ------------------------------------------------ |
+| **Klik node**           | Buka detail panel (preview konten + score)       |
+| **Double klik opinion** | Navigasi ke halaman opinion detail               |
+| **Hover edge**          | Tooltip "relevance: 0.87"                        |
+| **Drag node**           | Sementara, force simulation akan menarik kembali |
+| **Zoom scroll**         | Zoom in/out                                      |
+| **Toggle outlier**      | Sembunyikan / tampilkan node outlier             |
+| **Search**              | Filter node berdasarkan teks                     |
 
 ### 3.8 Data Structure (JSON dari API)
 
@@ -243,17 +243,17 @@ sehingga antar topic bisa dibedakan.
 
 ### 4.2 Dua Model ML
 
-| Model | Fungsi | Input | Output | Kecepatan |
-|---|---|---|---|---|
-| **Bi-Encoder** (all-MiniLM-L6-v2) | Generate embedding | Teks | Vector(384) | ~10.000 teks/detik |
-| **Cross-Encoder** (ms-marco-MiniLM-L6-v2) | Relevance score | Pair teks | Score 0-1 | ~1.800 pairs/detik |
+| Model                                     | Fungsi             | Input     | Output      | Kecepatan          |
+| ----------------------------------------- | ------------------ | --------- | ----------- | ------------------ |
+| **Bi-Encoder** (all-MiniLM-L6-v2)         | Generate embedding | Teks      | Vector(384) | ~10.000 teks/detik |
+| **Cross-Encoder** (ms-marco-MiniLM-L6-v2) | Relevance score    | Pair teks | Score 0-1   | ~1.800 pairs/detik |
 
 ### 4.3 Relevance yang Dihitung
 
-| Pair | Kolom di DB | Makna |
-|---|---|---|
-| `(topic.title + topic.desc, opinion.content)` | `opinions.relevance_score` | Seberapa relevan pendapat terhadap topic |
-| `(opinion.content, comment.content)` | `discussion_comments.relevance_score` | Seberapa relevan komentar terhadap pendapat |
+| Pair                                          | Kolom di DB                           | Makna                                       |
+| --------------------------------------------- | ------------------------------------- | ------------------------------------------- |
+| `(topic.title + topic.desc, opinion.content)` | `opinions.relevance_score`            | Seberapa relevan pendapat terhadap topic    |
+| `(opinion.content, comment.content)`          | `discussion_comments.relevance_score` | Seberapa relevan komentar terhadap pendapat |
 
 ### 4.4 Scoring Flow (Python)
 
@@ -291,12 +291,12 @@ def get_embedding(text: str) -> list[float]:
 
 ### 4.6 Schedule & Refresh
 
-| Event | Trigger | Action |
-|---|---|---|
-| **Opinion baru dibuat** | Webhook/API | Generate embedding + score via Python |
-| **Comment baru dibuat** | Webhook/API | Generate embedding + score via Python |
-| **Batch refresh** | Cron tiap 5 menit | Re-score semua opinion/comment yang belum punya score |
-| **Full re-index** | Cron tiap 1 jam | Re-score semua data (jika model di-fine-tune) |
+| Event                   | Trigger           | Action                                                |
+| ----------------------- | ----------------- | ----------------------------------------------------- |
+| **Opinion baru dibuat** | Webhook/API       | Generate embedding + score via Python                 |
+| **Comment baru dibuat** | Webhook/API       | Generate embedding + score via Python                 |
+| **Batch refresh**       | Cron tiap 5 menit | Re-score semua opinion/comment yang belum punya score |
+| **Full re-index**       | Cron tiap 1 jam   | Re-score semua data (jika model di-fine-tune)         |
 
 ### 4.7 Outlier Threshold
 
@@ -338,12 +338,12 @@ villages
 
 ### 5.2 Key Tables untuk Node Graph
 
-| Table | Peran dalam Graph | Kolom Penting |
-|---|---|---|
-| `discussion_rooms` | Root node (Topic) | id, title, cooperative_id |
-| `opinions` | Level 2 node (sekaligus vote) | id, room_id, content, **embedding**, **relevance_score** |
-| `discussion_comments` | Level 3 node | id, opinion_id, content, parent_id, **embedding**, **relevance_score** |
-| `reactions` | Voting (agree/disagree pada opinion) | user_id, target_type, target_id, reaction |
+| Table                 | Peran dalam Graph                    | Kolom Penting                                                          |
+| --------------------- | ------------------------------------ | ---------------------------------------------------------------------- |
+| `discussion_rooms`    | Root node (Topic)                    | id, title, cooperative_id                                              |
+| `opinions`            | Level 2 node (sekaligus vote)        | id, room_id, content, **embedding**, **relevance_score**               |
+| `discussion_comments` | Level 3 node                         | id, opinion_id, content, parent_id, **embedding**, **relevance_score** |
+| `reactions`           | Voting (agree/disagree pada opinion) | user_id, target_type, target_id, reaction                              |
 
 ### 5.3 pgvector Index
 
@@ -383,15 +383,15 @@ SELECT * FROM find_similar_opinions('uuid', 5);
 
 ### 6.1 Python FastAPI Endpoints
 
-| Method | Endpoint | Fungsi |
-|---|---|---|
-| `POST` | `/api/relevance/score` | Score 1 pair |
-| `POST` | `/api/relevance/batch` | Score batch pairs |
-| `POST` | `/api/relevance/graph` | Return graph JSON |
-| `POST` | `/api/embed` | Generate embedding |
-| `POST` | `/api/embed/batch` | Batch generate embedding |
-| `GET` | `/api/graph/{topic_id}` | Graph data (via `get_topic_graph`) |
-| `GET` | `/api/graph/{topic_id}/ranking` | Opinion ranking per topic |
+| Method | Endpoint                        | Fungsi                             |
+| ------ | ------------------------------- | ---------------------------------- |
+| `POST` | `/api/relevance/score`          | Score 1 pair                       |
+| `POST` | `/api/relevance/batch`          | Score batch pairs                  |
+| `POST` | `/api/relevance/graph`          | Return graph JSON                  |
+| `POST` | `/api/embed`                    | Generate embedding                 |
+| `POST` | `/api/embed/batch`              | Batch generate embedding           |
+| `GET`  | `/api/graph/{topic_id}`         | Graph data (via `get_topic_graph`) |
+| `GET`  | `/api/graph/{topic_id}/ranking` | Opinion ranking per topic          |
 
 ### 6.2 Contoh Response
 
@@ -460,17 +460,17 @@ components/
 
 ```typescript
 const forceConfig = {
-  d3AlphaDecay: 0.02,          // Stabilitas simulasi
-  d3VelocityDecay: 0.3,        // Perlambatan
+  d3AlphaDecay: 0.02, // Stabilitas simulasi
+  d3VelocityDecay: 0.3, // Perlambatan
   linkDistance: (link) => {
     // Makin relevan, makin pendek jarak
-    return 300 - (link.weight * 250);
+    return 300 - link.weight * 250;
   },
   linkStrength: (link) => link.weight,
   centerStrength: 0.5,
   chargeStrength: (node) => {
-    if (node.type === 'topic') return -500;   // fixed center
-    if (node.type === 'opinion') return -200;
+    if (node.type === "topic") return -500; // fixed center
+    if (node.type === "opinion") return -200;
     return -100;
   },
 };
@@ -479,14 +479,16 @@ const forceConfig = {
 ### 7.4 Outlier Filter
 
 ```typescript
-const filteredNodes = nodes.filter(n => {
+const filteredNodes = nodes.filter((n) => {
   if (showOutliers) return true;
   return n.relevance_score >= OUTLIER_THRESHOLD; // 0.35
 });
 
-const filteredEdges = edges.filter(e => {
-  return filteredNodes.some(n => n.id === e.source)
-      && filteredNodes.some(n => n.id === e.target);
+const filteredEdges = edges.filter((e) => {
+  return (
+    filteredNodes.some((n) => n.id === e.source) &&
+    filteredNodes.some((n) => n.id === e.target)
+  );
 });
 ```
 
@@ -529,12 +531,12 @@ const filteredEdges = edges.filter(e => {
 
 ## 9. Reference Files
 
-| File | Deskripsi |
-|---|---|
-| `database/001_init_schema.sql` | Schema inti: semua tabel, indexes, triggers, geolocation |
-| `database/002_relevance_ml.sql` | ML relevance functions, node graph views, ranking view |
-| `prd/node-graph-relevance-system.md` | Dokumen ini — PRD lengkap |
-| `prd/ml-relevance-scoring.md` | Versi 1.0 — detail teknis ML model (bi-encoder, cross-encoder, fine-tuning) |
+| File                                 | Deskripsi                                                                   |
+| ------------------------------------ | --------------------------------------------------------------------------- |
+| `database/001_init_schema.sql`       | Schema inti: semua tabel, indexes, triggers, geolocation                    |
+| `database/002_relevance_ml.sql`      | ML relevance functions, node graph views, ranking view                      |
+| `prd/node-graph-relevance-system.md` | Dokumen ini — PRD lengkap                                                   |
+| `prd/ml-relevance-scoring.md`        | Versi 1.0 — detail teknis ML model (bi-encoder, cross-encoder, fine-tuning) |
 
 ### Cara Deploy
 
