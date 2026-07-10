@@ -4,7 +4,6 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../../core/constants.dart';
 import '../../../data/models/cooperative.dart';
-import '../../../data/models/discussion_room.dart';
 import '../../../data/repositories/cooperative_repository.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/discussion/discussion_room_bloc.dart';

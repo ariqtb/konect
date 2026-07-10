@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences_explorer/shared_preferences_explorer.dart';
 import 'core/theme.dart';
 import 'core/constants.dart';
 import 'routes.dart';
@@ -43,7 +45,7 @@ class _KonectAppState extends State<KonectApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    final app = MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => AuthBloc()..add(AuthCheckRequested())),
         BlocProvider(create: (_) => ForumBloc()),
@@ -131,5 +133,6 @@ class _KonectAppState extends State<KonectApp> {
         },
       ),
     );
+    return kDebugMode ? SharedPreferencesExplorer(child: app) : app;
   }
 }

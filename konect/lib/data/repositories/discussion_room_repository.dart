@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 import '../models/discussion_room.dart';
 
 /// Repository untuk entity `discussion_rooms`.
@@ -7,10 +8,16 @@ import '../models/discussion_room.dart';
 /// Menyimpan data ke SharedPreferences (local storage JSON)
 /// sebagai solusi sementara sebelum backend Supabase siap.
 ///
+/// ID generation pakai UUID v4 agar kompatibel dengan schema DB
+/// (`discussion_rooms.id UUID PRIMARY KEY`). Saat migrasi ke
+/// Supabase, ID yang sudah di-generate di local bisa langsung
+/// di-INSERT ke tabel DB tanpa transformasi.
+///
 /// Pattern: singleton + bootstrap di main(), mengikuti
 /// [PreferencesService] & [AuthRepository].
 class DiscussionRoomRepository {
   static const String _storageKey = 'discussion_rooms';
+  static const _uuid = Uuid();
 
   static DiscussionRoomRepository? _instance;
   static DiscussionRoomRepository get instance =>
@@ -63,8 +70,8 @@ class DiscussionRoomRepository {
   /// Buat room diskusi baru.
   ///
   /// Parameter sesuai kolom NOT NULL + opsional di schema:
-  ///   - [cooperativeId] : FK ke cooperatives.id (wajib)
-  ///   - [createdBy]     : FK ke users.id (wajib, user yang login)
+  ///   - [cooperativeId] : FK ke cooperatives.id (wajib, UUID)
+  ///   - [createdBy]     : FK ke users.id (wajib, UUID, user yang login)
   ///   - [title]         : judul room (wajib, max 255 char)
   ///   - [description]   : deskripsi (opsional)
   ///   - [isAnonymous]   : izinkan post anonim di room ini (default false)
@@ -80,8 +87,8 @@ class DiscussionRoomRepository {
 
     final now = DateTime.now();
     final room = DiscussionRoom(
-      // ID unik berbasis timestamp + random, karena belum pakai UUID DB
-      id: 'room_${now.microsecondsSinceEpoch}_${_cache.length}',
+      // UUID v4 — match dengan schema DB (UUID PRIMARY KEY)
+      id: _uuid.v4(),
       cooperativeId: cooperativeId,
       createdBy: createdBy,
       title: title,
