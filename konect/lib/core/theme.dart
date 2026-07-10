@@ -83,9 +83,8 @@ class AppTheme {
           color: onSurfaceColor,
         ),
       ),
-      cardTheme: CardTheme(
-        color: Colors.white,
-        elevation: 0,
+      cardTheme: CardThemeData(
+        elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32), // large components rounded-4xl = 32px
         ),

@@ -1,1 +1,8 @@
 node_modules/
+
+# Secrets - jangan commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
