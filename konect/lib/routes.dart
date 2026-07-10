@@ -3,11 +3,14 @@ import '../presentation/pages/article/article_detail_page.dart';
 import '../presentation/pages/article/create_article_page.dart';
 import '../presentation/pages/reedem/redeem_voucher_page.dart';
 import '../presentation/pages/room/room_discussion_page.dart';
+import '../presentation/pages/main_shell_page.dart';
 import '../core/constants.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppConstants.mainShellRoute:
+        return MaterialPageRoute(builder: (_) => const MainShellPage());
       case AppConstants.articleDetailRoute:
         return MaterialPageRoute(builder: (_) => const ArticleDetailPage());
       case AppConstants.createArticleRoute:

@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ArticleDetailPage extends StatelessWidget {
   const ArticleDetailPage({super.key});
@@ -71,26 +70,26 @@ class ArticleDetailPage extends StatelessWidget {
                     children: [
                       // Category Badge
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF059669).withOpacity(0.8), // Emerald-600/80
+                          color: const Color(0xFF059669).withOpacity(0.85),
                           borderRadius: BorderRadius.circular(100),
                         ),
-                        child: Text(
-                          'ENERGI TERBARUKAN',
-                          style: GoogleFonts.outfit(
+                        child: const Text(
+                          'Energi Terbarukan',
+                          style: TextStyle(
                             fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.3,
                             color: Colors.white,
                           ),
                         ),
                       ),
                       const SizedBox(height: 12),
                       // Title
-                      Text(
+                      const Text(
                         'Penyelesaian Fondasi Tiang Surya Tahap I',
-                        style: GoogleFonts.outfit(
+                        style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -105,14 +104,14 @@ class ArticleDetailPage extends StatelessWidget {
                           const SizedBox(width: 6),
                           Text(
                             '24 Oktober 2023',
-                            style: GoogleFonts.outfit(fontSize: 13, color: Colors.white.withOpacity(0.9)),
+                            style: TextStyle(fontSize: 13, color: Colors.white.withOpacity(0.9)),
                           ),
                           const SizedBox(width: 20),
                           const Icon(Icons.person_outline, size: 14, color: Colors.white70),
                           const SizedBox(width: 6),
                           Text(
                             'Tim Infrastruktur Desa',
-                            style: GoogleFonts.outfit(fontSize: 13, color: Colors.white.withOpacity(0.9)),
+                            style: TextStyle(fontSize: 13, color: Colors.white.withOpacity(0.9)),
                           ),
                         ],
                       ),
@@ -128,92 +127,72 @@ class ArticleDetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Drop cap sentence
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'K',
-                          style: GoogleFonts.outfit(
-                            fontSize: 48,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFF111C2D),
-                            height: 0.9,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'emajuan signifikan telah dicapai dalam inisiatif VoxSilent Desa untuk kemandirian energi. Pekan ini, tim konstruksi kami secara resmi menyelesaikan penanaman 45 fondasi utama untuk rangkaian panel surya tahap pertama di area perbukitan selatan.',
-                          style: GoogleFonts.outfit(
-                            fontSize: 16,
-                            height: 1.6,
-                            fontWeight: FontWeight.normal,
-                            color: const Color(0xFF334155),
-                          ),
-                        ),
-                      ],
+                  // First paragraph — normal, no drop cap
+                  const Text(
+                    'Kemajuan signifikan telah dicapai dalam inisiatif VoxSilent Desa untuk kemandirian energi. Pekan ini, tim konstruksi kami secara resmi menyelesaikan penanaman 45 fondasi utama untuk rangkaian panel surya tahap pertama di area perbukitan selatan.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      height: 1.6,
+                      color: Color(0xFF334155),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(
+                  const Text(
                     'Proyek ini merupakan tulang punggung dari visi "Desa Mandiri Energi" yang kita cita-citakan bersama. Fondasi yang telah terpasang menggunakan spesifikasi beton bertulang tahan gempa, memastikan instalasi panel surya akan bertahan selama puluhan tahun mendatang di tengah kondisi cuaca ekstrem sekalipun.',
-                    style: GoogleFonts.outfit(
+                    style: TextStyle(
                       fontSize: 16,
                       height: 1.6,
-                      color: const Color(0xFF334155),
+                      color: Color(0xFF334155),
                     ),
                   ),
                   const SizedBox(height: 28),
                   
                   // Subheading
-                  Text(
+                  const Text(
                     'Tantangan Geografis & Solusi Lokal',
-                    style: GoogleFonts.outfit(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF111C2D),
+                      color: Color(0xFF111C2D),
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Text(
+                  const Text(
                     'Medan yang cukup terjal di area Bukit Hijau menuntut ketelitian ekstra. Namun, berkat kolaborasi antara tenaga ahli dan warga lokal, kita berhasil mengoptimalkan distribusi material tanpa merusak ekosistem hutan sekitarnya. Penggunaan teknik manual terkontrol di beberapa titik kritis membuktikan bahwa pembangunan modern bisa selaras dengan alam.',
-                    style: GoogleFonts.outfit(
+                    style: TextStyle(
                       fontSize: 16,
                       height: 1.6,
-                      color: const Color(0xFF334155),
+                      color: Color(0xFF334155),
                     ),
                   ),
                   const SizedBox(height: 32),
                   
-                  // Next Steps Box (Amber box)
+                  // Next Steps Box — simplified, neutral warm
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFFBEB), // light amber background
-                      borderRadius: BorderRadius.circular(16),
-                      border: const Border(
-                        top: BorderSide(color: Color(0xFFF59E0B), width: 4), // border amber
-                      ),
+                      color: const Color(0xFFF5F5F0),
+                      borderRadius: BorderRadius.circular(14),
                     ),
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'LANGKAH SELANJUTNYA',
-                          style: GoogleFonts.outfit(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 1.5,
-                            color: const Color(0xFFB45309), // dark amber
+                          'Langkah selanjutnya',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF1E293B),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: 10),
                         Text(
                           'Dengan selesainya Tahap I, tim akan segera melakukan mobilisasi untuk pemasangan rangka penyangga baja pada awal bulan depan. Kami mengundang seluruh anggota koperasi untuk menghadiri sesi pemaparan teknis Tahap II yang akan diadakan di Balai Desa pada hari Sabtu mendatang.',
-                          style: GoogleFonts.outfit(
+                          style: TextStyle(
                             fontSize: 15,
                             height: 1.6,
-                            color: const Color(0xFF78350F), // amber brown
+                            color: Color(0xFF475569),
                           ),
                         ),
                       ],

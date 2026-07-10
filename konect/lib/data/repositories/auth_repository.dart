@@ -2,25 +2,39 @@ import '../models/user.dart';
 
 class AuthRepository {
   // Placeholder - implementasikan sesuai API
+  User? _currentUser;
+
   Future<User?> login(String email, String password) async {
-    // TODO: API call
-    await Future.delayed(const Duration(seconds: 1));
-    return null;
+    await Future.delayed(const Duration(milliseconds: 500));
+    _currentUser = User(
+      id: '1',
+      name: 'Budi (Kopdes)',
+      email: email,
+      role: 'kopdes',
+      createdAt: DateTime.now(),
+    );
+    return _currentUser;
   }
 
   Future<User?> register(String name, String email, String password) async {
-    // TODO: API call
-    await Future.delayed(const Duration(seconds: 1));
-    return null;
+    await Future.delayed(const Duration(milliseconds: 500));
+    _currentUser = User(
+      id: '1',
+      name: name,
+      email: email,
+      role: 'member',
+      createdAt: DateTime.now(),
+    );
+    return _currentUser;
   }
 
   Future<void> logout() async {
-    // TODO: Clear storage
+    await Future.delayed(const Duration(milliseconds: 200));
+    _currentUser = null;
   }
 
   Future<User?> getCurrentUser() async {
-    // TODO: Get from storage/API
-    return null;
+    return _currentUser;
   }
 }
 

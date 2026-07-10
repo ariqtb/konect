@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/dashed_line.dart';
 
 class RoomOpinion {
@@ -134,25 +133,25 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
             ],
             border: Border.all(color: const Color(0xFFF1F5F9)),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'TOPIK',
-                style: GoogleFonts.outfit(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.0,
-                  color: const Color(0xFFFF7A3D), // Brand Orange
+                'Topik',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.3,
+                  color: Color(0xFFE21E49),
                 ),
               ),
-              const SizedBox(height: 6),
+              SizedBox(height: 6),
               Text(
                 'Pelebaran jalan di pertigaan pasar sangat mendesak.',
-                style: GoogleFonts.outfit(
+                style: TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF1E293B),
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF1E293B),
                 ),
               ),
             ],
@@ -187,7 +186,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(24), // rounded-xl-custom
+                borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.04),
@@ -210,10 +209,10 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                             const SizedBox(width: 4),
                             Text(
                               '${opinion.likes}',
-                              style: GoogleFonts.outfit(
+                              style: const TextStyle(
                                 fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xFF64748B),
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF64748B),
                               ),
                             ),
                           ],
@@ -235,7 +234,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                               const SizedBox(width: 4),
                               Text(
                                 '${opinion.comments.length}',
-                                style: GoogleFonts.outfit(fontSize: 10, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -246,10 +245,10 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                   const SizedBox(height: 10),
                   Text(
                     opinion.text,
-                    style: GoogleFonts.outfit(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
-                      color: const Color(0xFF334155),
+                      color: Color(0xFF334155),
                       height: 1.4,
                     ),
                   ),
@@ -260,8 +259,6 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
         ),
       );
 
-      // We estimate opinion height dynamically
-      // A standard 2-line opinion is around 90-100px. Let's assume 100px height.
       const double estOpinionHeight = 100.0;
       double commentY = cardY + estOpinionHeight + 30.0;
 
@@ -269,23 +266,20 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
       for (int j = 0; j < opinion.comments.length; j++) {
         final comment = opinion.comments[j];
         const double commentWidth = 200.0;
-        // Shift comment to the opposite side or indent slightly
         final double commentX = isLeft ? cardX + 40.0 : cardX + 20.0;
 
-        // Draw L-shaped connecting line from parent card to comment
-        // Start: side center of parent opinion or bottom
         final Offset lineStart = Offset(
           isLeft ? cardX + 30.0 : cardX + cardWidth - 30.0,
           cardY + estOpinionHeight,
         );
         final Offset lineEnd = Offset(
           isLeft ? commentX : commentX + commentWidth,
-          commentY + 25.0, // center Y of comment card (~50px tall)
+          commentY + 25.0,
         );
 
         connections.add(CanvasConnection(start: lineStart, end: lineEnd, isLRoute: true));
 
-        // Comment Card Widget (Frosted Glass Look)
+        // Comment Card Widget
         positionedWidgets.add(
           Positioned(
             left: commentX,
@@ -295,7 +289,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.7),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(14),
                 border: Border.all(color: Colors.white.withOpacity(0.5)),
                 boxShadow: [
                   BoxShadow(
@@ -305,11 +299,10 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                 ],
               ),
               child: Text(
-                '"$comment"',
-                style: GoogleFonts.outfit(
+                comment,
+                style: const TextStyle(
                   fontSize: 12,
-                  fontStyle: FontStyle.italic,
-                  color: const Color(0xFF64748B),
+                  color: Color(0xFF64748B),
                   height: 1.3,
                 ),
               ),
@@ -317,7 +310,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
           ),
         );
 
-        commentY += 65.0; // increment Y for next comment
+        commentY += 65.0;
       }
 
       // Update currentY for next opinion block
@@ -327,7 +320,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
     final double totalCanvasHeight = currentY + 120.0;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F6F2), // Warm light background from design mockup
+      backgroundColor: const Color(0xFFF8F6F2),
       appBar: AppBar(
         backgroundColor: Colors.white.withOpacity(0.85),
         elevation: 1,
@@ -335,13 +328,13 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
         centerTitle: true,
         title: Column(
           children: [
-            Text(
-              'KODE: 09IO08',
-              style: GoogleFonts.outfit(
-                fontSize: 9,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.5,
-                color: const Color(0xFF94A3B8),
+            const Text(
+              'Kode: 09IO08',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.5,
+                color: Color(0xFF94A3B8),
               ),
             ),
             const SizedBox(height: 2),
@@ -349,12 +342,12 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   'Barang belanja Koperasi...',
-                  style: GoogleFonts.outfit(
+                  style: TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF1E293B),
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF1E293B),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -371,17 +364,17 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         width: 6,
                         height: 6,
                         decoration: const BoxDecoration(
-                          color: Color(0xFF10B981), // Success Emerald Green
+                          color: Color(0xFF10B981),
                           shape: BoxShape.circle,
                         ),
                       ),
                       const SizedBox(width: 4),
-                      Text(
+                      const Text(
                         '24',
-                        style: GoogleFonts.outfit(
+                        style: TextStyle(
                           fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF475569),
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF475569),
                         ),
                       ),
                     ],
@@ -438,10 +431,10 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: TextField(
                         controller: _opinionController,
-                        style: GoogleFonts.outfit(fontSize: 14),
-                        decoration: InputDecoration(
+                        style: const TextStyle(fontSize: 14),
+                        decoration: const InputDecoration(
                           hintText: 'Tulis tanggapan atau ide baru...',
-                          hintStyle: GoogleFonts.outfit(color: const Color(0xFF94A3B8)),
+                          hintStyle: TextStyle(color: Color(0xFF94A3B8)),
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
@@ -458,7 +451,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                       width: 48,
                       height: 48,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFE84141), // Action Red
+                        color: Color(0xFFE21E49),
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
@@ -498,7 +491,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B),
+                      color: const Color(0xFFD1D5DB),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -513,13 +506,13 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'PENDAPAT',
-                              style: GoogleFonts.outfit(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.0,
-                                color: const Color(0xFF94A3B8),
+                            const Text(
+                              'Pendapat',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.3,
+                                color: Color(0xFF94A3B8),
                               ),
                             ),
                             // Vote counters
@@ -537,9 +530,9 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                                       const SizedBox(width: 4),
                                       Text(
                                         '${opinion.likes}',
-                                        style: GoogleFonts.outfit(
+                                        style: const TextStyle(
                                           fontSize: 10,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                     ],
@@ -561,10 +554,10 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         const SizedBox(height: 8),
                         Text(
                           opinion.text,
-                          style: GoogleFonts.outfit(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: const Color(0xFF0F172A),
+                            color: Color(0xFF0F172A),
                             height: 1.3,
                           ),
                         ),
@@ -578,12 +571,12 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: Row(
                       children: [
-                        Text(
+                        const Text(
                           'Komentar',
-                          style: GoogleFonts.outfit(
+                          style: TextStyle(
                             fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF1E293B),
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF1E293B),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -595,9 +588,9 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                           ),
                           child: Text(
                             '${opinion.comments.length}',
-                            style: GoogleFonts.outfit(
+                            style: const TextStyle(
                               fontSize: 10,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                               color: Colors.white,
                             ),
                           ),
@@ -618,11 +611,11 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 '-',
-                                style: GoogleFonts.outfit(
-                                  color: const Color(0xFF94A3B8),
-                                  fontWeight: FontWeight.bold,
+                                style: TextStyle(
+                                  color: Color(0xFF94A3B8),
+                                  fontWeight: FontWeight.w600,
                                   fontSize: 16,
                                 ),
                               ),
@@ -630,9 +623,9 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                               Expanded(
                                 child: Text(
                                   opinion.comments[index],
-                                  style: GoogleFonts.outfit(
+                                  style: const TextStyle(
                                     fontSize: 14,
-                                    color: const Color(0xFF475569),
+                                    color: Color(0xFF475569),
                                     height: 1.4,
                                   ),
                                 ),
@@ -666,10 +659,10 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                               padding: const EdgeInsets.symmetric(horizontal: 16.0),
                               child: TextField(
                                 controller: commentFieldController,
-                                style: GoogleFonts.outfit(fontSize: 14),
-                                decoration: InputDecoration(
+                                style: const TextStyle(fontSize: 14),
+                                decoration: const InputDecoration(
                                   hintText: 'Tambahkan komentar',
-                                  hintStyle: GoogleFonts.outfit(color: const Color(0xFF94A3B8)),
+                                  hintStyle: TextStyle(color: Color(0xFF94A3B8)),
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
@@ -697,7 +690,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                               width: 40,
                               height: 40,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFE84141), // Secondary Red
+                                color: Color(0xFFE21E49),
                                 shape: BoxShape.circle,
                               ),
                               alignment: Alignment.center,
@@ -722,7 +715,7 @@ class GridBackgroundPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFFE2E8F0).withOpacity(0.5) // faint grid line
+      ..color = const Color(0xFFE2E8F0).withOpacity(0.5)
       ..strokeWidth = 1.0;
 
     const double step = 24.0;

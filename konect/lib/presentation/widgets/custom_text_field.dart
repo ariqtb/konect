@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -32,7 +31,7 @@ class CustomTextField extends StatelessWidget {
     final theme = Theme.of(context);
     final borderStyle = OutlineInputBorder(
       borderRadius: BorderRadius.circular(24), // 24px standard corner radius
-      borderSide: const BorderSide(color: Color(0xFFE2E8F0), width: 1), // slate-200 or border-slate-300
+      borderSide: const BorderSide(color: Color(0xFFE2E8F0), width: 1),
     );
 
     return Column(
@@ -41,10 +40,10 @@ class CustomTextField extends StatelessWidget {
         if (labelText != null) ...[
           Text(
             labelText!,
-            style: GoogleFonts.outfit(
+            style: const TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF334155), // slate-700
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF334155), // slate-700
             ),
           ),
           const SizedBox(height: 8),
@@ -57,15 +56,15 @@ class CustomTextField extends StatelessWidget {
           maxLines: maxLines,
           onChanged: onChanged,
           onFieldSubmitted: onSubmitted,
-          style: GoogleFonts.outfit(
+          style: const TextStyle(
             fontSize: 15,
-            color: const Color(0xFF0F172A), // slate-900
+            color: Color(0xFF0F172A), // slate-900
           ),
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: GoogleFonts.outfit(
+            hintStyle: const TextStyle(
               fontSize: 15,
-              color: const Color(0xFF94A3B8), // slate-400
+              color: Color(0xFF94A3B8), // slate-400
             ),
             fillColor: const Color(0xFFF8FAFC), // slate-50/50
             filled: true,
@@ -80,7 +79,7 @@ class CustomTextField extends StatelessWidget {
             enabledBorder: borderStyle,
             focusedBorder: borderStyle.copyWith(
               borderSide: BorderSide(
-                color: theme.colorScheme.primaryContainer, // orange accent
+                color: theme.colorScheme.secondaryContainer, // red brand accent
                 width: 2,
               ),
             ),
@@ -102,3 +101,4 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
+

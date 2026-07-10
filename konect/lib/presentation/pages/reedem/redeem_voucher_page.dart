@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/ticket_card.dart';
 
@@ -9,7 +8,7 @@ class RedeemVoucherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF8FF), // tinted off-white surface
+      backgroundColor: const Color(0xFFFAF8FF),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -17,12 +16,12 @@ class RedeemVoucherPage extends StatelessWidget {
           icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           'Tukar Voucher',
-          style: GoogleFonts.outfit(
+          style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF1E293B),
+            color: Color(0xFF1E293B),
           ),
         ),
       ),
@@ -37,7 +36,7 @@ class RedeemVoucherPage extends StatelessWidget {
               borderRadius: 16,
               notchRadius: 10,
               backgroundColor: Colors.white,
-              borderColor: const Color(0xFFF1F5F9), // slate-100
+              borderColor: const Color(0xFFF1F5F9),
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
@@ -46,27 +45,27 @@ class RedeemVoucherPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEEF2FF), // indigo-50
+                        color: const Color(0xFFEEF2FF),
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Berhasil Ditukar',
-                        style: GoogleFonts.outfit(
+                        style: TextStyle(
                           fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF4F46E5), // indigo-600
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF4F46E5),
                         ),
                       ),
                     ),
                     const SizedBox(height: 16),
                     // Voucher Title
-                    Text(
+                    const Text(
                       'Voucher Sembako Rp 15.000',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.outfit(
+                      style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFF0F172A), // slate-900
+                        color: Color(0xFF0F172A),
                         height: 1.3,
                       ),
                     ),
@@ -78,13 +77,6 @@ class RedeemVoucherPage extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(24),
                         border: Border.all(color: const Color(0xFFF1F5F9)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFFFF7A3D).withOpacity(0.06),
-                            blurRadius: 24,
-                            spreadRadius: 2,
-                          ),
-                        ],
                       ),
                       child: Column(
                         children: [
@@ -95,13 +87,13 @@ class RedeemVoucherPage extends StatelessWidget {
                             fit: BoxFit.contain,
                           ),
                           const SizedBox(height: 16),
-                          Text(
+                          const Text(
                             'VX - 982 - SML - 71',
-                            style: GoogleFonts.outfit(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              letterSpacing: 1.5,
-                              color: const Color(0xFFFF7A3D), // brand Orange
+                              letterSpacing: 1.0,
+                              color: Color(0xFFE21E49),
                             ),
                           ),
                         ],
@@ -109,42 +101,40 @@ class RedeemVoucherPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     // Instruction Tip text
-                    Text(
+                    const Text(
                       'Tunjukkan QR ini ke pengurus koperasi untuk klaim',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.outfit(
+                      style: TextStyle(
                         fontSize: 13,
-                        color: const Color(0xFF64748B), // slate-500
+                        color: Color(0xFF64748B),
                       ),
                     ),
                     
-                    // Vertical spacer to place the expiry info below the dashed divider (h * 0.8)
-                    // Total height of top contents ~ 400. Ratio 0.8 means bottom half is 100 height.
                     const SizedBox(height: 50),
                     
                     // Expiry Info Row
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.calendar_today_outlined,
                           size: 16,
-                          color: Color(0xFF94A3B8), // slate-400
+                          color: Color(0xFF94A3B8),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           'Berlaku hingga: ',
-                          style: GoogleFonts.outfit(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: const Color(0xFF64748B),
+                            color: Color(0xFF64748B),
                           ),
                         ),
                         Text(
                           '24 Okt 2024',
-                          style: GoogleFonts.outfit(
+                          style: TextStyle(
                             fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF1E293B),
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF1E293B),
                           ),
                         ),
                       ],
@@ -158,7 +148,7 @@ class RedeemVoucherPage extends StatelessWidget {
             // Save to Gallery Button
             CustomButton(
               text: 'Simpan ke Galeri',
-              isPrimary: false, // outline orange
+              isPrimary: false,
               icon: Icons.download_rounded,
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -169,13 +159,12 @@ class RedeemVoucherPage extends StatelessWidget {
             const SizedBox(height: 32),
 
             // How To Redeem Section
-            Text(
-              'CARA PENUKARAN',
-              style: GoogleFonts.outfit(
-                fontSize: 12,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 1.5,
-                color: const Color(0xFF1E293B),
+            const Text(
+              'Cara Penukaran',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF1E293B),
               ),
             ),
             const SizedBox(height: 20),
@@ -200,34 +189,34 @@ class RedeemVoucherPage extends StatelessWidget {
             ),
             const SizedBox(height: 32),
 
-            // Footer Support Banner (Pink-50)
+            // Footer Support Banner
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: const Color(0xFFFDF2F8), // pink-50
+                color: const Color(0xFFF5F5F0),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: GoogleFonts.outfit(
+              child: const Text.rich(
+                TextSpan(
+                  style: TextStyle(
                     fontSize: 13,
                     height: 1.5,
-                    color: const Color(0xFF475569), // slate-600
+                    color: Color(0xFF475569),
                   ),
-                  children: const [
+                  children: [
                     TextSpan(text: 'Ada kendala? Hubungi Admin melalui menu '),
                     TextSpan(
                       text: 'Pesan',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF9D174D), // pink-800
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFFE21E49),
                       ),
                     ),
                     TextSpan(text: ' atau kunjungi kantor Balai Desa.'),
                   ],
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(height: 24),
@@ -247,23 +236,23 @@ class RedeemVoucherPage extends StatelessWidget {
       children: [
         // Number badge
         Container(
-          width: 36,
-          height: 36,
+          width: 32,
+          height: 32,
           decoration: const BoxDecoration(
-            color: Color(0xFF1E293B), // dark circle
+            color: Color(0xFF1E293B),
             shape: BoxShape.circle,
           ),
           alignment: Alignment.center,
           child: Text(
             number,
-            style: GoogleFonts.outfit(
+            style: const TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
             ),
           ),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 14),
         // Text details
         Expanded(
           child: Column(
@@ -271,18 +260,18 @@ class RedeemVoucherPage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.outfit(
+                style: const TextStyle(
                   fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF1E293B),
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF1E293B),
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 description,
-                style: GoogleFonts.outfit(
+                style: const TextStyle(
                   fontSize: 13,
-                  color: const Color(0xFF64748B),
+                  color: Color(0xFF64748B),
                   height: 1.4,
                 ),
               ),

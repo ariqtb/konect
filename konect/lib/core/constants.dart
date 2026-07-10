@@ -4,13 +4,13 @@ class AppConstants {
   static const String appTagline = 'Koperasi Connect';
 
   // Routes
-  static const String splashRoute = '/';
-  static const String loginRoute = '/login';
-  static const String registerRoute = '/register';
+  static const String mainShellRoute = '/';
   static const String homeRoute = '/home';
+  static const String koperasiRoute = '/koperasi';
+  static const String voucherRoute = '/voucher';
+  static const String profileRoute = '/profile';
   static const String forumRoute = '/forum';
   static const String votingRoute = '/voting';
-  static const String profileRoute = '/profile';
   static const String articleDetailRoute = '/article-detail';
   static const String createArticleRoute = '/create-article';
   static const String redeemRoute = '/redeem';
@@ -24,3 +24,4 @@ class AppConstants {
   static const String baseUrl = 'https://api.konect.id';
   static const Duration apiTimeout = Duration(seconds: 30);
 }
+

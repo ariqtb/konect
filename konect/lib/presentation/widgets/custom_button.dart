@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -25,13 +24,13 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
-    // Rose primary action color as per design.md (#e21e49)
+    // Red brand primary action color (#e21e49)
     final Color defaultPrimaryBg = theme.colorScheme.secondaryContainer;
     const Color defaultPrimaryText = Colors.white;
 
-    // Secondary brand container or outline-style (#ff7a3d / custom orange border)
+    // Secondary: outline-style
     const Color defaultSecondaryBg = Colors.transparent;
-    final Color defaultSecondaryText = theme.colorScheme.primaryContainer; // Orange
+    final Color defaultSecondaryText = theme.colorScheme.secondaryContainer; // Red
 
     Color finalBgColor;
     Color finalTextColor;
@@ -59,7 +58,7 @@ class CustomButton extends StatelessWidget {
         ],
         Text(
           text,
-          style: GoogleFonts.outfit(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: finalTextColor,
@@ -94,3 +93,4 @@ class CustomButton extends StatelessWidget {
     return result;
   }
 }
+

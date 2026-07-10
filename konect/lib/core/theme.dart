@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  // SF Pro is the default system font on iOS — no need to specify fontFamily
+  static const String fontFamily = '.AppleSystemUIFont';
+
   static const Color primaryColor = Color(0xFFa53c00);
   static const Color primaryContainerColor = Color(0xFFff7a3d);
   static const Color secondaryColor = Color(0xFFba0035);
-  static const Color secondaryContainerColor = Color(0xFFe21e49); // Rose-colored primary buttons
+  static const Color secondaryContainerColor = Color(0xFFe21e49); // Red — brand primary action
   static const Color tertiaryColor = Color(0xFF494bd6); // Indigo
   static const Color backgroundColor = Color(0xFFf9f9ff);
   static const Color surfaceColor = Color(0xFFfaf8ff);
@@ -32,52 +34,52 @@ class AppTheme {
         outline: outlineColor,
       ),
       scaffoldBackgroundColor: backgroundColor,
-      textTheme: GoogleFonts.outfitTextTheme(base.textTheme).copyWith(
-        displayLarge: GoogleFonts.outfit(
+      textTheme: base.textTheme.copyWith(
+        displayLarge: const TextStyle(
           fontSize: 30,
           fontWeight: FontWeight.w700,
           height: 36 / 30,
-          letterSpacing: -0.025 * 30,
+          letterSpacing: -0.75,
           color: onSurfaceColor,
         ),
-        headlineMedium: GoogleFonts.outfit(
+        headlineMedium: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w700,
           height: 32 / 24,
           color: onSurfaceColor,
         ),
-        titleLarge: GoogleFonts.outfit(
+        titleLarge: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w700,
           height: 24 / 18,
           color: onSurfaceColor,
         ),
-        bodyLarge: GoogleFonts.outfit(
+        bodyLarge: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
           height: 24 / 16,
           color: onSurfaceColor,
         ),
-        bodyMedium: GoogleFonts.outfit(
+        bodyMedium: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
           height: 20 / 14,
           color: onSurfaceColor,
         ),
-        labelLarge: GoogleFonts.outfit(
+        labelLarge: const TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w700,
           height: 12 / 10,
-          letterSpacing: 0.05 * 10,
+          letterSpacing: 0.5,
           color: onSurfaceColor,
         ),
       ),
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: onSurfaceColor,
         centerTitle: true,
         elevation: 0,
-        titleTextStyle: GoogleFonts.outfit(
+        titleTextStyle: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
           color: onSurfaceColor,
@@ -91,13 +93,13 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: secondaryContainerColor, // Rose-colored primary buttons
+          backgroundColor: secondaryContainerColor, // Red brand primary buttons
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24), // standard components = 24px
           ),
-          textStyle: GoogleFonts.outfit(
+          textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
@@ -117,7 +119,7 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
-          borderSide: const BorderSide(color: primaryContainerColor, width: 2),
+          borderSide: const BorderSide(color: secondaryContainerColor, width: 2),
         ),
       ),
     );
