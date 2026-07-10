@@ -6,3 +6,6 @@ node_modules/
 !.env.example
 *.pem
 *.key
+
+# Docker volumes - data persisten Supabase
+database/volumes/
