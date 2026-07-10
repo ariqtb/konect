@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daftar Voucher | VoxSilent Desa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f9f9ff",
+                    "success": "#10b981",
+                    "on-primary-fixed": "#360f00",
+                    "tertiary": "#494bd6",
+                    "primary": "#a53c00",
+                    "secondary-container": "#e21e49",
+                    "outline-variant": "#dfc0b4",
+                    "primary-container": "#ff7a3d",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#ffb598",
+                    "surface": "#faf8ff",
+                    "primary-fixed": "#ffdbcd",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#2f2ebe",
+                    "surface-tint": "#a53c00",
+                    "on-surface-variant": "#584239",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#ffb3b6",
+                    "outline": "#8c7167",
+                    "background": "#f9f9ff",
+                    "accent-indigo": "#818cf8",
+                    "on-tertiary-container": "#1b14b1",
+                    "on-secondary-container": "#fffbff",
+                    "secondary-fixed": "#ffdada",
+                    "tertiary-fixed": "#e1e0ff",
+                    "on-surface": "#111c2d",
+                    "surface-container-high": "#dee8ff",
+                    "surface-dim": "#cfdaf2",
+                    "inverse-primary": "#ffb598",
+                    "tertiary-fixed-dim": "#c0c1ff",
+                    "on-tertiary": "#ffffff",
+                    "container": "#f2f3ff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-tertiary-fixed": "#07006c",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#d8e3fb",
+                    "on-secondary-fixed": "#40000c",
+                    "secondary": "#ba0035",
+                    "surface-container-highest": "#d8e3fb",
+                    "on-background": "#111c2d",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#920028",
+                    "accent-rose": "#fb7185",
+                    "tertiary-container": "#9497ff",
+                    "on-primary-container": "#652200",
+                    "inverse-surface": "#263143",
+                    "on-primary-fixed-variant": "#7e2c00",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter-card": "1rem",
+                    "stack-md": "1.5rem",
+                    "stack-lg": "2.5rem",
+                    "stack-sm": "0.5rem",
+                    "margin-page": "1.5rem"
+            },
+            "fontFamily": {
+                    "headline-md": ["Outfit"],
+                    "label-caps": ["Outfit"],
+                    "display-lg": ["Outfit"],
+                    "body-sm": ["Outfit"],
+                    "body-md": ["Outfit"],
+                    "title-lg": ["Outfit"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-caps": ["10px", {"lineHeight": "12px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "display-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.025em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Outfit', sans-serif;
+        background-color: #faf8ff;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .card-shadow {
+        box-shadow: 0 10px 30px -5px rgba(0,0,0,0.05);
+      }
+      .voucher-gradient {
+        background: linear-gradient(135deg, #ba0035 0%, #e21e49 100%);
+      }
+    </style>
+</head>
+<body class="bg-surface-bright text-on-surface mb-24">
+<!-- Top Navigation -->
+<header class="bg-surface dark:bg-inverse-surface w-full top-0 sticky z-40 transition-colors">
+<div class="flex items-center justify-between px-margin-page h-16 w-full max-w-7xl mx-auto">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-variant/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">Voucher Tersedia</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-page py-6">
+<!-- Points Summary Hero -->
+<section class="mb-stack-lg">
+<div class="relative overflow-hidden p-6 rounded-lg voucher-gradient text-white flex justify-between items-center card-shadow">
+<!-- Decorative geometric overlay -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<svg height="100%" preserveaspectratio="none" viewbox="0 0 100 100" width="100%">
+<path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="0.5"></path>
+<circle cx="50" cy="50" fill="none" r="30" stroke="white" stroke-width="0.5"></circle>
+</svg>
+</div>
+<div>
+<p class="font-label-caps text-label-caps opacity-80 uppercase mb-1">Total Poin Anda</p>
+<h2 class="font-display-lg text-display-lg">4.250 Pts</h2>
+</div>
+<div class="flex flex-col items-end">
+<div class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-md mb-2">
+<span class="font-body-sm text-body-sm">Status: Warga Aktif</span>
+</div>
+<button class="flex items-center gap-1 text-white font-body-sm hover:underline">
+                        Riwayat <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section><section class="mb-stack-md">
+<div class="flex p-1 bg-surface-container rounded-full max-w-md mx-auto">
+<button class="flex-1 py-2.5 rounded-full font-title-lg text-title-lg transition-all bg-white text-secondary shadow-sm" id="toggle-available">Tersedia</button>
+<button class="flex-1 py-2.5 rounded-full font-title-lg text-title-lg transition-all text-on-surface-variant hover:bg-surface-container-high" id="toggle-owned">Milik Saya</button>
+</div>
+</section>
+<!-- Categories / Chips (Micro Interaction) -->
+<div class="block" id="available-state-container"></div><div class="hidden" id="owned-state-container">
+<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-gutter-card">
+<!-- Owned Card 1 -->
+<div class="bg-white rounded-lg border border-outline-variant overflow-hidden flex flex-col transition-all hover:shadow-md">
+<div class="relative h-32 w-full opacity-80 grayscale-[0.5]">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9nfpceU45x0gWOwocXQEJzWT87hB0MXim2JyUwShKtStUd3DKLvvdmdKvk2jE0Si-6LbJuz6-tZTaoD5SerUL2Flm-Ug8JpbNE-s4KpL8hVWFAL2gNwBgQ6tJL-psCz0db5Wic9ub5CuMZR5-foAg3yighkstpIRE9LrVFF-Moqo1mxQYqHcgzXCLxJQ2m_pd0S4BhZlcqE6EbdqAvkNlk_dQN1IbhORxqD5Wk6x4KRYCNb0Mvj3ngg"/>
+<div class="absolute top-2 right-2 bg-success text-white px-2 py-0.5 rounded-full font-label-caps text-label-caps uppercase">Aktif</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-sm mb-3">Voucher Sembako Rp 15.000</h3>
+<button class="w-full py-2 rounded-full bg-secondary text-white font-title-lg text-body-sm hover:bg-secondary/90 transition-colors">Gunakan</button>
+</div>
+</div>
+<!-- Owned Card 2 -->
+<div class="bg-white rounded-lg border border-outline-variant overflow-hidden flex flex-col transition-all hover:shadow-md">
+<div class="relative h-32 w-full opacity-80 grayscale-[0.5]">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvbljTxoA69rnOmdwYZTduqIeX1ysvSXSvDlA6h_mCmRcsidHDnCtZ36TGa1k14mA5PW6Xsne4lP7cTeM8lkX6qbhFmm5P25VOpDDsCiYf5Zsatrfv6cWPgsW4PjhMXR5bPpZH_akivyNcM8y_OUmhf4JaaF1rjKdPD34Qimb5vEPpAZD85Q8oB_S2G3m93jDvQqGeyBpTNMw-MLUGqc9cLpn4hMGRdth753112UGrHicvEhhcV5YAVA"/>
+<div class="absolute top-2 right-2 bg-on-surface-variant/20 text-on-surface-variant px-2 py-0.5 rounded-full font-label-caps text-label-caps uppercase">Digunakan</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-sm mb-3">Token Listrik Rp 20.000</h3>
+<button class="w-full py-2 rounded-full bg-surface-container text-on-surface-variant font-title-lg text-body-sm cursor-not-allowed" disabled="">Selesai</button>
+</div>
+</div>
+</div>
+</div><section class="mb-stack-md flex gap-3 overflow-x-auto pb-2 -mx-margin-page px-margin-page scrollbar-hide">
+<button class="whitespace-nowrap px-6 py-2 bg-secondary text-white rounded-full font-title-lg text-title-lg shadow-md transition-all active:scale-95">Semua</button>
+<button class="whitespace-nowrap px-6 py-2 bg-surface-container text-on-surface-variant rounded-full font-title-lg text-title-lg hover:bg-surface-container-high transition-all">Sembako</button>
+<button class="whitespace-nowrap px-6 py-2 bg-surface-container text-on-surface-variant rounded-full font-title-lg text-title-lg hover:bg-surface-container-high transition-all">Listrik</button>
+<button class="whitespace-nowrap px-6 py-2 bg-surface-container text-on-surface-variant rounded-full font-title-lg text-title-lg hover:bg-surface-container-high transition-all">Hiburan</button>
+</section>
+<!-- Voucher Grid -->
+<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-gutter-card">
+<!-- Card 1: Sembako -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden card-shadow flex flex-col group transition-all hover:-translate-y-1">
+<div class="relative h-48 w-full">
+<img class="w-full h-full object-cover" data-alt="A clean, vibrant studio photograph of a traditional Indonesian grocery package including rice, oil, and eggs, arranged neatly on a white surface with warm, natural sunlight. The image has a soft-focus background with modern, high-contrast reds and warm oranges to match the Konect Village brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9nfpceU45x0gWOwocXQEJzWT87hB0MXim2JyUwShKtStUd3DKLvvdmdKvk2jE0Si-6LbJuz6-tZTaoD5SerUL2Flm-Ug8JpbNE-s4KpL8hVWFAL2gNwBgQ6tJL-psCz0db5Wic9ub5CuMZR5-foAg3yighkstpIRE9LrVFF-Moqo1mxQYqHcgzXCLxJQ2m_pd0S4BhZlcqE6EbdqAvkNlk_dQN1IbhORxqD5Wk6x4KRYCNb0Mvj3ngg"/>
+<div class="absolute top-4 left-4 bg-secondary-container text-white px-3 py-1 rounded-full font-label-caps text-label-caps uppercase">Populer</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg mb-1">Voucher Sembako Rp 15.000</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-body-md text-body-md text-primary font-bold">1.500 Pts</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-full bg-secondary text-white font-title-lg text-title-lg hover:bg-secondary/90 transition-colors active:scale-95 shadow-lg shadow-secondary/20">Tukar</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Listrik -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden card-shadow flex flex-col group transition-all hover:-translate-y-1">
+<div class="relative h-48 w-full">
+<img class="w-full h-full object-cover" data-alt="A futuristic, glowing digital illustration of an electric pulse and a smart power meter, set against a deep slate and vibrant indigo background. The art style is modern-tactile with soft glows and clean lines, reflecting a high-tech community cooperative service. Lighting is cinematic and focused on a central glowing element." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvbljTxoA69rnOmdwYZTduqIeX1ysvSXSvDlA6h_mCmRcsidHDnCtZ36TGa1k14mA5PW6Xsne4lP7cTeM8lkX6qbhFmm5P25VOpDDsCiYf5Zsatrfv6cWPgsW4PjhMXR5bPpZH_akivyNcM8y_OUmhf4JaaF1rjKdPD34Qimb5vEPpAZD85Q8oB_S2G3m93jDvQqGeyBpTNMw-MLUGqc9cLpn4hMGRdth753112UGrHicvEhhcV5YAVA"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg mb-1">Voucher Token Listrik Rp 20.000</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-body-md text-body-md text-primary font-bold">2.000 Pts</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-full bg-secondary text-white font-title-lg text-title-lg hover:bg-secondary/90 transition-colors active:scale-95 shadow-lg shadow-secondary/20">Tukar</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Belanja Koperasi -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden card-shadow flex flex-col group transition-all hover:-translate-y-1">
+<div class="relative h-48 w-full">
+<img class="w-full h-full object-cover" data-alt="A warm and inviting interior view of a modern community cooperative store with well-organized wooden shelves, bright lighting, and inclusive design. The scene is depicted in a playful-tech style with vibrant warm tones and soft organic shapes. A hand is seen holding a digital smartphone with a voucher code, merging rural charm with modern technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAr2K7zrF9cMlnlfc_oeUVONbnq-ksVPh85OOEK4QOzjcYhU2p-SpjqI2OMfm-waRtkUle-v6G3cgQjL7vqECNOZt6l0D0G56X9p4U9tJpwTi8A00K2PYAvQs9OQCFEXLQYRYnW02vWU4ZZ7gpuQvipcpX-EQ8hriPm6uuPijZEeBRFDP1NNK4uj8nuS-U1E2UnwPnxluXB92XbIo-AJwD0avUNxWyT8KOYXOCtXLb6X1KxPpXZJkm5w"/>
+<div class="absolute top-4 left-4 bg-tertiary text-white px-3 py-1 rounded-full font-label-caps text-label-caps uppercase">Spesial</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg mb-1">Voucher Belanja Koperasi</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-body-md text-body-md text-primary font-bold">3.000 Pts</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-full bg-secondary text-white font-title-lg text-title-lg hover:bg-secondary/90 transition-colors active:scale-95 shadow-lg shadow-secondary/20">Tukar</button>
+</div>
+</div>
+</div>
+<!-- Card 4: Internet Desa -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden card-shadow flex flex-col group transition-all hover:-translate-y-1">
+<div class="relative h-48 w-full">
+<img class="w-full h-full object-cover" data-alt="A stylized 3D icon of a Wi-Fi signal radiating from a charming village center building, rendered in a playful claymorphism style with bright reds, whites, and soft grays. The lighting is sunny and optimistic, conveying a connected and technologically advanced rural community ecosystem." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApS10xItl1HQqx-uv8h9Jvo3LVjJpVrlxO_ziMm3EaN96KkNhW-TtalhIq7P3nxILrX1gPATi9NWtbEGdZz4Ij2WOHJpBqyE3SC10KpnvSnFMlQ4wHM0CQVG9Bm8gFvtzmqPjViNA-YsC8sXV_yzkJoKXeaWnFtjepOSmtPMeCuYPCPLHrkqXHD_n1EMAbAMkoWyvTn7vFuu3jAnbplqslCN40vQJw5vgC0G31nScuityCyQLg7cyjkA"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg mb-1">Paket Internet Desa 24 Jam</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-body-md text-body-md text-primary font-bold">500 Pts</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-full bg-secondary text-white font-title-lg text-title-lg hover:bg-secondary/90 transition-colors active:scale-95 shadow-lg shadow-secondary/20">Tukar</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State Suggestion / Information -->
+<section class="mt-stack-lg p-6 bg-surface-container-low rounded-lg border-2 border-dashed border-outline-variant flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-3">volunteer_activism</span>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-2">Ingin Poin Lebih Banyak?</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Ikuti kegiatan gotong royong warga atau bayar iuran tepat waktu untuk mendapatkan bonus poin harian!</p>
+<button class="mt-4 text-primary font-title-lg hover:underline">Pelajari Selengkapnya</button>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-lg z-50 rounded-t-lg shadow-[0_-4px_20px_0_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-label-caps text-label-caps mt-1">Koperasi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-3xl text-secondary">add_circle</span>
+<span class="font-label-caps text-label-caps mt-1">Add</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-xl px-3 py-1.5 transition-all active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-label-caps text-label-caps mt-1">Voucher</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profile</span>
+</a>
+</nav>
+<!-- Modal Mockup (Micro-interaction script) -->
+<script>
+        document.querySelectorAll('button').forEach(btn => {
+            if(btn.innerText === 'Tukar') {
+                btn.onclick = () => {
+                    const cardTitle = btn.closest('.p-5').querySelector('h3').innerText;
+                    alert('Konfirmasi Penukaran: ' + cardTitle + '\n\nPoin Anda akan dipotong sesuai harga voucher.');
+                }
+            }
+        });
+    </script>
+<script>
+  (function() {
+    const btnAvail = document.getElementById('toggle-available');
+    const btnOwned = document.getElementById('toggle-owned');
+    const contAvail = document.getElementById('available-state-container');
+    const contOwned = document.getElementById('owned-state-container');
+
+    function setTab(active) {
+      if (active === 'available') {
+        btnAvail.classList.add('bg-white', 'text-secondary', 'shadow-sm');
+        btnAvail.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+        btnOwned.classList.remove('bg-white', 'text-secondary', 'shadow-sm');
+        btnOwned.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+        contAvail.classList.remove('hidden');
+        contOwned.classList.add('hidden');
+      } else {
+        btnOwned.classList.add('bg-white', 'text-secondary', 'shadow-sm');
+        btnOwned.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+        btnAvail.classList.remove('bg-white', 'text-secondary', 'shadow-sm');
+        btnAvail.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+        contOwned.classList.remove('hidden');
+        contAvail.classList.add('hidden');
+      }
+    }
+
+    btnAvail.onclick = () => setTab('available');
+    btnOwned.onclick = () => setTab('owned');
+  })();
+</script></body></html>

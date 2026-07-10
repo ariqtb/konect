@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: const Icon(
                           Icons.emoji_events_outlined, 
-                          color: Color(0xFFE21E49),
+                          color: Color(0xFFDC2626),
                           size: 22,
                         ),
                       ),
@@ -201,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFE21E49), // brand-secondary red
+                                backgroundColor: const Color(0xFFDC2626), // brand-secondary red
                                 foregroundColor: Colors.white,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(width: 8),
-                                  Icon(Icons.arrow_forward_rounded, size: 20),
+                                  Icon(Icons.arrow_forward_outlined, size: 20),
                                 ],
                               ),
                             ),
@@ -260,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFFE21E49),
+                              color: Color(0xFFDC2626),
                             ),
                           ),
                         ),
@@ -350,7 +350,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(color: Color(0xFFE21E49), width: 2),
+                                borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
                               ),
                             ),
                           ),
@@ -359,7 +359,7 @@ class _HomePageState extends State<HomePage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFE21E49),
+                                backgroundColor: const Color(0xFFDC2626),
                                 foregroundColor: Colors.white,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
@@ -421,7 +421,7 @@ class _HomePageState extends State<HomePage> {
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.login_rounded, size: 20),
+                                  Icon(Icons.login_outlined, size: 20),
                                   SizedBox(width: 8),
                                   Text(
                                     'Gabung Rapat',
@@ -455,7 +455,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.tune_rounded, color: Color(0xFF475569)),
+                          icon: const Icon(Icons.tune_outlined, color: Color(0xFF475569)),
                           onPressed: () {},
                         ),
                       ],
@@ -480,7 +480,7 @@ class _HomePageState extends State<HomePage> {
                     _buildHistoryItem(
                       icon: Icons.groups_outlined,
                       iconBg: const Color(0xFFFFE4E6),
-                      iconColor: const Color(0xFFE21E49),
+                      iconColor: const Color(0xFFDC2626),
                       title: 'Rapat Karang Taruna',
                       subtitle: '01 Oktober 2024 • 19:00 WIB',
                     ),
@@ -634,7 +634,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right_rounded, color: Color(0xFF94A3B8), size: 20),
+            const Icon(Icons.chevron_right_outlined, color: Color(0xFF94A3B8), size: 20),
           ],
         ),
       ),

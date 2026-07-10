@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color brandRed = Color(0xFFE21E49);
+  static const Color brandRed = Color(0xFFDC2626);
   static const Color brandNavy = Color(0xFF1E293B);
   static const Color brandBg = Color(0xFFF8FAFC);
   static const Color containerBg = Color(0xFFF2F3FF);
@@ -20,10 +20,10 @@ class AppTheme {
   // SF Pro is the default system font on iOS — no need to specify fontFamily
   static const String fontFamily = '.AppleSystemUIFont';
 
-  static const Color primaryColor = Color(0xFFa53c00);
-  static const Color primaryContainerColor = Color(0xFFff7a3d);
-  static const Color secondaryColor = Color(0xFFba0035);
-  static const Color secondaryContainerColor = AppColors.brandRed; // Red — brand primary action
+  static const Color primaryColor = AppColors.brandRed; // Red-600
+  static const Color primaryContainerColor = Color(0xFFFEE2E2); // Red-100
+  static const Color secondaryColor = AppColors.brandNavy;
+  static const Color secondaryContainerColor = Color(0xFFE2E8F0); // Slate-200
   static const Color tertiaryColor = Color(0xFF494bd6); // Indigo
   static const Color backgroundColor = AppColors.brandBg;
   static const Color surfaceColor = AppColors.brandBg;

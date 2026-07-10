@@ -105,7 +105,6 @@ class _MainPageState extends State<MainPage> {
                 const Text(
                   'Konect',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF111C2D),
@@ -116,7 +115,6 @@ class _MainPageState extends State<MainPage> {
                 const Text(
                   'Akses layanan desa Anda hari ini.',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 14,
                     color: Color(0xFF64748B),
                   ),
@@ -132,7 +130,7 @@ class _MainPageState extends State<MainPage> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: IconButton(
-              icon: const Icon(Icons.emoji_events_outlined, color: Color(0xFFE21E49)),
+              icon: const Icon(Icons.emoji_events_outlined, color: Color(0xFFDC2626)),
               onPressed: () {
                 Navigator.pushNamed(context, AppConstants.leaderboardRoute);
               },
@@ -152,7 +150,6 @@ class _MainPageState extends State<MainPage> {
           const Text(
             'Diskusi Koperasi Desa di lokasi anda',
             style: TextStyle(
-              fontFamily: 'Outfit',
               fontSize: 22,
               fontWeight: FontWeight.bold,
               color: Color(0xFF111C2D),
@@ -188,7 +185,6 @@ class _MainPageState extends State<MainPage> {
                       child: const Text(
                         'Sedang Aktif',
                         style: TextStyle(
-                          fontFamily: 'Outfit',
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF494BD6),
@@ -198,7 +194,6 @@ class _MainPageState extends State<MainPage> {
                     const Text(
                       '24 Okt 2023',
                       style: TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 12,
                         color: Color(0xFF64748B),
                         fontWeight: FontWeight.w500,
@@ -210,7 +205,6 @@ class _MainPageState extends State<MainPage> {
                 const Text(
                   'Koperasi Desa Makmur Jaya',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF64748B),
@@ -220,7 +214,6 @@ class _MainPageState extends State<MainPage> {
                 const Text(
                   'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF111C2D),
@@ -261,7 +254,6 @@ class _MainPageState extends State<MainPage> {
                       child: const Text(
                         '+42 Lainnya',
                         style: TextStyle(
-                          fontFamily: 'Outfit',
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF494BD6),
@@ -282,7 +274,7 @@ class _MainPageState extends State<MainPage> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE21E49),
+                      backgroundColor: const Color(0xFFDC2626),
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24),
@@ -294,13 +286,12 @@ class _MainPageState extends State<MainPage> {
                         Text(
                           'Ikuti Diskusi',
                           style: TextStyle(
-                            fontFamily: 'Outfit',
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(width: 8),
-                        Icon(Icons.arrow_forward, size: 20),
+                        Icon(Icons.arrow_forward_outlined, size: 20),
                       ],
                     ),
                   ),
@@ -328,7 +319,7 @@ class _MainPageState extends State<MainPage> {
           errorBuilder: (context, error, stackTrace) {
             return Container(
               color: Colors.grey[300],
-              child: const Icon(Icons.person, size: 18, color: Colors.white),
+              child: const Icon(Icons.person_outline, size: 18, color: Colors.white),
             );
           },
         ),
@@ -361,7 +352,6 @@ class _MainPageState extends State<MainPage> {
               const Text(
                 'Koperasi Desa Terdekat',
                 style: TextStyle(
-                  fontFamily: 'Outfit',
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF111C2D),
@@ -374,10 +364,9 @@ class _MainPageState extends State<MainPage> {
                 child: const Text(
                   'Lihat Semua',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFFE21E49),
+                    color: Color(0xFFDC2626),
                   ),
                 ),
               ),
@@ -432,7 +421,7 @@ class _MainPageState extends State<MainPage> {
                               return Container(
                                 height: 150,
                                 color: Colors.grey[200],
-                                child: const Icon(Icons.image, color: Colors.grey),
+                                child: const Icon(Icons.image_outlined, color: Colors.grey),
                               );
                             },
                           ),
@@ -456,7 +445,6 @@ class _MainPageState extends State<MainPage> {
                                 Text(
                                   'Buka',
                                   style: TextStyle(
-                                    fontFamily: 'Outfit',
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
@@ -476,7 +464,6 @@ class _MainPageState extends State<MainPage> {
                           Text(
                             coop['title']!,
                             style: const TextStyle(
-                              fontFamily: 'Outfit',
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF111C2D),
@@ -485,12 +472,11 @@ class _MainPageState extends State<MainPage> {
                           const SizedBox(height: 6),
                           Row(
                             children: [
-                              const Icon(Icons.location_on, size: 16, color: Color(0xFF94A3B8)),
+                              const Icon(Icons.location_on_outlined, size: 16, color: Color(0xFF94A3B8)),
                               const SizedBox(width: 4),
                               Text(
                                 coop['location']!,
                                 style: const TextStyle(
-                                  fontFamily: 'Outfit',
                                   fontSize: 14,
                                   color: Color(0xFF64748B),
                                 ),
@@ -512,6 +498,11 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildJoinRoom() {
+    final authState = context.read<AuthBloc>().state;
+    final bool isLoggedIn = authState is AuthAuthenticated;
+    final bool isKopdes = isLoggedIn &&
+        (authState.user.role == 'kopdes' || authState.user.role == 'admin');
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -520,7 +511,6 @@ class _MainPageState extends State<MainPage> {
           const Text(
             'Masuk room',
             style: TextStyle(
-              fontFamily: 'Outfit',
               fontSize: 22,
               fontWeight: FontWeight.bold,
               color: Color(0xFF111C2D),
@@ -540,7 +530,6 @@ class _MainPageState extends State<MainPage> {
                 const Text(
                   'Masukkan Kode Ruang',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF111C2D),
@@ -555,87 +544,130 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/create-room');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE21E49),
-                      elevation: 0,
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.add_circle_outline, size: 22, color: Colors.white),
-                        SizedBox(width: 10),
-                        Text(
-                          'Buat Rapat Baru',
-                          style: TextStyle(
-                            fontFamily: 'Outfit',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+
+                // Kopdes/Admin: Buat Rapat (Primary) + atau + Gabung Rapat (Secondary)
+                // Masyarakat:   Gabung Rapat only (Primary)
+                if (isKopdes) ...[
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/create-room');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.brandRed,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add_circle_outline, size: 22, color: Colors.white),
+                          SizedBox(width: 10),
+                          Text(
+                            'Buat Rapat Baru',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12.0),
-                  child: Center(
-                    child: Text(
-                      'atau',
-                      style: TextStyle(
-                        fontFamily: 'Outfit',
-                        fontSize: 14,
-                        color: Color(0xFF94A3B8),
-                        fontWeight: FontWeight.w500,
+                        ],
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_roomCodeController.text.trim().isNotEmpty) {
-                        Navigator.pushNamed(
-                          context,
-                          AppConstants.roomDiscussionRoute,
-                          arguments: _roomCodeController.text.trim(),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Silakan masukkan kode ruang')),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFF1F5F9),
-                      foregroundColor: const Color(0xFF1E293B),
-                      elevation: 0,
-                      side: const BorderSide(color: Color(0xFFE2E8F0)),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.login, size: 22, color: Color(0xFF1E293B)),
-                        SizedBox(width: 10),
-                        Text(
-                          'Gabung Rapat',
-                          style: TextStyle(
-                            fontFamily: 'Outfit',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 12.0),
+                    child: Center(
+                      child: Text(
+                        'atau',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF94A3B8),
+                          fontWeight: FontWeight.w500,
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_roomCodeController.text.trim().isNotEmpty) {
+                          Navigator.pushNamed(
+                            context,
+                            AppConstants.roomDiscussionRoute,
+                            arguments: _roomCodeController.text.trim(),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Silakan masukkan kode ruang')),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFF1F5F9),
+                        foregroundColor: const Color(0xFF1E293B),
+                        elevation: 0,
+                        side: const BorderSide(color: Color(0xFFE2E8F0)),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.login, size: 22, color: Color(0xFF1E293B)),
+                          SizedBox(width: 10),
+                          Text(
+                            'Gabung Rapat',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ] else ...[
+                  // Masyarakat: single primary red Gabung Rapat button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_roomCodeController.text.trim().isNotEmpty) {
+                          Navigator.pushNamed(
+                            context,
+                            AppConstants.roomDiscussionRoute,
+                            arguments: _roomCodeController.text.trim(),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Silakan masukkan kode ruang')),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.brandRed,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.login, size: 22, color: Colors.white),
+                          SizedBox(width: 10),
+                          Text(
+                            'Gabung Rapat',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -649,21 +681,21 @@ class _MainPageState extends State<MainPage> {
       {
         'title': 'Musyawarah Pembangunan Jalan',
         'time': '12 Oktober 2024 • 14:00 WIB',
-        'icon': Icons.volume_up,
+        'icon': Icons.volume_up_outlined,
         'iconColor': const Color(0xFF494BD6),
         'bgColor': const Color(0xFFE0E7FF),
       },
       {
         'title': 'Distribusi Pupuk Subsidi',
         'time': '08 Oktober 2024 • 09:30 WIB',
-        'icon': Icons.local_shipping,
+        'icon': Icons.local_shipping_outlined,
         'iconColor': const Color(0xFF10B981),
         'bgColor': const Color(0xFFD1FAE5),
       },
       {
         'title': 'Rapat Karang Taruna',
         'time': '01 Oktober 2024 • 19:00 WIB',
-        'icon': Icons.people,
+        'icon': Icons.people_outline,
         'iconColor': const Color(0xFFBA0035),
         'bgColor': const Color(0xFFFFE4E6),
       }
@@ -680,14 +712,13 @@ class _MainPageState extends State<MainPage> {
               const Text(
                 'Riwayat Ruang Saya',
                 style: TextStyle(
-                  fontFamily: 'Outfit',
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF111C2D),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.tune, color: Color(0xFF64748B)),
+                icon: const Icon(Icons.tune_outlined, color: Color(0xFF64748B)),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Filter Riwayat')),
@@ -743,7 +774,6 @@ class _MainPageState extends State<MainPage> {
                             Text(
                               item['title'] as String,
                               style: const TextStyle(
-                                fontFamily: 'Outfit',
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF111C2D),
@@ -753,7 +783,6 @@ class _MainPageState extends State<MainPage> {
                             Text(
                               item['time'] as String,
                               style: const TextStyle(
-                                fontFamily: 'Outfit',
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xFF64748B),
@@ -795,8 +824,8 @@ class _MainPageState extends State<MainPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(child: _buildNavItem(Icons.home, 'Home', 0)),
-            Expanded(child: _buildNavItem(Icons.storefront, 'Koperasi', 1)),
+            Expanded(child: _buildNavItem(Icons.home_outlined, 'Home', 0)),
+            Expanded(child: _buildNavItem(Icons.storefront_outlined, 'Koperasi', 1)),
             const SizedBox(width: 72),
             Expanded(child: _buildNavItem(Icons.confirmation_number_outlined, 'Voucher', 2)),
             Expanded(child: _buildNavItem(Icons.person_outline, 'Profile', 3)),
@@ -808,7 +837,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _buildNavItem(IconData icon, String label, int index) {
     final isActive = _currentIndex == index;
-    final activeColor = const Color(0xFFE21E49);
+    final activeColor = const Color(0xFFDC2626);
     final inactiveColor = const Color(0xFF94A3B8);
 
     return InkWell(
@@ -829,7 +858,6 @@ class _MainPageState extends State<MainPage> {
           Text(
             label.toUpperCase(),
             style: TextStyle(
-              fontFamily: 'Outfit',
               fontSize: 10,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.05 * 10,
@@ -850,7 +878,7 @@ class _MainPageState extends State<MainPage> {
       width: 64,
       height: 64,
       decoration: BoxDecoration(
-        color: const Color(0xFFE21E49),
+        color: const Color(0xFFDC2626),
         shape: BoxShape.circle,
         border: Border.all(color: Colors.white, width: 4),
       ),
@@ -901,7 +929,6 @@ class _MainPageState extends State<MainPage> {
               const Text(
                 'PILIH AKSI',
                 style: TextStyle(
-                  fontFamily: 'Outfit',
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.0,
@@ -913,14 +940,13 @@ class _MainPageState extends State<MainPage> {
                 leading: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE21E49).withOpacity(0.08),
+                    color: const Color(0xFFDC2626).withOpacity(0.08),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.forum_outlined, color: Color(0xFFE21E49)),
+                  child: const Icon(Icons.forum_outlined, color: Color(0xFFDC2626)),
                 ),
                 title: const Text(
                   'Buat Room Diskusi Baru',
-                  style: TextStyle(fontFamily: 'Outfit', fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 subtitle: const Text('Mulai sesi musyawarah warga baru di canvas'),
                 onTap: () {
@@ -940,7 +966,6 @@ class _MainPageState extends State<MainPage> {
                 ),
                 title: const Text(
                   'Kirim Progress Baru (Artikel)',
-                  style: TextStyle(fontFamily: 'Outfit', fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 subtitle: const Text('Posting berita atau update perkembangan koperasi'),
                 onTap: () {
@@ -1060,7 +1085,7 @@ class _MainPageState extends State<MainPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: const Color(0xFFE21E49).withOpacity(0.08),
+              color: const Color(0xFFDC2626).withOpacity(0.08),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -1068,7 +1093,7 @@ class _MainPageState extends State<MainPage> {
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFE21E49),
+                color: Color(0xFFDC2626),
               ),
             ),
           ),

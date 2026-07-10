@@ -84,7 +84,7 @@ class DetailKoperasiPage extends StatelessWidget {
                   const SizedBox(height: 8),
                   const Row(
                     children: [
-                      Icon(Icons.location_on_outlined, size: 16, color: Color(0xFFE21E49)),
+                      Icon(Icons.location_on_outlined, size: 16, color: Color(0xFFDC2626)),
                       SizedBox(width: 6),
                       Expanded(
                         child: Text(
@@ -160,7 +160,7 @@ class DetailKoperasiPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFE21E49),
+              backgroundColor: const Color(0xFFDC2626),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
@@ -196,7 +196,7 @@ class DetailKoperasiPage extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFE21E49),
+                color: Color(0xFFDC2626),
               ),
             ),
             const SizedBox(height: 4),

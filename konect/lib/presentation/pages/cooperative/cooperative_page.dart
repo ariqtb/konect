@@ -38,7 +38,6 @@ class _CooperativePageState extends State<CooperativePage> {
         title: const Text(
           'Daftar Koperasi',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontWeight: FontWeight.bold,
             color: brandSecondary,
           ),
@@ -107,7 +106,6 @@ class _CooperativePageState extends State<CooperativePage> {
                               child: Text(
                                 'Tidak ada koperasi yang cocok.',
                                 style: TextStyle(
-                                  fontFamily: 'Outfit',
                                   fontSize: 15,
                                   color: Color(0xFF6B7280),
                                 ),
@@ -176,7 +174,6 @@ class _CooperativePageState extends State<CooperativePage> {
         decoration: InputDecoration(
           hintText: 'Cari nama koperasi...',
           hintStyle: const TextStyle(
-            fontFamily: 'Outfit',
             color: Color(0xFF9CA3AF),
             fontSize: 14,
           ),
@@ -223,7 +220,6 @@ class _CooperativePageState extends State<CooperativePage> {
                 child: Text(
                   category,
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: isActive ? Colors.white : const Color(0xFF4B5563),
@@ -244,7 +240,6 @@ class _CooperativePageState extends State<CooperativePage> {
         const Text(
           'Paling Dekat',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 22,
             fontWeight: FontWeight.bold,
             color: Color(0xFF1A2E44),
@@ -260,7 +255,6 @@ class _CooperativePageState extends State<CooperativePage> {
           label: const Text(
             'Atur Lokasi',
             style: TextStyle(
-              fontFamily: 'Outfit',
               color: Color(0xFFE14242),
               fontWeight: FontWeight.bold,
               fontSize: 14,
@@ -326,7 +320,6 @@ class _CooperativePageState extends State<CooperativePage> {
                       child: Text(
                         item.name,
                         style: const TextStyle(
-                          fontFamily: 'Outfit',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: brandSecondary,
@@ -358,7 +351,6 @@ class _CooperativePageState extends State<CooperativePage> {
                           Text(
                             item.isOpen ? 'Buka' : 'Tutup',
                             style: const TextStyle(
-                              fontFamily: 'Outfit',
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: brandSecondary,
@@ -380,7 +372,6 @@ class _CooperativePageState extends State<CooperativePage> {
                       child: Text(
                         item.address,
                         style: const TextStyle(
-                          fontFamily: 'Outfit',
                           fontSize: 14,
                           color: Color(0xFF6B7280),
                         ),
@@ -410,7 +401,6 @@ class _CooperativePageState extends State<CooperativePage> {
                             const Text(
                               'Jarak',
                               style: TextStyle(
-                                fontFamily: 'Outfit',
                                 fontSize: 12,
                                 color: Color(0xFF9CA3AF),
                               ),
@@ -418,7 +408,6 @@ class _CooperativePageState extends State<CooperativePage> {
                             Text(
                               item.distance,
                               style: const TextStyle(
-                                fontFamily: 'Outfit',
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: brandSecondary,
@@ -444,7 +433,6 @@ class _CooperativePageState extends State<CooperativePage> {
                       child: const Text(
                         'Lihat Detail',
                         style: TextStyle(
-                          fontFamily: 'Outfit',
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -503,7 +491,6 @@ class _CooperativePageState extends State<CooperativePage> {
                         Text(
                           'HOME',
                           style: TextStyle(
-                            fontFamily: 'Outfit',
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                             color: grayColor,
@@ -527,7 +514,6 @@ class _CooperativePageState extends State<CooperativePage> {
                         Text(
                           'KOPERASI',
                           style: TextStyle(
-                            fontFamily: 'Outfit',
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -553,7 +539,6 @@ class _CooperativePageState extends State<CooperativePage> {
                         Text(
                           'VOUCHER',
                           style: TextStyle(
-                            fontFamily: 'Outfit',
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                             color: grayColor,
@@ -577,7 +562,6 @@ class _CooperativePageState extends State<CooperativePage> {
                         Text(
                           'PROFIL',
                           style: TextStyle(
-                            fontFamily: 'Outfit',
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                             color: grayColor,

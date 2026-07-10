@@ -124,7 +124,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
                         margin: const EdgeInsets.only(right: 10),
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                         decoration: BoxDecoration(
-                          color: isSelected ? const Color(0xFFE21E49) : const Color(0xFFF2F3FF),
+                          color: isSelected ? const Color(0xFFDC2626) : const Color(0xFFF2F3FF),
                           borderRadius: BorderRadius.circular(100), // chip rounded
                         ),
                         child: Text(
@@ -164,7 +164,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
                     TextButton.icon(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                        foregroundColor: const Color(0xFFE21E49),
+                        foregroundColor: const Color(0xFFDC2626),
                       ),
                       icon: const Icon(Icons.my_location_rounded, size: 16),
                       label: const Text(
@@ -324,7 +324,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                       ),
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color(0xFFE21E49),
+                                          backgroundColor: const Color(0xFFDC2626),
                                           foregroundColor: Colors.white,
                                           elevation: 0,
                                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),

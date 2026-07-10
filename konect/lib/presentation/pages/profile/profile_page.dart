@@ -27,7 +27,6 @@ class ProfilePage extends StatelessWidget {
                   const Text(
                     'Profil Saya',
                     style: TextStyle(
-                      fontFamily: 'Outfit',
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF1E293B),
@@ -63,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: const Color(0xFFFFF1F2),
-                                border: Border.all(color: const Color(0xFFE21E49).withOpacity(0.15), width: 3),
+                                border: Border.all(color: const Color(0xFFDC2626).withOpacity(0.15), width: 3),
                               ),
                               child: CircleAvatar(
                                 backgroundColor: Colors.transparent,
@@ -71,7 +70,7 @@ class ProfilePage extends StatelessWidget {
                                 child: avatarUrl == null
                                     ? const Icon(
                                         Icons.person_outline,
-                                        color: Color(0xFFE21E49),
+                                        color: Color(0xFFDC2626),
                                         size: 34,
                                       )
                                     : null,
@@ -86,7 +85,6 @@ class ProfilePage extends StatelessWidget {
                                   Text(
                                     name,
                                     style: const TextStyle(
-                                      fontFamily: 'Outfit',
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFF1E293B),
@@ -96,7 +94,6 @@ class ProfilePage extends StatelessWidget {
                                   Text(
                                     emailOrMac,
                                     style: const TextStyle(
-                                      fontFamily: 'Outfit',
                                       fontSize: 13,
                                       color: Color(0xFF64748B),
                                     ),
@@ -114,7 +111,6 @@ class ProfilePage extends StatelessWidget {
                                     child: Text(
                                       role,
                                       style: const TextStyle(
-                                        fontFamily: 'Outfit',
                                         fontSize: 9,
                                         fontWeight: FontWeight.bold,
                                         color: Color(0xFF475569),
@@ -137,7 +133,7 @@ class ProfilePage extends StatelessWidget {
                           children: [
                             _buildStatItem(Icons.emoji_events_outlined, '1.240', 'Poin', const Color(0xFFF59E0B)),
                             _buildStatDivider(),
-                            _buildStatItem(Icons.forum_outlined, '8 Rapat', 'Diskusi', const Color(0xFFE21E49)),
+                            _buildStatItem(Icons.forum_outlined, '8 Rapat', 'Diskusi', const Color(0xFFDC2626)),
                             _buildStatDivider(),
                             _buildStatItem(Icons.storefront_outlined, 'Aktif', 'Anggota', const Color(0xFF10B981)),
                           ],
@@ -151,7 +147,6 @@ class ProfilePage extends StatelessWidget {
                   const Text(
                     'PENGATURAN APLIKASI',
                     style: TextStyle(
-                      fontFamily: 'Outfit',
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.0,
@@ -216,7 +211,7 @@ class ProfilePage extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFE21E49),
+                          backgroundColor: const Color(0xFFDC2626),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
@@ -240,7 +235,6 @@ class ProfilePage extends StatelessWidget {
                             SizedBox(width: 8),
                             Text(
                               'Masuk sebagai Kopdes (Simulasi)',
-                              style: TextStyle(fontFamily: 'Outfit', fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                           ],
                         ),
@@ -268,7 +262,6 @@ class ProfilePage extends StatelessWidget {
                             SizedBox(width: 8),
                             Text(
                               'Keluar Akun',
-                              style: TextStyle(fontFamily: 'Outfit', fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                           ],
                         ),
@@ -291,7 +284,6 @@ class ProfilePage extends StatelessWidget {
         Text(
           value,
           style: const TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Color(0xFF1E293B),
@@ -301,7 +293,6 @@ class ProfilePage extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 11,
             color: Color(0xFF94A3B8),
             fontWeight: FontWeight.w500,
@@ -350,7 +341,6 @@ class ProfilePage extends StatelessWidget {
                     Text(
                       title,
                       style: const TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1E293B),
@@ -360,7 +350,6 @@ class ProfilePage extends StatelessWidget {
                     Text(
                       subtitle,
                       style: const TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 12,
                         color: Color(0xFF94A3B8),
                       ),

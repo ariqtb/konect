@@ -22,7 +22,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
     // Design System Tokens (from documents/design.md)
     const Color colorSurface = Color(0xFFF8FAFC);
     const Color colorOnSurface = Color(0xFF111C2D);
-    const Color colorSecondaryContainer = Color(0xFFE21E49); // Rose / Red Accent
+    const Color colorSecondaryContainer = Color(0xFFDC2626); // Rose / Red Accent
 
     return Scaffold(
       backgroundColor: colorSurface,
@@ -61,7 +61,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
             const Text(
               'Peringkat Warga',
               style: TextStyle(
-                fontFamily: 'Outfit',
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: colorSecondaryContainer,
@@ -147,7 +146,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
   }
 
   Widget _buildUserRankCard(BuildContext context, LeaderboardLoaded state) {
-    const Color colorSecondaryContainer = Color(0xFFE21E49);
+    const Color colorSecondaryContainer = Color(0xFFDC2626);
 
     return Container(
       width: double.infinity,
@@ -204,7 +203,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 const Text(
                   'Peringkat Anda',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 14,
                     fontWeight: FontWeight.w300,
                     color: Colors.white70,
@@ -214,7 +212,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 Text(
                   state.currentUser.name,
                   style: const TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -231,7 +228,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                         const Text(
                           'Current Rank',
                           style: TextStyle(
-                            fontFamily: 'Outfit',
                             fontSize: 14,
                             fontWeight: FontWeight.w300,
                             color: Colors.white70,
@@ -244,7 +240,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                             const Text(
                               '2nd',
                               style: TextStyle(
-                                fontFamily: 'Outfit',
                                 fontSize: 36,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -266,7 +261,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                                   Text(
                                     '+1',
                                     style: TextStyle(
-                                      fontFamily: 'Outfit',
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFFD1FAE5),
@@ -285,7 +279,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                         const Text(
                           'Total Poin',
                           style: TextStyle(
-                            fontFamily: 'Outfit',
                             fontSize: 14,
                             fontWeight: FontWeight.w300,
                             color: Colors.white70,
@@ -295,7 +288,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                         Text(
                           '${((state.currentPoints / state.targetPoints) * 100).toStringAsFixed(1)}%',
                           style: const TextStyle(
-                            fontFamily: 'Outfit',
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -314,7 +306,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
   }
 
   Widget _buildResidentHeader(BuildContext context) {
-    const Color colorSecondaryContainer = Color(0xFFE21E49);
+    const Color colorSecondaryContainer = Color(0xFFDC2626);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -322,7 +314,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
         const Text(
           'WARGA TERAKTIF',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 13,
             fontWeight: FontWeight.bold,
             letterSpacing: 0.05 * 13,
@@ -338,7 +329,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
           child: const Text(
             'Details',
             style: TextStyle(
-              fontFamily: 'Outfit',
               fontSize: 14,
               fontWeight: FontWeight.bold,
               color: colorSecondaryContainer,
@@ -363,7 +353,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
   }
 
   Widget _buildResidentListItem(BuildContext context, LeaderboardUser user) {
-    const Color colorSecondaryContainer = Color(0xFFE21E49);
+    const Color colorSecondaryContainer = Color(0xFFDC2626);
 
     // Current User gets dark slate borders and Anda badge
     final isMe = user.isCurrentUser;
@@ -408,7 +398,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
             child: Text(
               user.rank.toString(),
               style: TextStyle(
-                fontFamily: 'Outfit',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: isMe ? Colors.white : const Color(0xFF334155),
@@ -424,7 +413,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 Text(
                   user.name,
                   style: const TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF1E293B),
@@ -434,7 +422,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 Text(
                   'Skor: ${user.score.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')} pts',
                   style: const TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 12,
                     color: Color(0xFF64748B),
                   ),
@@ -460,7 +447,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
               child: const Text(
                 'ANDA',
                 style: TextStyle(
-                  fontFamily: 'Outfit',
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 0.05 * 10,
@@ -474,7 +460,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
   }
 
   Widget _buildRewardProgressSection(BuildContext context, LeaderboardLoaded state) {
-    const Color colorSecondaryContainer = Color(0xFFE21E49);
+    const Color colorSecondaryContainer = Color(0xFFDC2626);
 
     final percentage = (state.currentPoints / state.targetPoints * 100).toInt();
 
@@ -507,7 +493,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                     Text(
                       'Target Hadiah Pribadi',
                       style: TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1E293B),
@@ -517,7 +502,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                     Text(
                       'Kumpulkan poin untuk hadiah pilihanmu',
                       style: TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 14,
                         color: Color(0xFF64748B),
                       ),
@@ -571,7 +555,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                     Text(
                       'Target Hadiah:',
                       style: TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: Color(0xFFC2410C), // orange-700
@@ -581,7 +564,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                     Text(
                       'Voucher Belanja Sembako',
                       style: TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1E293B),
@@ -606,7 +588,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                   Text(
                     state.currentPoints.toString(),
                     style: const TextStyle(
-                      fontFamily: 'Outfit',
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: colorSecondaryContainer,
@@ -616,7 +597,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                   const Text(
                     '/ 10,000 pts',
                     style: TextStyle(
-                      fontFamily: 'Outfit',
                       fontSize: 14,
                       color: Color(0xFF94A3B8),
                       fontWeight: FontWeight.w500,
@@ -627,7 +607,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
               Text(
                 '$percentage%',
                 style: const TextStyle(
-                  fontFamily: 'Outfit',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF1E293B),
@@ -677,7 +656,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                   child: Text(
                     'Hanya ${state.targetPoints - state.currentPoints} poin lagi untuk klaim voucher! Setoran sampah berikutnya menambah 50 poin.',
                     style: const TextStyle(
-                      fontFamily: 'Outfit',
                       fontSize: 13,
                       height: 1.4,
                       color: Color(0xFF475569),
@@ -715,7 +693,6 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                   : const Text(
                       'Tukar Point',
                       style: TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
