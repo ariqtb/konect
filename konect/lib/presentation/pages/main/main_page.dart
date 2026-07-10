@@ -987,9 +987,19 @@ class _MainPageState extends State<MainPage> {
                 ),
                 title: const Text(
                   'Buat Room Diskusi Baru',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0F172A),
+                  ),
                 ),
-                subtitle:
-                    const Text('Mulai sesi musyawarah warga baru di canvas'),
+                subtitle: const Text(
+                  'Mulai sesi musyawarah warga baru di canvas',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF64748B),
+                  ),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/create-room');
@@ -1008,9 +1018,19 @@ class _MainPageState extends State<MainPage> {
                 ),
                 title: const Text(
                   'Kirim Progress Baru (Artikel)',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0F172A),
+                  ),
                 ),
                 subtitle: const Text(
-                    'Posting berita atau update perkembangan koperasi'),
+                  'Posting berita atau update perkembangan koperasi',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF64748B),
+                  ),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, AppConstants.createArticleRoute);
