@@ -6,6 +6,7 @@ import '../../../core/theme.dart';
 import '../voucher/voucher_page.dart';
 import '../profile/profile_page.dart';
 import '../cooperative/cooperative_page.dart';
+import '../../../data/repositories/room_repository.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -17,6 +18,48 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   final TextEditingController _roomCodeController = TextEditingController();
+  List<Map<String, dynamic>>? _joinedRooms;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadJoinedRooms();
+    });
+  }
+
+  Future<void> _loadJoinedRooms() async {
+    final authState = context.read<AuthBloc>().state;
+    if (authState is AuthAuthenticated) {
+      final rooms = await roomRepository.getJoinedRooms(authState.user.id);
+      if (mounted) {
+        setState(() {
+          _joinedRooms = rooms;
+        });
+      }
+    } else {
+      if (mounted) {
+        setState(() {
+          _joinedRooms = [];
+        });
+      }
+    }
+  }
+
+  String _formatDateTime(String isoString) {
+    try {
+      final dt = DateTime.parse(isoString).toLocal();
+      final months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+      final day = dt.day.toString().padLeft(2, '0');
+      final month = months[dt.month - 1];
+      final year = dt.year;
+      final hour = dt.hour.toString().padLeft(2, '0');
+      final minute = dt.minute.toString().padLeft(2, '0');
+      return '$day $month $year • $hour:$minute WIB';
+    } catch (_) {
+      return isoString;
+    }
+  }
 
   @override
   void dispose() {
@@ -630,13 +673,14 @@ class _MainPageState extends State<MainPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_roomCodeController.text.trim().isNotEmpty) {
-                          Navigator.pushNamed(
+                          await Navigator.pushNamed(
                             context,
                             AppConstants.roomDiscussionRoute,
                             arguments: _roomCodeController.text.trim(),
                           );
+                          _loadJoinedRooms();
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -671,13 +715,14 @@ class _MainPageState extends State<MainPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_roomCodeController.text.trim().isNotEmpty) {
-                          Navigator.pushNamed(
+                          await Navigator.pushNamed(
                             context,
                             AppConstants.roomDiscussionRoute,
                             arguments: _roomCodeController.text.trim(),
                           );
+                          _loadJoinedRooms();
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -717,29 +762,51 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildHistorySection() {
-    final historyItems = [
-      {
-        'title': 'Musyawarah Pembangunan Jalan',
-        'time': '12 Oktober 2024 • 14:00 WIB',
-        'icon': Icons.volume_up_outlined,
-        'iconColor': AppColors.brandNavy,
-        'bgColor': const Color(0xFFF1F5F9),
-      },
-      {
-        'title': 'Distribusi Pupuk Subsidi',
-        'time': '08 Oktober 2024 • 09:30 WIB',
-        'icon': Icons.local_shipping_outlined,
-        'iconColor': AppColors.brandNavy,
-        'bgColor': const Color(0xFFF1F5F9),
-      },
-      {
-        'title': 'Rapat Karang Taruna',
-        'time': '01 Oktober 2024 • 19:00 WIB',
-        'icon': Icons.people_outline,
-        'iconColor': AppColors.brandNavy,
-        'bgColor': const Color(0xFFF1F5F9),
-      }
-    ];
+    if (_joinedRooms == null) {
+      return const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (_joinedRooms!.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Riwayat Ruang Saya',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF111C2D),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: const Color(0xFFF1F5F9)),
+              ),
+              child: const Center(
+                child: Text(
+                  'Belum ada riwayat rapat. Silakan gabung rapat menggunakan kode ruang.',
+                  style: TextStyle(
+                    color: Color(0xFF64748B),
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -771,17 +838,18 @@ class _MainPageState extends State<MainPage> {
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: historyItems.length,
+            itemCount: _joinedRooms!.length,
             separatorBuilder: (context, index) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
-              final item = historyItems[index];
+              final item = _joinedRooms![index];
               return InkWell(
-                onTap: () {
-                  Navigator.pushNamed(
+                onTap: () async {
+                  await Navigator.pushNamed(
                     context,
                     AppConstants.roomDiscussionRoute,
-                    arguments: item['title'] as String,
+                    arguments: item['id'] as String,
                   );
+                  _loadJoinedRooms();
                 },
                 borderRadius: BorderRadius.circular(24),
                 child: Container(
@@ -797,12 +865,12 @@ class _MainPageState extends State<MainPage> {
                         width: 56,
                         height: 56,
                         decoration: BoxDecoration(
-                          color: item['bgColor'] as Color,
+                          color: const Color(0xFFF1F5F9),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: Icon(
-                          item['icon'] as IconData,
-                          color: item['iconColor'] as Color,
+                        child: const Icon(
+                          Icons.people_outline,
+                          color: AppColors.brandNavy,
                           size: 28,
                         ),
                       ),
@@ -821,7 +889,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              item['time'] as String,
+                              _formatDateTime(item['time'] as String),
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -1055,7 +1123,7 @@ class _MainPageState extends State<MainPage> {
       isScrollControlled: true,
       builder: (context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.5,
+          height: MediaQuery.of(context).size.height * 0.65,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -1093,7 +1161,7 @@ class _MainPageState extends State<MainPage> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
-                  'Daftar ruang diskusi yang pernah Anda masuki dari perangkat ini.',
+                  'Daftar ruang diskusi yang pernah Anda masuki.',
                   style: TextStyle(
                     fontSize: 13,
                     color: Color(0xFF64748B),
@@ -1104,28 +1172,37 @@ class _MainPageState extends State<MainPage> {
 
               // History list
               Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  children: [
-                    _buildHistoryItemModal(
-                      code: '09IO08',
-                      title: 'Barang Belanja Koperasi Periode Juli',
-                      date: 'Hari ini, 14:20',
-                    ),
-                    const SizedBox(height: 10),
-                    _buildHistoryItemModal(
-                      code: '12TR90',
-                      title: 'Diskusi Rencana Panel Surya Dusun 2',
-                      date: 'Kemarin, 09:15',
-                    ),
-                    const SizedBox(height: 10),
-                    _buildHistoryItemModal(
-                      code: '04OP55',
-                      title: 'Evaluasi Pembagian Sembako Murah',
-                      date: '3 Juli 2026',
-                    ),
-                  ],
-                ),
+                child: _joinedRooms == null
+                    ? const Center(child: CircularProgressIndicator())
+                    : _joinedRooms!.isEmpty
+                        ? const Center(
+                            child: Text(
+                              'Belum ada riwayat rapat.',
+                              style: TextStyle(color: Color(0xFF64748B)),
+                            ),
+                          )
+                        : ListView.separated(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            itemCount: _joinedRooms!.length,
+                            separatorBuilder: (_, __) => const SizedBox(height: 10),
+                            itemBuilder: (context, index) {
+                              final item = _joinedRooms![index];
+                              final String id = item['id'] as String;
+                              final String code = id.length > 6 ? id.substring(0, 6).toUpperCase() : id.toUpperCase();
+                              
+                              final String startStr = item['createdAt'] != '' ? _formatDateTime(item['createdAt'] as String) : '-';
+                              final String endStr = (item['isActive'] as bool) 
+                                  ? 'Aktif (Sedang Berjalan)' 
+                                  : (item['updatedAt'] != '' ? _formatDateTime(item['updatedAt'] as String) : 'Selesai');
+                              
+                              return _buildHistoryItemModal(
+                                id: id,
+                                code: code,
+                                title: item['title'] as String,
+                                date: 'Mulai: $startStr\nSelesai: $endStr',
+                              );
+                            },
+                          ),
               ),
               const SizedBox(height: 24),
             ],
@@ -1136,6 +1213,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildHistoryItemModal({
+    required String id,
     required String code,
     required String title,
     required String date,
@@ -1179,12 +1257,13 @@ class _MainPageState extends State<MainPage> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: 4),
                 Text(
                   date,
                   style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF94A3B8),
+                    fontSize: 10,
+                    color: Color(0xFF64748B),
+                    height: 1.3,
                   ),
                 ),
               ],
@@ -1194,13 +1273,14 @@ class _MainPageState extends State<MainPage> {
           IconButton(
             icon: const Icon(Icons.arrow_forward_rounded,
                 color: Color(0xFF64748B), size: 18),
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(context); // Close sheet
-              Navigator.pushNamed(
+              await Navigator.pushNamed(
                 context,
                 AppConstants.roomDiscussionRoute,
-                arguments: title,
+                arguments: id,
               );
+              _loadJoinedRooms();
             },
           ),
         ],

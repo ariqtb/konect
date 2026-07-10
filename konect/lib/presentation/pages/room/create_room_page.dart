@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../../core/constants.dart';
+import '../../../data/repositories/room_repository.dart';
+import '../../../data/repositories/auth_repository.dart';
+import '../../../data/repositories/cooperative_repository.dart';
+import '../../../data/models/cooperative.dart';
 
 class CreateRoomPage extends StatefulWidget {
   const CreateRoomPage({super.key});
@@ -19,13 +23,33 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
   DateTime? _startDate;
   DateTime? _endDate;
 
-  String _selectedCoop = 'Koperasi Tani Makmur';
+  List<CooperativeItem> _coops = [];
+  CooperativeItem? _selectedCoop;
+  bool _isLoadingCoops = true;
+  bool _isCreatingRoom = false;
 
-  final List<String> _coops = [
-    'Koperasi Tani Makmur',
-    'Koperasi Unit Desa (KUD) Mandiri',
-    'Koperasi Wanita Sejahtera',
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadCooperatives();
+  }
+
+  Future<void> _loadCooperatives() async {
+    try {
+      final list = await cooperativeRepository.getCooperatives(limit: 100);
+      setState(() {
+        _coops = list;
+        if (list.isNotEmpty) {
+          _selectedCoop = list.first;
+        }
+        _isLoadingCoops = false;
+      });
+    } catch (_) {
+      setState(() {
+        _isLoadingCoops = false;
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -207,45 +231,54 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    DropdownButtonFormField<String>(
-                      value: _selectedCoop,
-                      style: const TextStyle(
-                          fontSize: 15, color: Color(0xFF0F172A)),
-                      decoration: InputDecoration(
-                        fillColor: const Color(0xFFF8FAFC),
-                        filled: true,
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24),
-                          borderSide:
-                              const BorderSide(color: Color(0xFFE2E8F0)),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24),
-                          borderSide:
-                              const BorderSide(color: Color(0xFFE2E8F0)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24),
-                          borderSide: const BorderSide(
-                              color: Color(0xFFDC2626), width: 2),
-                        ),
-                      ),
-                      items: _coops.map((String coop) {
-                        return DropdownMenuItem<String>(
-                          value: coop,
-                          child: Text(coop),
-                        );
-                      }).toList(),
-                      onChanged: (val) {
-                        if (val != null) {
-                          setState(() {
-                            _selectedCoop = val;
-                          });
-                        }
-                      },
-                    ),
+                    _isLoadingCoops
+                        ? const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFDC2626)),
+                              ),
+                            ),
+                          )
+                        : DropdownButtonFormField<CooperativeItem>(
+                            value: _selectedCoop,
+                            style: const TextStyle(
+                                fontSize: 15, color: Color(0xFF0F172A)),
+                            decoration: InputDecoration(
+                              fillColor: const Color(0xFFF8FAFC),
+                              filled: true,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(24),
+                                borderSide:
+                                    const BorderSide(color: Color(0xFFE2E8F0)),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(24),
+                                borderSide:
+                                    const BorderSide(color: Color(0xFFE2E8F0)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(24),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFDC2626), width: 2),
+                              ),
+                            ),
+                            items: _coops.map((CooperativeItem coop) {
+                              return DropdownMenuItem<CooperativeItem>(
+                                value: coop,
+                                child: Text(coop.name, overflow: TextOverflow.ellipsis),
+                              );
+                            }).toList(),
+                            onChanged: (val) {
+                              if (val != null) {
+                                setState(() {
+                                  _selectedCoop = val;
+                                });
+                              }
+                            },
+                          ),
                     const SizedBox(height: 16),
                     CustomTextField(
                       controller: _descController,
@@ -281,40 +314,90 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
             ),
           ),
           child: CustomButton(
-            text: 'Mulai Rapat Baru',
+            text: _isCreatingRoom ? 'Memproses...' : 'Mulai Rapat Baru',
             icon: Icons.play_arrow_rounded,
             backgroundColor: const Color(0xFFDC2626),
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                if (_startDate == null || _endDate == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text(
-                            'Silakan pilih waktu mulai dan selesai rapat')),
-                  );
-                  return;
-                }
+            onPressed: _isCreatingRoom
+                ? null
+                : () async {
+                    if (_formKey.currentState!.validate()) {
+                      if (_startDate == null || _endDate == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text(
+                                  'Silakan pilih waktu mulai dan selesai rapat')),
+                        );
+                        return;
+                      }
 
-                if (_endDate!.isBefore(_startDate!)) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text(
-                            'Waktu selesai tidak boleh lebih awal dari waktu mulai')),
-                  );
-                  return;
-                }
+                      if (_endDate!.isBefore(_startDate!)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text(
+                                  'Waktu selesai tidak boleh lebih awal dari waktu mulai')),
+                        );
+                        return;
+                      }
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Memulai rapat baru...')),
-                );
-                // Redirect langsung ke room baru dengan topic yang dibuat
-                Navigator.pushReplacementNamed(
-                  context,
-                  AppConstants.roomDiscussionRoute,
-                  arguments: _topicController.text,
-                );
-              }
-            },
+                      if (_selectedCoop == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text(
+                                  'Silakan pilih koperasi penyelenggara')),
+                        );
+                        return;
+                      }
+
+                      setState(() {
+                        _isCreatingRoom = true;
+                      });
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Memulai rapat baru...')),
+                      );
+
+                      final currentUser = await authRepository.getCurrentUser();
+                      if (currentUser == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Silakan login kembali')),
+                        );
+                        setState(() {
+                          _isCreatingRoom = false;
+                        });
+                        return;
+                      }
+
+                      final roomId = await roomRepository.createRoom(
+                        coopRef: _selectedCoop!.id,
+                        title: _topicController.text,
+                        description: _descController.text,
+                        createdBy: currentUser.id,
+                        startDate: _startDate!,
+                        endDate: _endDate!,
+                      );
+
+                      if (roomId != null) {
+                        if (mounted) {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppConstants.roomDiscussionRoute,
+                            arguments: roomId,
+                          );
+                        }
+                      } else {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    'Gagal membuat room rapat. Silakan coba lagi.')),
+                          );
+                          setState(() {
+                            _isCreatingRoom = false;
+                          });
+                        }
+                      }
+                    }
+                  },
           ),
         ),
       ),

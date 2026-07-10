@@ -483,9 +483,10 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                      content: Text('Bergabung ke diskusi: ${room.title}')),
+                Navigator.pushNamed(
+                  context,
+                  AppConstants.roomDiscussionRoute,
+                  arguments: room.id,
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -521,48 +522,58 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
       BuildContext context, CoopDiscussionRoom room) {
     const Color colorNavy = Color(0xFF1E293B);
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(32), // rounded-vox (32px)
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.access_time, color: Color(0xFF64748B), size: 16),
-              const SizedBox(width: 6),
-              Text(
-                'Selesai • ${room.date}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF64748B),
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          AppConstants.roomDiscussionRoute,
+          arguments: room.id,
+        );
+      },
+      borderRadius: BorderRadius.circular(32),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(32), // rounded-vox (32px)
+          border: Border.all(color: const Color(0xFFE2E8F0)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.access_time, color: Color(0xFF64748B), size: 16),
+                const SizedBox(width: 6),
+                Text(
+                  'Selesai • ${room.date}',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF64748B),
+                  ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              room.title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: colorNavy,
               ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            room.title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: colorNavy,
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            room.description,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF64748B),
+            const SizedBox(height: 4),
+            Text(
+              room.description,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Color(0xFF64748B),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

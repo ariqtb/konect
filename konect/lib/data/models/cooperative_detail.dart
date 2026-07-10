@@ -33,7 +33,7 @@ class CooperativeDetail {
       name: json['name'] ?? '',
       category: json['category'] ?? '',
       address: json['address'] ?? '',
-      about: json['about'] ?? '',
+      about: json['description'] ?? json['about'] ?? '',
       chairperson: json['chairperson'] ?? '',
       memberCount: json['member_count'] ?? 0,
       legalStatus: json['legal_status'] ?? '',

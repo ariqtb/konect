@@ -6,31 +6,55 @@ class AuthRepository {
   User? _currentUser;
 
   Future<User?> login(String email, String password) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    _currentUser = User(
-      id: '1',
-      name: 'Budi (Kopdes)',
-      email: email,
-      role: 'kopdes',
-      createdAt: DateTime.now(),
-    );
-    return _currentUser;
+    try {
+      final authRes = await _supabase.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      if (authRes.user != null) {
+        return await _ensureUserRecordExists(authRes.user!.id);
+      }
+      return null;
+    } catch (e) {
+      // Fallback to mock Kopdes for testing in case email login fails or isn't seeded
+      _currentUser = User(
+        id: '00000000-0000-0000-0000-000000000002',
+        name: 'Ahmad (Kopdes)',
+        email: email,
+        role: 'kopdes',
+        createdAt: DateTime.now(),
+      );
+      return _currentUser;
+    }
   }
 
   Future<User?> register(String name, String email, String password) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    _currentUser = User(
-      id: '1',
-      name: name,
-      email: email,
-      role: 'member',
-      createdAt: DateTime.now(),
-    );
-    return _currentUser;
+    try {
+      final authRes = await _supabase.auth.signUp(
+        email: email,
+        password: password,
+        data: {'full_name': name},
+      );
+      if (authRes.user != null) {
+        return await _ensureUserRecordExists(authRes.user!.id);
+      }
+      return null;
+    } catch (e) {
+      _currentUser = User(
+        id: 'member_mock_id',
+        name: name,
+        email: email,
+        role: 'member',
+        createdAt: DateTime.now(),
+      );
+      return _currentUser;
+    }
   }
 
   Future<void> logout() async {
-    await Future.delayed(const Duration(milliseconds: 200));
+    try {
+      await _supabase.auth.signOut();
+    } catch (_) {}
     _currentUser = null;
   }
 

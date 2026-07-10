@@ -11,19 +11,19 @@ class LeaderboardRepository {
       final currentUser = await authRepository.getCurrentUser();
       final currentUserId = currentUser?.id;
 
-      // Fetch top 50 users from leaderboard view
-      final response = await _supabase
-          .from('leaderboard')
-          .select()
-          .limit(50);
+      // Fetch from RPC get_leaderboard (from 006_frontend_views.sql)
+      final response = await _supabase.rpc(
+        'get_leaderboard',
+        params: {'p_user_id': currentUserId},
+      );
           
       final List<LeaderboardUser> rankings = (response as List).map((data) {
         return LeaderboardUser(
           id: data['id'] ?? '',
-          name: data['full_name'] ?? data['username'] ?? 'Warga',
-          score: data['points_balance'] ?? 0,
+          name: data['name'] ?? data['username'] ?? 'Warga',
+          score: data['score'] ?? 0,
           rank: (data['rank'] ?? 0).toInt(),
-          isCurrentUser: data['id'] == currentUserId,
+          isCurrentUser: data['is_current_user'] ?? false,
         );
       }).toList();
 

@@ -2,6 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
+import '../../../data/repositories/auth_repository.dart';
+import '../../../data/repositories/cooperative_repository.dart';
+import '../../../core/services/supabase_service.dart';
 
 class CreateArticlePage extends StatefulWidget {
   const CreateArticlePage({super.key});
@@ -15,6 +18,51 @@ class _CreateArticlePageState extends State<CreateArticlePage> {
   final _titleController = TextEditingController();
   final _dateController = TextEditingController(text: '07/08/2026');
   final _descController = TextEditingController();
+
+  String _coopName = 'Memuat...';
+  String? _coopId;
+  String? _userId;
+  bool _loadingCoop = true;
+  bool _isSubmitting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCooperative();
+  }
+
+  Future<void> _loadCooperative() async {
+    try {
+      final currentUser = await authRepository.getCurrentUser();
+      if (currentUser != null) {
+        _userId = currentUser.id;
+        final coopId = await cooperativeRepository.getAdminCooperative(currentUser.id);
+        _coopId = coopId;
+        
+        final client = SupabaseService().client;
+        final coop = await client
+            .from('cooperatives')
+            .select('name')
+            .eq('id', coopId)
+            .maybeSingle();
+            
+        setState(() {
+          _coopName = coop?['name'] ?? 'Koperasi Terkait';
+          _loadingCoop = false;
+        });
+      } else {
+        setState(() {
+          _coopName = 'Koperasi Terkait';
+          _loadingCoop = false;
+        });
+      }
+    } catch (_) {
+      setState(() {
+        _coopName = 'Koperasi Terkait';
+        _loadingCoop = false;
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -80,6 +128,31 @@ class _CreateArticlePageState extends State<CreateArticlePage> {
                 ),
                 child: Column(
                   children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF1F5F9),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.storefront_outlined, color: Color(0xFF64748B), size: 20),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Penerbit: $_coopName',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF475569),
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     CustomTextField(
                       controller: _titleController,
                       labelText: 'Judul Progres',
@@ -211,16 +284,54 @@ class _CreateArticlePageState extends State<CreateArticlePage> {
             ),
           ),
           child: CustomButton(
-            text: 'Kirim Update',
+            text: _isSubmitting ? 'Memproses...' : 'Kirim Update',
             icon: Icons.send,
             backgroundColor: const Color(0xFFDC2626),
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Mengirim update progres...')),
-                );
-              }
-            },
+            onPressed: _isSubmitting || _loadingCoop
+                ? null
+                : () async {
+                    if (_formKey.currentState!.validate()) {
+                      if (_coopId == null || _userId == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Data koperasi atau user tidak ditemukan.')),
+                        );
+                        return;
+                      }
+
+                      setState(() {
+                        _isSubmitting = true;
+                      });
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Mengirim update progres...')),
+                      );
+
+                      final success = await cooperativeRepository.createArticle(
+                        cooperativeId: _coopId!,
+                        title: _titleController.text,
+                        content: _descController.text,
+                        createdBy: _userId!,
+                      );
+
+                      if (success) {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Update progres berhasil diterbitkan!')),
+                          );
+                          Navigator.pop(context);
+                        }
+                      } else {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Gagal menerbitkan update progres.')),
+                          );
+                          setState(() {
+                            _isSubmitting = false;
+                          });
+                        }
+                      }
+                    }
+                  },
           ),
         ),
       ),

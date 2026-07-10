@@ -22,6 +22,8 @@ import 'presentation/pages/profile/profile_page.dart';
 import 'presentation/pages/room/room_discussion_page.dart';
 import 'presentation/pages/room/create_room_page.dart';
 import 'presentation/pages/reedem/redeem_history_page.dart';
+import 'presentation/pages/article/article_detail_page.dart';
+import 'presentation/pages/article/create_article_page.dart';
 
 class KonectApp extends StatelessWidget {
   const KonectApp({super.key});
@@ -65,6 +67,10 @@ class KonectApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => CooperativeDetailPage(coopId: coopId),
               );
+            case AppConstants.articleDetailRoute:
+              return MaterialPageRoute(builder: (_) => const ArticleDetailPage());
+            case AppConstants.createArticleRoute:
+              return MaterialPageRoute(builder: (_) => const CreateArticlePage());
             case AppConstants.voucherRoute:
               return MaterialPageRoute(builder: (_) => const VoucherPage());
             case AppConstants.profileRoute:

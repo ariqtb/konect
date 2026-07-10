@@ -29,48 +29,68 @@ class CooperativeRepository {
   Future<CooperativeDetail> getCooperativeDetail(String id) async {
     try {
       final client = SupabaseService().client;
-      
-      final profile = await client.from('profil_koperasi').select().eq('koperasi_ref', id).maybeSingle();
-      if (profile == null) throw Exception('Koperasi tidak ditemukan');
-
-      final board = await client.from('pengurus_koperasi').select().eq('koperasi_ref', id).limit(1).maybeSingle();
-      
-      final members = await client.from('anggota_koperasi').select('anggota_ref').eq('koperasi_ref', id);
-      
-      return CooperativeDetail(
-        coopId: id,
-        name: profile['nama_koperasi']?.toString() ?? 'Koperasi Tanpa Nama',
-        category: profile['kategori_usaha']?.toString() ?? 'Umum',
-        address: profile['alamat_lengkap']?.toString() ?? 'Alamat tidak tersedia',
-        about: profile['tentang_koperasi']?.toString() ?? 'Belum ada deskripsi tentang koperasi ini.',
-        chairperson: board?['nama']?.toString() ?? 'Belum ada pengurus',
-        memberCount: (members as List).length,
-        legalStatus: profile['status_registrasi']?.toString() ?? 'Drafted',
-        phone: board?['no_hp']?.toString() ?? '-',
-        email: board?['email']?.toString() ?? '-',
-        rooms: const [
-          CoopDiscussionRoom(
-            id: 'r1',
-            title: 'Diskusi Tahunan',
-            description: 'Membahas operasional dan SHU koperasi.',
-            status: 'Aktif',
-            date: 'Sekarang',
-            membersCount: 10,
-            avatars: [],
-          )
-        ],
-        updates: const [
-          CoopTimelineUpdate(
-            id: 'u1',
-            title: 'Koperasi Telah Terdaftar',
-            description: 'Koperasi telah aktif dan siap melayani anggota.',
-            date: 'Baru saja',
-            type: 'info',
-          )
-        ],
+      final response = await client.rpc(
+        'get_cooperative_detail',
+        params: {'p_coop_ref': id},
       );
+      
+      if (response == null) {
+        throw Exception('Koperasi tidak ditemukan');
+      }
+
+      return CooperativeDetail.fromJson(Map<String, dynamic>.from(response));
     } catch (e) {
       throw Exception('Failed to fetch cooperative details: $e');
+    }
+  }
+
+  Future<String> getAdminCooperative(String userId) async {
+    try {
+      final client = SupabaseService().client;
+      final member = await client
+          .from('cooperative_members')
+          .select('cooperative_id')
+          .eq('user_id', userId)
+          .maybeSingle();
+      if (member != null && member['cooperative_id'] != null) {
+        return member['cooperative_id'];
+      }
+
+      final room = await client
+          .from('discussion_rooms')
+          .select('cooperative_id')
+          .eq('created_by', userId)
+          .limit(1)
+          .maybeSingle();
+      if (room != null && room['cooperative_id'] != null) {
+        return room['cooperative_id'];
+      }
+
+      final coop = await client.from('cooperatives').select('id').limit(1).maybeSingle();
+      if (coop != null && coop['id'] != null) {
+        return coop['id'];
+      }
+    } catch (_) {}
+    return '00000000-0000-0000-0000-0000000000a1';
+  }
+
+  Future<bool> createArticle({
+    required String cooperativeId,
+    required String title,
+    required String content,
+    required String createdBy,
+  }) async {
+    try {
+      final client = SupabaseService().client;
+      await client.from('articles').insert({
+        'cooperative_id': cooperativeId,
+        'title': title,
+        'content': content,
+        'created_by': createdBy,
+      });
+      return true;
+    } catch (_) {
+      return false;
     }
   }
 }
