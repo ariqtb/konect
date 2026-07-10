@@ -1,5 +1,9 @@
 class CooperativeDetail {
   final String coopId;
+  final String name;
+  final String category;
+  final String address;
+  final String about;
   final String chairperson;
   final int memberCount;
   final String legalStatus;
@@ -10,6 +14,10 @@ class CooperativeDetail {
 
   const CooperativeDetail({
     required this.coopId,
+    required this.name,
+    required this.category,
+    required this.address,
+    required this.about,
     required this.chairperson,
     required this.memberCount,
     required this.legalStatus,
@@ -22,6 +30,10 @@ class CooperativeDetail {
   factory CooperativeDetail.fromJson(Map<String, dynamic> json) {
     return CooperativeDetail(
       coopId: json['coop_id'] ?? '',
+      name: json['name'] ?? '',
+      category: json['category'] ?? '',
+      address: json['address'] ?? '',
+      about: json['about'] ?? '',
       chairperson: json['chairperson'] ?? '',
       memberCount: json['member_count'] ?? 0,
       legalStatus: json['legal_status'] ?? '',
@@ -39,6 +51,10 @@ class CooperativeDetail {
   Map<String, dynamic> toJson() {
     return {
       'coop_id': coopId,
+      'name': name,
+      'category': category,
+      'address': address,
+      'about': about,
       'chairperson': chairperson,
       'member_count': memberCount,
       'legal_status': legalStatus,

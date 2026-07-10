@@ -194,9 +194,9 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               ),
               const SizedBox(height: 12),
               // Cooperative Title
-              const Text(
-                'Kopdes Makmur Jaya',
-                style: TextStyle(
+              Text(
+                details.name,
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -204,19 +204,34 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               ),
               const SizedBox(height: 6),
               // Address Row
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.location_on_outlined,
+                  const Icon(Icons.location_on_outlined,
                       color: Colors.white70, size: 16),
-                  SizedBox(width: 4),
-                  Text(
-                    'Desa Sukatani, Jawa Barat',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white70,
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      details.address,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white70,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                details.about,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                  height: 1.5,
+                ),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

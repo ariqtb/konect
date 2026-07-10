@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../../core/constants.dart';
 import '../../../core/theme.dart';
-import '../koperasi/koperasi_page.dart';
 import '../voucher/voucher_page.dart';
 import '../profile/profile_page.dart';
 
@@ -79,11 +78,9 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
               ),
-              // Index 1: Koperasi
-              const KoperasiPage(),
-              // Index 2: Voucher
+              // Index 1: Voucher
               const VoucherPage(),
-              // Index 3: Profile
+              // Index 2: Profile
               const ProfilePage(),
             ],
           ),
@@ -376,14 +373,19 @@ class _MainPageState extends State<MainPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Koperasi Desa Terdekat',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF111C2D),
+              Expanded(
+                child: const Text(
+                  'Koperasi Desa Terdekat',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF111C2D),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
+              const SizedBox(width: 8),
               GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, AppConstants.cooperativeRoute);
@@ -860,13 +862,12 @@ class _MainPageState extends State<MainPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(child: _buildNavItem(Icons.home_outlined, 'Home', 0)),
-            Expanded(
-                child: _buildNavItem(Icons.storefront_outlined, 'Koperasi', 1)),
+            Expanded(child: const SizedBox()), // Empty space to balance
             const SizedBox(width: 72),
             Expanded(
                 child: _buildNavItem(
-                    Icons.confirmation_number_outlined, 'Voucher', 2)),
-            Expanded(child: _buildNavItem(Icons.person_outline, 'Profile', 3)),
+                    Icons.confirmation_number_outlined, 'Voucher', 1)),
+            Expanded(child: _buildNavItem(Icons.person_outline, 'Profile', 2)),
           ],
         ),
       ),
