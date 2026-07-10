@@ -62,7 +62,7 @@ class _VotingPageState extends State<VotingPage> {
               child: ListView.separated(
                 padding: const EdgeInsets.all(12),
                 itemCount: state.items.length,
-                separatorBuilder: (_, _) => const SizedBox(height: 8),
+                separatorBuilder: (_, a) => const SizedBox(height: 8),
                 itemBuilder: (_, i) => _VotingCard(item: state.items[i]),
               ),
             );

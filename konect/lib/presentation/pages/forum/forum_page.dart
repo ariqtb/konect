@@ -52,7 +52,7 @@ class _ForumPageState extends State<ForumPage> {
               child: ListView.separated(
                 padding: const EdgeInsets.all(12),
                 itemCount: state.topics.length,
-                separatorBuilder: (_, _) => const SizedBox(height: 8),
+                separatorBuilder: (_, a) => const SizedBox(height: 8),
                 itemBuilder: (_, i) => _TopicCard(topic: state.topics[i]),
               ),
             );
