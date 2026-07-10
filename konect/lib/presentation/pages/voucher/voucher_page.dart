@@ -23,6 +23,7 @@ class _VoucherPageState extends State<VoucherPage> {
       'badgeColor': const Color(0xFFDC2626),
       'image': 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=400',
       'desc': 'Voucher ini dapat digunakan untuk pembelian sembako (beras, minyak, telur) di seluruh unit Koperasi Desa Makmur Jaya.',
+      'category': 'Sembako',
     },
     {
       'title': 'Voucher Token Listrik Rp 20.000',
@@ -31,6 +32,7 @@ class _VoucherPageState extends State<VoucherPage> {
       'badgeColor': Colors.transparent,
       'image': 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400',
       'desc': 'Potongan langsung untuk pembelian token listrik prabayar melalui koperasi.',
+      'category': 'Listrik',
     },
     {
       'title': 'Voucher Belanja Koperasi',
@@ -39,6 +41,7 @@ class _VoucherPageState extends State<VoucherPage> {
       'badgeColor': const Color(0xFF494BD6),
       'image': 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=400',
       'desc': 'Belanja kebutuhan sehari-hari di unit toko koperasi desa.',
+      'category': 'Sembako',
     },
     {
       'title': 'Paket Internet Desa 24 Jam',
@@ -47,6 +50,7 @@ class _VoucherPageState extends State<VoucherPage> {
       'badgeColor': Colors.transparent,
       'image': 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=400',
       'desc': 'Akses internet desa selama 24 jam penuh.',
+      'category': 'Hiburan',
     },
   ];
 
@@ -78,6 +82,92 @@ class _VoucherPageState extends State<VoucherPage> {
         data: data,
         isOwned: isOwned,
       ),
+    );
+  }
+
+  void _showFilterBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE2E8F0),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Pilih Kategori',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF0F172A),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Flexible(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: _categories.length,
+                      separatorBuilder: (_, __) => const Divider(color: Color(0xFFF1F5F9), height: 1),
+                      itemBuilder: (context, index) {
+                        final cat = _categories[index];
+                        final isSelected = _selectedCategory == cat;
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              _selectedCategory = cat;
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  cat,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                    color: isSelected ? AppColors.brandRed : const Color(0xFF0F172A),
+                                  ),
+                                ),
+                                if (isSelected)
+                                  const Icon(
+                                    Icons.check_rounded,
+                                    color: AppColors.brandRed,
+                                    size: 20,
+                                  ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -188,83 +278,90 @@ class _VoucherPageState extends State<VoucherPage> {
               ),
               const SizedBox(height: 24),
 
-              // Tabs
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF1F5F9),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    _buildTabButton('Tersedia', _isAvailableSelected, () {
-                      setState(() => _isAvailableSelected = true);
-                    }),
-                    _buildTabButton('Milik Saya', !_isAvailableSelected, () {
-                      setState(() => _isAvailableSelected = false);
-                    }),
+              // Tab & Filter Row
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF1F5F9),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          _buildTabButton('Tersedia', _isAvailableSelected, () {
+                            setState(() => _isAvailableSelected = true);
+                          }),
+                          _buildTabButton('Milik Saya', !_isAvailableSelected, () {
+                            setState(() => _isAvailableSelected = false);
+                          }),
+                        ],
+                      ),
+                    ),
+                  ),
+                  if (_isAvailableSelected) ...[
+                    const SizedBox(width: 12),
+                    GestureDetector(
+                      onTap: () => _showFilterBottomSheet(context),
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF1F5F9),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          Icons.tune_rounded,
+                          color: _selectedCategory == 'Semua' 
+                              ? const Color(0xFF475569) 
+                              : AppColors.brandRed,
+                          size: 20,
+                        ),
+                      ),
+                    ),
                   ],
-                ),
+                ],
               ),
               const SizedBox(height: 24),
 
-              // Category chips (only for Tersedia tab)
-              if (_isAvailableSelected) ...[
-                SizedBox(
-                  height: 40,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _categories.length,
-                    separatorBuilder: (_, __) => const SizedBox(width: 8),
-                    itemBuilder: (context, index) {
-                      final cat = _categories[index];
-                      final isSelected = _selectedCategory == cat;
-                      return GestureDetector(
-                        onTap: () => setState(() => _selectedCategory = cat),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: isSelected ? AppColors.brandRed : const Color(0xFFF1F5F9),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            cat,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: isSelected ? Colors.white : const Color(0xFF475569),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 24),
-              ],
-
               // Grid
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.82,
-                ),
-                itemCount: _isAvailableSelected
-                    ? _availableVouchers.length
-                    : _ownedVouchers.length,
-                itemBuilder: (context, index) {
-                  if (_isAvailableSelected) {
-                    final v = _availableVouchers[index];
-                    return _buildAvailableCard(v);
-                  } else {
-                    final v = _ownedVouchers[index];
-                    return _buildOwnedCard(v);
+              Builder(
+                builder: (context) {
+                  final filteredVouchers = _isAvailableSelected
+                      ? _availableVouchers.where((v) => _selectedCategory == 'Semua' || v['category'] == _selectedCategory).toList()
+                      : _ownedVouchers;
+
+                  if (filteredVouchers.isEmpty) {
+                    return SizedBox(
+                      height: 200,
+                      child: Center(
+                        child: Text(
+                          'Tidak ada voucher untuk kategori "$_selectedCategory"',
+                          style: const TextStyle(color: Color(0xFF64748B), fontSize: 14),
+                        ),
+                      ),
+                    );
                   }
+
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 0.82,
+                    ),
+                    itemCount: filteredVouchers.length,
+                    itemBuilder: (context, index) {
+                      final v = filteredVouchers[index];
+                      if (_isAvailableSelected) {
+                        return _buildAvailableCard(v);
+                      } else {
+                        return _buildOwnedCard(v);
+                      }
+                    },
+                  );
                 },
               ),
               const SizedBox(height: 40),
