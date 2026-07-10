@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants.dart';
+import '../../../core/theme.dart';
 
 class KoperasiPage extends StatefulWidget {
   const KoperasiPage({super.key});
@@ -14,34 +15,37 @@ class _KoperasiPageState extends State<KoperasiPage> {
   final List<String> _categories = [
     'Semua',
     'Sembako',
-    'Simpan Pinjam',
+    'Token Listrik',
     'Pertanian',
   ];
 
-  final List<Map<String, dynamic>> _koperasiList = [
+  static const List<Map<String, dynamic>> _koperasiList = [
     {
-      'name': 'Koperasi Tani Makmur',
-      'image': 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=400&fit=crop',
-      'address': 'Jl. Raya Desa No. 42, Dusun Selatan',
-      'distance': '200m dari lokasimu',
+      'id': '1',
+      'name': 'Koperasi Tani Sukamaju',
+      'address': 'Jl. Raya Desa Sukamaju No. 12',
+      'distance': '1.2 km',
       'isOpen': true,
+      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFoJgR2qD9tq72e1s2tG3h5k9s82H2v8L7m3y5q8s9t2v8c8L3y5s8H2v8L7m3y5s8=w400-h200-c',
       'category': 'Pertanian',
     },
     {
-      'name': 'Koperasi Unit Desa (KUD) Mandiri',
-      'image': 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&fit=crop',
-      'address': 'Pusat Desa, Samping Balai Desa',
-      'distance': '200m dari lokasimu',
+      'id': '2',
+      'name': 'Koperasi Sembako Mulia',
+      'address': 'Dusun Krajan RT 02/RW 01',
+      'distance': '2.5 km',
       'isOpen': true,
+      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCK1yMQNzemgA8JjbukSWJhytq4ApsMrjwUF-GBeHOIrZ7qhoh945cfdFZWK5ryUh_quzDE2XS3AXfiCTlGOB7wT9LFHOW0iGlTlQMQuCNCT0VebWkqGOdGKNOiapzU814uROyR7rwGLMAw_1y9A_6dsahL0HaLcm4LFp5MckXxjnrle_wOiRd4xIQeDPM7k4Qm8uDfQMMvbsyp3uF6jKavR9mgwkud_3wIQWLMs8e2EhZccGCcJbh6VsuOXLllWVEWKkU=w400-h200-c',
       'category': 'Sembako',
     },
     {
-      'name': 'Koperasi Wanita Sejahtera',
-      'image': 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&fit=crop',
-      'address': 'Dusun Barat, Rt 04 / Rw 02',
-      'distance': '600m dari lokasimu',
+      'id': '3',
+      'name': 'Koperasi Listrik Desa',
+      'address': 'Jl. Balai Desa RT 04/RW 02',
+      'distance': '3.1 km',
       'isOpen': false,
-      'category': 'Simpan Pinjam',
+      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCKj0KyglLbOn2DNZtnYMsq9ynlR1zolGnlJFH_Wi5WD4UFDg61Ko5G0p_9-k8CGSHESAEm6ruFwuqZ_FeYobQJ8ZByPooIyVDKFdMzvvtBo6LWVoBA-Zg-Zh2dCoTOPIiFAuUIms3rKcoYv_fDc_O3VNQsX5BL_SieaMawl9qyZFkmKNXcN2N3EMXBEktJ3UskUHFo055njg4PkXRI3WfbsTcqT4hRBJrIKFnrdk4h6cxtTGMKTL4PS_C8XOFCMztcx00=w400-h200-c',
+      'category': 'Token Listrik',
     },
   ];
 
@@ -55,7 +59,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
             .toList();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC), // brand bg
+      backgroundColor: AppColors.brandBg, // brand bg
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

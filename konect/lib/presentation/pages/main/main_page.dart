@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../../core/constants.dart';
+import '../../../core/theme.dart';
 import '../koperasi/koperasi_page.dart';
 import '../voucher/voucher_page.dart';
 import '../profile/profile_page.dart';
@@ -26,7 +27,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: AppColors.brandBg,
       body: Stack(
         children: [
           IndexedStack(
