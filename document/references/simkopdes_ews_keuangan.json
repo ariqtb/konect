@@ -1,0 +1,110 @@
+{
+  "schema": {
+    "version": "1.0",
+    "exported_at": "2026-07-09T00:00:00+07:00",
+    "exported_by": "sisyphus",
+    "description": "Laporan Kesehatan Keuangan KDKMP Nasional per Tahun 2025 dari dashboard EWS SIMKOPDES"
+  },
+  "type": "simkopdes_ews_keuangan",
+  "source": "https://simkopdes.go.id/pers/ews/kesehatan-keuangan",
+  "as_of": "2026-07-09",
+  "tahun_laporan": 2025,
+  "data": {
+    "ringkasan_laporan": {
+      "total_koperasi": 83382,
+      "sudah_lapor": 31265,
+      "sudah_lapor_persen": 37.5,
+      "belum_lapor": 52117,
+      "belum_lapor_persen": 62.5
+    },
+    "laporan_keuangan_nasional": {
+      "pendapatan_total": 85260000000,
+      "beban_total": 29190000000,
+      "aset_total": 453890000000,
+      "liabilitas_total": 61590000000,
+      "ekuitas_total": 215910000000
+    },
+    "kategori_kesehatan": {
+      "sehat": {
+        "jumlah": 683,
+        "persen": 2.2
+      },
+      "cukup_sehat": {
+        "jumlah": 2087,
+        "persen": 6.7
+      },
+      "tidak_sehat": {
+        "jumlah": 28495,
+        "persen": 91.1
+      },
+      "catatan": "Persentase dihitung dari 31.265 koperasi yang sudah lapor (37.5% dari total 83.382). Mayoritas koperasi yang lapor (91.1%) masuk kategori tidak sehat."
+    },
+    "top_10_koperasi_sehat": [
+      "KOPERASI DESA MERAH PUTIH LIMBANGAN KECAMATAN SUKARAJA (70%)",
+      "KOPERASI DESA MERAH PUTIH GROGOL KECAMATAN GIRI (70%)",
+      "KOPERASI DESA MERAH PUTIH KARYA SAKTI KECAMATAN MUARA KELINGI (70%)",
+      "KOPERASI DESA MERAH PUTIH MEDAN SENEMBAH (70%)",
+      "KOPERASI KELURAHAN MERAH PUTIH SUKAMAJU KECAMATAN CILODONG (70%)",
+      "KOPERASI DESA MERAH PUTIH SUKAMULYA KECAMATAN CIHAURBEUTI (70%)",
+      "KOPERASI DESA MERAH PUTIH JAMBI KECAMATAN BARON (70%)",
+      "KOPERASI DESA MERAH PUTIH KARANG ANYAR KECAMATAN KEMIRI (70%)",
+      "KOPERASI DESA MERAH PUTIH BALIAN (70%)",
+      "KOPERASI DESA MERAH PUTIH CILEMBER KECAMATAN CISARUA (70%)"
+    ],
+    "top_5_provinsi_sehat": [
+      { "rank": 1, "provinsi": "JAWA TENGAH", "persentase_kesehatan": 55 },
+      { "rank": 2, "provinsi": "JAWA TIMUR", "persentase_kesehatan": 55 },
+      { "rank": 3, "provinsi": "JAWA BARAT", "persentase_kesehatan": 55 },
+      { "rank": 4, "provinsi": "ACEH", "persentase_kesehatan": 53 },
+      { "rank": 5, "provinsi": "SUMATERA SELATAN", "persentase_kesehatan": 54 }
+    ],
+    "ringkasan_keuangan_provinsi": {
+      "pendapatan_5_tertinggi": [
+        { "rank": 1, "provinsi": "BANTEN", "nilai": 50820000000 },
+        { "rank": 2, "provinsi": "MALUKU UTARA", "nilai": 4640000000 },
+        { "rank": 3, "provinsi": "JAWA TIMUR", "nilai": 4430000000 },
+        { "rank": 4, "provinsi": "JAWA BARAT", "nilai": 2980000000 },
+        { "rank": 5, "provinsi": "KALIMANTAN SELATAN", "nilai": 2790000000 }
+      ],
+      "beban_5_tertinggi": [
+        { "rank": 1, "provinsi": "JAWA TIMUR", "nilai": 5020000000 },
+        { "rank": 2, "provinsi": "JAWA BARAT", "nilai": 2880000000 },
+        { "rank": 3, "provinsi": "PAPUA TENGAH", "nilai": 2340000000 },
+        { "rank": 4, "provinsi": "BALI", "nilai": 2210000000 },
+        { "rank": 5, "provinsi": "JAWA TENGAH", "nilai": 1620000000 }
+      ],
+      "aset_5_tertinggi": [
+        { "rank": 1, "provinsi": "JAWA TIMUR", "nilai": 69520000000 },
+        { "rank": 2, "provinsi": "BANTEN", "nilai": 65180000000 },
+        { "rank": 3, "provinsi": "SUMATERA UTARA", "nilai": 42920000000 },
+        { "rank": 4, "provinsi": "JAWA BARAT", "nilai": 27730000000 },
+        { "rank": 5, "provinsi": "JAWA TENGAH", "nilai": 27630000000 }
+      ],
+      "liabilitas_5_tertinggi": [
+        { "rank": 1, "provinsi": "JAWA TIMUR", "nilai": 18290000000 },
+        { "rank": 2, "provinsi": "BALI", "nilai": 12240000000 },
+        { "rank": 3, "provinsi": "JAWA BARAT", "nilai": 6050000000 },
+        { "rank": 4, "provinsi": "JAWA TENGAH", "nilai": 5260000000 },
+        { "rank": 5, "provinsi": "NUSA TENGGARA TIMUR", "nilai": 3160000000 }
+      ],
+      "ekuitas_5_tertinggi": [
+        { "rank": 1, "provinsi": "JAWA TIMUR", "nilai": 35280000000 },
+        { "rank": 2, "provinsi": "SUMATERA UTARA", "nilai": 25130000000 },
+        { "rank": 3, "provinsi": "JAWA TENGAH", "nilai": 23420000000 },
+        { "rank": 4, "provinsi": "JAWA BARAT", "nilai": 19470000000 },
+        { "rank": 5, "provinsi": "NUSA TENGGARA TIMUR", "nilai": 16340000000 }
+      ]
+    }
+  },
+  "key_insights": [
+    "Hanya 37,5% koperasi (31.265 dari 83.382) yang sudah lapor keuangan untuk tahun 2025",
+    "62,5% koperasi (52.117) belum lapor keuangan sama sekali",
+    "91,1% koperasi yang sudah lapor masuk kategori TIDAK SEHAT",
+    "Hanya 2,2% koperasi yang SEHAT",
+    "Jawa Tengah, Jawa Timur, Jawa Barat menjadi provinsi dengan koperasi paling sehat (55% kesehatan)",
+    "Banten mendominasi pendapatan koperasi meski bukan provinsi dengan jumlah koperasi terbesar",
+    "Total aset nasional: Rp 453,89 Milyar (sangat kecil dibanding estimasi proyek Rp240 Triliun)",
+    "Total pendapatan nasional: Rp 85,26 Milyar (dari koperasi yang sudah lapor)"
+  ],
+  "tags": ["simkopdes", "ews", "kesehatan keuangan", "laporan 2025", "9 juli 2026"]
+}

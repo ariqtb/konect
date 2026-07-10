@@ -1,0 +1,65 @@
+{
+  "schema": {
+    "version": "1.0",
+    "exported_at": "2026-07-09T00:00:00+07:00",
+    "exported_by": "sisyphus",
+    "description": "Data agregat nasional dari dashboard resmi SIMKOPDES (simkopdes.go.id) per 9 Juli 2026"
+  },
+  "type": "simkopdes_national",
+  "source": "https://simkopdes.go.id/pers/dashboard",
+  "as_of": "2026-07-09",
+  "data": {
+    "total_koperasi": 83382,
+    "koperasi_berbadan_hukum": {
+      "total": 83382,
+      "kelurahan": 8576,
+      "desa": 74805,
+      "telah_memiliki_akun": 79706,
+      "telah_memiliki_npwp": 80978,
+      "telah_memiliki_nib": 60773
+    },
+    "modal_koperasi": {
+      "simpanan_pokok": 41514541015,
+      "simpanan_wajib": 10374248180
+    },
+    "dampak_ekonomi": {
+      "volume_transaksi_2026": 53262,
+      "nilai_transaksi_2026": 56571080135,
+      "produk_teratas": [
+        { "no": 1, "produk": "Pupuk NPK Phonska", "volume": 8178733, "nilai": 15093051120 },
+        { "no": 2, "produk": "Pupuk Urea N 46%", "volume": 6206984, "nilai": 11272048800 },
+        { "no": 3, "produk": "BARANG LAINNYA", "volume": 525272, "nilai": 7900985061.25 },
+        { "no": 4, "produk": "MINYAK GORENG BIMOLI 2L", "volume": 598, "nilai": 3627964240 },
+        { "no": 5, "produk": "BERAS MEDIUM SPHP 5 KG", "volume": 54549, "nilai": 2417089253 },
+        { "no": 6, "produk": "BERAS", "volume": 26970, "nilai": 1138097939.97 },
+        { "no": 7, "produk": "SUNCO MINYAK GORENG POUCH 2L", "volume": 11362, "nilai": 501741040.74 },
+        { "no": 8, "produk": "GAS LPG 3 KG", "volume": 25423, "nilai": 476901231 },
+        { "no": 9, "produk": "GULA KTM 1KG", "volume": 16204, "nilai": 284781730.87 },
+        { "no": 10, "produk": "FILTER SURYA MERAH 12", "volume": 10306, "nilai": 271455224.91 }
+      ]
+    },
+    "rat_activity": {
+      "koperasi_telah_melaksanakan_rat": 50264,
+      "total_rat_dilaporkan": 6037,
+      "total_diverifikasi_dinas": 44227,
+      "sedang_rat_draft": 14346,
+      "belum_rat": 18772
+    },
+    "kesiapan_pembangunan_gerai": {
+      "data_update": "2026-07-09 14:03 WIB",
+      "lahan_diajukan": 38053,
+      "belum_diverifikasi": 2183,
+      "terverifikasi": 35870,
+      "belum_mulai_pembangunan": 492,
+      "sedang_pembangunan": 19845,
+      "pembangunan_100_persen": 15533
+    },
+    "ringkasan_pembangunan": {
+      "pembangunan_100_persen_persen": 43.3,
+      "sedang_pembangunan_persen": 55.3,
+      "belum_mulai_persen": 1.4,
+      "catatan": "Persentase dihitung dari lahan terverifikasi (35.870 unit)"
+    }
+  },
+  "tags": ["simkopdes", "dashboard", "agregat nasional", "9 juli 2026"]
+}

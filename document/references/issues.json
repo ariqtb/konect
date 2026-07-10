@@ -1,0 +1,231 @@
+{
+  "schema": {
+    "version": "1.1",
+    "exported_at": "2026-07-09T12:00:00+07:00",
+    "exported_by": "sisyphus",
+    "description": "Isu-isu utama dan kontroversi seputar Koperasi Desa Merah Putih"
+  },
+  "type": "issues",
+  "data": [
+    {
+      "id": "iss-001",
+      "title": "Pemangkasan Dana Desa 58%",
+      "category": "anggaran",
+      "severity": "critical",
+      "description": "Pemerintah memangkas 58,03% Dana Desa (Rp34,57 triliun dari Rp60,57T) untuk dialokasikan ke program Kopdes melalui PMK No. 7/2026",
+      "impact": "Infrastruktur desa terhenti, kepala desa kehilangan fleksibilitas anggaran",
+      "affected_parties": ["Kepala Desa", "Perangkat Desa", "Masyarakat Desa", "BUMDes"],
+      "sources_supporting": ["src-bbc-2026", "src-pmk-7-2026", "src-apdesi-ntb"],
+      "tags": ["dana desa", "anggaran", "pemangkasan", "infrastruktur", "pmk"]
+    },
+    {
+      "id": "iss-002",
+      "title": "Skema Pembiayaan dan Risiko Gagal Bayar",
+      "category": "keuangan",
+      "severity": "critical",
+      "description": "Pinjaman Himbara Rp3 miliar per unit dengan tenor 6 tahun, bunga 6%/tahun. Cicilan dibayar dari Dana Desa/DAU/DBH. Berpotensi gagal bayar Rp85,96 triliun",
+      "impact": "Risiko likuiditas bank Himbara Rp2,8-4,6 triliun/bulan. Beban fiskal jangka panjang",
+      "affected_parties": ["Bank Himbara", "Pemerintah Pusat", "Perangkat Desa", "Masyarakat"],
+      "sources_supporting": ["src-celios-full"],
+      "tags": ["pembiayaan", "himbara", "gagal bayar", "likuiditas", "fiskal"]
+    },
+    {
+      "id": "iss-003",
+      "title": "Pendekatan Top-Down dan Komando",
+      "category": "tata_kelola",
+      "severity": "high",
+      "description": "Kopdes dibentuk via Inpres No. 9/2025 (instruksi presiden), bukan inisiatif warga. Melanggar Putusan MK No. 28/PUU-XI/2013 dan UU No. 25/1992",
+      "impact": "Bertentangan dengan prinsip koperasi yang bottom-up, legitimasi dipertanyakan",
+      "affected_parties": ["Masyarakat Desa", "Pemerintah", "Dekopin", "YLBHI"],
+      "sources_supporting": ["src-idn-times-ylbhi", "src-dekopin-kritik", "src-fh-ugm-policy"],
+      "tags": ["top-down", "komando", "inpres", "mk", "legitimasi"]
+    },
+    {
+      "id": "iss-004",
+      "title": "Keterlibatan TNI dan Militerisasi Ekonomi",
+      "category": "tata_kelola",
+      "severity": "high",
+      "description": "TNI dilibatkan dalam pembangunan fisik via PT Agrinas. YLBHI dan GMNI mengecam sebagai normalisasi dwifungsi TNI dalam bentuk baru",
+      "impact": "Sekuritisasi ruang ekonomi sipil, ketakutan masyarakat",
+      "affected_parties": ["TNI", "PT Agrinas", "Masyarakat Sipil", "YLBHI", "GMNI"],
+      "sources_supporting": ["src-idn-times-ylbhi", "src-gmni-dki"],
+      "tags": ["tni", "militerisasi", "dwifungsi", "agrinas", "sekuritisasi"]
+    },
+    {
+      "id": "iss-005",
+      "title": "Korban Jiwa dalam Pelatihan Militer",
+      "category": "keselamatan",
+      "severity": "critical",
+      "description": "5 calon manajer SPPI meninggal saat Latihan Dasar Militer (Latsarmil) karena heat stroke, TBC, dan henti jantung",
+      "impact": "Kemhan hentikan Latsarmil, ganti dengan pembekalan bela negara. Kerugian nyawa dan biaya Rp1,35 triliun",
+      "affected_parties": ["Peserta Pelatihan", "Kemhan", "Keluarga Korban", "Komnas HAM"],
+      "sources_supporting": ["src-idn-times-ylbhi", "src-kemhan-latsarmil", "src-komisi1-dpr-biaya"],
+      "tags": ["korban jiwa", "latsarmil", "pelatihan", "militer", "keselamatan"]
+    },
+    {
+      "id": "iss-006",
+      "title": "Lokasi Pembangunan Tidak Strategis",
+      "category": "operasional",
+      "severity": "medium",
+      "description": "Banyak lokasi Kopdes dianggap tidak strategis: tengah hutan (Tanggamus), dekat kuburan, atas bukit (Kendal), tepi jurang, sengketa lahan",
+      "impact": "Meragukan keseriusan perencanaan, membuang sumber daya",
+      "affected_parties": ["Masyarakat Desa", "Pemerintah Daerah"],
+      "sources_supporting": ["src-tribun-lokasi"],
+      "tags": ["lokasi", "hutan", "kuburan", "sengketa lahan", "perencanaan"]
+    },
+    {
+      "id": "iss-007",
+      "title": "Risiko Korupsi dan Kebocoran Anggaran",
+      "category": "korupsi",
+      "severity": "critical",
+      "description": "65% perangkat desa melihat celah korupsi. Potensi kebocoran Rp48 triliun/tahun. Penunjukan langsung PT Agrinas tanpa tender",
+      "impact": "Potensi kerugian negara sangat besar, hilangnya kepercayaan publik",
+      "affected_parties": ["Masyarakat", "Pemerintah", "ICW", "KPK", "Kejaksaan"],
+      "sources_supporting": ["src-celios-full", "src-detik-impor-pikap", "src-jrn-008"],
+      "tags": ["korupsi", "kebocoran", "agrinas", "penunjukan langsung", "icw"]
+    },
+    {
+      "id": "iss-008",
+      "title": "Impor Pikap 105.000 Unit dari India",
+      "category": "pengadaan",
+      "severity": "high",
+      "description": "Rencana impor 105.000 unit pikap dari India untuk operasional Kopdes. Ditolak Menteri Perindustrian dan ICW karena penunjukan langsung tanpa tender",
+      "impact": "Merugikan industri otomotif lokal, potensi markup harga",
+      "affected_parties": ["Industri Otomotif Lokal", "PT Agrinas", "Kemenperin", "ICW"],
+      "sources_supporting": ["src-detik-impor-pikap"],
+      "tags": ["impor", "pikap", "india", "industri lokal", "tender"]
+    },
+    {
+      "id": "iss-009",
+      "title": "Denda Rp100 Juta untuk Calon Manajer",
+      "category": "kebijakan",
+      "severity": "medium",
+      "description": "Aturan denda Rp100 juta bagi calon manajer yang mundur dari pelatihan. Dicabut setelah viral dan mendapat tekanan publik",
+      "impact": "Indikasi pemaksaan partisipasi, pelanggaran hak individu",
+      "affected_parties": ["Calon Manajer", "Pemerintah"],
+      "sources_supporting": ["src-cnn-pencabutan-denda"],
+      "tags": ["denda", "manajer", "pemaksaan", "dicabut"]
+    },
+    {
+      "id": "iss-010",
+      "title": "Krisis Kepercayaan Publik",
+      "category": "sosial",
+      "severity": "high",
+      "description": "59% sentimen negatif di TikTok, konten negatif paling cepat menyebar di X. Kata kunci dominan: 'korupsi', 'anggaran', 'proyek'",
+      "impact": "Rendahnya partisipasi masyarakat, potensi kegagalan program",
+      "affected_parties": ["Masyarakat", "Pemerintah", "Kopdes"],
+      "sources_supporting": ["src-bedata-sentimen"],
+      "tags": ["kepercayaan", "sentimen", "negatif", "media sosial"]
+    },
+    {
+      "id": "iss-011",
+      "title": "Kompetisi dengan BUMDes dan Usaha Lokal",
+      "category": "ekonomi",
+      "severity": "high",
+      "description": "Kopdes berpotensi mematikan BUMDes dan usaha lokal. Model bisnis ritel (minimarket) bersaing langsung dengan warung existing",
+      "impact": "46% perangkat desa khawatir konflik sosial. BUMDes mati suri",
+      "affected_parties": ["BUMDes", "UMKM Desa", "Warung Lokal", "Masyarakat"],
+      "sources_supporting": ["src-celios-full", "src-bbc-2026", "src-jrn-002"],
+      "tags": ["bumdes", "kompetisi", "umkm", "ritel", "konflik sosial"]
+    },
+    {
+      "id": "iss-012",
+      "title": "Sentralisasi dan Otonomi Desa Tergerus",
+      "category": "tata_kelola",
+      "severity": "high",
+      "description": "Desain seragam dari pusat: usaha, mekanisme pelaporan, struktur semua sama. 35% perangkat desa mencium kepentingan politik",
+      "impact": "Otonomi desa terkikis, keputusan tidak sesuai kebutuhan lokal",
+      "affected_parties": ["Pemerintah Desa", "Masyarakat", "Pemerintah Pusat"],
+      "sources_supporting": ["src-celios-full", "src-dekopin-kritik", "src-fh-ugm-policy"],
+      "tags": ["sentralisasi", "otonomi desa", "seragam", "politik"]
+    },
+    {
+      "id": "iss-013",
+      "title": "Tidak Ada Studi Kelayakan",
+      "category": "perencanaan",
+      "severity": "high",
+      "description": "KPPOD dan berbagai pihak mengkritik ketiadaan studi kelayakan yang memadai sebelum program diluncurkan",
+      "impact": "Program berisiko tinggi gagal karena tidak dirancang berdasarkan data dan analisis",
+      "affected_parties": ["Masyarakat Desa", "Pemerintah"],
+      "sources_supporting": ["src-kppod"],
+      "tags": ["studi kelayakan", "perencanaan", "risiko"]
+    },
+    {
+      "id": "iss-014",
+      "title": "Biaya Pelatihan Tidak Efisien",
+      "category": "keuangan",
+      "severity": "medium",
+      "description": "Biaya Rp45 juta/orang dengan proporsi 30 hari latihan militer dan 15 hari materi koperasi. Total Rp1,35 triliun untuk 30.000 peserta",
+      "impact": "Pemborosan anggaran, fokus yang salah (lebih banyak militer daripada koperasi)",
+      "affected_parties": ["Peserta", "APBN", "Kemhan", "Kemenkop"],
+      "sources_supporting": ["src-komisi1-dpr-biaya", "src-kemhan-latsarmil"],
+      "tags": ["biaya", "pelatihan", "efisiensi", "anggaran"]
+    },
+    {
+      "id": "iss-015",
+      "title": "Pemangkasan Target 80.000 → 40.000",
+      "category": "kebijakan",
+      "severity": "high",
+      "description": "Pemerintah pangkas target dari 80.000 jadi 40.000 beroperasi akhir 2026. Fokus beralih dari kuantitas ke kualitas. Target Oktober 2026 operasional penuh",
+      "impact": "Target turun drastis 50%, indikasi realitas lebih kecil dari ambisi awal",
+      "affected_parties": ["Pemerintah Pusat", "Masyarakat Desa", "Pelaksana Program"],
+      "sources_supporting": ["src-bisnis-target-dipangkas", "src-antara-40k-2026", "src-mediaindonesia-40k-oktober"],
+      "tags": ["target", "pemangkasan", "kuantitas", "kualitas", "oktober"]
+    },
+    {
+      "id": "iss-016",
+      "title": "Kematian Detail 5 Peserta SPPI",
+      "category": "keselamatan",
+      "severity": "critical",
+      "description": "Detail 5 korban Latsarmil: Yonanda (cardiac arrest, Baturaja, 17 Juni), Anisa (heat stroke, Balikpapan, 18 Juni), Novia (TBC, Jakarta, 22 Juni), Rifki (cardiac arrest, Jakarta, 26 Juni), Nola (cardiac arrest, Kalimantan, 26 Juni). 35.476 total peserta",
+      "impact": "Kronologi kematian terungkap, tuntutan investigasi independen menguat",
+      "affected_parties": ["Keluarga Korban", "Kemhan", "Peserta SPPI", "Komnas HAM"],
+      "sources_supporting": ["src-merdeka-mitigasi", "src-bisnisia-sppi", "src-tribun-wamenhan"],
+      "tags": ["korban jiwa", "sppi", "latsarmil", "detail", "kronologi"]
+    },
+    {
+      "id": "iss-017",
+      "title": "Santunan Belum Jelas",
+      "category": "keselamatan",
+      "severity": "medium",
+      "description": "Santunan Rp92-168jt tergantung penyebab. Verifikasi masih berlangsung. Koalisi sipil desak investigasi independen Komnas HAM",
+      "impact": "Keluarga korban belum mendapat kepastian, kepercayaan publik semakin rendah",
+      "affected_parties": ["Keluarga Korban", "Kemhan", "Koalisi Sipil", "Komnas HAM"],
+      "sources_supporting": ["src-kompas-santunan", "src-koalisi-sipil"],
+      "tags": ["santunan", "verifikasi", "koalisi sipil", "komnas ham"]
+    },
+    {
+      "id": "iss-018",
+      "title": "Tim Investigasi Kemhan-Kemenkes",
+      "category": "tata_kelola",
+      "severity": "medium",
+      "description": "Tim investigasi gabungan dibentuk usut 5 kematian. Tracing TBC massal. Pemeriksaan kesehatan lebih ketat",
+      "impact": "Respons institusional terhadap krisis, tetapi efektivitas masih dipertanyakan",
+      "affected_parties": ["Kemhan", "Kemenkes", "Peserta SPPI", "Keluarga Korban"],
+      "sources_supporting": ["src-viva-tim-investigasi"],
+      "tags": ["investigasi", "kemhan", "kemenkes", "tbc", "pemeriksaan"]
+    },
+    {
+      "id": "iss-019",
+      "title": "PMK 15/2026 Gantikan PMK 49/2025 dan 63/2025",
+      "category": "regulasi",
+      "severity": "medium",
+      "description": "Regulasi baru diteken. Limit Rp3M/unit, bunga 6%/th, tenor 72 bulan, grace period 6-12 bulan. Mekanisme baru penyaluran dana",
+      "impact": "Perubahan kerangka hukum pembiayaan, implikasi pada kepastian regulasi",
+      "affected_parties": ["Pemerintah", "Bank Himbara", "Pelaksana Kopdes"],
+      "sources_supporting": ["src-pmk-15-2026"],
+      "tags": ["pmk", "regulasi", "pembiayaan", "limit", "tenor"]
+    },
+    {
+      "id": "iss-020",
+      "title": "Proyek tanpa Studi Layak dan Sentralistik",
+      "category": "perencanaan",
+      "severity": "high",
+      "description": "Kritik dari Tribun, Agus Pambagio (prediksi 99% gagal), PSPK UGM, diskusi Fisipol UGM. Desakan audit KPK/BPK/KPPU",
+      "impact": "Kredibilitas program dipertanyakan oleh akademisi dan pakar kebijakan publik",
+      "affected_parties": ["Masyarakat Desa", "Pemerintah", "KPK", "BPK", "KPPU"],
+      "sources_supporting": ["src-tribun-evaluasi-total", "src-agus-pambagio", "src-pspk-ugm", "src-ugm-diskusi-publik"],
+      "tags": ["studi kelayakan", "sentralistik", "audit", "kpk", "bpk", "kppu", "ugm"]
+    }
+  ]
+}
