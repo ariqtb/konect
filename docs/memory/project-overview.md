@@ -42,8 +42,10 @@ Konect hadir sebagai solusi untuk meningkatkan **trust, transparansi, dan partis
 | **Frontend Mobile** | **Flutter 3.10+** (Dart) | Cross-platform (Android, iOS, Web, Desktop) |
 | **State Management** | **flutter_bloc** + equatable | BLoC pattern untuk state management |
 | **Backend/Database** | **Supabase** (PostgreSQL 17 + pgvector) | Self-hosted via Docker |
-| **ML Backend** | **Python FastAPI** (planned) | sentence-transformers untuk embedding & relevance scoring |
-| **Graph Visualization** | **react-force-graph-2d** (planned) | Force-directed graph untuk visualisasi diskusi |
+| **ML Backend** | **MVP: OpenRouter API via Supabase Edge Function** (Deno) | Scoring via Mistral 7B gratis |
+| | **Final: Python FastAPI** (post-hackathon) | sentence-transformers untuk embedding & relevance scoring |
+| **Graph Visualization** | **MVP: Flutter CustomPainter** | Canvas dengan posisi dari relevance_score |
+| | **Final: react-force-graph-2d** (post-hackathon) | Force-directed graph |
 | **Auth** | Supabase Auth (GoTrue) | JWT-based authentication |
 | **Infrastructure** | Docker Compose | Self-hosted Supabase stack |
 
@@ -130,8 +132,9 @@ konect/
 | Flutter App Auth | 🟡 MVP | Login page, auth bloc, auth repo (placeholder) |
 | Flutter App Forum | 🟡 In Progress | BLoC declared, page scaffolding |
 | Flutter App Voting | 🟡 In Progress | BLoC declared, page scaffolding |
-| Python ML Backend | ❌ Belum | machine-learning/ masih kosong |
-| Node Graph Frontend | ❌ Belum | react-force-graph-2d belum diintegrasi |
+| Python ML Backend | ❌ Skip (MVP) | Ganti dengan OpenRouter Edge Function |
+| Node Graph Frontend | 🟡 MVP | Flutter CustomPainter + posisi dari get_topic_graph() |
+| Edge Function scoring | 🟡 In Progress | compute-score/index.ts via OpenRouter |
 | Supabase Production | 🟡 Self-host | Shared hackathon DB, beberapa service ga jalan |
 
 ---

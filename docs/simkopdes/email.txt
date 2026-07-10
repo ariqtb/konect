@@ -1,0 +1,32 @@
+Hello Fellow Finalists,
+
+To fully support your team's MVP development process and application infrastructure during this competition, Google has prepared Google Cloud Credit facilities and a centralized Shared Database Server that you can use immediately.
+
+Here are the Google Cloud account details and database configuration specific to your team:
+
+1. Google Cloud Credit Account ($60)
+ Account Email: 
+
+hackaton.group3a@pendamping.kop.id
+hackaton.group3b@pendamping.kop.id
+hackaton.group3c@pendamping.kop.id
+
+ Default Password: hackatonSIMKOPDES$_
+
+IMPORTANT: After successfully logging in for the first time, you are required to immediately change the default password for the security of your own team's project data.
+
+2. PostgreSQL Database Credentials (Shared DB)
+Use the environment variables ( Environment Variables / .env ) configuration below in your application project to connect to the shared server database :
+
+Code snippet:
+DB_CONNECTION=pgsql
+DB_HOST=34.101.155.200
+DB_PORT=5432
+DB_DATABASE=hackathon_2026
+DB_USERNAME=hackathon_participant_2026
+DB_PASSWORD=*H4ck4thonK3men0P2026@
+Database Usage Requirement: please set your team name/ID as "Table Prefix" in your application database configuration before starting coding.
+
+Enjoy taking advantage of this Google facility, maximize its integration, and good luck competing!
+
+Regards,
