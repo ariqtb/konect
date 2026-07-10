@@ -54,20 +54,11 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               // Index 1: Koperasi
-              const Padding(
-                padding: EdgeInsets.only(bottom: 90.0),
-                child: KoperasiPage(),
-              ),
+              const KoperasiPage(),
               // Index 2: Voucher
-              const Padding(
-                padding: EdgeInsets.only(bottom: 90.0),
-                child: VoucherPage(),
-              ),
+              const VoucherPage(),
               // Index 3: Profile
-              const Padding(
-                padding: EdgeInsets.only(bottom: 90.0),
-                child: ProfilePage(),
-              ),
+              const ProfilePage(),
             ],
           ),
           // Floating Translucent Bottom Navigation Bar
@@ -159,7 +150,7 @@ class _MainPageState extends State<MainPage> {
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(16),
               border: Border.all(color: const Color(0xFFE2E8F0)),
               boxShadow: [
                 BoxShadow(
@@ -179,7 +170,7 @@ class _MainPageState extends State<MainPage> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE0E7FF),
+                        color: const Color(0xFFD1FAE5),
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: const Text(
@@ -187,7 +178,7 @@ class _MainPageState extends State<MainPage> {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF494BD6),
+                          color: Color(0xFF065F46),
                         ),
                       ),
                     ),
@@ -248,7 +239,7 @@ class _MainPageState extends State<MainPage> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE0E7FF),
+                        color: const Color(0xFFF1F5F9),
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: const Text(
@@ -256,7 +247,7 @@ class _MainPageState extends State<MainPage> {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF494BD6),
+                          color: Color(0xFF475569),
                         ),
                       ),
                     ),
@@ -395,7 +386,7 @@ class _MainPageState extends State<MainPage> {
                 margin: const EdgeInsets.only(right: 16),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(32),
+                  borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: const Color(0xFFF1F5F9)),
                   boxShadow: [
                     BoxShadow(
@@ -411,7 +402,7 @@ class _MainPageState extends State<MainPage> {
                     Stack(
                       children: [
                         ClipRRect(
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+                          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                           child: Image.network(
                             coop['image']!,
                             height: 150,
@@ -521,7 +512,7 @@ class _MainPageState extends State<MainPage> {
             padding: const EdgeInsets.all(28.0),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(16),
               border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
             child: Column(
@@ -682,22 +673,22 @@ class _MainPageState extends State<MainPage> {
         'title': 'Musyawarah Pembangunan Jalan',
         'time': '12 Oktober 2024 • 14:00 WIB',
         'icon': Icons.volume_up_outlined,
-        'iconColor': const Color(0xFF494BD6),
-        'bgColor': const Color(0xFFE0E7FF),
+        'iconColor': AppColors.brandNavy,
+        'bgColor': const Color(0xFFF1F5F9),
       },
       {
         'title': 'Distribusi Pupuk Subsidi',
         'time': '08 Oktober 2024 • 09:30 WIB',
         'icon': Icons.local_shipping_outlined,
-        'iconColor': const Color(0xFF10B981),
-        'bgColor': const Color(0xFFD1FAE5),
+        'iconColor': AppColors.brandNavy,
+        'bgColor': const Color(0xFFF1F5F9),
       },
       {
         'title': 'Rapat Karang Taruna',
         'time': '01 Oktober 2024 • 19:00 WIB',
         'icon': Icons.people_outline,
-        'iconColor': const Color(0xFFBA0035),
-        'bgColor': const Color(0xFFFFE4E6),
+        'iconColor': AppColors.brandNavy,
+        'bgColor': const Color(0xFFF1F5F9),
       }
     ];
 
@@ -912,7 +903,7 @@ class _MainPageState extends State<MainPage> {
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
           decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFE0E7FF), // indigo-100
+                                  color: const Color(0xFFD1FAE5), // emerald-100
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 child: const Text(
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF4338CA), // indigo-700
+                                    color: Color(0xFF065F46), // emerald-800
                                   ),
                                 ),
                               ),
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFE0E7FF),
+                                  color: const Color(0xFFF1F5F9),
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 child: const Text(
@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF4338CA),
+                                    color: Color(0xFF475569),
                                   ),
                                 ),
                               ),
@@ -463,24 +463,24 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 16),
                     _buildHistoryItem(
                       icon: Icons.volume_up_outlined,
-                      iconBg: const Color(0xFFE0E7FF),
-                      iconColor: const Color(0xFF4338CA),
+                      iconBg: const Color(0xFFF1F5F9),
+                      iconColor: const Color(0xFF1E293B),
                       title: 'Musyawarah Pembangunan Jalan',
                       subtitle: '12 Oktober 2024 • 14:00 WIB',
                     ),
                     const SizedBox(height: 12),
                     _buildHistoryItem(
                       icon: Icons.local_shipping_outlined,
-                      iconBg: const Color(0xFFD1FAE5),
-                      iconColor: const Color(0xFF059669),
+                      iconBg: const Color(0xFFF1F5F9),
+                      iconColor: const Color(0xFF1E293B),
                       title: 'Distribusi Pupuk Subsidi',
                       subtitle: '08 Oktober 2024 • 09:30 WIB',
                     ),
                     const SizedBox(height: 12),
                     _buildHistoryItem(
                       icon: Icons.groups_outlined,
-                      iconBg: const Color(0xFFFFE4E6),
-                      iconColor: const Color(0xFFDC2626),
+                      iconBg: const Color(0xFFF1F5F9),
+                      iconColor: const Color(0xFF1E293B),
                       title: 'Rapat Karang Taruna',
                       subtitle: '01 Oktober 2024 • 19:00 WIB',
                     ),

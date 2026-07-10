@@ -15,7 +15,6 @@ class _VoucherPageState extends State<VoucherPage> {
 
   final List<String> _categories = ['Semua', 'Sembako', 'Listrik', 'Hiburan'];
 
-  // Dummy Data
   final List<Map<String, dynamic>> _availableVouchers = [
     {
       'title': 'Voucher Sembako Rp 15.000',
@@ -23,6 +22,7 @@ class _VoucherPageState extends State<VoucherPage> {
       'badge': 'Populer',
       'badgeColor': const Color(0xFFDC2626),
       'image': 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=400',
+      'desc': 'Voucher ini dapat digunakan untuk pembelian sembako (beras, minyak, telur) di seluruh unit Koperasi Desa Makmur Jaya.',
     },
     {
       'title': 'Voucher Token Listrik Rp 20.000',
@@ -30,13 +30,15 @@ class _VoucherPageState extends State<VoucherPage> {
       'badge': '',
       'badgeColor': Colors.transparent,
       'image': 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400',
+      'desc': 'Potongan langsung untuk pembelian token listrik prabayar melalui koperasi.',
     },
     {
       'title': 'Voucher Belanja Koperasi',
       'points': '3.000',
       'badge': 'Spesial',
-      'badgeColor': const Color(0xFF494BD6), // Indigo
+      'badgeColor': const Color(0xFF494BD6),
       'image': 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=400',
+      'desc': 'Belanja kebutuhan sehari-hari di unit toko koperasi desa.',
     },
     {
       'title': 'Paket Internet Desa 24 Jam',
@@ -44,6 +46,7 @@ class _VoucherPageState extends State<VoucherPage> {
       'badge': '',
       'badgeColor': Colors.transparent,
       'image': 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=400',
+      'desc': 'Akses internet desa selama 24 jam penuh.',
     },
   ];
 
@@ -51,18 +54,32 @@ class _VoucherPageState extends State<VoucherPage> {
     {
       'title': 'Voucher Sembako Rp 15.000',
       'status': 'Aktif',
-      'statusColor': const Color(0xFF10B981), // Emerald
+      'statusColor': const Color(0xFF10B981),
       'image': 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=400',
       'isActive': true,
+      'desc': 'Voucher ini dapat digunakan untuk pembelian sembako (beras, minyak, telur) di seluruh unit Koperasi Desa Makmur Jaya.',
     },
     {
       'title': 'Token Listrik Rp 20.000',
       'status': 'Digunakan',
-      'statusColor': const Color(0xFF94A3B8), // Slate 400
+      'statusColor': const Color(0xFF94A3B8),
       'image': 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400',
       'isActive': false,
+      'desc': 'Potongan langsung untuk pembelian token listrik prabayar.',
     },
   ];
+
+  void _showVoucherDetail(Map<String, dynamic> data, {bool isOwned = false}) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => _VoucherDetailSheet(
+        data: data,
+        isOwned: isOwned,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,24 +103,17 @@ class _VoucherPageState extends State<VoucherPage> {
               ),
               const SizedBox(height: 24),
 
-              // Points Hero Summary
+              // Points Hero
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(16),
                   gradient: const LinearGradient(
                     colors: [Color(0xFF991B1B), AppColors.brandRed],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.brandRed.withValues(alpha: 0.2),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,10 +148,10 @@ class _VoucherPageState extends State<VoucherPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
                             color: Colors.white.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Text(
-                            'Status: Warga Aktif',
+                            'Warga Aktif',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -150,11 +160,9 @@ class _VoucherPageState extends State<VoucherPage> {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Menampilkan riwayat...')),
-                            );
+                            Navigator.pushNamed(context, AppConstants.redeemRoute);
                           },
                           child: Row(
                             children: [
@@ -184,77 +192,23 @@ class _VoucherPageState extends State<VoucherPage> {
               Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF1F5F9), // Slate 100
-                  borderRadius: BorderRadius.circular(100),
+                  color: AppColors.slate100,
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () => setState(() => _isAvailableSelected = true),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                            color: _isAvailableSelected ? Colors.white : Colors.transparent,
-                            borderRadius: BorderRadius.circular(100),
-                            boxShadow: _isAvailableSelected
-                                ? [
-                                    BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.05),
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 2),
-                                    )
-                                  ]
-                                : null,
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Tersedia',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: _isAvailableSelected ? AppColors.brandNavy : const Color(0xFF64748B),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () => setState(() => _isAvailableSelected = false),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                            color: !_isAvailableSelected ? Colors.white : Colors.transparent,
-                            borderRadius: BorderRadius.circular(100),
-                            boxShadow: !_isAvailableSelected
-                                ? [
-                                    BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.05),
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 2),
-                                    )
-                                  ]
-                                : null,
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Milik Saya',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: !_isAvailableSelected ? AppColors.brandNavy : const Color(0xFF64748B),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    _buildTabButton('Tersedia', _isAvailableSelected, () {
+                      setState(() => _isAvailableSelected = true);
+                    }),
+                    _buildTabButton('Milik Saya', !_isAvailableSelected, () {
+                      setState(() => _isAvailableSelected = false);
+                    }),
                   ],
                 ),
               ),
               const SizedBox(height: 24),
 
-              // Horizontal Categories (only show if 'Tersedia' is selected)
+              // Category chips (only for Tersedia tab)
               if (_isAvailableSelected) ...[
                 SizedBox(
                   height: 40,
@@ -263,32 +217,23 @@ class _VoucherPageState extends State<VoucherPage> {
                     itemCount: _categories.length,
                     separatorBuilder: (_, __) => const SizedBox(width: 8),
                     itemBuilder: (context, index) {
-                      final category = _categories[index];
-                      final isSelected = _selectedCategory == category;
+                      final cat = _categories[index];
+                      final isSelected = _selectedCategory == cat;
                       return GestureDetector(
-                        onTap: () => setState(() => _selectedCategory = category),
+                        onTap: () => setState(() => _selectedCategory = cat),
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: isSelected ? AppColors.brandNavy : const Color(0xFFF1F5F9),
-                            borderRadius: BorderRadius.circular(100),
-                            boxShadow: isSelected
-                                ? [
-                                    BoxShadow(
-                                      color: AppColors.brandNavy.withValues(alpha: 0.2),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 4),
-                                    )
-                                  ]
-                                : null,
+                            color: isSelected ? AppColors.brandNavy : AppColors.slate100,
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            category,
+                            cat,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color: isSelected ? Colors.white : const Color(0xFF64748B),
+                              color: isSelected ? Colors.white : AppColors.slate500,
                             ),
                           ),
                         ),
@@ -299,7 +244,7 @@ class _VoucherPageState extends State<VoucherPage> {
                 const SizedBox(height: 24),
               ],
 
-              // Grid Content
+              // Grid
               GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -307,34 +252,36 @@ class _VoucherPageState extends State<VoucherPage> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 0.65, // Adjust to fit image and text
+                  childAspectRatio: 0.68,
                 ),
-                itemCount: _isAvailableSelected ? _availableVouchers.length : _ownedVouchers.length,
+                itemCount: _isAvailableSelected
+                    ? _availableVouchers.length
+                    : _ownedVouchers.length,
                 itemBuilder: (context, index) {
-                  return _isAvailableSelected
-                      ? _buildAvailableCard(_availableVouchers[index])
-                      : _buildOwnedCard(_ownedVouchers[index]);
+                  if (_isAvailableSelected) {
+                    final v = _availableVouchers[index];
+                    return _buildAvailableCard(v);
+                  } else {
+                    final v = _ownedVouchers[index];
+                    return _buildOwnedCard(v);
+                  }
                 },
               ),
-
               const SizedBox(height: 40),
 
-              // Empty State / Suggestion Banner
+              // CTA banner
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEEF2FF), // Light Indigo
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(
-                    color: const Color(0xFFC7D2FE), // Dashed look simulated with solid border here for simplicity
-                    width: 2,
-                  ),
+                  color: const Color(0xFFEEF2FF),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: const Color(0xFFC7D2FE), width: 1.5),
                 ),
                 child: Column(
                   children: [
-                    const Icon(Icons.volunteer_activism, size: 40, color: Color(0xFF818CF8)),
-                    const SizedBox(height: 16),
+                    const Icon(Icons.volunteer_activism, size: 36, color: Color(0xFF818CF8)),
+                    const SizedBox(height: 12),
                     const Text(
                       'Ingin Poin Lebih Banyak?',
                       style: TextStyle(
@@ -349,11 +296,11 @@ class _VoucherPageState extends State<VoucherPage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
-                        color: Color(0xFF64748B),
+                        color: AppColors.slate500,
                         height: 1.4,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     TextButton(
                       onPressed: () {},
                       child: const Text(
@@ -375,234 +322,204 @@ class _VoucherPageState extends State<VoucherPage> {
     );
   }
 
-  Widget _buildAvailableCard(Map<String, dynamic> data) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, AppConstants.redeemRoute),
-      child: Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
+  Widget _buildTabButton(String label, bool isActive, VoidCallback onTap) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          decoration: BoxDecoration(
+            color: isActive ? Colors.white : Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Image Box
-          Expanded(
-            flex: 3,
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    image: DecorationImage(
-                      image: NetworkImage(data['image']),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                if (data['badge'].isNotEmpty)
-                  Positioned(
-                    top: 12,
-                    left: 12,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: data['badgeColor'],
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Text(
-                        data['badge'].toString().toUpperCase(),
-                        style: const TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
+          alignment: Alignment.center,
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: isActive ? AppColors.brandNavy : AppColors.slate500,
             ),
           ),
-          // Content Box
-          Expanded(
-            flex: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAvailableCard(Map<String, dynamic> data) {
+    return GestureDetector(
+      onTap: () => _showVoucherDetail(data),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: AppColors.slate100),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image
+            Expanded(
+              flex: 3,
+              child: Stack(
                 children: [
-                  Text(
-                    data['title'],
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.brandNavy,
-                      height: 1.2,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      const Icon(Icons.stars, color: AppColors.brandRed, size: 16),
-                      const SizedBox(width: 4),
-                      Text(
-                        '${data['points']} Pts',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.brandRed,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, AppConstants.redeemRoute);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.brandNavy,
-                        foregroundColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                      ),
-                      child: const Text(
-                        'Tukar',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+                      image: DecorationImage(
+                        image: NetworkImage(data['image']),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
+                  if ((data['badge'] as String).isNotEmpty)
+                    Positioned(
+                      top: 10,
+                      left: 10,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: data['badgeColor'] as Color,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          (data['badge'] as String).toUpperCase(),
+                          style: const TextStyle(
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
-          ),
-        ],
+            // Content
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      data['title'] as String,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.brandNavy,
+                        height: 1.2,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        const Icon(Icons.stars, color: AppColors.brandRed, size: 14),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${data['points']} Pts',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.brandRed,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () => _showVoucherDetail(data),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.brandRed,
+                          foregroundColor: Colors.white,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                        ),
+                        child: const Text(
+                          'Tukar',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildOwnedCard(Map<String, dynamic> data) {
-    final bool isActive = data['isActive'];
+    final bool isActive = data['isActive'] as bool;
 
     return GestureDetector(
-      onTap: isActive ? () => Navigator.pushNamed(context, AppConstants.redeemRoute) : null,
+      onTap: () => _showVoucherDetail(data, isOwned: true),
       child: Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Image Box
-          Expanded(
-            flex: 3,
-            child: Stack(
-              children: [
-                Container(
-                  foregroundDecoration: isActive ? null : const BoxDecoration(
-                    color: Colors.grey,
-                    backgroundBlendMode: BlendMode.saturation,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    image: DecorationImage(
-                      image: NetworkImage(data['image']),
-                      fit: BoxFit.cover,
-                      colorFilter: isActive 
-                          ? null 
-                          : ColorFilter.mode(Colors.black.withValues(alpha: 0.5), BlendMode.darken),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 12,
-                  right: 12,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: AppColors.slate100),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 3,
+              child: Stack(
+                children: [
+                  Container(
                     decoration: BoxDecoration(
-                      color: isActive ? data['statusColor'] : Colors.white.withValues(alpha: 0.9),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Text(
-                      data['status'].toString().toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 9,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
-                        color: isActive ? Colors.white : const Color(0xFF64748B),
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+                      image: DecorationImage(
+                        image: NetworkImage(data['image'] as String),
+                        fit: BoxFit.cover,
+                        colorFilter: isActive
+                            ? null
+                            : ColorFilter.mode(
+                                Colors.black.withValues(alpha: 0.4),
+                                BlendMode.darken,
+                              ),
                       ),
                     ),
+                    foregroundDecoration: isActive
+                        ? null
+                        : const BoxDecoration(
+                            color: Colors.grey,
+                            backgroundBlendMode: BlendMode.saturation,
+                          ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          // Content Box
-          Expanded(
-            flex: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    data['title'],
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.brandNavy,
-                      height: 1.2,
-                    ),
-                  ),
-                  const Spacer(),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: isActive ? () {
-                         Navigator.pushNamed(context, AppConstants.redeemRoute);
-                      } : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isActive ? AppColors.brandRed : const Color(0xFFF1F5F9),
-                        foregroundColor: isActive ? Colors.white : const Color(0xFF94A3B8),
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: isActive
+                            ? data['statusColor'] as Color
+                            : Colors.white.withValues(alpha: 0.9),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
-                        isActive ? 'Gunakan' : 'Selesai',
-                        style: const TextStyle(
-                          fontSize: 14,
+                        (data['status'] as String).toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 9,
                           fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                          color: isActive ? Colors.white : AppColors.slate500,
                         ),
                       ),
                     ),
@@ -610,9 +527,371 @@ class _VoucherPageState extends State<VoucherPage> {
                 ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      data['title'] as String,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.brandNavy,
+                        height: 1.2,
+                      ),
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: isActive
+                            ? () => _showVoucherDetail(data, isOwned: true)
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isActive
+                              ? AppColors.brandRed
+                              : AppColors.slate100,
+                          foregroundColor: isActive
+                              ? Colors.white
+                              : AppColors.slate400,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                        ),
+                        child: Text(
+                          isActive ? 'Gunakan' : 'Selesai',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────
+// Detail Bottom Sheet (replaces the separate page)
+// ─────────────────────────────────────────────
+class _VoucherDetailSheet extends StatefulWidget {
+  final Map<String, dynamic> data;
+  final bool isOwned;
+
+  const _VoucherDetailSheet({required this.data, this.isOwned = false});
+
+  @override
+  State<_VoucherDetailSheet> createState() => _VoucherDetailSheetState();
+}
+
+class _VoucherDetailSheetState extends State<_VoucherDetailSheet> {
+  bool _isProcessing = false;
+
+  void _handleRedeem() {
+    setState(() => _isProcessing = true);
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      if (!mounted) return;
+      setState(() => _isProcessing = false);
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Voucher berhasil ditukar!')),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final data = widget.data;
+    final isActive = data['isActive'] as bool? ?? true;
+
+    return DraggableScrollableSheet(
+      initialChildSize: 0.85,
+      maxChildSize: 0.95,
+      minChildSize: 0.5,
+      builder: (context, scrollController) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          ),
+          child: Column(
+            children: [
+              // Handle
+              Container(
+                margin: const EdgeInsets.only(top: 12, bottom: 8),
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: AppColors.slate300,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+
+              // Scrollable content
+              Expanded(
+                child: ListView(
+                  controller: scrollController,
+                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
+                  children: [
+                    // Hero Image
+                    Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                          image: NetworkImage(data['image'] as String),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          if (!widget.isOwned)
+                            Positioned(
+                              top: 12,
+                              right: 12,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF10B981)
+                                      .withValues(alpha: 0.9),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: const Text(
+                                  'TERSEDIA',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.5,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          if (widget.isOwned)
+                            Positioned(
+                              top: 12,
+                              right: 12,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: isActive
+                                      ? const Color(0xFF10B981)
+                                      : AppColors.slate400,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  ((data['status'] as String?) ?? 'Aktif')
+                                      .toUpperCase(),
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.5,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Title
+                    Text(
+                      data['title'] as String,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.brandNavy,
+                        height: 1.2,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+
+                    // Points (only for available)
+                    if (!widget.isOwned)
+                      Row(
+                        children: [
+                          const Icon(Icons.stars,
+                              color: AppColors.brandRed, size: 18),
+                          const SizedBox(width: 6),
+                          Text(
+                            '${data['points']} Pts',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.brandRed,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      child: Divider(color: AppColors.slate200, height: 1),
+                    ),
+
+                    // Deskripsi
+                    const Text(
+                      'Deskripsi',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.brandNavy,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      data['desc'] as String? ??
+                          'Voucher ini dapat digunakan di seluruh unit Koperasi Desa.',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: AppColors.slate500,
+                        height: 1.5,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Syarat & Ketentuan
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: AppColors.slate50,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.slate100),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Icon(Icons.info_outline,
+                                  size: 18, color: AppColors.slate500),
+                              SizedBox(width: 8),
+                              Text(
+                                'Syarat & Ketentuan',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.brandNavy,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          _termItem('1', 'Berlaku untuk satu kali transaksi.'),
+                          const SizedBox(height: 6),
+                          _termItem('2', 'Tidak dapat diuangkan.'),
+                          const SizedBox(height: 6),
+                          _termItem(
+                              '3', 'Tunjukkan QR code saat pembayaran.'),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 80),
+                  ],
+                ),
+              ),
+
+              // Sticky bottom button
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  border: Border(
+                    top: BorderSide(color: AppColors.slate100, width: 1),
+                  ),
+                ),
+                child: SafeArea(
+                  top: false,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: (widget.isOwned && !isActive)
+                          ? null
+                          : (_isProcessing ? null : _handleRedeem),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.brandRed,
+                        foregroundColor: Colors.white,
+                        disabledBackgroundColor: AppColors.slate100,
+                        disabledForegroundColor: AppColors.slate400,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: _isProcessing
+                          ? const SizedBox(
+                              height: 22,
+                              width: 22,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.5,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Text(
+                              widget.isOwned
+                                  ? (isActive ? 'Gunakan' : 'Selesai')
+                                  : 'Tukar Sekarang',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _termItem(String number, String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '$number.',
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            color: AppColors.brandRed,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 13,
+              color: AppColors.slate500,
+              height: 1.4,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

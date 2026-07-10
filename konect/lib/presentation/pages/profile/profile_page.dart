@@ -19,7 +19,7 @@ class ProfilePage extends StatelessWidget {
             final String? avatarUrl = isLoggedIn ? state.user.avatarUrl : null;
 
             return SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 120),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
