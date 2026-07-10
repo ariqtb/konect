@@ -7,6 +7,7 @@ import 'koperasi/koperasi_page.dart';
 import 'voucher/voucher_page.dart';
 import 'profile/profile_page.dart';
 import '../../core/constants.dart';
+import '../../data/repositories/room_repository.dart';
 
 class MainShellPage extends StatefulWidget {
   const MainShellPage({super.key});
@@ -42,22 +43,111 @@ class _MainShellPageState extends State<MainShellPage> {
     final bool isKopdes = isLoggedIn && (authState.user.role == 'kopdes' || authState.user.role == 'admin');
 
     if (isKopdes) {
-      // Buka halaman room baru (admin create/update room)
-      Navigator.pushNamed(context, '/create-room');
+      _showAdminMenuModal();
     } else {
-      // Tampilkan bottom sheet modal riwayat room
       _showRoomHistoryModal();
     }
   }
 
+  void _showAdminMenuModal() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(24),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD1D5DB),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Menu Admin Koperasi',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E293B),
+                ),
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                leading: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFDC2626).withOpacity(0.08),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.add_circle_outline, color: Color(0xFFDC2626)),
+                ),
+                title: const Text(
+                  'Buat Room Rapat Baru',
+                  style: TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF1E293B)),
+                ),
+                subtitle: const Text('Mulai sesi rapat/diskusi kanvas baru'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/create-room');
+                },
+              ),
+              const Divider(),
+              ListTile(
+                leading: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF10B981).withOpacity(0.08),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.article_outlined, color: Color(0xFF10B981)),
+                ),
+                title: const Text(
+                  'Buat Progress / Artikel',
+                  style: TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF1E293B)),
+                ),
+                subtitle: const Text('Publikasikan artikel progres pembangunan atau berita'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, AppConstants.createArticleRoute);
+                },
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   void _showRoomHistoryModal() {
+    final authState = context.read<AuthBloc>().state;
+    if (authState is! AuthAuthenticated) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Silakan login terlebih dahulu untuk melihat riwayat.')),
+      );
+      return;
+    }
+    final userId = authState.user.id;
+
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder: (context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.5,
+          height: MediaQuery.of(context).size.height * 0.6,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -95,7 +185,7 @@ class _MainShellPageState extends State<MainShellPage> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
-                  'Daftar ruang diskusi yang pernah Anda masuki dari perangkat ini.',
+                  'Daftar ruang diskusi yang pernah Anda masuki.',
                   style: TextStyle(
                     fontSize: 13,
                     color: Color(0xFF64748B),
@@ -106,27 +196,70 @@ class _MainShellPageState extends State<MainShellPage> {
 
               // History list
               Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  children: [
-                    _buildHistoryItem(
-                      code: '09IO08',
-                      title: 'Barang Belanja Koperasi Periode Juli',
-                      date: 'Hari ini, 14:20',
-                    ),
-                    const SizedBox(height: 10),
-                    _buildHistoryItem(
-                      code: '12TR90',
-                      title: 'Diskusi Rencana Panel Surya Dusun 2',
-                      date: 'Kemarin, 09:15',
-                    ),
-                    const SizedBox(height: 10),
-                    _buildHistoryItem(
-                      code: '04OP55',
-                      title: 'Evaluasi Pembagian Sembako Murah',
-                      date: '3 Juli 2026',
-                    ),
-                  ],
+                child: FutureBuilder<List<Map<String, dynamic>>>(
+                  future: roomRepository.getJoinedRooms(userId),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFDC2626)),
+                        ),
+                      );
+                    }
+                    if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          'Belum ada riwayat rapat.',
+                          style: TextStyle(color: Color(0xFF64748B)),
+                        ),
+                      );
+                    }
+
+                    final list = snapshot.data!;
+                    return ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                      itemCount: list.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 12),
+                      itemBuilder: (context, idx) {
+                        final item = list[idx];
+                        
+                        String dateStr = '';
+                        if (item['startDate'].toString().isNotEmpty && item['endDate'].toString().isNotEmpty) {
+                          try {
+                            final start = DateTime.parse(item['startDate']);
+                            final end = DateTime.parse(item['endDate']);
+                            
+                            final startFormatted = '${start.day.toString().padLeft(2, '0')}/${start.month.toString().padLeft(2, '0')} ${start.hour.toString().padLeft(2, '0')}:${start.minute.toString().padLeft(2, '0')}';
+                            final endFormatted = '${end.hour.toString().padLeft(2, '0')}:${end.minute.toString().padLeft(2, '0')}';
+                            
+                            dateStr = 'Mulai: $startFormatted s/d $endFormatted';
+                          } catch (_) {
+                            dateStr = 'Aktif';
+                          }
+                        } else {
+                          dateStr = 'Aktif';
+                        }
+
+                        return InkWell(
+                          onTap: () {
+                            Navigator.pop(context); // Close bottom sheet
+                            Navigator.pushNamed(
+                              context,
+                              AppConstants.roomDiscussionRoute,
+                              arguments: item['id'],
+                            );
+                          },
+                          borderRadius: BorderRadius.circular(14),
+                          child: _buildHistoryItem(
+                            code: item['isActive'] == true ? 'AKTIF' : 'SELESAI',
+                            title: item['title'] ?? 'Rapat Tanpa Judul',
+                            date: dateStr,
+                            isActive: item['isActive'] == true,
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 24),
@@ -141,6 +274,7 @@ class _MainShellPageState extends State<MainShellPage> {
     required String code,
     required String title,
     required String date,
+    required bool isActive,
   }) {
     return Container(
       padding: const EdgeInsets.all(14),
@@ -154,15 +288,17 @@ class _MainShellPageState extends State<MainShellPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: const Color(0xFFDC2626).withOpacity(0.08),
+              color: isActive
+                  ? const Color(0xFF10B981).withOpacity(0.08)
+                  : const Color(0xFF64748B).withOpacity(0.08),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
               code,
-              style: const TextStyle(
-                fontSize: 12,
+              style: TextStyle(
+                fontSize: 10,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFDC2626),
+                color: isActive ? const Color(0xFF10B981) : const Color(0xFF64748B),
               ),
             ),
           ),
@@ -181,25 +317,19 @@ class _MainShellPageState extends State<MainShellPage> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: 4),
                 Text(
                   date,
                   style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF94A3B8),
+                    fontSize: 12,
+                    color: Color(0xFF64748B),
                   ),
                 ),
               ],
             ),
           ),
           const SizedBox(width: 8),
-          IconButton(
-            icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xFF64748B), size: 18),
-            onPressed: () {
-              Navigator.pop(context); // Close sheet
-              Navigator.pushNamed(context, AppConstants.roomDiscussionRoute);
-            },
-          ),
+          const Icon(Icons.arrow_forward_rounded, color: Color(0xFF64748B), size: 18),
         ],
       ),
     );

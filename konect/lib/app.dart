@@ -15,6 +15,7 @@ import 'presentation/blocs/discussion/discussion_room_bloc.dart';
 import 'presentation/blocs/location/location_bloc.dart';
 import 'data/services/location_service.dart';
 import 'presentation/widgets/location_onboarding_sheet.dart';
+import 'presentation/pages/splash_screen.dart';
 import 'presentation/pages/auth/login_page.dart';
 import 'presentation/pages/forum/forum_page.dart';
 import 'presentation/pages/voting/voting_page.dart';
@@ -27,6 +28,8 @@ import 'presentation/pages/profile/profile_page.dart';
 import 'presentation/pages/room/room_discussion_page.dart';
 import 'presentation/pages/room/create_room_page.dart';
 import 'presentation/pages/reedem/redeem_history_page.dart';
+import 'presentation/pages/article/article_detail_page.dart';
+import 'presentation/pages/article/create_article_page.dart';
 
 class KonectApp extends StatefulWidget {
   const KonectApp({super.key});
@@ -93,8 +96,11 @@ class _KonectAppState extends State<KonectApp> {
             child: child ?? const SizedBox.shrink(),
           );
         },
+        initialRoute: AppConstants.splashRoute,
         onGenerateRoute: (settings) {
           switch (settings.name) {
+            case AppConstants.splashRoute:
+              return MaterialPageRoute(builder: (_) => const SplashScreen());
             case AppConstants.loginRoute:
               return MaterialPageRoute(builder: (_) => const MainPage());
             case AppConstants.homeRoute:
@@ -112,6 +118,10 @@ class _KonectAppState extends State<KonectApp> {
               return MaterialPageRoute(
                 builder: (_) => CooperativeDetailPage(coopId: coopId),
               );
+            case AppConstants.articleDetailRoute:
+              return MaterialPageRoute(builder: (_) => const ArticleDetailPage());
+            case AppConstants.createArticleRoute:
+              return MaterialPageRoute(builder: (_) => const CreateArticlePage());
             case AppConstants.voucherRoute:
               return MaterialPageRoute(builder: (_) => const VoucherPage());
             case AppConstants.profileRoute:

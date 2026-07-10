@@ -222,7 +222,7 @@ class _VoucherPageState extends State<VoucherPage> {
                         ),
                         const SizedBox(height: 4),
                         const Text(
-                          '4.250 Pts',
+                          '4.2500 Pts',
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,

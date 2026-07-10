@@ -5,6 +5,7 @@ class AppConstants {
 
   // Routes
   static const String mainShellRoute = '/';
+  static const String splashRoute = '/splash';
   static const String loginRoute = '/login';
   static const String homeRoute = '/home';
   static const String koperasiRoute = '/koperasi';

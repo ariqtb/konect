@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sp;
 import '../../widgets/dashed_line.dart';
+import '../../../data/repositories/room_repository.dart';
+import '../../../data/repositories/auth_repository.dart';
 
 class RoomOpinion {
   final String id;
@@ -24,9 +27,15 @@ class RoomDiscussionPage extends StatefulWidget {
 
 class _RoomDiscussionPageState extends State<RoomDiscussionPage>
     with SingleTickerProviderStateMixin {
-  // We'll initialize the opinions based on the route argument topic
+  // We'll initialize the opinions based on the route argument roomId
   List<RoomOpinion>? _opinions;
-  String? _lastTopic;
+  String? _roomId;
+  String _topicTitle = 'Memuat...';
+  String _topicDescription = '';
+  int _participantsCount = 0;
+  bool _isLoading = false;
+  bool _hasError = false;
+  sp.RealtimeChannel? _realtimeChannel;
 
   final TextEditingController _opinionController = TextEditingController();
   final TransformationController _transformationController =
@@ -60,7 +69,83 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
     _opinionController.dispose();
     _transformationController.dispose();
     _flyAnimController.dispose();
+    _unsubscribeRealtime();
     super.dispose();
+  }
+
+  void _subscribeToRealtime(String roomId) {
+    if (!_isValidUUID(roomId)) return;
+    
+    final client = sp.Supabase.instance.client;
+    _unsubscribeRealtime();
+
+    _realtimeChannel = client.channel('room_canvas_$roomId');
+    
+    _realtimeChannel!
+      .onPostgresChanges(
+        event: sp.PostgresChangeEvent.all,
+        schema: 'public',
+        table: 'opinions',
+        callback: (payload) {
+          final newRecord = payload.newRecord;
+          final oldRecord = payload.oldRecord;
+          if ((newRecord != null && newRecord['room_id'] == roomId) ||
+              (oldRecord != null && oldRecord['room_id'] == roomId)) {
+            _reloadCanvasSilent();
+          }
+        },
+      )
+      .onPostgresChanges(
+        event: sp.PostgresChangeEvent.all,
+        schema: 'public',
+        table: 'discussion_comments',
+        callback: (payload) {
+          _reloadCanvasSilent();
+        },
+      )
+      .onPostgresChanges(
+        event: sp.PostgresChangeEvent.all,
+        schema: 'public',
+        table: 'reactions',
+        callback: (payload) {
+          _reloadCanvasSilent();
+        },
+      )
+      .subscribe();
+  }
+
+  void _unsubscribeRealtime() {
+    if (_realtimeChannel != null) {
+      try {
+        sp.Supabase.instance.client.removeChannel(_realtimeChannel!);
+      } catch (_) {}
+      _realtimeChannel = null;
+    }
+  }
+
+  Future<void> _reloadCanvasSilent() async {
+    if (_roomId == null) return;
+    final data = await roomRepository.getRoomCanvas(_roomId!);
+    if (!mounted || data == null) return;
+
+    setState(() {
+      _topicTitle = data['title'] ?? 'Tanpa Judul';
+      _topicDescription = data['description'] ?? '';
+      
+      final ops = data['opinions'] as List<dynamic>? ?? [];
+      _opinions = ops.map((o) {
+        final commentsDyn = o['comments'] as List<dynamic>? ?? [];
+        final comments = commentsDyn.map((c) => c.toString()).toList();
+        return RoomOpinion(
+          id: o['id'] ?? '',
+          text: o['text'] ?? '',
+          likes: o['likes'] ?? 0,
+          comments: comments,
+        );
+      }).toList();
+      
+      _participantsCount = ops.length + 1;
+    });
   }
 
   /// Smoothly animate the canvas to center on [canvasPoint].
@@ -86,87 +171,151 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
       ..forward();
   }
 
-  void _initializeOpinions(String topic) {
-    if (_lastTopic == topic && _opinions != null) return;
-    _lastTopic = topic;
-
-    if (topic.contains('Padi') || topic.contains('Pupuk')) {
-      _opinions = [
-        RoomOpinion(
-          id: '1',
-          text:
-              'Apakah subsidi pupuk bisa dibagikan langsung lewat Koperasi Tani?',
-          likes: 14,
-          comments: [
-            'Setuju, biar tidak salah sasaran.',
-            'Betul, lewat koperasi lebih transparan.',
-          ],
-        ),
-        RoomOpinion(
-          id: '2',
-          text:
-              'Bibit Padi Q3 sangat tahan hama, sebaiknya segera didistribusikan.',
-          likes: 8,
-          comments: [
-            'Bagaimana cara pembagian kuotanya?',
-          ],
-        ),
-        RoomOpinion(
-          id: '3',
-          text: 'Kita butuh pelatihan cara tanam padi Q3 yang optimal.',
-          likes: 5,
-          comments: [],
-        ),
-      ];
-    } else if (topic.contains('Jalan') || topic.contains('Jembatan')) {
-      _opinions = [
-        RoomOpinion(
-          id: '1',
-          text: 'Pelebaran jalan di pertigaan pasar sangat mendesak.',
-          likes: 12,
-          comments: [
-            'Setuju banget, motor sering numpuk.',
-            'Betul, parit sekarang sudah dangkal.',
-          ],
-        ),
-        RoomOpinion(
-          id: '2',
-          text: 'Gunakan aspal kualitas premium agar awet.',
-          likes: 8,
-          comments: [
-            'Sedang dikaji anggarannya.',
-          ],
-        ),
-        RoomOpinion(
-          id: '3',
-          text: 'Perbaikan drainase samping jalan prioritas.',
-          likes: 5,
-          comments: [],
-        ),
-      ];
-    } else {
-      // Default / fallback opinions
-      _opinions = [
-        RoomOpinion(
-          id: '1',
-          text: 'Mari kita mulai pembahasan mengenai topik: $topic',
-          likes: 3,
-          comments: [
-            'Siap mendukung hasil keputusan rapat.',
-          ],
-        ),
-        RoomOpinion(
-          id: '2',
-          text: 'Ide awal dan usulan warga bisa ditambahkan di sini.',
-          likes: 2,
-          comments: [],
-        ),
-      ];
-    }
+  bool _isValidUUID(String str) {
+    final RegExp uuidRegExp = RegExp(
+      r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+    );
+    return uuidRegExp.hasMatch(str);
   }
 
-  void _addOpinion(String text) {
+  Future<void> _initializeOpinions(String roomId) async {
+    if (_roomId == roomId && _opinions != null) return;
+
+    setState(() {
+      _isLoading = true;
+      _hasError = false;
+    });
+
+    final data = await roomRepository.getRoomCanvas(roomId);
+    if (!mounted) return;
+
+    if (data == null) {
+      if (!_isValidUUID(roomId)) {
+        _roomId = roomId;
+        setState(() {
+          _isLoading = false;
+          _hasError = false;
+          _topicTitle = roomId;
+          
+          if (roomId.contains('Padi') || roomId.contains('Pupuk')) {
+            _opinions = [
+              RoomOpinion(
+                id: '1',
+                text: 'Apakah subsidi pupuk bisa dibagikan langsung lewat Koperasi Tani?',
+                likes: 14,
+                comments: [
+                  'Setuju, biar tidak salah sasaran.',
+                  'Betul, lewat koperasi lebih transparan.',
+                ],
+              ),
+              RoomOpinion(
+                id: '2',
+                text: 'Bibit Padi Q3 sangat tahan hama, sebaiknya segera didistribusikan.',
+                likes: 8,
+                comments: [
+                  'Bagaimana cara pembagian kuotanya?',
+                ],
+              ),
+            ];
+          } else if (roomId.contains('Jalan') || roomId.contains('Jembatan')) {
+            _opinions = [
+              RoomOpinion(
+                id: '1',
+                text: 'Pelebaran jalan di pertigaan pasar sangat mendesak.',
+                likes: 12,
+                comments: [
+                  'Setuju banget, motor sering numpuk.',
+                  'Betul, parit sekarang sudah dangkal.',
+                ],
+              ),
+              RoomOpinion(
+                id: '2',
+                text: 'Gunakan aspal kualitas premium agar awet.',
+                likes: 8,
+                comments: [
+                  'Sedang dikaji anggarannya.',
+                ],
+              ),
+            ];
+          } else {
+            _opinions = [
+              RoomOpinion(
+                id: '1',
+                text: 'Mari kita mulai pembahasan mengenai topik: $roomId',
+                likes: 3,
+                comments: [
+                  'Siap mendukung hasil keputusan rapat.',
+                ],
+              ),
+            ];
+          }
+          _participantsCount = _opinions!.length + 1;
+        });
+        return;
+      }
+
+      setState(() {
+        _isLoading = false;
+        _hasError = true;
+        _opinions = [];
+        _topicTitle = 'Ruang tidak ditemukan';
+      });
+      return;
+    }
+
+    _roomId = data['id']?.toString() ?? roomId;
+
+    setState(() {
+      _isLoading = false;
+      _topicTitle = data['title'] ?? 'Tanpa Judul';
+      _topicDescription = data['description'] ?? '';
+      
+      final ops = data['opinions'] as List<dynamic>? ?? [];
+      _opinions = ops.map((o) {
+        final commentsDyn = o['comments'] as List<dynamic>? ?? [];
+        final comments = commentsDyn.map((c) => c.toString()).toList();
+        return RoomOpinion(
+          id: o['id'] ?? '',
+          text: o['text'] ?? '',
+          likes: o['likes'] ?? 0,
+          comments: comments,
+        );
+      }).toList();
+      
+      _participantsCount = ops.length + 1;
+    });
+
+    _subscribeToRealtime(_roomId!);
+
+    // Auto join room in background for history
+    try {
+      final currentUser = await authRepository.getCurrentUser();
+      if (currentUser != null && mounted) {
+        await roomRepository.joinRoom(roomId, currentUser.id);
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _addOpinion(String text) async {
     if (text.trim().isEmpty) return;
+    final String trimmed = text.trim();
+
+    if (_roomId != null && _isValidUUID(_roomId!)) {
+      final currentUser = await authRepository.getCurrentUser();
+      if (currentUser != null) {
+        final success = await roomRepository.addOpinion(
+          roomId: _roomId!,
+          userId: currentUser.id,
+          content: trimmed,
+        );
+        if (success) {
+          _opinionController.clear();
+          _opinions = null;
+          await _initializeOpinions(_roomId!);
+          return;
+        }
+      }
+    }
 
     // Compute where the NEW opinion node will be placed (before setState)
     // so we can spotlight it right after the next frame.
@@ -192,7 +341,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
       _opinions?.add(
         RoomOpinion(
           id: newId,
-          text: text.trim(),
+          text: trimmed,
           likes: 0,
           comments: [],
         ),
@@ -216,26 +365,82 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
     });
   }
 
-  void _addComment(RoomOpinion opinion, String commentText) {
+  Future<void> _addComment(RoomOpinion opinion, String commentText) async {
     if (commentText.trim().isEmpty) return;
+    final String trimmed = commentText.trim();
+
+    if (_roomId != null && _isValidUUID(_roomId!)) {
+      final currentUser = await authRepository.getCurrentUser();
+      if (currentUser != null) {
+        final success = await roomRepository.addComment(
+          opinionId: opinion.id,
+          userId: currentUser.id,
+          content: trimmed,
+        );
+        if (success) {
+          _opinions = null;
+          await _initializeOpinions(_roomId!);
+          return;
+        }
+      }
+    }
+
     setState(() {
-      opinion.comments.add(commentText.trim());
+      opinion.comments.add(trimmed);
     });
   }
 
-  void _likeOpinion(RoomOpinion opinion) {
+  Future<void> _likeOpinion(RoomOpinion opinion) async {
+    if (_roomId != null && _isValidUUID(_roomId!)) {
+      final currentUser = await authRepository.getCurrentUser();
+      if (currentUser != null) {
+        final success = await roomRepository.toggleReaction(
+          targetId: opinion.id,
+          userId: currentUser.id,
+          targetType: 'opinion',
+          reaction: 'like',
+        );
+        if (success) {
+          _opinions = null;
+          await _initializeOpinions(_roomId!);
+          return;
+        }
+      }
+    }
+
     setState(() {
       opinion.likes += 1;
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    final String topic =
-        ModalRoute.of(context)?.settings.arguments as String? ??
-            'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik';
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final String roomId =
+        ModalRoute.of(context)?.settings.arguments as String? ?? '';
+    _initializeOpinions(roomId);
+  }
 
-    _initializeOpinions(topic);
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+    
+    if (_hasError) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        body: const Center(child: Text('Ruang tidak ditemukan atau ID tidak valid')),
+      );
+    }
 
     final double screenWidth = MediaQuery.of(context).size.width;
     final double canvasWidth = screenWidth.clamp(320.0, 480.0);
@@ -261,7 +466,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
         width: topicWidth,
         height: topicHeight,
         child: GestureDetector(
-          onTap: () => _showTopicDetailModal(context, topic),
+          onTap: () => _showTopicDetailModal(context, _topicTitle),
           child: Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -318,7 +523,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                 const SizedBox(height: 10),
                 Expanded(
                   child: Text(
-                    topic,
+                    _topicTitle,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -547,7 +752,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
               children: [
                 Flexible(
                   child: Text(
-                    topic,
+                    _topicTitle,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
@@ -577,7 +782,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        '${42 + opinionsList.length}',
+                        '${_participantsCount + 42}', // dummy scaling
                         style: const TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w600,

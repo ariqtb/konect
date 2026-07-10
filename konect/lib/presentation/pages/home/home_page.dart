@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../blocs/auth/auth_bloc.dart';
 import '../../../core/constants.dart';
 import '../../widgets/location_permission_banner.dart';
 
@@ -37,6 +39,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = context.watch<AuthBloc>().state;
+    final bool isLoggedIn = authState is AuthAuthenticated;
+    final bool isAdmin = isLoggedIn && (authState.user.role == 'admin' || authState.user.role == 'kopdes');
+
     if (_isLoading) {
       return Scaffold(
         backgroundColor: const Color(0xFFDC2626), // Brand Red
@@ -386,6 +392,50 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          if (isAdmin) ...[
+                            const SizedBox(height: 20),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFDC2626),
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  elevation: 0,
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/create-room');
+                                },
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add_circle_outline, size: 20),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      'Buat Rapat Baru',
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12.0),
+                              child: Center(
+                                child: Text(
+                                  'atau',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFF94A3B8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                           const Text(
                             'Masukkan Kode Ruang',
                             style: TextStyle(
@@ -423,55 +473,14 @@ class _HomePageState extends State<HomePage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFDC2626),
-                                foregroundColor: Colors.white,
+                                backgroundColor: isAdmin ? const Color(0xFFF1F5F9) : const Color(0xFFDC2626),
+                                foregroundColor: isAdmin ? const Color(0xFF1E293B) : Colors.white,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(24),
                                 ),
                                 elevation: 0,
-                              ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/create-room');
-                              },
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.add_circle_outline, size: 20),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    'Buat Rapat Baru',
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 12.0),
-                            child: Center(
-                              child: Text(
-                                'atau',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF94A3B8),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFF1F5F9),
-                                foregroundColor: const Color(0xFF1E293B),
-                                padding: const EdgeInsets.symmetric(vertical: 16),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24),
-                                ),
-                                elevation: 0,
-                                side: const BorderSide(color: Color(0xFFE2E8F0)),
+                                side: isAdmin ? const BorderSide(color: Color(0xFFE2E8F0)) : null,
                               ),
                               onPressed: () {
                                 if (_codeController.text.trim().isNotEmpty) {
