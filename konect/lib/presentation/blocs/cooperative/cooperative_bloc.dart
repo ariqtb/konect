@@ -15,6 +15,10 @@ class CooperativeLoadRequested extends CooperativeEvent {
   const CooperativeLoadRequested();
 }
 
+class CooperativeLoadMoreRequested extends CooperativeEvent {
+  const CooperativeLoadMoreRequested();
+}
+
 class CooperativeFilterChanged extends CooperativeEvent {
   final String category;
 
@@ -54,12 +58,16 @@ class CooperativeLoaded extends CooperativeState {
   final List<CooperativeItem> filteredCooperatives;
   final String selectedCategory; // 'Semua', 'Sembako', 'Simpan Pinjam', 'Pertanian'
   final String searchQuery;
+  final int page;
+  final bool hasReachedMax;
 
   const CooperativeLoaded({
     required this.allCooperatives,
     required this.filteredCooperatives,
     required this.selectedCategory,
     required this.searchQuery,
+    this.page = 0,
+    this.hasReachedMax = false,
   });
 
   CooperativeLoaded copyWith({
@@ -67,17 +75,21 @@ class CooperativeLoaded extends CooperativeState {
     List<CooperativeItem>? filteredCooperatives,
     String? selectedCategory,
     String? searchQuery,
+    int? page,
+    bool? hasReachedMax,
   }) {
     return CooperativeLoaded(
       allCooperatives: allCooperatives ?? this.allCooperatives,
       filteredCooperatives: filteredCooperatives ?? this.filteredCooperatives,
       selectedCategory: selectedCategory ?? this.selectedCategory,
       searchQuery: searchQuery ?? this.searchQuery,
+      page: page ?? this.page,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }
 
   @override
-  List<Object?> get props => [allCooperatives, filteredCooperatives, selectedCategory, searchQuery];
+  List<Object?> get props => [allCooperatives, filteredCooperatives, selectedCategory, searchQuery, page, hasReachedMax];
 }
 
 class CooperativeError extends CooperativeState {
@@ -93,6 +105,7 @@ class CooperativeError extends CooperativeState {
 class CooperativeBloc extends Bloc<CooperativeEvent, CooperativeState> {
   CooperativeBloc() : super(const CooperativeInitial()) {
     on<CooperativeLoadRequested>(_onLoad);
+    on<CooperativeLoadMoreRequested>(_onLoadMore);
     on<CooperativeFilterChanged>(_onFilterChanged);
     on<CooperativeSearchQueryChanged>(_onSearchQueryChanged);
   }
@@ -103,15 +116,48 @@ class CooperativeBloc extends Bloc<CooperativeEvent, CooperativeState> {
   ) async {
     emit(const CooperativeLoading());
     try {
-      final items = await cooperativeRepository.getCooperatives();
+      final items = await cooperativeRepository.getCooperatives(page: 0, limit: 10);
       emit(CooperativeLoaded(
         allCooperatives: items,
         filteredCooperatives: items,
         selectedCategory: 'Semua',
         searchQuery: '',
+        page: 0,
+        hasReachedMax: items.length < 10,
       ));
     } catch (e) {
       emit(CooperativeError(e.toString()));
+    }
+  }
+
+  Future<void> _onLoadMore(
+    CooperativeLoadMoreRequested event,
+    Emitter<CooperativeState> emit,
+  ) async {
+    if (state is CooperativeLoaded) {
+      final currentState = state as CooperativeLoaded;
+      if (currentState.hasReachedMax) return;
+
+      try {
+        final nextPage = currentState.page + 1;
+        final newItems = await cooperativeRepository.getCooperatives(page: nextPage, limit: 10);
+        
+        final allItems = List<CooperativeItem>.from(currentState.allCooperatives)..addAll(newItems);
+        final filtered = _applyFilterAndSearch(
+          allItems,
+          currentState.selectedCategory,
+          currentState.searchQuery,
+        );
+        
+        emit(currentState.copyWith(
+          allCooperatives: allItems,
+          filteredCooperatives: filtered,
+          page: nextPage,
+          hasReachedMax: newItems.length < 10,
+        ));
+      } catch (e) {
+        emit(CooperativeError(e.toString()));
+      }
     }
   }
 

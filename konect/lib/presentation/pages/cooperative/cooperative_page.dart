@@ -4,7 +4,8 @@ import '../../blocs/cooperative/cooperative_bloc.dart';
 import '../../../data/models/cooperative.dart';
 
 class CooperativePage extends StatefulWidget {
-  const CooperativePage({super.key});
+  final bool showBackButton;
+  const CooperativePage({super.key, this.showBackButton = true});
 
   @override
   State<CooperativePage> createState() => _CooperativePageState();
@@ -12,15 +13,24 @@ class CooperativePage extends StatefulWidget {
 
 class _CooperativePageState extends State<CooperativePage> {
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     context.read<CooperativeBloc>().add(const CooperativeLoadRequested());
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200) {
+      context.read<CooperativeBloc>().add(const CooperativeLoadMoreRequested());
+    }
   }
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _searchController.dispose();
     super.dispose();
   }
@@ -45,10 +55,12 @@ class _CooperativePageState extends State<CooperativePage> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: brandSecondary, size: 20),
-          onPressed: () => Navigator.pop(context),
-        ),
+        leading: widget.showBackButton
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new, color: brandSecondary, size: 20),
+                onPressed: () => Navigator.pop(context),
+              )
+            : null,
       ),
       body: BlocBuilder<CooperativeBloc, CooperativeState>(
         builder: (context, state) {
@@ -80,6 +92,7 @@ class _CooperativePageState extends State<CooperativePage> {
                 // Scrollable Content
                 SafeArea(
                   child: SingleChildScrollView(
+                    controller: _scrollController,
                     padding: const EdgeInsets.only(
                       left: 16.0,
                       right: 16.0,
@@ -91,9 +104,6 @@ class _CooperativePageState extends State<CooperativePage> {
                       children: [
                         // Search Bar
                         _buildSearchBar(context, state.searchQuery),
-                        const SizedBox(height: 16),
-                        // Category Chips
-                        _buildCategoryChips(context, state.selectedCategory),
                         const SizedBox(height: 24),
                         // Section Header
                         _buildSectionHeader(context),
@@ -124,6 +134,11 @@ class _CooperativePageState extends State<CooperativePage> {
                                 state.filteredCooperatives[index],
                               );
                             },
+                          ),
+                        if (state.filteredCooperatives.isNotEmpty && !state.hasReachedMax)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 24.0),
+                            child: Center(child: CircularProgressIndicator(color: brandPrimary)),
                           ),
                       ],
                     ),
@@ -184,47 +199,6 @@ class _CooperativePageState extends State<CooperativePage> {
     );
   }
 
-  Widget _buildCategoryChips(BuildContext context, String activeCategory) {
-    final categories = ['Semua', 'Sembako', 'Simpan Pinjam', 'Pertanian'];
-
-    return SizedBox(
-      height: 40,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          final category = categories[index];
-          final isActive = category == activeCategory;
-
-          return Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: InkWell(
-              onTap: () {
-                context.read<CooperativeBloc>().add(CooperativeFilterChanged(category));
-              },
-              borderRadius: BorderRadius.circular(100),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                decoration: BoxDecoration(
-                  color: isActive ? const Color(0xFFE14242) : const Color(0xFFF2F3FF),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  category,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: isActive ? Colors.white : const Color(0xFF4B5563),
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
 
   Widget _buildSectionHeader(BuildContext context) {
     return Row(

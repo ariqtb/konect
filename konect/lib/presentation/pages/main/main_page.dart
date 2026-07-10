@@ -5,6 +5,7 @@ import '../../../core/constants.dart';
 import '../../../core/theme.dart';
 import '../voucher/voucher_page.dart';
 import '../profile/profile_page.dart';
+import '../cooperative/cooperative_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -78,9 +79,11 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
               ),
-              // Index 1: Voucher
+              // Index 1: Koperasi
+              const CooperativePage(showBackButton: false),
+              // Index 2: Voucher
               const VoucherPage(),
-              // Index 2: Profile
+              // Index 3: Profile
               const ProfilePage(),
             ],
           ),
@@ -862,12 +865,12 @@ class _MainPageState extends State<MainPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(child: _buildNavItem(Icons.home_outlined, 'Home', 0)),
-            Expanded(child: const SizedBox()), // Empty space to balance
-            const SizedBox(width: 72),
+            Expanded(child: _buildNavItem(Icons.storefront_outlined, 'Koperasi', 1)),
+            const SizedBox(width: 72), // Empty space for FAB
             Expanded(
                 child: _buildNavItem(
-                    Icons.confirmation_number_outlined, 'Voucher', 1)),
-            Expanded(child: _buildNavItem(Icons.person_outline, 'Profile', 2)),
+                    Icons.confirmation_number_outlined, 'Voucher', 2)),
+            Expanded(child: _buildNavItem(Icons.person_outline, 'Profile', 3)),
           ],
         ),
       ),

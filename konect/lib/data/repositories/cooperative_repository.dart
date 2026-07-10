@@ -3,9 +3,12 @@ import '../models/cooperative_detail.dart';
 import '../../core/services/supabase_service.dart';
 
 class CooperativeRepository {
-  Future<List<CooperativeItem>> getCooperatives() async {
+  Future<List<CooperativeItem>> getCooperatives({int page = 0, int limit = 10}) async {
     try {
-      final response = await SupabaseService().client.from('profil_koperasi').select();
+      final from = page * limit;
+      final to = from + limit - 1;
+      
+      final response = await SupabaseService().client.from('profil_koperasi').select().range(from, to);
       
       return (response as List<dynamic>).map((data) {
         return CooperativeItem(
