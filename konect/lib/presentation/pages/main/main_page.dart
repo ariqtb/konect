@@ -78,7 +78,7 @@ class _MainPageState extends State<MainPage> {
           ),
           // Floating Center Action Button (Centering horizontally, non-clipping)
           Positioned(
-            bottom: 50,
+            bottom: 42,
             left: 0,
             right: 0,
             child: Center(
@@ -129,10 +129,9 @@ class _MainPageState extends State<MainPage> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.black, width: 1.5),
             ),
             child: IconButton(
-              icon: const Icon(Icons.emoji_events_outlined, color: Colors.black),
+              icon: const Icon(Icons.emoji_events_outlined, color: Color(0xFFE21E49)),
               onPressed: () {
                 Navigator.pushNamed(context, AppConstants.leaderboardRoute);
               },
@@ -559,6 +558,48 @@ class _MainPageState extends State<MainPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
+                      Navigator.pushNamed(context, '/create-room');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFE21E49),
+                      elevation: 0,
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.add_circle_outline, size: 22, color: Colors.white),
+                        SizedBox(width: 10),
+                        Text(
+                          'Buat Rapat Baru',
+                          style: TextStyle(
+                            fontFamily: 'Outfit',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  child: Center(
+                    child: Text(
+                      'atau',
+                      style: TextStyle(
+                        fontFamily: 'Outfit',
+                        fontSize: 14,
+                        color: Color(0xFF94A3B8),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
                       if (_roomCodeController.text.trim().isNotEmpty) {
                         Navigator.pushNamed(
                           context,
@@ -572,14 +613,15 @@ class _MainPageState extends State<MainPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE21E49),
-                      elevation: 4,
-                      shadowColor: const Color(0xFFFFB3B6),
+                      backgroundColor: const Color(0xFFF1F5F9),
+                      foregroundColor: const Color(0xFF1E293B),
+                      elevation: 0,
+                      side: const BorderSide(color: Color(0xFFE2E8F0)),
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.login, size: 22),
+                        Icon(Icons.login, size: 22, color: Color(0xFF1E293B)),
                         SizedBox(width: 10),
                         Text(
                           'Gabung Rapat',
@@ -735,31 +777,29 @@ class _MainPageState extends State<MainPage> {
     return Container(
       height: 90,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.85),
+        color: Colors.white,
         border: const Border(
           top: BorderSide(color: Color(0xFFE2E8F0), width: 1),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 20,
-            offset: const Offset(0, -5),
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 15,
+            offset: const Offset(0, -4),
           ),
         ],
       ),
-      child: ClipRect(
-        child: SafeArea(
-          top: false,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(Icons.home, 'Home', 0),
-              _buildNavItem(Icons.storefront, 'Co-op', 1),
-              const SizedBox(width: 64),
-              _buildNavItem(Icons.confirmation_number_outlined, 'Voucher', 2),
-              _buildNavItem(Icons.person_outline, 'Profile', 3),
-            ],
-          ),
+      child: SafeArea(
+        top: false,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(child: _buildNavItem(Icons.home, 'Home', 0)),
+            Expanded(child: _buildNavItem(Icons.storefront, 'Koperasi', 1)),
+            const SizedBox(width: 72),
+            Expanded(child: _buildNavItem(Icons.confirmation_number_outlined, 'Voucher', 2)),
+            Expanded(child: _buildNavItem(Icons.person_outline, 'Profile', 3)),
+          ],
         ),
       ),
     );
@@ -811,13 +851,6 @@ class _MainPageState extends State<MainPage> {
       decoration: BoxDecoration(
         color: const Color(0xFFE21E49),
         shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFFE21E49).withOpacity(0.3),
-            blurRadius: 16,
-            offset: const Offset(0, 8),
-          ),
-        ],
         border: Border.all(color: Colors.white, width: 4),
       ),
       child: Material(
