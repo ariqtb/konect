@@ -259,7 +259,7 @@ class _VoucherPageState extends State<VoucherPage> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 0.68,
+                  childAspectRatio: 0.82,
                 ),
                 itemCount: _isAvailableSelected
                     ? _availableVouchers.length
@@ -276,25 +276,25 @@ class _VoucherPageState extends State<VoucherPage> {
               ),
               const SizedBox(height: 40),
 
-              // CTA banner
+              // CTA banner (Monochrome & Clean)
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEEF2FF),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFC7D2FE), width: 1.5),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
                 ),
                 child: Column(
                   children: [
-                    const Icon(Icons.volunteer_activism, size: 36, color: Color(0xFF818CF8)),
+                    const Icon(Icons.info_outline_rounded, size: 32, color: Color(0xFF64748B)),
                     const SizedBox(height: 12),
                     const Text(
                       'Ingin Poin Lebih Banyak?',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.brandNavy,
+                        color: Color(0xFF0F172A),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -302,20 +302,21 @@ class _VoucherPageState extends State<VoucherPage> {
                       'Ikuti kegiatan gotong royong warga atau bayar iuran tepat waktu untuk mendapatkan bonus poin harian!',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.slate500,
+                        fontSize: 13,
+                        color: Color(0xFF64748B),
                         height: 1.4,
                       ),
                     ),
                     const SizedBox(height: 12),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => _showPointsInfoModal(context),
                       child: const Text(
                         'Pelajari Selengkapnya',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.brandRed,
+                          color: Color(0xFF0F172A),
+                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
@@ -326,6 +327,163 @@ class _VoucherPageState extends State<VoucherPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showPointsInfoModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Pull bar
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFCBD5E1),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Cara Mendapatkan Poin',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF0F172A),
+                ),
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'Anda dapat mengumpulkan poin keaktifan dengan berpartisipasi aktif dalam kegiatan koperasi dan diskusi desa. Berikut rincian poin yang didapatkan:',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Color(0xFF64748B),
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 24),
+              
+              // Points details list
+              _buildPointInfoRow(
+                icon: Icons.chat_bubble_outline_rounded,
+                title: 'Berikan Pendapat',
+                description: 'Berikan gagasan atau pendapat baru pada forum diskusi rapat aktif.',
+                points: '+10 Poin',
+              ),
+              const SizedBox(height: 16),
+              _buildPointInfoRow(
+                icon: Icons.thumb_up_alt_outlined,
+                title: 'Pendapat Mendapat Vote',
+                description: 'Pendapat yang Anda berikan disukai atau mendapat dukungan/vote dari warga lain.',
+                points: '+10 Poin',
+              ),
+              const SizedBox(height: 16),
+              _buildPointInfoRow(
+                icon: Icons.volunteer_activism_outlined,
+                title: 'Partisipasi Kegiatan',
+                description: 'Terlibat dalam kegiatan gotong royong fisik atau pembayaran iuran tepat waktu.',
+                points: '+20 Poin',
+              ),
+              
+              const SizedBox(height: 32),
+              
+              // Close button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1E293B), // slate-800
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: const Text(
+                    'Mengerti',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildPointInfoRow({
+    required IconData icon,
+    required String title,
+    required String description,
+    required String points,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF1F5F9), // slate-100
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(icon, size: 20, color: const Color(0xFF475569)),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF0F172A),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF64748B),
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 16),
+        Text(
+          points,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF0F172A),
+          ),
+        ),
+      ],
     );
   }
 
@@ -359,106 +517,59 @@ class _VoucherPageState extends State<VoucherPage> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.slate100),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
-            Expanded(
-              flex: 3,
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
-                      image: DecorationImage(
-                        image: NetworkImage(data['image']),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  if ((data['badge'] as String).isNotEmpty)
-                    Positioned(
-                      top: 10,
-                      left: 10,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: data['badgeColor'] as Color,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(
-                          (data['badge'] as String).toUpperCase(),
-                          style: const TextStyle(
-                            fontSize: 9,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.5,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
+            AspectRatio(
+              aspectRatio: 16 / 10,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                child: Image.network(
+                  data['image'],
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            // Content
             Expanded(
-              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       data['title'] as String,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.brandNavy,
-                        height: 1.2,
+                        color: Color(0xFF0F172A),
+                        height: 1.3,
                       ),
                     ),
-                    const SizedBox(height: 6),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(Icons.stars, color: AppColors.brandRed, size: 14),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${data['points']} Pts',
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.brandRed,
-                          ),
+                        Row(
+                          children: [
+                            const Icon(Icons.stars_rounded, color: Color(0xFFDC2626), size: 14),
+                            const SizedBox(width: 4),
+                            Text(
+                              '${data['points']} Pts',
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFDC2626),
+                              ),
+                            ),
+                          ],
                         ),
+                        const Icon(Icons.arrow_forward_rounded, color: Color(0xFF94A3B8), size: 14),
                       ],
-                    ),
-                    const Spacer(),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () => _showVoucherDetail(data),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.brandRed,
-                          foregroundColor: Colors.white,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                        ),
-                        child: const Text(
-                          'Tukar',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),
@@ -478,108 +589,66 @@ class _VoucherPageState extends State<VoucherPage> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.slate100),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 3,
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
-                      image: DecorationImage(
-                        image: NetworkImage(data['image'] as String),
-                        fit: BoxFit.cover,
-                        colorFilter: isActive
-                            ? null
-                            : ColorFilter.mode(
-                                Colors.black.withValues(alpha: 0.4),
-                                BlendMode.darken,
-                              ),
-                      ),
-                    ),
-                    foregroundDecoration: isActive
-                        ? null
-                        : const BoxDecoration(
-                            color: Colors.grey,
-                            backgroundBlendMode: BlendMode.saturation,
-                          ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: isActive
-                            ? data['statusColor'] as Color
-                            : Colors.white.withValues(alpha: 0.9),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        (data['status'] as String).toUpperCase(),
-                        style: TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5,
-                          color: isActive ? Colors.white : AppColors.slate500,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            AspectRatio(
+              aspectRatio: 16 / 10,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                child: Image.network(
+                  data['image'] as String,
+                  fit: BoxFit.cover,
+                  color: isActive ? null : Colors.black.withOpacity(0.4),
+                  colorBlendMode: isActive ? null : BlendMode.darken,
+                ),
               ),
             ),
             Expanded(
-              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       data['title'] as String,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.brandNavy,
-                        height: 1.2,
+                        color: isActive ? const Color(0xFF0F172A) : const Color(0xFF94A3B8),
+                        height: 1.3,
                       ),
                     ),
-                    const Spacer(),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: isActive
-                            ? () => _showVoucherDetail(data, isOwned: true)
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: isActive
-                              ? AppColors.brandRed
-                              : AppColors.slate100,
-                          foregroundColor: isActive
-                              ? Colors.white
-                              : AppColors.slate400,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: isActive
+                                ? const Color(0xFFECFDF5) // emerald-50
+                                : const Color(0xFFF1F5F9), // slate-100
+                            borderRadius: BorderRadius.circular(6),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                        ),
-                        child: Text(
-                          isActive ? 'Gunakan' : 'Selesai',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                          child: Text(
+                            isActive ? 'Tersedia' : 'Selesai',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: isActive
+                                  ? const Color(0xFF059669) // emerald-600
+                                  : const Color(0xFF64748B), // slate-500
+                            ),
                           ),
                         ),
-                      ),
+                        const Icon(Icons.arrow_forward_rounded, color: Color(0xFF94A3B8), size: 14),
+                      ],
                     ),
                   ],
                 ),

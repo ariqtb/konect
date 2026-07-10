@@ -39,7 +39,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
     final initialDate = isStart
         ? (_startDate ?? DateTime.now())
         : (_endDate ?? _startDate ?? DateTime.now());
-    
+
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: initialDate,
@@ -130,10 +130,13 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                       : '${dateTime.day.toString().padLeft(2, '0')}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.year} ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}',
                   style: TextStyle(
                     fontSize: 15,
-                    color: dateTime == null ? const Color(0xFF94A3B8) : const Color(0xFF0F172A),
+                    color: dateTime == null
+                        ? const Color(0xFF94A3B8)
+                        : const Color(0xFF0F172A),
                   ),
                 ),
-                const Icon(Icons.calendar_today_outlined, size: 20, color: Color(0xFF94A3B8)),
+                const Icon(Icons.calendar_today_outlined,
+                    size: 20, color: Color(0xFF94A3B8)),
               ],
             ),
           ),
@@ -184,7 +187,8 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                     CustomTextField(
                       controller: _topicController,
                       labelText: 'Topik Rapat',
-                      hintText: 'Contoh: Pembahasan Distribusi Sembako Tahap II',
+                      hintText:
+                          'Contoh: Pembahasan Distribusi Sembako Tahap II',
                       validator: (val) {
                         if (val == null || val.isEmpty) {
                           return 'Topik rapat tidak boleh kosong';
@@ -205,22 +209,27 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                     const SizedBox(height: 8),
                     DropdownButtonFormField<String>(
                       value: _selectedCoop,
-                      style: const TextStyle(fontSize: 15, color: Color(0xFF0F172A)),
+                      style: const TextStyle(
+                          fontSize: 15, color: Color(0xFF0F172A)),
                       decoration: InputDecoration(
                         fillColor: const Color(0xFFF8FAFC),
                         filled: true,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
-                          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFE2E8F0)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
-                          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFE2E8F0)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
-                          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
+                          borderSide: const BorderSide(
+                              color: Color(0xFFDC2626), width: 2),
                         ),
                       ),
                       items: _coops.map((String coop) {
@@ -279,14 +288,18 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
               if (_formKey.currentState!.validate()) {
                 if (_startDate == null || _endDate == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Silakan pilih waktu mulai dan selesai rapat')),
+                    const SnackBar(
+                        content: Text(
+                            'Silakan pilih waktu mulai dan selesai rapat')),
                   );
                   return;
                 }
-                
+
                 if (_endDate!.isBefore(_startDate!)) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Waktu selesai tidak boleh lebih awal dari waktu mulai')),
+                    const SnackBar(
+                        content: Text(
+                            'Waktu selesai tidak boleh lebih awal dari waktu mulai')),
                   );
                   return;
                 }

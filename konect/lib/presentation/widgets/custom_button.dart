@@ -23,14 +23,15 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     // Red brand primary action color (#e21e49)
     final Color defaultPrimaryBg = theme.colorScheme.secondaryContainer;
     const Color defaultPrimaryText = Colors.white;
 
     // Secondary: outline-style
     const Color defaultSecondaryBg = Colors.transparent;
-    final Color defaultSecondaryText = theme.colorScheme.secondaryContainer; // Red
+    final Color defaultSecondaryText =
+        theme.colorScheme.secondaryContainer; // Red
 
     Color finalBgColor;
     Color finalTextColor;
@@ -93,4 +94,3 @@ class CustomButton extends StatelessWidget {
     return result;
   }
 }
-

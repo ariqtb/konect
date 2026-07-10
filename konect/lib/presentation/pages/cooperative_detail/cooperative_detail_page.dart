@@ -20,7 +20,9 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
   @override
   void initState() {
     super.initState();
-    context.read<CooperativeDetailBloc>().add(CooperativeDetailLoadRequested(widget.coopId));
+    context
+        .read<CooperativeDetailBloc>()
+        .add(CooperativeDetailLoadRequested(widget.coopId));
   }
 
   @override
@@ -29,20 +31,23 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     const Color colorSurface = Color(0xFFF8FAFC);
     const Color colorSecondaryContainer = Color(0xFFDC2626); // Brand Red/Rose
 
-
     return Scaffold(
       backgroundColor: colorSurface,
       body: BlocBuilder<CooperativeDetailBloc, CooperativeDetailState>(
         builder: (context, state) {
-          if (state is CooperativeDetailLoading || state is CooperativeDetailInitial) {
-            return const Center(child: CircularProgressIndicator(color: colorSecondaryContainer));
+          if (state is CooperativeDetailLoading ||
+              state is CooperativeDetailInitial) {
+            return const Center(
+                child:
+                    CircularProgressIndicator(color: colorSecondaryContainer));
           }
           if (state is CooperativeDetailError) {
             return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.error_outline, size: 48, color: colorSecondaryContainer),
+                  const Icon(Icons.error_outline,
+                      size: 48, color: colorSecondaryContainer),
                   const SizedBox(height: 8),
                   Text(state.message, textAlign: TextAlign.center),
                   const SizedBox(height: 12),
@@ -67,7 +72,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                   _buildHeroSection(context, details),
                   // Main Content
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 32.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -110,7 +116,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             errorBuilder: (context, error, stackTrace) {
               return Container(
                 color: colorNavy,
-                child: const Icon(Icons.storefront, color: Colors.white70, size: 64),
+                child: const Icon(Icons.storefront,
+                    color: Colors.white70, size: 64),
               );
             },
           ),
@@ -170,7 +177,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             children: [
               // Badge "Mitra Utama"
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(100),
@@ -198,7 +206,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               // Address Row
               const Row(
                 children: [
-                  Icon(Icons.location_on_outlined, color: Colors.white70, size: 16),
+                  Icon(Icons.location_on_outlined,
+                      color: Colors.white70, size: 16),
                   SizedBox(width: 4),
                   Text(
                     'Desa Sukatani, Jawa Barat',
@@ -216,7 +225,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildRoomsSection(BuildContext context, CooperativeDetailLoaded state) {
+  Widget _buildRoomsSection(
+      BuildContext context, CooperativeDetailLoaded state) {
     const Color colorNavy = Color(0xFF1E293B);
 
     return Column(
@@ -265,7 +275,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                   value: state.selectedFilter,
                   icon: const Padding(
                     padding: EdgeInsets.only(left: 8.0),
-                    child: Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 18),
+                    child: Icon(Icons.keyboard_arrow_down,
+                        color: Colors.white, size: 18),
                   ),
                   underline: const SizedBox.shrink(),
                   dropdownColor: colorNavy,
@@ -276,7 +287,9 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                   ),
                   onChanged: (val) {
                     if (val != null) {
-                      context.read<CooperativeDetailBloc>().add(CooperativeDetailFilterRooms(val));
+                      context
+                          .read<CooperativeDetailBloc>()
+                          .add(CooperativeDetailFilterRooms(val));
                     }
                   },
                   items: const [
@@ -326,7 +339,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildActiveDiscussionCard(BuildContext context, CoopDiscussionRoom room) {
+  Widget _buildActiveDiscussionCard(
+      BuildContext context, CoopDiscussionRoom room) {
     const Color colorNavy = Color(0xFF1E293B);
     const Color colorSecondaryContainer = Color(0xFFDC2626);
 
@@ -352,7 +366,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             children: [
               // Badge status Aktif
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: const Color(0xFFEEF2FF), // indigo-50
                   borderRadius: BorderRadius.circular(100),
@@ -415,7 +430,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                               height: 32,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 2),
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
                                 image: DecorationImage(
                                   image: NetworkImage(room.avatars[idx]),
                                   fit: BoxFit.cover,
@@ -428,7 +444,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                     ),
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       color: const Color(0xFFEEF2FF),
                       borderRadius: BorderRadius.circular(100),
@@ -452,7 +469,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             child: ElevatedButton(
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Bergabung ke diskusi: ${room.title}')),
+                  SnackBar(
+                      content: Text('Bergabung ke diskusi: ${room.title}')),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -484,7 +502,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildCompletedDiscussionCard(BuildContext context, CoopDiscussionRoom room) {
+  Widget _buildCompletedDiscussionCard(
+      BuildContext context, CoopDiscussionRoom room) {
     const Color colorNavy = Color(0xFF1E293B);
 
     return Container(
@@ -583,7 +602,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildUpdatesSection(BuildContext context, List<CoopTimelineUpdate> updates) {
+  Widget _buildUpdatesSection(
+      BuildContext context, List<CoopTimelineUpdate> updates) {
     const Color colorNavy = Color(0xFF1E293B);
     const Color colorSecondaryContainer = Color(0xFFDC2626);
 
@@ -621,15 +641,20 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               itemBuilder: (context, index) {
                 final update = updates[index];
                 final isWarning = update.type == 'warning';
-                final dotColor = isWarning ? const Color(0xFFFF7A3D) : const Color(0xFF94A3B8);
-                final dotBorderColor = isWarning ? const Color(0xFFFFEDD5) : const Color(0xFFF1F5F9);
+                final dotColor = isWarning
+                    ? const Color(0xFFFF7A3D)
+                    : const Color(0xFF94A3B8);
+                final dotBorderColor = isWarning
+                    ? const Color(0xFFFFEDD5)
+                    : const Color(0xFFF1F5F9);
 
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Timeline Point
                     Container(
-                      margin: const EdgeInsets.only(left: 16, right: 16, top: 12),
+                      margin:
+                          const EdgeInsets.only(left: 16, right: 16, top: 12),
                       width: 16,
                       height: 16,
                       decoration: BoxDecoration(
@@ -642,51 +667,53 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, AppConstants.articleDetailRoute);
+                          Navigator.pushNamed(
+                              context, AppConstants.articleDetailRoute);
                         },
                         child: Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(32), // rounded-vox
+                            borderRadius:
+                                BorderRadius.circular(32), // rounded-vox
                             border: Border.all(color: const Color(0xFFF1F5F9)),
                           ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              update.date,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF64748B),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                update.date,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF64748B),
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              update.title,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: colorNavy,
+                              const SizedBox(height: 6),
+                              Text(
+                                update.title,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: colorNavy,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              update.description,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF64748B),
-                                height: 1.4,
+                              const SizedBox(height: 4),
+                              Text(
+                                update.description,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xFF64748B),
+                                  height: 1.4,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              );
+                  ],
+                );
               },
             ),
           ],
@@ -698,10 +725,12 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           child: ElevatedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Membuka formulir saran & masukan')),
+                const SnackBar(
+                    content: Text('Membuka formulir saran & masukan')),
               );
             },
-            icon: const Icon(Icons.chat_bubble_outline, color: Colors.white, size: 18),
+            icon: const Icon(Icons.chat_bubble_outline,
+                color: Colors.white, size: 18),
             label: const Text(
               'Ruang saran dan masukan',
               style: TextStyle(
@@ -723,7 +752,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildDetailKoperasiSection(BuildContext context, CooperativeDetail details) {
+  Widget _buildDetailKoperasiSection(
+      BuildContext context, CooperativeDetail details) {
     const Color colorNavy = Color(0xFF1E293B);
 
     return Column(
@@ -878,37 +908,37 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-            children: [
-              const Icon(Icons.phone_outlined, color: colorNavy, size: 20),
-              const SizedBox(width: 12),
-              Text(
-                details.phone,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF334155),
-                ),
+                children: [
+                  const Icon(Icons.phone_outlined, color: colorNavy, size: 20),
+                  const SizedBox(width: 12),
+                  Text(
+                    details.phone,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF334155),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  const Icon(Icons.mail_outline, color: colorNavy, size: 20),
+                  const SizedBox(width: 12),
+                  Text(
+                    details.email,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF334155),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              const Icon(Icons.mail_outline, color: colorNavy, size: 20),
-              const SizedBox(width: 12),
-              Text(
-                details.email,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF334155),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
+        ),
       ],
     );
   }

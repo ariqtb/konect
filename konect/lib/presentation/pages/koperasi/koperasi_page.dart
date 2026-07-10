@@ -26,7 +26,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
       'address': 'Jl. Raya Desa Sukamaju No. 12',
       'distance': '1.2 km',
       'isOpen': true,
-      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFoJgR2qD9tq72e1s2tG3h5k9s82H2v8L7m3y5q8s9t2v8c8L3y5s8H2v8L7m3y5s8=w400-h200-c',
+      'image':
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuDFoJgR2qD9tq72e1s2tG3h5k9s82H2v8L7m3y5q8s9t2v8c8L3y5s8H2v8L7m3y5s8=w400-h200-c',
       'category': 'Pertanian',
     },
     {
@@ -35,7 +36,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
       'address': 'Dusun Krajan RT 02/RW 01',
       'distance': '2.5 km',
       'isOpen': true,
-      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCK1yMQNzemgA8JjbukSWJhytq4ApsMrjwUF-GBeHOIrZ7qhoh945cfdFZWK5ryUh_quzDE2XS3AXfiCTlGOB7wT9LFHOW0iGlTlQMQuCNCT0VebWkqGOdGKNOiapzU814uROyR7rwGLMAw_1y9A_6dsahL0HaLcm4LFp5MckXxjnrle_wOiRd4xIQeDPM7k4Qm8uDfQMMvbsyp3uF6jKavR9mgwkud_3wIQWLMs8e2EhZccGCcJbh6VsuOXLllWVEWKkU=w400-h200-c',
+      'image':
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuCK1yMQNzemgA8JjbukSWJhytq4ApsMrjwUF-GBeHOIrZ7qhoh945cfdFZWK5ryUh_quzDE2XS3AXfiCTlGOB7wT9LFHOW0iGlTlQMQuCNCT0VebWkqGOdGKNOiapzU814uROyR7rwGLMAw_1y9A_6dsahL0HaLcm4LFp5MckXxjnrle_wOiRd4xIQeDPM7k4Qm8uDfQMMvbsyp3uF6jKavR9mgwkud_3wIQWLMs8e2EhZccGCcJbh6VsuOXLllWVEWKkU=w400-h200-c',
       'category': 'Sembako',
     },
     {
@@ -44,7 +46,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
       'address': 'Jl. Balai Desa RT 04/RW 02',
       'distance': '3.1 km',
       'isOpen': false,
-      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCKj0KyglLbOn2DNZtnYMsq9ynlR1zolGnlJFH_Wi5WD4UFDg61Ko5G0p_9-k8CGSHESAEm6ruFwuqZ_FeYobQJ8ZByPooIyVDKFdMzvvtBo6LWVoBA-Zg-Zh2dCoTOPIiFAuUIms3rKcoYv_fDc_O3VNQsX5BL_SieaMawl9qyZFkmKNXcN2N3EMXBEktJ3UskUHFo055njg4PkXRI3WfbsTcqT4hRBJrIKFnrdk4h6cxtTGMKTL4PS_C8XOFCMztcx00=w400-h200-c',
+      'image':
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuCKj0KyglLbOn2DNZtnYMsq9ynlR1zolGnlJFH_Wi5WD4UFDg61Ko5G0p_9-k8CGSHESAEm6ruFwuqZ_FeYobQJ8ZByPooIyVDKFdMzvvtBo6LWVoBA-Zg-Zh2dCoTOPIiFAuUIms3rKcoYv_fDc_O3VNQsX5BL_SieaMawl9qyZFkmKNXcN2N3EMXBEktJ3UskUHFo055njg4PkXRI3WfbsTcqT4hRBJrIKFnrdk4h6cxtTGMKTL4PS_C8XOFCMztcx00=w400-h200-c',
       'category': 'Token Listrik',
     },
   ];
@@ -55,7 +58,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
     final filteredList = _selectedCategoryIndex == 0
         ? _koperasiList
         : _koperasiList
-            .where((item) => item['category'] == _categories[_selectedCategoryIndex])
+            .where((item) =>
+                item['category'] == _categories[_selectedCategoryIndex])
             .toList();
 
     return Scaffold(
@@ -68,7 +72,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(100),
@@ -83,7 +88,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
                   ),
                   child: const Row(
                     children: [
-                      Icon(Icons.search_rounded, color: Color(0xFF94A3B8), size: 20),
+                      Icon(Icons.search_rounded,
+                          color: Color(0xFF94A3B8), size: 20),
                       SizedBox(width: 10),
                       Expanded(
                         child: TextField(
@@ -122,14 +128,18 @@ class _KoperasiPageState extends State<KoperasiPage> {
                       },
                       child: Container(
                         margin: const EdgeInsets.only(right: 10),
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 10),
                         decoration: BoxDecoration(
-                          color: isSelected ? const Color(0xFFDC2626) : Colors.white,
+                          color: isSelected
+                              ? const Color(0xFFDC2626)
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: isSelected 
-                                ? const Color(0xFFDC2626) 
-                                : const Color(0xFFDC2626).withValues(alpha: 0.3),
+                            color: isSelected
+                                ? const Color(0xFFDC2626)
+                                : const Color(0xFFDC2626)
+                                    .withValues(alpha: 0.3),
                             width: 1.5,
                           ),
                         ),
@@ -138,7 +148,9 @@ class _KoperasiPageState extends State<KoperasiPage> {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: isSelected ? Colors.white : const Color(0xFFDC2626),
+                            color: isSelected
+                                ? Colors.white
+                                : const Color(0xFFDC2626),
                           ),
                         ),
                       ),
@@ -147,7 +159,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
                 ),
               ),
             ),
-            
+
             const SliverToBoxAdapter(
               child: SizedBox(height: 24),
             ),
@@ -182,7 +194,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
                 ),
               ),
             ),
-            
+
             const SliverToBoxAdapter(
               child: SizedBox(height: 12),
             ),
@@ -199,7 +211,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(24), // rounded-custom
+                          borderRadius:
+                              BorderRadius.circular(24), // rounded-custom
                           border: Border.all(color: const Color(0xFFF1F5F9)),
                           boxShadow: [
                             BoxShadow(
@@ -216,7 +229,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
                             Stack(
                               children: [
                                 ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(24)),
                                   child: Image.network(
                                     item['image'],
                                     height: 160,
@@ -228,11 +242,14 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                   top: 16,
                                   left: 16,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 4),
                                     decoration: BoxDecoration(
                                       color: item['isOpen']
-                                          ? const Color(0xFFECFDF5).withOpacity(0.9)
-                                          : const Color(0xFFFEF2F2).withOpacity(0.9),
+                                          ? const Color(0xFFECFDF5)
+                                              .withOpacity(0.9)
+                                          : const Color(0xFFFEF2F2)
+                                              .withOpacity(0.9),
                                       borderRadius: BorderRadius.circular(100),
                                     ),
                                     child: Row(
@@ -242,7 +259,9 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                           width: 6,
                                           height: 6,
                                           decoration: BoxDecoration(
-                                            color: item['isOpen'] ? const Color(0xFF10B981) : const Color(0xFFEF4444),
+                                            color: item['isOpen']
+                                                ? const Color(0xFF10B981)
+                                                : const Color(0xFFEF4444),
                                             shape: BoxShape.circle,
                                           ),
                                         ),
@@ -252,7 +271,9 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.bold,
-                                            color: item['isOpen'] ? const Color(0xFF065F46) : const Color(0xFF991B1B),
+                                            color: item['isOpen']
+                                                ? const Color(0xFF065F46)
+                                                : const Color(0xFF991B1B),
                                           ),
                                         ),
                                       ],
@@ -280,7 +301,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                   const SizedBox(height: 6),
                                   Row(
                                     children: [
-                                      const Icon(Icons.location_on_outlined, size: 14, color: Color(0xFF94A3B8)),
+                                      const Icon(Icons.location_on_outlined,
+                                          size: 14, color: Color(0xFF94A3B8)),
                                       const SizedBox(width: 4),
                                       Expanded(
                                         child: Text(
@@ -296,7 +318,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                   ),
                                   const SizedBox(height: 20),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -304,17 +327,25 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                             padding: const EdgeInsets.all(8),
                                             decoration: BoxDecoration(
                                               color: const Color(0xFFF2F3FF),
-                                              borderRadius: BorderRadius.circular(12),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                             ),
-                                            child: const Icon(Icons.location_searching_rounded, size: 18, color: Color(0xFF1A2E44)),
+                                            child: const Icon(
+                                                Icons
+                                                    .location_searching_rounded,
+                                                size: 18,
+                                                color: Color(0xFF1A2E44)),
                                           ),
                                           const SizedBox(width: 10),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               const Text(
                                                 'Jarak',
-                                                style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+                                                style: TextStyle(
+                                                    fontSize: 11,
+                                                    color: Color(0xFF94A3B8)),
                                               ),
                                               Text(
                                                 item['distance'],
@@ -330,12 +361,15 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                       ),
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color(0xFFDC2626),
+                                          backgroundColor:
+                                              const Color(0xFFDC2626),
                                           foregroundColor: Colors.white,
                                           elevation: 0,
-                                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 12),
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(12),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
                                           ),
                                         ),
                                         onPressed: () {
@@ -347,7 +381,9 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                         },
                                         child: const Text(
                                           'Lihat Detail',
-                                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ],

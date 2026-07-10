@@ -35,7 +35,9 @@ class _MainPageState extends State<MainPage> {
             children: [
               // Index 0: Home Content
               SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 100.0), // Padding to avoid overlap with bottom navigation bar
+                padding: const EdgeInsets.only(
+                    bottom:
+                        100.0), // Padding to avoid overlap with bottom navigation bar
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -145,7 +147,8 @@ class _MainPageState extends State<MainPage> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: IconButton(
-              icon: const Icon(Icons.emoji_events_outlined, color: Colors.white),
+              icon:
+                  const Icon(Icons.emoji_events_outlined, color: Colors.white),
               onPressed: () {
                 Navigator.pushNamed(context, AppConstants.leaderboardRoute);
               },
@@ -192,7 +195,8 @@ class _MainPageState extends State<MainPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         color: const Color(0xFFD1FAE5),
                         borderRadius: BorderRadius.circular(999),
@@ -246,22 +250,26 @@ class _MainPageState extends State<MainPage> {
                         children: [
                           Positioned(
                             left: 0,
-                            child: _buildAvatar('https://lh3.googleusercontent.com/aida-public/AB6AXuDtRv06_ngfuOBMx3FQhVFdo11gQ7P656W04jhE26yTQXmjyaIYocjBvGu5J_iBmIaJVm3SxW5-4GBq_HB9DHlYHGkSFNYd8GdAYzvd7rrYr7SDjT_WNGEfvxFiDpqu96h7Y9klbXuIwwVCPr3BQKqWeMJw93vs91G2_oKrQr3eSGiXBZe6l67BcoYuCwmqk0LEbU2lRPgyGlwWKhfSBcqpOV7ScQiyWhLAy8DWnRxsfkqdHokMzUt9vw'),
+                            child: _buildAvatar(
+                                'https://lh3.googleusercontent.com/aida-public/AB6AXuDtRv06_ngfuOBMx3FQhVFdo11gQ7P656W04jhE26yTQXmjyaIYocjBvGu5J_iBmIaJVm3SxW5-4GBq_HB9DHlYHGkSFNYd8GdAYzvd7rrYr7SDjT_WNGEfvxFiDpqu96h7Y9klbXuIwwVCPr3BQKqWeMJw93vs91G2_oKrQr3eSGiXBZe6l67BcoYuCwmqk0LEbU2lRPgyGlwWKhfSBcqpOV7ScQiyWhLAy8DWnRxsfkqdHokMzUt9vw'),
                           ),
                           Positioned(
                             left: 20,
-                            child: _buildAvatar('https://lh3.googleusercontent.com/aida-public/AB6AXuC5s0X4zxT6Rz72_mLjmli0hSMZlyUXqLMNFgJoB9aStJuA198NhIS-VVuJpQY2GN3ESNcd97Owj83ujy8LvXY9yURjrMJ9Ze1lqoYGep4_gaGHXVfca_M6wheKrPitO7zyudY8_wlRiVb458rireAJmdKm3jyJrgxuaQAO_n3nqEIUTcEq6avB0-n2_Ml-HtC1Gozl9dgoFkp0C0nG5inPGpSUIZiYABWebZaEuvm9QWVV9cQloMhwsw'),
+                            child: _buildAvatar(
+                                'https://lh3.googleusercontent.com/aida-public/AB6AXuC5s0X4zxT6Rz72_mLjmli0hSMZlyUXqLMNFgJoB9aStJuA198NhIS-VVuJpQY2GN3ESNcd97Owj83ujy8LvXY9yURjrMJ9Ze1lqoYGep4_gaGHXVfca_M6wheKrPitO7zyudY8_wlRiVb458rireAJmdKm3jyJrgxuaQAO_n3nqEIUTcEq6avB0-n2_Ml-HtC1Gozl9dgoFkp0C0nG5inPGpSUIZiYABWebZaEuvm9QWVV9cQloMhwsw'),
                           ),
                           Positioned(
                             left: 40,
-                            child: _buildAvatar('https://lh3.googleusercontent.com/aida-public/AB6AXuDh1MwmbBu5s3kXhaQjmz08aufJAGbqJii-ssZi30uSPHAu1qdCxP-34X_OcI5XcVAX7AplHo4jNglpSGxtQNiAirdT7pW3VklekEEqCu9WyIwQkih5C4S3euqW7H5SaLWD8TU8M-E31-aIIXkGHSlg3g64Hmg-i4TfYIy1OJ9rGvzJsisAuLTPJd2ueXFzuUsrETvm_9UdN_ckr2HFIsQoUlx8UgcYPYOxLdXY9oehVx_TRd0in-1FLg'),
+                            child: _buildAvatar(
+                                'https://lh3.googleusercontent.com/aida-public/AB6AXuDh1MwmbBu5s3kXhaQjmz08aufJAGbqJii-ssZi30uSPHAu1qdCxP-34X_OcI5XcVAX7AplHo4jNglpSGxtQNiAirdT7pW3VklekEEqCu9WyIwQkih5C4S3euqW7H5SaLWD8TU8M-E31-aIIXkGHSlg3g64Hmg-i4TfYIy1OJ9rGvzJsisAuLTPJd2ueXFzuUsrETvm_9UdN_ckr2HFIsQoUlx8UgcYPYOxLdXY9oehVx_TRd0in-1FLg'),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         color: const Color(0xFFF1F5F9),
                         borderRadius: BorderRadius.circular(999),
@@ -285,7 +293,8 @@ class _MainPageState extends State<MainPage> {
                       Navigator.pushNamed(
                         context,
                         AppConstants.roomDiscussionRoute,
-                        arguments: 'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik',
+                        arguments:
+                            'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik',
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -334,7 +343,8 @@ class _MainPageState extends State<MainPage> {
           errorBuilder: (context, error, stackTrace) {
             return Container(
               color: Colors.grey[300],
-              child: const Icon(Icons.person_outline, size: 18, color: Colors.white),
+              child: const Icon(Icons.person_outline,
+                  size: 18, color: Colors.white),
             );
           },
         ),
@@ -347,12 +357,14 @@ class _MainPageState extends State<MainPage> {
       {
         'title': 'Koperasi Makmur Jaya',
         'location': 'Dusun Utara, 400m',
-        'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuA5VsV41stvFDtKwGpSKPfQeFnRKOOJeIZM-3Yy4Ay4z116mh_n2lGz_nkrh3i11N3Hz2nGolZfCY-ahnIIJ0gFsTZgUdVHF1y4IUDB7iZoXkKRAZd8m1TJ31dE7Ip5toZQf5hoSi4jDwCva0er9_EiTms9FWSFtMYdSMOFbjkLgRn_pKL6yDdMfAnubOtlfYEkJVXx3Z1atewMVUQhrvnm_ZTa2taY2s--2pIHMQYnBx0nmAvCrn7Hbw',
+        'image':
+            'https://lh3.googleusercontent.com/aida-public/AB6AXuA5VsV41stvFDtKwGpSKPfQeFnRKOOJeIZM-3Yy4Ay4z116mh_n2lGz_nkrh3i11N3Hz2nGolZfCY-ahnIIJ0gFsTZgUdVHF1y4IUDB7iZoXkKRAZd8m1TJ31dE7Ip5toZQf5hoSi4jDwCva0er9_EiTms9FWSFtMYdSMOFbjkLgRn_pKL6yDdMfAnubOtlfYEkJVXx3Z1atewMVUQhrvnm_ZTa2taY2s--2pIHMQYnBx0nmAvCrn7Hbw',
       },
       {
         'title': 'Koperasi Kreatif Mandiri',
         'location': 'Dusun Timur, 1.2km',
-        'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCyc41LM7xFYpceJLbO5Em-PRi7Nmz7X0oxLYCSmiG3fQzrcdnCFrZf7PK-1uw1jT1oEGevgKNvV2C1I2H98FZWjNVb-bT3dJNULzFVXNeXkIiRKUJG_CpEBeCU8zmuaMNonibl_G43QedIvQ9eeCOQ1e6xeGBo-b24XYvmvuQU1NIwEWHcK1Yr4R-gVMbs4BeEumzJZIwgY_ntdNz0mye6uW6at-wPH_C5Oz6idQA19ZToTD-_XtLI5g',
+        'image':
+            'https://lh3.googleusercontent.com/aida-public/AB6AXuCyc41LM7xFYpceJLbO5Em-PRi7Nmz7X0oxLYCSmiG3fQzrcdnCFrZf7PK-1uw1jT1oEGevgKNvV2C1I2H98FZWjNVb-bT3dJNULzFVXNeXkIiRKUJG_CpEBeCU8zmuaMNonibl_G43QedIvQ9eeCOQ1e6xeGBo-b24XYvmvuQU1NIwEWHcK1Yr4R-gVMbs4BeEumzJZIwgY_ntdNz0mye6uW6at-wPH_C5Oz6idQA19ZToTD-_XtLI5g',
       }
     ];
 
@@ -407,103 +419,108 @@ class _MainPageState extends State<MainPage> {
                 },
                 child: Container(
                   width: 280,
-                margin: const EdgeInsets.only(right: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFF1F5F9)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.02),
-                      blurRadius: 16,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                          child: Image.network(
-                            coop['image']!,
-                            height: 150,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                height: 150,
-                                color: Colors.grey[200],
-                                child: const Icon(Icons.image_outlined, color: Colors.grey),
-                              );
-                            },
-                          ),
-                        ),
-                        Positioned(
-                          top: 16,
-                          left: 16,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: const Color(0xCC10B981), // emerald-500 with opacity
-                              borderRadius: BorderRadius.circular(999),
+                  margin: const EdgeInsets.only(right: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: const Color(0xFFF1F5F9)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.02),
+                        blurRadius: 16,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(16)),
+                            child: Image.network(
+                              coop['image']!,
+                              height: 150,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  height: 150,
+                                  color: Colors.grey[200],
+                                  child: const Icon(Icons.image_outlined,
+                                      color: Colors.grey),
+                                );
+                              },
                             ),
-                            child: const Row(
+                          ),
+                          Positioned(
+                            top: 16,
+                            left: 16,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: const Color(
+                                    0xCC10B981), // emerald-500 with opacity
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              child: const Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 3,
+                                    backgroundColor: Colors.white,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    'Buka',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              coop['title']!,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF111C2D),
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Row(
                               children: [
-                                CircleAvatar(
-                                  radius: 3,
-                                  backgroundColor: Colors.white,
-                                ),
-                                SizedBox(width: 6),
+                                const Icon(Icons.location_on_outlined,
+                                    size: 16, color: Color(0xFF94A3B8)),
+                                const SizedBox(width: 4),
                                 Text(
-                                  'Buka',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                  coop['location']!,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFF64748B),
                                   ),
                                 ),
                               ],
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            coop['title']!,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF111C2D),
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Row(
-                            children: [
-                              const Icon(Icons.location_on_outlined, size: 16, color: Color(0xFF94A3B8)),
-                              const SizedBox(width: 4),
-                              Text(
-                                coop['location']!,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF64748B),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
               );
             },
           ),
@@ -577,7 +594,8 @@ class _MainPageState extends State<MainPage> {
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.add_circle_outline, size: 22, color: Colors.white),
+                          Icon(Icons.add_circle_outline,
+                              size: 22, color: Colors.white),
                           SizedBox(width: 10),
                           Text(
                             'Buat Rapat Baru',
@@ -616,7 +634,8 @@ class _MainPageState extends State<MainPage> {
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Silakan masukkan kode ruang')),
+                            const SnackBar(
+                                content: Text('Silakan masukkan kode ruang')),
                           );
                         }
                       },
@@ -656,7 +675,8 @@ class _MainPageState extends State<MainPage> {
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Silakan masukkan kode ruang')),
+                            const SnackBar(
+                                content: Text('Silakan masukkan kode ruang')),
                           );
                         }
                       },
@@ -840,9 +860,12 @@ class _MainPageState extends State<MainPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(child: _buildNavItem(Icons.home_outlined, 'Home', 0)),
-            Expanded(child: _buildNavItem(Icons.storefront_outlined, 'Koperasi', 1)),
+            Expanded(
+                child: _buildNavItem(Icons.storefront_outlined, 'Koperasi', 1)),
             const SizedBox(width: 72),
-            Expanded(child: _buildNavItem(Icons.confirmation_number_outlined, 'Voucher', 2)),
+            Expanded(
+                child: _buildNavItem(
+                    Icons.confirmation_number_outlined, 'Voucher', 2)),
             Expanded(child: _buildNavItem(Icons.person_outline, 'Profile', 3)),
           ],
         ),
@@ -887,7 +910,8 @@ class _MainPageState extends State<MainPage> {
   Widget _buildCenterActionButton() {
     final authState = context.read<AuthBloc>().state;
     final bool isLoggedIn = authState is AuthAuthenticated;
-    final bool isKopdes = isLoggedIn && (authState.user.role == 'kopdes' || authState.user.role == 'admin');
+    final bool isKopdes = isLoggedIn &&
+        (authState.user.role == 'kopdes' || authState.user.role == 'admin');
 
     return Container(
       width: 64,
@@ -958,12 +982,14 @@ class _MainPageState extends State<MainPage> {
                     color: const Color(0xFFDC2626).withOpacity(0.08),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.forum_outlined, color: Color(0xFFDC2626)),
+                  child: const Icon(Icons.forum_outlined,
+                      color: Color(0xFFDC2626)),
                 ),
                 title: const Text(
                   'Buat Room Diskusi Baru',
                 ),
-                subtitle: const Text('Mulai sesi musyawarah warga baru di canvas'),
+                subtitle:
+                    const Text('Mulai sesi musyawarah warga baru di canvas'),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/create-room');
@@ -977,12 +1003,14 @@ class _MainPageState extends State<MainPage> {
                     color: const Color(0xFF1E293B).withOpacity(0.08),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.article_outlined, color: Color(0xFF1E293B)),
+                  child: const Icon(Icons.article_outlined,
+                      color: Color(0xFF1E293B)),
                 ),
                 title: const Text(
                   'Kirim Progress Baru (Artikel)',
                 ),
-                subtitle: const Text('Posting berita atau update perkembangan koperasi'),
+                subtitle: const Text(
+                    'Posting berita atau update perkembangan koperasi'),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, AppConstants.createArticleRoute);
@@ -1140,7 +1168,8 @@ class _MainPageState extends State<MainPage> {
           ),
           const SizedBox(width: 8),
           IconButton(
-            icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xFF64748B), size: 18),
+            icon: const Icon(Icons.arrow_forward_rounded,
+                color: Color(0xFF64748B), size: 18),
             onPressed: () {
               Navigator.pop(context); // Close sheet
               Navigator.pushNamed(

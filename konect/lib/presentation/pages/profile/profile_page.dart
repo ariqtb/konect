@@ -61,8 +61,8 @@ class ProfilePage extends StatelessWidget {
                               height: 72,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: const Color(0xFFFFF1F2),
-                                border: Border.all(color: const Color(0xFFDC2626).withOpacity(0.15), width: 3),
+                                color: const Color(0xFFF8FAFC),
+                                border: Border.all(color: const Color(0xFFE2E8F0), width: 2),
                               ),
                               child: CircleAvatar(
                                 backgroundColor: Colors.transparent,
@@ -70,7 +70,7 @@ class ProfilePage extends StatelessWidget {
                                 child: avatarUrl == null
                                     ? const Icon(
                                         Icons.person_outline,
-                                        color: Color(0xFFDC2626),
+                                        color: Color(0xFF64748B),
                                         size: 34,
                                       )
                                     : null,
@@ -131,11 +131,11 @@ class ProfilePage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildStatItem(Icons.emoji_events_outlined, '1.240', 'Poin', const Color(0xFFF59E0B)),
+                            _buildStatItem(Icons.emoji_events_outlined, '1.240', 'Poin', const Color(0xFF475569)),
                             _buildStatDivider(),
-                            _buildStatItem(Icons.forum_outlined, '8 Rapat', 'Diskusi', const Color(0xFFDC2626)),
+                            _buildStatItem(Icons.forum_outlined, '8 Rapat', 'Diskusi', const Color(0xFF475569)),
                             _buildStatDivider(),
-                            _buildStatItem(Icons.storefront_outlined, 'Aktif', 'Anggota', const Color(0xFF10B981)),
+                            _buildStatItem(Icons.storefront_outlined, 'Aktif', 'Anggota', const Color(0xFF475569)),
                           ],
                         ),
                       ],
@@ -175,8 +175,8 @@ class ProfilePage extends StatelessWidget {
                           icon: Icons.notifications_none_rounded,
                           title: 'Notifikasi',
                           subtitle: 'Pemberitahuan berita, rapat & voting',
-                          iconBgColor: const Color(0xFFEFF6FF),
-                          iconColor: const Color(0xFF3B82F6),
+                          iconBgColor: const Color(0xFFEEF2F6),
+                          iconColor: const Color(0xFF475569),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -197,8 +197,8 @@ class ProfilePage extends StatelessWidget {
                           icon: Icons.help_outline_rounded,
                           title: 'Bantuan & FAQ',
                           subtitle: 'Panduan lengkap penggunaan aplikasi Konect',
-                          iconBgColor: const Color(0xFFECFDF5),
-                          iconColor: const Color(0xFF10B981),
+                          iconBgColor: const Color(0xFFEEF2F6),
+                          iconColor: const Color(0xFF475569),
                         ),
                       ],
                     ),

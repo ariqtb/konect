@@ -68,7 +68,8 @@ class CustomTextField extends StatelessWidget {
             ),
             fillColor: const Color(0xFFF8FAFC), // slate-50/50
             filled: true,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             prefixIcon: prefixIcon != null
                 ? Icon(
                     prefixIcon,
@@ -101,4 +102,3 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-
