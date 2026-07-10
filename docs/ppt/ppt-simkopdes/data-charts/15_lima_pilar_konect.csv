@@ -1,0 +1,6 @@
+Fitur,Tujuan,Dampak_Diharapkan
+Forum Diskusi Terstruktur,Topik ke Pendapat ke Komentar hierarki jelas,Argumen paling relevan naik via ML Scoring
+E Voting Transparan,Setiap pendapat adalah vote agree disagree,Hasil real time dan bisa diaudit publik
+Node Graph Interaktif,Visualisasi force directed graph,Peta ide dan sentimen warga real time
+Dashboard Transparansi,Lihat diskusi Kopdes manapun,Kepercayaan publik naik lewat keterbukaan
+ML Relevance Scoring,Bi Encoder dan Cross Encoder,Outlier otomatis tersingkir dari graph

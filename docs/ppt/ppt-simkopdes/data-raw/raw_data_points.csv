@@ -1,0 +1,35 @@
+Kategori;Metrik_Utama;Nilai;Sumber
+Anggaran;Potongan Dana Desa untuk Kopdes;58%;PMK 7/2026, PMK 49/2025
+Anggaran;Dana Desa Total;Rp71 Triliun;APBN 2026
+Anggaran;Target Kopdes;40.000 unit;Perpres 2026 (revisi turun dari 80.000)
+Anggaran;Anggaran Latsarmil (Kemhan);Rp1,35 Triliun;Kemhan, Komisi I DPR
+Anggaran;Biaya per Peserta SPPI;Rp45 Juta/orang;TB Hasanuddin, DPR
+Kelembagaan;Koperasi Desa Aktif (existing);83.382 unit;SIMKOPDES Dashboard
+Kelembagaan;Koperasi Sehat (EWS);683 unit (2,2%);SIMKOPDES Dashboard
+Kelembagaan;Koperasi Belum Lapor Keuangan;52.117 unit (62,5%);SIMKOPDES Dashboard
+Kelembagaan;Koperasi Tidak Sehat;28.495 unit (91,1% dari yang lapor);SIMKOPDES Dashboard
+Pembangunan;Lahan Terverifikasi;35.870 unit;SIMKOPDES Dashboard
+Pembangunan;Pembangunan Gerai 100%;15.533 unit (43,3%);SIMKOPDES Dashboard
+Pembangunan;Sedang Pembangunan;55,3%;SIMKOPDES Dashboard
+Pembangunan;Belum Mulai Pembangunan;1,4%;SIMKOPDES Dashboard
+Keuangan;Aset Total;Rp453,89 Triliun;SIMKOPDES Dashboard
+Keuangan;Liabilitas Total;Rp61,59 Triliun;SIMKOPDES Dashboard
+Keuangan;Ekuitas Total;Rp215,91 Triliun;SIMKOPDES Dashboard
+Keuangan;Pendapatan Total;Rp85,26 Triliun;SIMKOPDES Dashboard
+Keuangan;Beban Total;Rp29,19 Triliun;SIMKOPDES Dashboard
+Keuangan;Rasio Pendapatan/Beban;2,92x;Dihitung
+Keuangan;Rasio Aset/Liabilitas;7,37x;Dihitung
+Transaksi;Nilai Transaksi 10 Besar Provinsi;Rp47,69 Triliun;SIMKOPDES Dashboard
+Transaksi;Koperasi Aktif Bertransaksi;53.262 unit;SIMKOPDES Dashboard
+Transaksi;Produk Terlaris (Pupuk);Rp26,37 Triliun;SIMKOPDES Dashboard
+Kelembagaan;Provinsi dengan Koperasi Terbanyak;Jawa Tengah (8.524);SIMKOPDES Dashboard
+Pembangunan;Provinsi dengan Pembangunan Tercepat;Kalimantan Utara (80,69%);SIMKOPDES Dashboard
+Sentimen;Sentimen Negatif TikTok;59%;BeData
+Sentimen;Tidak Setuju Skema Pinjaman;76%;CELIOS
+Sentimen;Melihat Celah Korupsi;65%;CELIOS
+Sentimen;Khawatir Konflik Sosial;46%;CELIOS
+Kematian;Korban Jiwa SPPI;5 orang;Kemhan, Komnas HAM, Merdeka
+Kematian;Biaya Santunan per Korban (belum jelas);?;Kompas
+Impor;Pikap Impor dari India;105.000 unit;Detik, Kemenperin
+Denda;Denda Calon Manajer;Rp100 Juta;CNN
+Kades;Kades Pati tolak bangun;Viral;Media Sosial
