@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>KONECT — Membangun Kembali Kepercayaan Kopdes</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: #08080f;
+        color: #f5f0eb;
+        font-family: Inter, system-ui, sans-serif;
+        overflow: hidden;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #08080f;
+      }
+
+      /* --- Background decorative layer --- */
+      .bg-layer {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .bg-glow {
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.15;
+      }
+
+      .bg-glow.red { background: #dc2626; top: -200px; right: -200px; }
+      .bg-glow.gold { background: #d97706; bottom: -200px; left: -200px; }
+      .bg-glow.indigo { background: #4f46e5; bottom: 100px; right: 300px; }
+
+      .bg-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+      }
+
+      .ghost-text {
+        position: absolute;
+        font-size: 180px;
+        font-weight: 900;
+        color: rgba(255,255,255,0.03);
+        letter-spacing: -0.03em;
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      .ghost-text.kopdes { top: 60px; right: -80px; font-size: 220px; }
+      .ghost-text.trust { bottom: 40px; left: -60px; font-size: 260px; }
+
+      /* --- Slide base --- */
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 120px;
+        z-index: 1;
+        opacity: 0;
+      }
+
+      .slide-content {
+        width: 100%;
+        max-width: 1600px;
+        position: relative;
+      }
+
+      /* --- Typography --- */
+      .tag {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #dc2626;
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 80px;
+        line-height: 1.1;
+        margin-bottom: 24px;
+      }
+
+      h1 .accent-red { color: #dc2626; }
+      h1 .accent-gold { color: #d97706; }
+
+      .subtitle {
+        font-size: 22px;
+        font-weight: 300;
+        color: #9ca3af;
+        line-height: 1.6;
+        max-width: 900px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 52px;
+        line-height: 1.15;
+        margin-bottom: 16px;
+      }
+
+      .body-text {
+        font-size: 20px;
+        font-weight: 300;
+        color: #9ca3af;
+        line-height: 1.7;
+        max-width: 800px;
+      }
+
+      .body-text strong { color: #f5f0eb; font-weight: 600; }
+
+      /* --- Data display --- */
+      .data-row {
+        display: flex;
+        gap: 40px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+      }
+
+      .data-card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        padding: 32px 40px;
+        min-width: 220px;
+        flex: 1;
+        text-align: center;
+      }
+
+      .data-number {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 56px;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .data-number.red { color: #dc2626; }
+      .data-number.gold { color: #d97706; }
+      .data-number.indigo { color: #818cf8; }
+      .data-number.green { color: #22c55e; }
+      .data-number.white { color: #f5f0eb; }
+
+      .data-label {
+        font-size: 14px;
+        font-weight: 400;
+        color: #9ca3af;
+        letter-spacing: 0.03em;
+        line-height: 1.4;
+      }
+
+      .data-source {
+        font-size: 11px;
+        color: #6b7280;
+        margin-top: 8px;
+      }
+
+      /* --- Bar chart --- */
+      .bar-chart {
+        width: 100%;
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .bar-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .bar-label {
+        width: 200px;
+        font-size: 16px;
+        font-weight: 400;
+        color: #9ca3af;
+        text-align: right;
+      }
+
+      .bar-track {
+        flex: 1;
+        height: 36px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: 6px;
+        width: 0%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .bar-fill.red { background: linear-gradient(90deg, #dc2626, #ef4444); }
+      .bar-fill.gold { background: linear-gradient(90deg, #d97706, #f59e0b); }
+      .bar-fill.green { background: linear-gradient(90deg, #22c55e, #4ade80); }
+      .bar-fill.indigo { background: linear-gradient(90deg, #4f46e5, #818cf8); }
+      .bar-fill.gray { background: linear-gradient(90deg, #6b7280, #9ca3af); }
+
+      .bar-value {
+        width: 80px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #f5f0eb;
+      }
+
+      /* --- Dimension pillars --- */
+      .pillar-grid {
+        display: flex;
+        gap: 20px;
+        margin-top: 32px;
+        width: 100%;
+      }
+
+      .pillar {
+        flex: 1;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 14px;
+        padding: 24px 20px;
+        text-align: center;
+        opacity: 0;
+      }
+
+      .pillar-icon {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+
+      .pillar-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #f5f0eb;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+
+      .pillar-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 4px;
+      }
+
+      .pillar-badge.kritis { background: rgba(220,38,38,0.2); color: #ef4444; border: 1px solid rgba(220,38,38,0.3); }
+      .pillar-badge.tinggi { background: rgba(217,119,6,0.2); color: #f59e0b; border: 1px solid rgba(217,119,6,0.3); }
+
+      .pillar-desc {
+        font-size: 11px;
+        color: #6b7280;
+        margin-top: 8px;
+        line-height: 1.4;
+      }
+
+      /* --- Timeline --- */
+      .timeline-vis {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 24px;
+        width: 100%;
+      }
+
+      .timeline-event {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+        opacity: 0;
+      }
+
+      .tl-date {
+        font-size: 12px;
+        font-weight: 700;
+        color: #d97706;
+        min-width: 100px;
+        text-align: right;
+        padding-top: 2px;
+      }
+
+      .tl-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #dc2626;
+        margin-top: 4px;
+        flex-shrink: 0;
+      }
+
+      .tl-text {
+        font-size: 16px;
+        color: #9ca3af;
+        line-height: 1.5;
+      }
+
+      .tl-text strong { color: #f5f0eb; }
+
+      /* --- Solution mapping --- */
+      .solution-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 28px;
+        width: 100%;
+      }
+
+      .solution-item {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 12px;
+        padding: 20px 24px;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        opacity: 0;
+      }
+
+      .solution-icon {
+        font-size: 28px;
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(220,38,38,0.1);
+        border-radius: 12px;
+      }
+
+      .solution-text h4 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #f5f0eb;
+        margin-bottom: 4px;
+      }
+
+      .solution-text p {
+        font-size: 13px;
+        color: #6b7280;
+        line-height: 1.4;
+      }
+
+      .problem-badge {
+        font-size: 10px;
+        font-weight: 600;
+        background: rgba(220,38,38,0.15);
+        color: #ef4444;
+        padding: 2px 8px;
+        border-radius: 10px;
+        margin-left: 6px;
+      }
+
+      /* --- Centered specials --- */
+      .center-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .big-quote {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        font-weight: 700;
+        font-style: italic;
+        color: #f5f0eb;
+        line-height: 1.4;
+        max-width: 1000px;
+        margin-bottom: 20px;
+      }
+
+      .quote-source {
+        font-size: 16px;
+        color: #6b7280;
+        font-style: normal;
+      }
+
+      /* --- Logo --- */
+      .logo-mark {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 120px;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+
+      .logo-mark .k { color: #f5f0eb; }
+      .logo-mark .o1 { color: #dc2626; }
+      .logo-mark .n { color: #f5f0eb; }
+      .logo-mark .e { color: #f5f0eb; }
+      .logo-mark .c { color: #f5f0eb; }
+      .logo-mark .t { color: #f5f0eb; }
+
+      .pillar-tag {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: rgba(220,38,38,0.15);
+        color: #ef4444;
+        padding: 6px 16px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+      }
+
+      /* --- CTA --- */
+      .cta-line {
+        font-size: 18px;
+        color: #9ca3af;
+        margin-top: 8px;
+      }
+
+      .pilar-3 {
+        font-size: 11px;
+        color: #6b7280;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 32px;
+        padding: 8px 20px;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        display: inline-block;
+      }
+
+      .persistent-logo {
+        position: absolute;
+        top: 32px;
+        left: 40px;
+        font-size: 14px;
+        font-weight: 700;
+        color: rgba(255,255,255,0.15);
+        letter-spacing: 0.1em;
+        z-index: 5;
+        font-family: Inter, sans-serif;
+      }
+
+      .persistent-watermark {
+        position: absolute;
+        bottom: 28px;
+        right: 40px;
+        font-size: 11px;
+        color: rgba(255,255,255,0.08);
+        z-index: 5;
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-j5am" id="root"       data-composition-id="konect-pitch"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="71">
+      <!-- === Persistent elements === -->
+      <div data-hf-id="hf-g7rh" class="bg-layer">
+        <div data-hf-id="hf-ggg4" class="bg-glow red"></div>
+        <div data-hf-id="hf-jfsp" class="bg-glow gold"></div>
+        <div data-hf-id="hf-6tsh" class="bg-glow indigo"></div>
+        <div data-hf-id="hf-yqqm" class="bg-grid"></div>
+        <div data-hf-id="hf-zelh" class="ghost-text kopdes">KOPDES</div>
+        <div data-hf-id="hf-gbax" class="ghost-text trust">TRUST</div>
+      </div>
+
+      <div data-hf-id="hf-qhnh" class="persistent-logo">KONECT</div>
+      <div data-hf-id="hf-k6wb" class="persistent-watermark">HACKATHON KEMENKOP 2026</div>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 1 — OPENING (0-6s)                                      -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-bubj" id="slide-1" class="slide clip" data-start="0" data-duration="6" data-track-index="1">
+        <div data-hf-id="hf-l5zy" class="slide-content center-content">
+          <div data-hf-id="hf-tv0r" class="pillar-tag">Pilar 3 · Keterlibatan Masyarakat</div>
+          <div data-hf-id="hf-visd" class="logo-mark">
+            <span data-hf-id="hf-3vfx" class="k">K</span><span data-hf-id="hf-lhm2" class="o1">O</span><span data-hf-id="hf-rdkl" class="n">N</span><span data-hf-id="hf-4net" class="e">E</span><span data-hf-id="hf-mttp" class="c">C</span><span data-hf-id="hf-imdx" class="t">T</span>
+          </div>
+          <h1 data-hf-id="hf-txgk" style="font-size:44px; margin-top:8px;">
+            Membangun Kembali <span data-hf-id="hf-7zp9" class="accent-red">Kepercayaan</span><br data-hf-id="hf-x5px">
+            Koperasi Desa
+          </h1>
+          <p data-hf-id="hf-tlbm" class="cta-line">Forum Online · E-Voting · Transparansi · Partisipasi Anggota</p>
+          <div data-hf-id="hf-lg2n" class="pilar-3">Menghubungkan Kepercayaan — Menghidupkan Koperasi</div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 2 — THE CRISIS (6-12s)                                  -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-nkfn" id="slide-2" class="slide clip" data-start="6" data-duration="6" data-track-index="2">
+        <div data-hf-id="hf-mooy" class="slide-content center-content">
+          <div data-hf-id="hf-nz9o" class="tag">Rumusan Masalah</div>
+          <h2 data-hf-id="hf-cfjz">Krisis Kepercayaan Publik<br data-hf-id="hf-rsrt">terhadap Kopdes Merah Putih</h2>
+          <div data-hf-id="hf-hz4x" class="big-quote">
+            <span data-hf-id="hf-boe5">"Masalahnya bukan pada konsep koperasi,</span>
+            <span data-hf-id="hf-m9ft">tetapi pada rendahnya kepercayaan terhadap <span data-hf-id="hf-78c6" style="color:#dc2626;">implementasi</span>"</span>
+          </div>
+          <p data-hf-id="hf-tqa7" class="quote-source">— BeData Technology, Analisis Sentimen Digital 2026</p>
+          <div data-hf-id="hf-ah37" class="data-row" style="justify-content:center; gap:24px; margin-top:28px;">
+            <div data-hf-id="hf-uw4e" class="data-card" style="min-width:180px;">
+              <div data-hf-id="hf-e1xr" class="data-number red">91.1%</div>
+              <div data-hf-id="hf-7oqx" class="data-label">Koperasi Tidak Sehat</div>
+              <div data-hf-id="hf-h1n7" class="data-source">SIMKOPDES</div>
+            </div>
+            <div data-hf-id="hf-q136" class="data-card" style="min-width:180px;">
+              <div data-hf-id="hf-0rt0" class="data-number gold">76%</div>
+              <div data-hf-id="hf-tjcs" class="data-label">Perangkat Desa Tolak</div>
+              <div data-hf-id="hf-nglb" class="data-source">CELIOS</div>
+            </div>
+            <div data-hf-id="hf-qfe7" class="data-card" style="min-width:180px;">
+              <div data-hf-id="hf-r29t" class="data-number indigo">59%</div>
+              <div data-hf-id="hf-smr4" class="data-label">Sentimen Negatif TikTok</div>
+              <div data-hf-id="hf-zd3n" class="data-source">BeData</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 3 — 5 DIMENSI TRUST DEFICIT (12-20s)                    -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-p07q" id="slide-3" class="slide clip" data-start="12" data-duration="8" data-track-index="3">
+        <div data-hf-id="hf-8gon" class="slide-content">
+          <div data-hf-id="hf-1ae2" class="tag">Trust Deficit Analysis</div>
+          <h2 data-hf-id="hf-vto7">5 Dimensi <span data-hf-id="hf-zjri" class="accent-red">Krisis Kepercayaan</span></h2>
+          <p data-hf-id="hf-2nq8" class="body-text" style="margin-bottom:12px;">
+            Lima dimensi yang saling memperkuat — tidak ada satu dimensi pun yang menunjukkan perbaikan.
+          </p>
+          <div data-hf-id="hf-uyf9" class="pillar-grid">
+            <div data-hf-id="hf-chj4" class="pillar" id="pillar-1">
+              <div data-hf-id="hf-fi0b" class="pillar-icon">💰</div>
+              <div data-hf-id="hf-sotv" class="pillar-title">Integritas<br data-hf-id="hf-szow">Keuangan</div>
+              <div data-hf-id="hf-gobu" class="pillar-badge kritis">KRITIS</div>
+              <div data-hf-id="hf-wgu0" class="pillar-desc">65% lihat korupsi<br data-hf-id="hf-sldv">Rp48T kebocoran/tahun</div>
+            </div>
+            <div data-hf-id="hf-l5ez" class="pillar" id="pillar-2">
+              <div data-hf-id="hf-o8qx" class="pillar-icon">📊</div>
+              <div data-hf-id="hf-dbvl" class="pillar-title">Kompetensi &amp;<br data-hf-id="hf-qluq">Kredibilitas</div>
+              <div data-hf-id="hf-o6we" class="pillar-badge kritis">KRITIS</div>
+              <div data-hf-id="hf-fc7t" class="pillar-desc">91.1% tidak sehat<br data-hf-id="hf-q7jp">Target dipangkas 50%</div>
+            </div>
+            <div data-hf-id="hf-h7ay" class="pillar" id="pillar-3">
+              <div data-hf-id="hf-1tlh" class="pillar-icon">⚖️</div>
+              <div data-hf-id="hf-lh9q" class="pillar-title">Tata Kelola &amp;<br data-hf-id="hf-regs">Partisipasi</div>
+              <div data-hf-id="hf-ol7f" class="pillar-badge kritis">KRITIS</div>
+              <div data-hf-id="hf-13k6" class="pillar-desc">Top-down via Inpres<br data-hf-id="hf-r05r">58% Dana Desa dipotong</div>
+            </div>
+            <div data-hf-id="hf-0n71" class="pillar" id="pillar-4">
+              <div data-hf-id="hf-duzc" class="pillar-icon">🏛️</div>
+              <div data-hf-id="hf-726d" class="pillar-title">Motivasi &amp;<br data-hf-id="hf-p0mm">Politik</div>
+              <div data-hf-id="hf-v52q" class="pillar-badge tinggi">TINGGI</div>
+              <div data-hf-id="hf-pzd8" class="pillar-desc">35% cium politik<br data-hf-id="hf-ombl">Militerisasi ekonomi</div>
+            </div>
+            <div data-hf-id="hf-xnxg" class="pillar" id="pillar-5">
+              <div data-hf-id="hf-7pv6" class="pillar-icon">🕊️</div>
+              <div data-hf-id="hf-jeq3" class="pillar-title">Dampak<br data-hf-id="hf-qsyj">Tragedi</div>
+              <div data-hf-id="hf-llbq" class="pillar-badge tinggi">TINGGI</div>
+              <div data-hf-id="hf-4ppq" class="pillar-desc">5 kematian Latsarmil<br data-hf-id="hf-r79k">Katalis krisis</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 4 — DATA 91.1% TIDAK SEHAT (20-27s)                     -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-qjro" id="slide-4" class="slide clip" data-start="20" data-duration="7" data-track-index="4">
+        <div data-hf-id="hf-c5mf" class="slide-content">
+          <div data-hf-id="hf-4wyz" class="tag">Temuan Paling Kritis</div>
+          <h2 data-hf-id="hf-7rd1">91.1% Koperasi <span data-hf-id="hf-hohr" class="accent-red">Tidak Sehat</span></h2>
+          <p data-hf-id="hf-po5i" class="body-text">
+            Dari 31.265 koperasi yang sudah lapor keuangan, hanya <strong data-hf-id="hf-kpdr">2.2%</strong> yang sehat.
+            <strong data-hf-id="hf-ki5e">62.5%</strong> lainnya bahkan <strong data-hf-id="hf-rcc3">belum pernah lapor</strong> keuangan.
+          </p>
+          <div data-hf-id="hf-ny2w" class="bar-chart">
+            <div data-hf-id="hf-25dp" class="bar-item">
+              <div data-hf-id="hf-tqr2" class="bar-label">Tidak Sehat</div>
+              <div data-hf-id="hf-2kxp" class="bar-track">
+                <div data-hf-id="hf-1sy3" class="bar-fill red" id="bar-tidak-sehat"></div>
+              </div>
+              <div data-hf-id="hf-n5fj" class="bar-value">91.1%</div>
+            </div>
+            <div data-hf-id="hf-o24x" class="bar-item">
+              <div data-hf-id="hf-u51v" class="bar-label">Cukup Sehat</div>
+              <div data-hf-id="hf-dok1" class="bar-track">
+                <div data-hf-id="hf-ek8b" class="bar-fill gold" id="bar-cukup-sehat"></div>
+              </div>
+              <div data-hf-id="hf-5qtf" class="bar-value">6.7%</div>
+            </div>
+            <div data-hf-id="hf-p920" class="bar-item">
+              <div data-hf-id="hf-g7yj" class="bar-label">Sehat</div>
+              <div data-hf-id="hf-evh4" class="bar-track">
+                <div data-hf-id="hf-to27" class="bar-fill green" id="bar-sehat"></div>
+              </div>
+              <div data-hf-id="hf-jsp2" class="bar-value">2.2%</div>
+            </div>
+          </div>
+          <div data-hf-id="hf-zwcy" class="data-row" style="margin-top:20px;">
+            <div data-hf-id="hf-a9c0" class="data-card" style="min-width:160px; padding:20px 24px;">
+              <div data-hf-id="hf-giak" class="data-number gold" style="font-size:32px;">Rp 2,7 Jt</div>
+              <div data-hf-id="hf-o2iw" class="data-label">Pendapatan rata-rata/koperasi/tahun</div>
+            </div>
+            <div data-hf-id="hf-lpko" class="data-card" style="min-width:160px; padding:20px 24px;">
+              <div data-hf-id="hf-m9to" class="data-number red" style="font-size:32px;">62.5%</div>
+              <div data-hf-id="hf-v6d4" class="data-label">Belum lapor keuangan</div>
+            </div>
+            <div data-hf-id="hf-kinl" class="data-card" style="min-width:160px; padding:20px 24px;">
+              <div data-hf-id="hf-a0xf" class="data-number indigo" style="font-size:32px;">Rp 85,26 M</div>
+              <div data-hf-id="hf-bc7m" class="data-label">Total pendapatan nasional</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 5 — PENOLAKAN PERANGKAT DESA (27-34s)                   -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-r9ix" id="slide-5" class="slide clip" data-start="27" data-duration="7" data-track-index="5">
+        <div data-hf-id="hf-brbe" class="slide-content">
+          <div data-hf-id="hf-ns1n" class="tag">Survei CELIOS · n=108, 34 Provinsi</div>
+          <h2 data-hf-id="hf-72lb">Penolakan di Level <span data-hf-id="hf-8aq3" class="accent-red">Pelaksana</span></h2>
+          <p data-hf-id="hf-4e0r" class="body-text">
+            Bukan hanya publik umum — <strong data-hf-id="hf-s74g">perangkat desa</strong> sebagai pelaksana lapangan
+            justru paling keras menolak. Ketika pelaksana sendiri tidak percaya,
+            program menghadapi hambatan implementasi serius.
+          </p>
+          <div data-hf-id="hf-nt6o" class="bar-chart" style="gap:14px;">
+            <div data-hf-id="hf-ouqz" class="bar-item">
+              <div data-hf-id="hf-a498" class="bar-label">Tolak Skema Pinjaman</div>
+              <div data-hf-id="hf-eh63" class="bar-track">
+                <div data-hf-id="hf-445h" class="bar-fill red" id="bar-tolak"></div>
+              </div>
+              <div data-hf-id="hf-3ym1" class="bar-value">76%</div>
+            </div>
+            <div data-hf-id="hf-mv7u" class="bar-item">
+              <div data-hf-id="hf-lj0i" class="bar-label">Lihat Celah Korupsi</div>
+              <div data-hf-id="hf-chmy" class="bar-track">
+                <div data-hf-id="hf-r0jw" class="bar-fill gold" id="bar-korupsi"></div>
+              </div>
+              <div data-hf-id="hf-yvl5" class="bar-value">65%</div>
+            </div>
+            <div data-hf-id="hf-mgwt" class="bar-item">
+              <div data-hf-id="hf-h6o8" class="bar-label">Khawatir Konflik Sosial</div>
+              <div data-hf-id="hf-c3bx" class="bar-track">
+                <div data-hf-id="hf-nn39" class="bar-fill indigo" id="bar-konflik"></div>
+              </div>
+              <div data-hf-id="hf-y430" class="bar-value">46%</div>
+            </div>
+            <div data-hf-id="hf-nntw" class="bar-item">
+              <div data-hf-id="hf-upyi" class="bar-label">Cium Kepentingan Politik</div>
+              <div data-hf-id="hf-da90" class="bar-track">
+                <div data-hf-id="hf-vsps" class="bar-fill gray" id="bar-politik"></div>
+              </div>
+              <div data-hf-id="hf-eysm" class="bar-value">35%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 6 — SENTIMEN PUBLIK & KEBOCORAN (34-41s)                -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-fgzf" id="slide-6" class="slide clip" data-start="34" data-duration="7" data-track-index="6">
+        <div data-hf-id="hf-bd0d" class="slide-content">
+          <div data-hf-id="hf-tila" class="tag">Sentimen Digital &amp; Risiko Fiskal</div>
+          <h2 data-hf-id="hf-nklk">59% Negatif · Rp48T <span data-hf-id="hf-0n5j" class="accent-gold">Bocor</span>/Tahun</h2>
+          <p data-hf-id="hf-cozx" class="body-text" style="margin-bottom:8px;">
+            Sentimen publik didominasi narasi negatif, sementara potensi kebocoran
+            mencapai angka yang mencengangkan.
+          </p>
+          <div data-hf-id="hf-255z" class="data-row">
+            <div data-hf-id="hf-zr51" class="data-card" style="padding:24px 20px;">
+              <div data-hf-id="hf-uh2c" class="data-number red">59%</div>
+              <div data-hf-id="hf-uxhk" class="data-label">Sentimen Negatif TikTok</div>
+              <div data-hf-id="hf-7jpq" class="data-source">BeData, Apr 2026</div>
+            </div>
+            <div data-hf-id="hf-j52x" class="data-card" style="padding:24px 20px;">
+              <div data-hf-id="hf-70u8" class="data-number gold">14%</div>
+              <div data-hf-id="hf-u35w" class="data-label">Sentimen Positif TikTok</div>
+              <div data-hf-id="hf-bzbm" class="data-source">BeData, Apr 2026</div>
+            </div>
+            <div data-hf-id="hf-kc00" class="data-card" style="padding:24px 20px;">
+              <div data-hf-id="hf-3qd1" class="data-number indigo">55%</div>
+              <div data-hf-id="hf-0w2i" class="data-label">Netral di X/Twitter</div>
+              <div data-hf-id="hf-cdmn" class="data-source">BeData, Apr 2026</div>
+            </div>
+          </div>
+          <div data-hf-id="hf-dwuq" class="data-row" style="margin-top:8px;">
+            <div data-hf-id="hf-d7w5" class="data-card" style="padding:20px 24px; min-width:200px;">
+              <div data-hf-id="hf-cw8p" class="data-number red" style="font-size:40px;">Rp 48 T</div>
+              <div data-hf-id="hf-94ow" class="data-label">Potensi kebocoran per tahun</div>
+              <div data-hf-id="hf-y01r" class="data-source">CELIOS</div>
+            </div>
+            <div data-hf-id="hf-tbvt" class="data-card" style="padding:20px 24px; min-width:200px;">
+              <div data-hf-id="hf-x80f" class="data-number gold" style="font-size:40px;">46.6%</div>
+              <div data-hf-id="hf-pbf1" class="data-label">Transaksi hanya pupuk</div>
+              <div data-hf-id="hf-tkoj" class="data-source">SIMKOPDES</div>
+            </div>
+            <div data-hf-id="hf-uisw" class="data-card" style="padding:20px 24px; min-width:200px;">
+              <div data-hf-id="hf-g9wd" class="data-number white" style="font-size:40px;">43%</div>
+              <div data-hf-id="hf-g93x" class="data-label">Koperasi cangkang (China)</div>
+              <div data-hf-id="hf-qffa" class="data-source">Perbandingan Internasional</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 7 — AKAR MASALAH (41-49s)                               -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-0eca" id="slide-7" class="slide clip" data-start="41" data-duration="8" data-track-index="7">
+        <div data-hf-id="hf-e55k" class="slide-content">
+          <div data-hf-id="hf-9r1d" class="tag">Akar Masalah Sistemik</div>
+          <h2 data-hf-id="hf-16eb">Empat Pilar <span data-hf-id="hf-nzls" class="accent-red">Kegagalan</span> Struktural</h2>
+          <p data-hf-id="hf-3zl0" class="body-text" style="margin-bottom:16px;">
+            Krisis kepercayaan bukan kebetulan — ia lahir dari desain program yang bermasalah sejak awal.
+          </p>
+          <div data-hf-id="hf-f6cq" class="solution-grid" style="grid-template-columns:1fr 1fr; gap:16px;">
+            <div data-hf-id="hf-isld" class="solution-item" id="root-cause-1">
+              <div data-hf-id="hf-7suq" class="solution-icon" style="background:rgba(220,38,38,0.12);">📋</div>
+              <div data-hf-id="hf-7utr" class="solution-text">
+                <h4 data-hf-id="hf-fjmf">Top-Down &amp; Disinsentif</h4>
+                <p data-hf-id="hf-4wat">Inpres 9/2025 memaksakan pembentukan. 58% Dana Desa dipotong jika tidak membentuk Kopdes.</p>
+              </div>
+            </div>
+            <div data-hf-id="hf-mqpe" class="solution-item" id="root-cause-2">
+              <div data-hf-id="hf-chf3" class="solution-icon" style="background:rgba(217,119,6,0.12);">🔍</div>
+              <div data-hf-id="hf-eyun" class="solution-text">
+                <h4 data-hf-id="hf-12xz">Tanpa Studi Kelayakan</h4>
+                <p data-hf-id="hf-rd3o">KPPOD kritik ketiadaan studi. Agus Pambagio prediksi 99% koperasi tidak akan hidup.</p>
+              </div>
+            </div>
+            <div data-hf-id="hf-qotf" class="solution-item" id="root-cause-3">
+              <div data-hf-id="hf-gggv" class="solution-icon" style="background:rgba(79,70,229,0.12);">⚡</div>
+              <div data-hf-id="hf-ekjm" class="solution-text">
+                <h4 data-hf-id="hf-pbdh">Konflik Kepentingan</h4>
+                <p data-hf-id="hf-nu8t">Kades otomatis jadi ketua koperasi — pengawas dan pelaksana jadi satu.</p>
+              </div>
+            </div>
+            <div data-hf-id="hf-37bw" class="solution-item" id="root-cause-4">
+              <div data-hf-id="hf-t7zk" class="solution-icon" style="background:rgba(107,114,128,0.12);">📜</div>
+              <div data-hf-id="hf-e68l" class="solution-text">
+                <h4 data-hf-id="hf-k8qz">Legitimasi Hukum Rapuh</h4>
+                <p data-hf-id="hf-ckau">FH UGM identifikasi 5 aspek hukum problematik. Landasan disebut "bangunan tanpa tiang".</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 8 — TRAGEDI 5 KEMATIAN (49-56s)                         -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-aatf" id="slide-8" class="slide clip" data-start="49" data-duration="7" data-track-index="8">
+        <div data-hf-id="hf-dquj" class="slide-content">
+          <div data-hf-id="hf-k676" class="tag">Katalis Krisis · 17-26 Juni 2026</div>
+          <h2 data-hf-id="hf-5phs">5 <span data-hf-id="hf-m7q3" class="accent-red">Kematian</span> dalam 10 Hari</h2>
+          <p data-hf-id="hf-oc27" class="body-text" style="margin-bottom:8px;">
+            Koalisi sipil: <strong data-hf-id="hf-ngq8">"Bukan kecelakaan, tapi konsekuensi kebijakan keliru."</strong>
+          </p>
+          <div data-hf-id="hf-yi2k" class="timeline-vis">
+            <div data-hf-id="hf-j0ye" class="timeline-event" id="tl-1">
+              <div data-hf-id="hf-yta8" class="tl-date">17 Jun</div>
+              <div data-hf-id="hf-9h5i" class="tl-dot"></div>
+              <div data-hf-id="hf-sbpc" class="tl-text"><strong data-hf-id="hf-fwbg">Yonanda</strong> — Cardiac arrest, Baturaja</div>
+            </div>
+            <div data-hf-id="hf-f2ud" class="timeline-event" id="tl-2">
+              <div data-hf-id="hf-2ulh" class="tl-date">18 Jun</div>
+              <div data-hf-id="hf-xptm" class="tl-dot"></div>
+              <div data-hf-id="hf-ikoh" class="tl-text"><strong data-hf-id="hf-t0ro">Anisa</strong> — Heat stroke, Balikpapan</div>
+            </div>
+            <div data-hf-id="hf-eb6k" class="timeline-event" id="tl-3">
+              <div data-hf-id="hf-t2i4" class="tl-date">22 Jun</div>
+              <div data-hf-id="hf-y44n" class="tl-dot"></div>
+              <div data-hf-id="hf-d01d" class="tl-text"><strong data-hf-id="hf-g33b">Novia</strong> — TBC, Jakarta (Kodiklatau)</div>
+            </div>
+            <div data-hf-id="hf-1so3" class="timeline-event" id="tl-4">
+              <div data-hf-id="hf-fg4o" class="tl-date">26 Jun</div>
+              <div data-hf-id="hf-yifo" class="tl-dot"></div>
+              <div data-hf-id="hf-vwxy" class="tl-text"><strong data-hf-id="hf-vv2v">Rifki &amp; Nola</strong> — Cardiac arrest, Jakarta &amp; Kalimantan</div>
+            </div>
+          </div>
+          <div data-hf-id="hf-k449" class="data-row" style="margin-top:12px; gap:16px;">
+            <div data-hf-id="hf-b0sg" class="data-card" style="padding:14px 20px; min-width:130px;">
+              <div data-hf-id="hf-xg18" class="data-number red" style="font-size:28px;">35.476</div>
+              <div data-hf-id="hf-qjsh" class="data-label">Total peserta</div>
+            </div>
+            <div data-hf-id="hf-wv5k" class="data-card" style="padding:14px 20px; min-width:130px;">
+              <div data-hf-id="hf-sfht" class="data-number gold" style="font-size:28px;">Rp 45 Jt</div>
+              <div data-hf-id="hf-twrt" class="data-label">Biaya/orang</div>
+            </div>
+            <div data-hf-id="hf-vo8h" class="data-card" style="padding:14px 20px; min-width:130px;">
+              <div data-hf-id="hf-olrq" class="data-number indigo" style="font-size:28px;">30/15</div>
+              <div data-hf-id="hf-mk90" class="data-label">Hari militer/koperasi</div>
+            </div>
+            <div data-hf-id="hf-w2ji" class="data-card" style="padding:14px 20px; min-width:130px;">
+              <div data-hf-id="hf-jrkg" class="data-number white" style="font-size:28px;">Rp 1,35 T</div>
+              <div data-hf-id="hf-rkzt" class="data-label">Total biaya pelatihan</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 9 — SOLUSI KONECT (56-65s)                              -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-mlyb" id="slide-9" class="slide clip" data-start="56" data-duration="9" data-track-index="9">
+        <div data-hf-id="hf-dcji" class="slide-content">
+          <div data-hf-id="hf-o06k" class="tag">Pilar 3 — Keterlibatan Masyarakat dengan Kopdes</div>
+          <h2 data-hf-id="hf-wcdo"><span data-hf-id="hf-l1pp" class="accent-red">KONECT</span>: Trust Through <span data-hf-id="hf-h7so" class="accent-gold">Transparency</span></h2>
+          <p data-hf-id="hf-s1g6" class="body-text" style="margin-bottom:8px;">
+            Setiap fitur KONECT dirancang untuk menjawab satu atau lebih dimensi trust deficit.
+          </p>
+          <div data-hf-id="hf-izdo" class="solution-grid" style="grid-template-columns:1fr 1fr;">
+            <div data-hf-id="hf-bo83" class="solution-item" id="sol-1">
+              <div data-hf-id="hf-73cm" class="solution-icon">🗳️</div>
+              <div data-hf-id="hf-gyds" class="solution-text">
+                <h4 data-hf-id="hf-9k82">E-Voting Transparan</h4>
+                <p data-hf-id="hf-h25k">Jejak audit penuh, hasil real-time. Anggota bisa verifikasi setiap suara — menjawab <span data-hf-id="hf-dv5c" class="problem-badge">Integritas</span></p>
+              </div>
+            </div>
+            <div data-hf-id="hf-0sqg" class="solution-item" id="sol-2">
+              <div data-hf-id="hf-pv4y" class="solution-icon">📊</div>
+              <div data-hf-id="hf-gk2r" class="solution-text">
+                <h4 data-hf-id="hf-vuz9">Dashboard Kesehatan</h4>
+                <p data-hf-id="hf-029r">Laporan keuangan otomatis, EWS kesehatan koperasi. Deteksi dini fraud — menjawab <span data-hf-id="hf-4kzp" class="problem-badge">Kompetensi</span></p>
+              </div>
+            </div>
+            <div data-hf-id="hf-1ke9" class="solution-item" id="sol-3">
+              <div data-hf-id="hf-4ys0" class="solution-icon">💬</div>
+              <div data-hf-id="hf-g5rq" class="solution-text">
+                <h4 data-hf-id="hf-ixvv">Forum Diskusi Anggota</h4>
+                <p data-hf-id="hf-ctw0">Ruang partisipasi bottom-up. Aspirasi, mediasi konflik, RAT digital — menjawab <span data-hf-id="hf-5bte" class="problem-badge">Tata Kelola</span></p>
+              </div>
+            </div>
+            <div data-hf-id="hf-swie" class="solution-item" id="sol-4">
+              <div data-hf-id="hf-gq3b" class="solution-icon">📱</div>
+              <div data-hf-id="hf-frgp" class="solution-text">
+                <h4 data-hf-id="hf-lto5">Platform Berbasis Kebutuhan Desa</h4>
+                <p data-hf-id="hf-coo3">Bottom-up, dirancang untuk perangkat desa dan anggota, bukan instruksi pusat — menjawab <span data-hf-id="hf-gajy" class="problem-badge">Motivasi</span></p>
+              </div>
+            </div>
+            <div data-hf-id="hf-wbxh" class="solution-item" id="sol-5" style="grid-column:1 / -1;">
+              <div data-hf-id="hf-28uw" class="solution-icon">🛡️</div>
+              <div data-hf-id="hf-c6pg" class="solution-text">
+                <h4 data-hf-id="hf-ijm4">Early Warning System &amp; Manajemen Risiko</h4>
+                <p data-hf-id="hf-ket3">Notifikasi anomali keuangan, peringatan dini konflik, dashboard kesehatan koperasi — menjawab <span data-hf-id="hf-rert" class="problem-badge">Tragedi &amp; Krisis</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- FRAME 10 — CTA & CLOSING (65-71s)                             -->
+      <!-- ============================================================ -->
+      <section data-hf-id="hf-9bxo" id="slide-10" class="slide clip" data-start="65" data-duration="6" data-track-index="10">
+        <div data-hf-id="hf-n2zz" class="slide-content center-content">
+          <div data-hf-id="hf-h5c2" class="tag">Bangun Bersama</div>
+          <div data-hf-id="hf-3uo7" class="big-quote" style="font-size:40px;">
+            <span data-hf-id="hf-ly3y">"Trust is built on <span data-hf-id="hf-j8fa" style="color:#d97706;">transparency</span>.</span>
+            <span data-hf-id="hf-3edj">KONECT delivers <span data-hf-id="hf-f9t1" style="color:#dc2626;">both</span>."</span>
+          </div>
+          <div data-hf-id="hf-8pwj" class="data-row" style="justify-content:center; margin-top:24px; gap:40px;">
+            <div data-hf-id="hf-7dm4" style="text-align:center;">
+              <div data-hf-id="hf-q306" style="font-size:14px; font-weight:700; color:#f5f0eb; margin-bottom:4px;">Forum Online</div>
+              <div data-hf-id="hf-e4fl" style="font-size:12px; color:#6b7280;">Partisipasi &amp; Mediasi</div>
+            </div>
+            <div data-hf-id="hf-ni2s" style="text-align:center;">
+              <div data-hf-id="hf-dsov" style="font-size:14px; font-weight:700; color:#f5f0eb; margin-bottom:4px;">E-Voting</div>
+              <div data-hf-id="hf-d3ua" style="font-size:12px; color:#6b7280;">Transparansi &amp; Jejak Audit</div>
+            </div>
+            <div data-hf-id="hf-mb5p" style="text-align:center;">
+              <div data-hf-id="hf-4n2a" style="font-size:14px; font-weight:700; color:#f5f0eb; margin-bottom:4px;">Dashboard</div>
+              <div data-hf-id="hf-7plp" style="font-size:12px; color:#6b7280;">Kesehatan &amp; EWS</div>
+            </div>
+          </div>
+          <p data-hf-id="hf-u5rl" class="cta-line" style="margin-top:32px; font-size:16px;">
+            Bangun kepercayaan dari desa. Mulai dari transparansi.
+          </p>
+          <div data-hf-id="hf-q0v3" class="pilar-3" style="margin-top:20px;">KONECT · Hackathon KEMENKOP 2026 · Pilar 3: Keterlibatan Masyarakat</div>
+        </div>
+      </section>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ==============================
+      // FRAME 1 — OPENING (0-6s)
+      // ==============================
+      tl.set("#slide-1", { opacity: 1, autoAlpha: 1 }, 0);
+      tl.from("#slide-1 .pillar-tag", { y: -20, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+      tl.from("#slide-1 .logo-mark", { scale: 0.8, opacity: 0, duration: 0.7, ease: "back.out(1.5)" }, 0.5);
+      tl.from("#slide-1 h1", { y: 30, opacity: 0, duration: 0.6, ease: "power2.out" }, 0.9);
+      tl.from("#slide-1 .cta-line", { y: 20, opacity: 0, duration: 0.5, ease: "power2.out" }, 1.4);
+      tl.from("#slide-1 .pilar-3", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 1.8);
+      // Hold visible through frame
+      tl.set("#slide-1", { opacity: 1 }, 5.8);
+
+      // ==============================
+      // FRAME 2 — CRISIS (6-12s)
+      // ==============================
+      tl.set("#slide-2", { opacity: 1 }, 6);
+      tl.from("#slide-2 .tag", { y: -20, opacity: 0, duration: 0.5, ease: "power2.out" }, 6.3);
+      tl.from("#slide-2 h2", { y: 30, opacity: 0, duration: 0.6, ease: "power2.out" }, 6.6);
+      tl.from("#slide-2 .big-quote", { y: 30, opacity: 0, duration: 0.7, ease: "power2.out" }, 7.2);
+      tl.from("#slide-2 .quote-source", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 7.8);
+      // Data cards stagger
+      tl.from("#slide-2 .data-card", { y: 40, opacity: 0, duration: 0.5, ease: "power2.out", stagger: 0.15 }, 8.2);
+      tl.set("#slide-2", { opacity: 1 }, 11.8);
+
+      // ==============================
+      // FRAME 3 — 5 DIMENSI (12-20s)
+      // ==============================
+      tl.set("#slide-3", { opacity: 1 }, 12);
+      tl.from("#slide-3 .tag", { y: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, 12.3);
+      tl.from("#slide-3 h2", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 12.6);
+      tl.from("#slide-3 .body-text", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 13);
+      // Pillars stagger
+      tl.to("#pillar-1", { opacity: 1, y: -10, duration: 0.5, ease: "power3.out" }, 13.5);
+      tl.to("#pillar-2", { opacity: 1, y: -10, duration: 0.5, ease: "power3.out" }, 14);
+      tl.to("#pillar-3", { opacity: 1, y: -10, duration: 0.5, ease: "power3.out" }, 14.5);
+      tl.to("#pillar-4", { opacity: 1, y: -10, duration: 0.5, ease: "power3.out" }, 15);
+      tl.to("#pillar-5", { opacity: 1, y: -10, duration: 0.5, ease: "power3.out" }, 15.5);
+      tl.set("#slide-3", { opacity: 1 }, 19.8);
+
+      // ==============================
+      // FRAME 4 — 91.1% TIDAK SEHAT (20-27s)
+      // ==============================
+      tl.set("#slide-4", { opacity: 1 }, 20);
+      tl.from("#slide-4 .tag", { y: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, 20.3);
+      tl.from("#slide-4 h2", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 20.6);
+      tl.from("#slide-4 .body-text", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 21);
+      // Bars animate width
+      tl.to("#bar-tidak-sehat", { width: "91.1%", duration: 0.8, ease: "power3.out" }, 21.5);
+      tl.to("#bar-cukup-sehat", { width: "6.7%", duration: 0.6, ease: "power3.out" }, 22.2);
+      tl.to("#bar-sehat", { width: "2.2%", duration: 0.5, ease: "power3.out" }, 22.7);
+      // Data cards
+      tl.from("#slide-4 .data-row .data-card", { y: 30, opacity: 0, duration: 0.4, ease: "power2.out", stagger: 0.1 }, 23.2);
+      tl.set("#slide-4", { opacity: 1 }, 26.8);
+
+      // ==============================
+      // FRAME 5 — PENOLAKAN (27-34s)
+      // ==============================
+      tl.set("#slide-5", { opacity: 1 }, 27);
+      tl.from("#slide-5 .tag", { y: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, 27.3);
+      tl.from("#slide-5 h2", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 27.6);
+      tl.from("#slide-5 .body-text", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 28);
+      tl.to("#bar-tolak", { width: "76%", duration: 0.8, ease: "power3.out" }, 28.5);
+      tl.to("#bar-korupsi", { width: "65%", duration: 0.7, ease: "power3.out" }, 29.2);
+      tl.to("#bar-konflik", { width: "46%", duration: 0.6, ease: "power3.out" }, 29.8);
+      tl.to("#bar-politik", { width: "35%", duration: 0.5, ease: "power3.out" }, 30.3);
+      tl.set("#slide-5", { opacity: 1 }, 33.8);
+
+      // ==============================
+      // FRAME 6 — SENTIMEN (34-41s)
+      // ==============================
+      tl.set("#slide-6", { opacity: 1 }, 34);
+      tl.from("#slide-6 .tag", { y: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, 34.3);
+      tl.from("#slide-6 h2", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 34.6);
+      tl.from("#slide-6 .body-text", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 35);
+      tl.from("#slide-6 .data-row:nth-child(4) .data-card", { y: 30, opacity: 0, duration: 0.4, ease: "power2.out", stagger: 0.12 }, 35.5);
+      tl.from("#slide-6 .data-row:nth-child(5) .data-card", { y: 30, opacity: 0, duration: 0.4, ease: "power2.out", stagger: 0.12 }, 36.5);
+      tl.set("#slide-6", { opacity: 1 }, 40.8);
+
+      // ==============================
+      // FRAME 7 — AKAR MASALAH (41-49s)
+      // ==============================
+      tl.set("#slide-7", { opacity: 1 }, 41);
+      tl.from("#slide-7 .tag", { y: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, 41.3);
+      tl.from("#slide-7 h2", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 41.6);
+      tl.from("#slide-7 .body-text", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 42);
+      tl.to("#root-cause-1", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 42.5);
+      tl.to("#root-cause-2", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 43);
+      tl.to("#root-cause-3", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 43.5);
+      tl.to("#root-cause-4", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 44);
+      tl.set("#slide-7", { opacity: 1 }, 48.8);
+
+      // ==============================
+      // FRAME 8 — TRAGEDI (49-56s)
+      // ==============================
+      tl.set("#slide-8", { opacity: 1 }, 49);
+      tl.from("#slide-8 .tag", { y: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, 49.3);
+      tl.from("#slide-8 h2", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 49.6);
+      tl.from("#slide-8 .body-text", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 50);
+      // Timeline events stagger
+      tl.to("#tl-1", { opacity: 1, x: -10, duration: 0.4, ease: "power2.out" }, 50.5);
+      tl.to("#tl-2", { opacity: 1, x: -10, duration: 0.4, ease: "power2.out" }, 51);
+      tl.to("#tl-3", { opacity: 1, x: -10, duration: 0.4, ease: "power2.out" }, 51.5);
+      tl.to("#tl-4", { opacity: 1, x: -10, duration: 0.4, ease: "power2.out" }, 52);
+      tl.from("#slide-8 .data-row .data-card", { y: 20, opacity: 0, duration: 0.4, ease: "power2.out", stagger: 0.1 }, 52.5);
+      tl.set("#slide-8", { opacity: 1 }, 55.8);
+
+      // ==============================
+      // FRAME 9 — SOLUSI KONECT (56-65s)
+      // ==============================
+      tl.set("#slide-9", { opacity: 1 }, 56);
+      tl.from("#slide-9 .tag", { y: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, 56.3);
+      tl.from("#slide-9 h2", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 56.6);
+      tl.from("#slide-9 .body-text", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 57);
+      // Solution items stagger
+      tl.to("#sol-1", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 57.5);
+      tl.to("#sol-2", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 58);
+      tl.to("#sol-3", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 58.5);
+      tl.to("#sol-4", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 59);
+      tl.to("#sol-5", { opacity: 1, y: -8, duration: 0.5, ease: "power3.out" }, 59.5);
+      tl.set("#slide-9", { opacity: 1 }, 64.8);
+
+      // ==============================
+      // FRAME 10 — CTA (65-71s)
+      // ==============================
+      tl.set("#slide-10", { opacity: 1 }, 65);
+      tl.from("#slide-10 .tag", { y: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, 65.3);
+      tl.from("#slide-10 .big-quote", { y: 30, opacity: 0, duration: 0.7, ease: "power2.out" }, 65.7);
+      tl.from("#slide-10 .data-row > div", { y: 20, opacity: 0, duration: 0.4, ease: "power2.out", stagger: 0.12 }, 66.5);
+      tl.from("#slide-10 .cta-line", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 67.5);
+      tl.from("#slide-10 .pilar-3", { y: 10, opacity: 0, duration: 0.3, ease: "power2.out" }, 68);
+      // Sentinel — keep timeline alive to full duration
+      tl.set({}, {}, 70.9);
+
+      window.__timelines["konect-pitch"] = tl;
+    </script>
+  </body>
+</html>
