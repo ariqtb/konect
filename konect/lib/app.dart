@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences_explorer/shared_preferences_explorer.dart';
 import 'core/theme.dart';
 import 'core/constants.dart';
 import 'routes.dart';
@@ -67,7 +66,6 @@ class _KonectAppState extends State<KonectApp> {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        initialRoute: AppConstants.homeRoute,
         navigatorKey: _navigatorKey,
         // builder: BlocListener di sini berjalan di context YANG MEMILIKI
         // akses ke Navigator (via navigatorKey), bukan dari luar.
@@ -143,6 +141,6 @@ class _KonectAppState extends State<KonectApp> {
         },
       ),
     );
-    return kDebugMode ? SharedPreferencesExplorer(child: app) : app;
+    return app;
   }
 }

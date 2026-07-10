@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/location/location_bloc.dart';
 import '../../../core/constants.dart';
 import '../../../core/theme.dart';
+import '../../../core/services/supabase_service.dart';
+import '../../../data/models/cooperative.dart';
+import '../../../data/repositories/cooperative_repository.dart';
 import '../voucher/voucher_page.dart';
 import '../profile/profile_page.dart';
 import '../cooperative/cooperative_page.dart';
@@ -20,12 +25,112 @@ class _MainPageState extends State<MainPage> {
   final TextEditingController _roomCodeController = TextEditingController();
   List<Map<String, dynamic>>? _joinedRooms;
 
+  CooperativeItem? _nearbyCoop;
+  double? _nearbyDistance;
+  bool _isLoadingLocation = true;
+  Map<String, dynamic>? _nearbyRoom;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadJoinedRooms();
+      _initLocationCheck();
     });
+  }
+
+  void _initLocationCheck() {
+    final locationState = context.read<LocationBloc>().state;
+    debugPrint('[MainPage] _initLocationCheck: state=${locationState.runtimeType}');
+    if (locationState is LocationReady) {
+      debugPrint('[MainPage] LocationReady → lat=${locationState.location.latitude}, lng=${locationState.location.longitude}');
+      _checkNearbyCooperativeWithPosition(
+        locationState.location.latitude,
+        locationState.location.longitude,
+      );
+    } else if (locationState is LocationChecking) {
+      setState(() {
+        _isLoadingLocation = true;
+      });
+    } else {
+      // Location not ready yet — keep loading state true so 
+      // BlocListener can catch future LocationReady transitions
+      debugPrint('[MainPage] Location not ready yet (${locationState.runtimeType}), waiting for BlocListener...');
+      setState(() {
+        _isLoadingLocation = true;
+      });
+      // Re-trigger location initialization in case it stalled
+      context.read<LocationBloc>().add(const LocationInitialized());
+    }
+  }
+
+  Future<void> _checkNearbyCooperativeWithPosition(double latitude, double longitude) async {
+    debugPrint('[MainPage] _checkNearbyCooperativeWithPosition: user=($latitude, $longitude)');
+    try {
+      final cooperatives = await cooperativeRepository.getCooperatives(page: 0, limit: 100);
+      debugPrint('[MainPage] fetched ${cooperatives.length} cooperatives');
+      
+      CooperativeItem? closestCoop;
+      double minDistance = double.infinity;
+
+      for (final coop in cooperatives) {
+        if (coop.latitude != null && coop.longitude != null) {
+          final dist = Geolocator.distanceBetween(
+            latitude,
+            longitude,
+            coop.latitude!,
+            coop.longitude!,
+          );
+          debugPrint('[MainPage] coop "${coop.name}" (${coop.id}): lat=${coop.latitude}, lng=${coop.longitude}, dist=${dist.toStringAsFixed(1)}m');
+          if (dist <= 50.0 && dist < minDistance) {
+            closestCoop = coop;
+            minDistance = dist;
+          }
+        } else {
+          debugPrint('[MainPage] coop "${coop.name}" (${coop.id}): SKIPPED (null coordinates)');
+        }
+      }
+
+      if (closestCoop != null) {
+        debugPrint('[MainPage] closest coop: "${closestCoop.name}" at ${minDistance.toStringAsFixed(1)}m');
+        final client = SupabaseService().client;
+        final roomResponse = await client
+            .from('discussion_rooms')
+            .select('id, title, description, created_at, is_active, cooperatives!inner(legacy_ref)')
+            .eq('cooperatives.legacy_ref', closestCoop.id)
+            .eq('is_active', true)
+            .order('created_at', ascending: false)
+            .limit(1)
+            .maybeSingle();
+
+        if (mounted) {
+          setState(() {
+            _nearbyCoop = closestCoop;
+            _nearbyDistance = minDistance;
+            _nearbyRoom = roomResponse;
+            _isLoadingLocation = false;
+          });
+        }
+      } else {
+        debugPrint('[MainPage] NO coop found within 5000m radius');
+        if (mounted) {
+          setState(() {
+            _nearbyCoop = null;
+            _nearbyDistance = null;
+            _nearbyRoom = null;
+            _isLoadingLocation = false;
+          });
+        }
+      }
+    } catch (e) {
+      debugPrint('[MainPage] ERROR in _checkNearbyCooperativeWithPosition: $e');
+      if (mounted) {
+        setState(() {
+          _isLoadingLocation = false;
+          _nearbyCoop = null;
+        });
+      }
+    }
   }
 
   Future<void> _loadJoinedRooms() async {
@@ -69,10 +174,30 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.brandBg,
-      body: Stack(
-        children: [
+    return BlocListener<LocationBloc, LocationState>(
+      listener: (context, state) {
+        if (state is LocationReady) {
+          _checkNearbyCooperativeWithPosition(
+            state.location.latitude,
+            state.location.longitude,
+          );
+        } else if (state is LocationChecking) {
+          setState(() {
+            _isLoadingLocation = true;
+          });
+        } else {
+          setState(() {
+            _nearbyCoop = null;
+            _nearbyDistance = null;
+            _nearbyRoom = null;
+            _isLoadingLocation = false;
+          });
+        }
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.brandBg,
+        body: Stack(
+          children: [
           IndexedStack(
             index: _currentIndex,
             children: [
@@ -148,12 +273,12 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-    );
+    ),);
   }
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,6 +328,103 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildHeroDiscussion() {
+    if (_isLoadingLocation) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Container(
+          height: 180,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
+          ),
+          child: const Center(
+            child: CircularProgressIndicator(color: AppColors.brandRed),
+          ),
+        ),
+      );
+    }
+
+    if (_nearbyCoop == null) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.03),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFF1F1),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.location_off_outlined,
+                  color: AppColors.brandRed,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Di Luar Radius Koperasi',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF111C2D),
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Anda harus berada di dalam radius 5 km dari lokasi gerai koperasi untuk dapat mengakses dan mengikuti ruang diskusi desa.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Color(0xFF64748B),
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 16),
+              OutlinedButton.icon(
+                onPressed: () {
+                  setState(() {
+                    _isLoadingLocation = true;
+                  });
+                  context.read<LocationBloc>().add(const LocationInitialized());
+                },
+                icon: const Icon(Icons.refresh, size: 16),
+                label: const Text('Cek Ulang Lokasi'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.brandRed,
+                  side: const BorderSide(color: AppColors.brandRed),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final hasRoom = _nearbyRoom != null;
+    final title = hasRoom ? _nearbyRoom!['title'] : 'Belum Ada Diskusi Aktif';
+    final desc = hasRoom ? _nearbyRoom!['description'] : 'Jadilah yang pertama untuk memulai ruang diskusi di koperasi ini.';
+    final dateStr = hasRoom ? _formatDateTime(_nearbyRoom!['created_at']) : 'Sekarang';
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -241,21 +463,21 @@ class _MainPageState extends State<MainPage> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFD1FAE5),
+                        color: hasRoom ? const Color(0xFFD1FAE5) : const Color(0xFFFFF3CD),
                         borderRadius: BorderRadius.circular(999),
                       ),
-                      child: const Text(
-                        'Sedang Aktif',
+                      child: Text(
+                        hasRoom ? 'Sedang Aktif' : 'Kosong',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF065F46),
+                          color: hasRoom ? const Color(0xFF065F46) : const Color(0xFF856404),
                         ),
                       ),
                     ),
-                    const Text(
-                      '24 Okt 2023',
-                      style: TextStyle(
+                    Text(
+                      dateStr,
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Color(0xFF64748B),
                         fontWeight: FontWeight.w500,
@@ -264,81 +486,51 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Koperasi Desa Makmur Jaya',
-                  style: TextStyle(
+                Text(
+                  _nearbyCoop!.name,
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF64748B),
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik',
-                  style: TextStyle(
-                    fontSize: 22,
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF111C2D),
                     height: 1.25,
                   ),
                 ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    // Overlapping Avatars
-                    SizedBox(
-                      height: 36,
-                      width: 76,
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: 0,
-                            child: _buildAvatar(
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuDtRv06_ngfuOBMx3FQhVFdo11gQ7P656W04jhE26yTQXmjyaIYocjBvGu5J_iBmIaJVm3SxW5-4GBq_HB9DHlYHGkSFNYd8GdAYzvd7rrYr7SDjT_WNGEfvxFiDpqu96h7Y9klbXuIwwVCPr3BQKqWeMJw93vs91G2_oKrQr3eSGiXBZe6l67BcoYuCwmqk0LEbU2lRPgyGlwWKhfSBcqpOV7ScQiyWhLAy8DWnRxsfkqdHokMzUt9vw'),
-                          ),
-                          Positioned(
-                            left: 20,
-                            child: _buildAvatar(
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuC5s0X4zxT6Rz72_mLjmli0hSMZlyUXqLMNFgJoB9aStJuA198NhIS-VVuJpQY2GN3ESNcd97Owj83ujy8LvXY9yURjrMJ9Ze1lqoYGep4_gaGHXVfca_M6wheKrPitO7zyudY8_wlRiVb458rireAJmdKm3jyJrgxuaQAO_n3nqEIUTcEq6avB0-n2_Ml-HtC1Gozl9dgoFkp0C0nG5inPGpSUIZiYABWebZaEuvm9QWVV9cQloMhwsw'),
-                          ),
-                          Positioned(
-                            left: 40,
-                            child: _buildAvatar(
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuDh1MwmbBu5s3kXhaQjmz08aufJAGbqJii-ssZi30uSPHAu1qdCxP-34X_OcI5XcVAX7AplHo4jNglpSGxtQNiAirdT7pW3VklekEEqCu9WyIwQkih5C4S3euqW7H5SaLWD8TU8M-E31-aIIXkGHSlg3g64Hmg-i4TfYIy1OJ9rGvzJsisAuLTPJd2ueXFzuUsrETvm_9UdN_ckr2HFIsQoUlx8UgcYPYOxLdXY9oehVx_TRd0in-1FLg'),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF1F5F9),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                      child: const Text(
-                        '+42 Lainnya',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF475569),
-                        ),
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: 8),
+                Text(
+                  desc,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF64748B),
+                    height: 1.4,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        AppConstants.roomDiscussionRoute,
-                        arguments:
-                            'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik',
-                      );
+                      if (hasRoom) {
+                        Navigator.pushNamed(
+                          context,
+                          AppConstants.roomDiscussionRoute,
+                          arguments: _nearbyRoom!['id'],
+                        );
+                      } else {
+                        Navigator.pushNamed(
+                          context,
+                          '/create-room',
+                          arguments: _nearbyCoop!.id,
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFDC2626),
@@ -347,18 +539,19 @@ class _MainPageState extends State<MainPage> {
                         borderRadius: BorderRadius.circular(24),
                       ),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Ikuti Diskusi',
-                          style: TextStyle(
+                          hasRoom ? 'Ikuti Diskusi' : 'Buat Ruang Diskusi',
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
-                        SizedBox(width: 8),
-                        Icon(Icons.arrow_forward_outlined, size: 20),
+                        const SizedBox(width: 8),
+                        const Icon(Icons.arrow_forward_outlined, color: Colors.white, size: 20),
                       ],
                     ),
                   ),
@@ -401,13 +594,13 @@ class _MainPageState extends State<MainPage> {
         'title': 'Koperasi Makmur Jaya',
         'location': 'Dusun Utara, 400m',
         'image':
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuA5VsV41stvFDtKwGpSKPfQeFnRKOOJeIZM-3Yy4Ay4z116mh_n2lGz_nkrh3i11N3Hz2nGolZfCY-ahnIIJ0gFsTZgUdVHF1y4IUDB7iZoXkKRAZd8m1TJ31dE7Ip5toZQf5hoSi4jDwCva0er9_EiTms9FWSFtMYdSMOFbjkLgRn_pKL6yDdMfAnubOtlfYEkJVXx3Z1atewMVUQhrvnm_ZTa2taY2s--2pIHMQYnBx0nmAvCrn7Hbw',
+            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800',
       },
       {
         'title': 'Koperasi Kreatif Mandiri',
         'location': 'Dusun Timur, 1.2km',
         'image':
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuCyc41LM7xFYpceJLbO5Em-PRi7Nmz7X0oxLYCSmiG3fQzrcdnCFrZf7PK-1uw1jT1oEGevgKNvV2C1I2H98FZWjNVb-bT3dJNULzFVXNeXkIiRKUJG_CpEBeCU8zmuaMNonibl_G43QedIvQ9eeCOQ1e6xeGBo-b24XYvmvuQU1NIwEWHcK1Yr4R-gVMbs4BeEumzJZIwgY_ntdNz0mye6uW6at-wPH_C5Oz6idQA19ZToTD-_XtLI5g',
+            'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800',
       }
     ];
 
@@ -489,7 +682,7 @@ class _MainPageState extends State<MainPage> {
                             borderRadius: const BorderRadius.vertical(
                                 top: Radius.circular(16)),
                             child: Image.network(
-                              coop['image']!,
+                              coop['image'] ?? '',
                               height: 150,
                               width: double.infinity,
                               fit: BoxFit.cover,

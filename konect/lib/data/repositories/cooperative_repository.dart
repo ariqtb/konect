@@ -28,6 +28,8 @@ class CooperativeRepository {
           distance: 'Gerai Koperasi',
           imageUrl: data['foto_gerai']?.toString() ?? 
               'https://ui-avatars.com/api/?name=${Uri.encodeComponent(name)}&background=random',
+          latitude: (data['latitude'] as num?)?.toDouble(),
+          longitude: (data['longitude'] as num?)?.toDouble(),
         );
       }).toList();
     } catch (e) {
@@ -47,7 +49,21 @@ class CooperativeRepository {
         throw Exception('Koperasi tidak ditemukan');
       }
 
-      return CooperativeDetail.fromJson(Map<String, dynamic>.from(response));
+      final Map<String, dynamic> data = Map<String, dynamic>.from(response);
+
+      // Query coordinates directly from profil_koperasi to avoid modifying RPC function schema
+      final profile = await client
+          .from('profil_koperasi')
+          .select('latitude, longitude')
+          .eq('koperasi_ref', id)
+          .maybeSingle();
+
+      if (profile != null) {
+        data['latitude'] = profile['latitude'];
+        data['longitude'] = profile['longitude'];
+      }
+
+      return CooperativeDetail.fromJson(data);
     } catch (e) {
       throw Exception('Failed to fetch cooperative details: $e');
     }

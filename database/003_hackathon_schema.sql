@@ -148,7 +148,8 @@ CREATE TABLE profil_koperasi (
     nik_koperasi          VARCHAR(30),
     alamat_lengkap        TEXT,
     kode_pos              VARCHAR(10),
-    koordinat_dibulatkan  VARCHAR(50),
+    latitude              DOUBLE PRECISION,
+    longitude             DOUBLE PRECISION,
     modal_awal            NUMERIC(18,2)   DEFAULT 0,
     sumber_persetujuan    VARCHAR(50),
     tentang_koperasi      TEXT,
@@ -322,7 +323,8 @@ CREATE TABLE aset_koperasi (
     panjang_lahan        NUMERIC(14,2) DEFAULT 0,
     lebar_lahan          NUMERIC(14,2) DEFAULT 0,
     akses_jalan          VARCHAR(100),
-    koordinat_dibulatkan VARCHAR(50),
+    latitude             DOUBLE PRECISION,
+    longitude            DOUBLE PRECISION,
     dibuat_pada          TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     diperbarui_pada      TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -371,7 +373,8 @@ CREATE TABLE gerai_koperasi (
     status_pemanfaatan_aset_gerai   VARCHAR(50),
     sumber_air_bersih               VARCHAR(50),
     jenis_bangunan                  VARCHAR(50),
-    koordinat_dibulatkan            VARCHAR(50),
+    latitude                        DOUBLE PRECISION,
+    longitude                       DOUBLE PRECISION,
     dibuat_pada                     TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     diperbarui_pada                 TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

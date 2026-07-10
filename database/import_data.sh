@@ -105,8 +105,12 @@ for fname in sorted(os.listdir("sample")):
     trunc_len = TRUNCATE_LEN.get(fname, {})
     with open(path, "r", encoding="utf-8") as f:
         lines = f.readlines()
+    
+    has_coords = False
+    coord_idx = -1
     new_lines = []
-    for line in lines:
+    
+    for line_idx, line in enumerate(lines):
         fields, cur, in_quote = [], "", False
         for ch in line:
             if ch == '"':
@@ -120,6 +124,13 @@ for fname in sorted(os.listdir("sample")):
         if cur:
             fields.append(cur)
         raw_fields = [normalize(convert_value(f)) for f in fields]
+        
+        # Determine if file has koordinat_dibulatkan and its index from header
+        if line_idx == 0:
+            if "koordinat_dibulatkan" in raw_fields:
+                has_coords = True
+                coord_idx = raw_fields.index("koordinat_dibulatkan")
+                
         new_fields = []
         for idx, v in enumerate(raw_fields):
             if (not v) and idx in defaults:
@@ -131,6 +142,21 @@ for fname in sorted(os.listdir("sample")):
             if v and idx in trunc_len:
                 v = v[:trunc_len[idx]]
             new_fields.append(v)
+            
+        if has_coords and coord_idx != -1:
+            val = new_fields[coord_idx].strip('"')
+            if line_idx == 0:
+                # Replace with latitude, longitude headers
+                new_fields[coord_idx:coord_idx+1] = ["latitude", "longitude"]
+            else:
+                lat, lng = "", ""
+                if val and "," in val:
+                    parts = val.split(",")
+                    if len(parts) == 2:
+                        lat = parts[0].strip()
+                        lng = parts[1].strip()
+                new_fields[coord_idx:coord_idx+1] = [lat, lng]
+                
         new_lines.append(",".join(new_fields) + "\n")
     with open(path, "w", encoding="utf-8") as f:
         f.writelines(new_lines)
@@ -222,7 +248,7 @@ import_table "referensi_komoditas_desa" "referensi_komoditas_desa.csv" \
 echo ""
 echo "[6] profil_koperasi"
 import_table "profil_koperasi" "profil_koperasi.csv" \
-  "koperasi_ref, nama_koperasi, status_registrasi, bentuk_koperasi, kategori_usaha, nik_koperasi, alamat_lengkap, kode_pos, koordinat_dibulatkan, modal_awal, sumber_persetujuan, tentang_koperasi, pola_pengelolaan, metode_pengisian, dibuat_pada, diperbarui_pada"
+  "koperasi_ref, nama_koperasi, status_registrasi, bentuk_koperasi, kategori_usaha, nik_koperasi, alamat_lengkap, kode_pos, latitude, longitude, modal_awal, sumber_persetujuan, tentang_koperasi, pola_pengelolaan, metode_pengisian, dibuat_pada, diperbarui_pada"
 
 echo ""
 echo "[7] referensi_koperasi_wilayah"
@@ -282,7 +308,7 @@ import_table "akun_bank_koperasi" "akun_bank_koperasi.csv" \
 echo ""
 echo "[18] aset_koperasi"
 import_table "aset_koperasi" "aset_koperasi.csv" \
-  "aset_ref, koperasi_ref, nama_aset, tipe_aset, status, progres_pembangunan, foto_utama, foto_sekunder, dokumen_utama, dokumen_sekunder, dokumen_lainnya, luas_lahan, panjang_lahan, lebar_lahan, akses_jalan, koordinat_dibulatkan, dibuat_pada, diperbarui_pada"
+  "aset_ref, koperasi_ref, nama_aset, tipe_aset, status, progres_pembangunan, foto_utama, foto_sekunder, dokumen_utama, dokumen_sekunder, dokumen_lainnya, luas_lahan, panjang_lahan, lebar_lahan, akses_jalan, latitude, longitude, dibuat_pada, diperbarui_pada"
 
 echo ""
 echo "[19] modal_koperasi"
@@ -297,7 +323,7 @@ import_table "karyawan_koperasi" "karyawan_koperasi.csv" \
 echo ""
 echo "[21] gerai_koperasi"
 import_table "gerai_koperasi" "gerai_koperasi.csv" \
-  "gerai_ref, koperasi_ref, jenis_gerai_ref, status_gerai, foto_gerai, pengisi, akses_internet, akses_listrik, status_kepemilikan_aset_gerai, status_pemanfaatan_aset_gerai, sumber_air_bersih, jenis_bangunan, koordinat_dibulatkan, dibuat_pada, diperbarui_pada"
+  "gerai_ref, koperasi_ref, jenis_gerai_ref, status_gerai, foto_gerai, pengisi, akses_internet, akses_listrik, status_kepemilikan_aset_gerai, status_pemanfaatan_aset_gerai, sumber_air_bersih, jenis_bangunan, latitude, longitude, dibuat_pada, diperbarui_pada"
 
 echo ""
 echo "[22] dokumen_koperasi"

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import '../../blocs/cooperative/cooperative_detail_bloc.dart';
+import '../../blocs/location/location_bloc.dart';
 import '../../../data/models/cooperative_detail.dart';
 import '../../../core/constants.dart';
 
@@ -17,12 +19,61 @@ class CooperativeDetailPage extends StatefulWidget {
 }
 
 class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
+  bool _isCheckingLocation = true;
+  double? _distance;
+
   @override
   void initState() {
     super.initState();
     context
         .read<CooperativeDetailBloc>()
         .add(CooperativeDetailLoadRequested(widget.coopId));
+  }
+
+  void _computeDistance(double userLat, double userLng, double? coopLat, double? coopLng) {
+    if (coopLat == null || coopLng == null) {
+      if (mounted) {
+        setState(() {
+          _distance = null;
+          _isCheckingLocation = false;
+        });
+      }
+      return;
+    }
+
+    final dist = Geolocator.distanceBetween(
+      userLat, userLng, coopLat, coopLng,
+    );
+
+    if (mounted) {
+      setState(() {
+        _distance = dist;
+        _isCheckingLocation = false;
+      });
+    }
+  }
+
+  /// Called once when the cooperative detail is loaded and location is ready.
+  void _tryComputeDistance(CooperativeDetail details) {
+    final locationState = context.read<LocationBloc>().state;
+    if (locationState is LocationReady) {
+      _computeDistance(
+        locationState.location.latitude,
+        locationState.location.longitude,
+        details.latitude,
+        details.longitude,
+      );
+    } else if (locationState is LocationChecking) {
+      // Still loading, BlocListener will catch it
+    } else {
+      // No location available (denied, disabled, etc.)
+      if (mounted) {
+        setState(() {
+          _distance = null;
+          _isCheckingLocation = false;
+        });
+      }
+    }
   }
 
   Color _parseHexColor(String hexString) {
@@ -42,9 +93,28 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     const Color colorSurface = Color(0xFFF8FAFC);
     const Color colorSecondaryContainer = Color(0xFFDC2626); // Brand Red/Rose
 
-    return Scaffold(
-      backgroundColor: colorSurface,
-      body: BlocBuilder<CooperativeDetailBloc, CooperativeDetailState>(
+    return BlocListener<LocationBloc, LocationState>(
+      listener: (context, locState) {
+        if (locState is LocationReady && _isCheckingLocation) {
+          final coopState = context.read<CooperativeDetailBloc>().state;
+          if (coopState is CooperativeDetailLoaded) {
+            _computeDistance(
+              locState.location.latitude,
+              locState.location.longitude,
+              coopState.details.latitude,
+              coopState.details.longitude,
+            );
+          }
+        } else if (locState is! LocationChecking && _isCheckingLocation) {
+          setState(() {
+            _distance = null;
+            _isCheckingLocation = false;
+          });
+        }
+      },
+      child: Scaffold(
+        backgroundColor: colorSurface,
+        body: BlocBuilder<CooperativeDetailBloc, CooperativeDetailState>(
         builder: (context, state) {
           if (state is CooperativeDetailLoading ||
               state is CooperativeDetailInitial) {
@@ -74,6 +144,38 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           }
           if (state is CooperativeDetailLoaded) {
             final details = state.details;
+
+            if (_isCheckingLocation) {
+              // Try to compute distance on first load
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (_isCheckingLocation) {
+                  _tryComputeDistance(details);
+                }
+              });
+            }
+
+            if (_isCheckingLocation) {
+              return Scaffold(
+                backgroundColor: colorSurface,
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  leading: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF1E293B), size: 20),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
+                body: const Center(
+                  child: CircularProgressIndicator(color: colorSecondaryContainer),
+                ),
+              );
+            }
+
+            if (details.latitude != null && details.longitude != null) {
+              if (_distance != null && _distance! > 5000.0) {
+                return _buildLocationLockedScreen(details, const Color(0xFF1E293B), colorSecondaryContainer);
+              }
+            }
 
             return SingleChildScrollView(
               child: Column(
@@ -108,6 +210,108 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           }
           return const SizedBox.shrink();
         },
+      ),
+    ),);
+  }
+
+  Widget _buildLocationLockedScreen(CooperativeDetail details, Color colorNavy, Color colorSecondaryContainer) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
+      appBar: AppBar(
+        title: Text(details.name, style: TextStyle(color: colorNavy, fontWeight: FontWeight.bold, fontSize: 18)),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new, color: colorNavy, size: 20),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(24),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFF1F1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.location_off_rounded,
+                  color: colorSecondaryContainer,
+                  size: 64,
+                ),
+              ),
+              const SizedBox(height: 32),
+              Text(
+                'Lokasi Terkunci',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: colorNavy,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Anda berada di luar area Koperasi "${details.name}". Untuk keamanan dan integritas data, Anda harus berada dalam radius 5 km dari koperasi untuk dapat mengakses detail dan ruang diskusi.',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Color(0xFF64748B),
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 24),
+              if (_distance != null)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF1F5F9),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    'Jarak saat ini: ${_distance!.toStringAsFixed(2)} meter',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: colorNavy,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              const SizedBox(height: 32),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      _isCheckingLocation = true;
+                    });
+                    context.read<LocationBloc>().add(const LocationInitialized());
+                    context
+                        .read<CooperativeDetailBloc>()
+                        .add(CooperativeDetailLoadRequested(widget.coopId));
+                  },
+                  icon: const Icon(Icons.refresh, color: Colors.white),
+                  label: const Text(
+                    'Coba Lagi',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorSecondaryContainer,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

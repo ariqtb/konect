@@ -27,7 +27,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
       'distance': '1.2 km',
       'isOpen': true,
       'image':
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuDFoJgR2qD9tq72e1s2tG3h5k9s82H2v8L7m3y5q8s9t2v8c8L3y5s8H2v8L7m3y5s8=w400-h200-c',
+          'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800',
       'category': 'Pertanian',
     },
     {
@@ -37,7 +37,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
       'distance': '2.5 km',
       'isOpen': true,
       'image':
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuCK1yMQNzemgA8JjbukSWJhytq4ApsMrjwUF-GBeHOIrZ7qhoh945cfdFZWK5ryUh_quzDE2XS3AXfiCTlGOB7wT9LFHOW0iGlTlQMQuCNCT0VebWkqGOdGKNOiapzU814uROyR7rwGLMAw_1y9A_6dsahL0HaLcm4LFp5MckXxjnrle_wOiRd4xIQeDPM7k4Qm8uDfQMMvbsyp3uF6jKavR9mgwkud_3wIQWLMs8e2EhZccGCcJbh6VsuOXLllWVEWKkU=w400-h200-c',
+          'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800',
       'category': 'Sembako',
     },
     {
@@ -47,7 +47,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
       'distance': '3.1 km',
       'isOpen': false,
       'image':
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuCKj0KyglLbOn2DNZtnYMsq9ynlR1zolGnlJFH_Wi5WD4UFDg61Ko5G0p_9-k8CGSHESAEm6ruFwuqZ_FeYobQJ8ZByPooIyVDKFdMzvvtBo6LWVoBA-Zg-Zh2dCoTOPIiFAuUIms3rKcoYv_fDc_O3VNQsX5BL_SieaMawl9qyZFkmKNXcN2N3EMXBEktJ3UskUHFo055njg4PkXRI3WfbsTcqT4hRBJrIKFnrdk4h6cxtTGMKTL4PS_C8XOFCMztcx00=w400-h200-c',
+          'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=800',
       'category': 'Token Listrik',
     },
   ];
@@ -225,10 +225,18 @@ class _KoperasiPageState extends State<KoperasiPage> {
                                   borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(24)),
                                   child: Image.network(
-                                    item['image'],
+                                    item['image'] ?? '',
                                     height: 160,
                                     width: double.infinity,
                                     fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        height: 160,
+                                        color: Colors.grey[200],
+                                        child: const Icon(Icons.storefront,
+                                            color: Colors.grey, size: 48),
+                                      );
+                                    },
                                   ),
                                 ),
                                 Positioned(

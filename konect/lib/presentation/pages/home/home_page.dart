@@ -50,16 +50,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Location permission banner — auto-hides saat granted.
-              const LocationPermissionBanner(),
-              // MainHeader
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
               Image.asset(
                 'assets/images/logo.png',
                 height: 80,

@@ -6,6 +6,8 @@ class CooperativeItem {
   final String imageUrl;
   final String category; // 'Sembako' | 'Simpan Pinjam' | 'Pertanian'
   final bool isOpen;
+  final double? latitude;
+  final double? longitude;
 
   const CooperativeItem({
     required this.id,
@@ -15,6 +17,8 @@ class CooperativeItem {
     required this.imageUrl,
     required this.category,
     required this.isOpen,
+    this.latitude,
+    this.longitude,
   });
 
   CooperativeItem copyWith({
@@ -25,6 +29,8 @@ class CooperativeItem {
     String? imageUrl,
     String? category,
     bool? isOpen,
+    double? latitude,
+    double? longitude,
   }) {
     return CooperativeItem(
       id: id ?? this.id,
@@ -34,6 +40,8 @@ class CooperativeItem {
       imageUrl: imageUrl ?? this.imageUrl,
       category: category ?? this.category,
       isOpen: isOpen ?? this.isOpen,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
     );
   }
 
@@ -46,6 +54,8 @@ class CooperativeItem {
       imageUrl: json['image_url'] ?? '',
       category: json['category'] ?? '',
       isOpen: json['is_open'] ?? false,
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
     );
   }
 
@@ -58,6 +68,8 @@ class CooperativeItem {
       'image_url': imageUrl,
       'category': category,
       'is_open': isOpen,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }

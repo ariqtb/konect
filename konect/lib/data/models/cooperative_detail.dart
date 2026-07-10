@@ -11,6 +11,8 @@ class CooperativeDetail {
   final String email;
   final List<CoopDiscussionRoom> rooms;
   final List<CoopTimelineUpdate> updates;
+  final double? latitude;
+  final double? longitude;
 
   const CooperativeDetail({
     required this.coopId,
@@ -25,6 +27,8 @@ class CooperativeDetail {
     required this.email,
     required this.rooms,
     required this.updates,
+    this.latitude,
+    this.longitude,
   });
 
   factory CooperativeDetail.fromJson(Map<String, dynamic> json) {
@@ -45,6 +49,8 @@ class CooperativeDetail {
       updates: (json['updates'] as List? ?? [])
           .map((item) => CoopTimelineUpdate.fromJson(item))
           .toList(),
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
     );
   }
 
@@ -62,6 +68,8 @@ class CooperativeDetail {
       'email': email,
       'rooms': rooms.map((item) => item.toJson()).toList(),
       'updates': updates.map((item) => item.toJson()).toList(),
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }
