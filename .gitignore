@@ -8,3 +8,4 @@ node_modules/
 *.key
 .playwright-mcp/
 .omo/
+docs\ppt

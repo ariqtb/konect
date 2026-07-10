@@ -1,0 +1,1 @@
+ssh -i "C:\Users\Farid\OneDrive\Dokumen\Github\konect\sumopodkey" ubuntu@43.157.247.43
