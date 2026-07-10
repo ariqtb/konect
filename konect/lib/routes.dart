@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../presentation/blocs/auth/auth_bloc.dart';
 import '../presentation/pages/auth/login_page.dart';
 import '../presentation/pages/forum/forum_page.dart';
 import '../presentation/pages/voting/voting_page.dart';
