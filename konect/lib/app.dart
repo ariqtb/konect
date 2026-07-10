@@ -9,6 +9,7 @@ import 'presentation/blocs/forum/forum_bloc.dart';
 import 'presentation/blocs/cooperative/cooperative_bloc.dart';
 import 'presentation/blocs/cooperative/cooperative_detail_bloc.dart';
 import 'presentation/blocs/leaderboard/leaderboard_bloc.dart';
+import 'presentation/pages/splash_screen.dart';
 import 'presentation/pages/auth/login_page.dart';
 import 'presentation/pages/forum/forum_page.dart';
 import 'presentation/pages/voting/voting_page.dart';
@@ -42,9 +43,11 @@ class KonectApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        initialRoute: AppConstants.homeRoute,
+        initialRoute: AppConstants.splashRoute,
         onGenerateRoute: (settings) {
           switch (settings.name) {
+            case AppConstants.splashRoute:
+              return MaterialPageRoute(builder: (_) => const SplashScreen());
             case AppConstants.loginRoute:
               return MaterialPageRoute(builder: (_) => const MainPage());
             case AppConstants.homeRoute:
