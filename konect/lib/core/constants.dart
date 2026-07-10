@@ -11,6 +11,10 @@ class AppConstants {
   static const String forumRoute = '/forum';
   static const String votingRoute = '/voting';
   static const String profileRoute = '/profile';
+  static const String articleDetailRoute = '/article-detail';
+  static const String createArticleRoute = '/create-article';
+  static const String redeemRoute = '/redeem';
+  static const String roomDiscussionRoute = '/room-discussion';
 
   // Storage Keys
   static const String tokenKey = 'auth_token';

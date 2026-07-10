@@ -88,7 +88,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (user != null) {
         emit(AuthAuthenticated(user));
       } else {
-        emit(const AuthError('Login failed'));
+        emit(AuthError('Login failed'));
       }
     } catch (e) {
       emit(AuthError(e.toString()));
