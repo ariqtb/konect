@@ -9,7 +9,7 @@ services:
     networks:
       - traefik
     ports:
-      - "3000:3000"
+      - "0.0.0.0:3000:3000"
     healthcheck:
       test:
         [
@@ -79,8 +79,8 @@ services:
       studio:
         condition: service_healthy
     ports:
-      - ${KONG_HTTP_PORT}:8000/tcp
-      - ${KONG_HTTPS_PORT}:8443/tcp
+      - 0.0.0.0:${KONG_HTTP_PORT}:8000/tcp
+      - 0.0.0.0:${KONG_HTTPS_PORT}:8443/tcp
     volumes:
       # https://github.com/supabase/supabase/issues/12661
       - ./volumes/api/kong.yml:/home/kong/temp.yml:ro,z
@@ -628,7 +628,7 @@ services:
     networks:
       - traefik
     ports:
-      - ${POOLER_PROXY_PORT_TRANSACTION}:6543
+      - 0.0.0.0:${POOLER_PROXY_PORT_TRANSACTION}:6543
     volumes:
       - ./volumes/pooler/pooler.exs:/etc/pooler/pooler.exs:ro,z
     healthcheck:
