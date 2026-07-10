@@ -25,6 +25,17 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
         .add(CooperativeDetailLoadRequested(widget.coopId));
   }
 
+  Color _parseHexColor(String hexString) {
+    try {
+      final buffer = StringBuffer();
+      if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+      buffer.write(hexString.replaceFirst('#', ''));
+      return Color(int.parse(buffer.toString(), radix: 16));
+    } catch (_) {
+      return const Color(0xFFDC2626);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Design System Tokens (from documents/design.md)
@@ -438,18 +449,31 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                       width: 32 + (room.avatars.length - 1) * 20.0,
                       child: Stack(
                         children: List.generate(room.avatars.length, (idx) {
+                          final avatarVal = room.avatars[idx];
+                          final isHex = avatarVal.startsWith('#');
+                          final Color bgColor = isHex ? _parseHexColor(avatarVal) : const Color(0xFFDC2626);
+                          
+                          // Determine letter dynamically (e.g. A, R, B)
+                          final String letter = idx == 0 ? 'A' : (idx == 1 ? 'R' : 'B');
+
                           return Positioned(
                             left: idx * 20.0,
                             child: Container(
                               width: 32,
                               height: 32,
                               decoration: BoxDecoration(
+                                color: bgColor,
                                 shape: BoxShape.circle,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                                image: DecorationImage(
-                                  image: NetworkImage(room.avatars[idx]),
-                                  fit: BoxFit.cover,
+                                border: Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  letter,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
