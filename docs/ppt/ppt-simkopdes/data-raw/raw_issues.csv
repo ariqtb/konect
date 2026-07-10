@@ -1,0 +1,21 @@
+ID;Judul;Kategori;Severitas;Dampak;Pihak_Terdampak;Sumber_Pendukung
+iss-001;Pemangkasan Dana Desa 58%;anggaran;critical;Infrastruktur desa terhenti, kepala desa kehilangan fleksibilitas anggaran;Kepala Desa, Perangkat Desa, Masyarakat Desa, BUMDes;src-bbc-2026,src-pmk-7-2026,src-apdesi-ntb
+iss-002;Skema Pembiayaan dan Risiko Gagal Bayar;keuangan;critical;Risiko likuiditas bank Himbara Rp2,8-4,6 triliun/bulan;BANK HIMBARA, Pemerintah Pusat, Perangkat Desa, Masyarakat;src-celios-full
+iss-003;Pendekatan Top-Down dan Komando;tata_kelola;high;Melanggar prinsip koperasi bottom-up, legitimasi dipertanyakan;Masyarakat Desa, Pemerintah, Dekopin, YLBHI;src-idn-times-ylbhi,src-dekopin-kritik,src-fh-ugm-policy
+iss-004;Keterlibatan TNI dan Militerisasi Ekonomi;tata_kelola;high;Sekuritisasi ruang ekonomi sipil, ketakutan masyarakat;TNI, PT Agrinas, Masyarakat Sipil, YLBHI, GMNI;src-idn-times-ylbhi,src-gmni-dki
+iss-005;Korban Jiwa dalam Pelatihan Militer;keselamatan;critical;Kerugian nyawa dan biaya Rp1,35 triliun;Peserta Pelatihan, Kemhan, Keluarga Korban, Komnas HAM;src-idn-times-ylbhi,src-kemhan-latsarmil,src-komisi1-dpr-biaya
+iss-006;Lokasi Pembangunan Tidak Strategis;operasional;medium;Meragukan keseriusan perencanaan, membuang sumber daya;Masyarakat Desa, Pemerintah Daerah;src-tribun-lokasi
+iss-007;Risiko Korupsi dan Kebocoran Anggaran;korupsi;critical;Potensi kerugian negara sangat besar, hilangnya kepercayaan publik;Masyarakat, Pemerintah, ICW, KPK, Kejaksaan;src-celios-full,src-detik-impor-pikap,src-jrn-008
+iss-008;Impor Pikap 105.000 Unit dari India;pengadaan;high;Merugikan industri otomotif lokal, potensi markup harga;Industri Otomotif Lokal, PT Agrinas, Kemenperin, ICW;src-detik-impor-pikap
+iss-009;Denda Rp100 Juta untuk Calon Manajer;kebijakan;medium;Indikasi pemaksaan partisipasi, pelanggaran hak individu;Calon Manajer, Pemerintah;src-cnn-pencabutan-denda
+iss-010;Krisis Kepercayaan Publik;sosial;high;Rendahnya partisipasi masyarakat, potensi kegagalan program;Masyarakat, Pemerintah, Kopdes;src-bedata-sentimen
+iss-011;Kompetisi dengan BUMDes dan Usaha Lokal;ekonomi;high;BUMDes mati suri, potensi konflik sosial;BUMDes, UMKM Desa, Warung Lokal, Masyarakat;src-celios-full,src-bbc-2026,src-jrn-002
+iss-012;Sentralisasi dan Otonomi Desa Tergerus;tata_kelola;high;Otonomi desa terkikis, keputusan tidak sesuai kebutuhan lokal;Pemerintah Desa, Masyarakat, Pemerintah Pusat;src-celios-full,src-dekopin-kritik,src-fh-ugm-policy
+iss-013;Tidak Ada Studi Kelayakan;perencanaan;high;Program berisiko tinggi gagal;Masyarakat Desa, Pemerintah;src-kppod
+iss-014;Biaya Pelatihan Tidak Efisien;keuangan;medium;Pemborosan anggaran, fokus yang salah;Peserta, APBN, Kemhan, Kemenkop;src-komisi1-dpr-biaya,src-kemhan-latsarmil
+iss-015;Pemangkasan Target 80.000 ke 40.000;kebijakan;high;Target turun drastis 50%, indikasi realitas lebih kecil;Pemerintah Pusat, Masyarakat Desa, Pelaksana Program;src-bisnis-target-dipangkas,src-antara-40k-2026,src-mediaindonesia-40k-oktober
+iss-016;Kematian Detail 5 Peserta SPPI;keselamatan;critical;Kronologi kematian terungkap, tuntutan investigasi independen;Keluarga Korban, Kemhan, Peserta SPPI, Komnas HAM;src-merdeka-mitigasi,src-bisnisia-sppi,src-tribun-wamenhan
+iss-017;Santunan Belum Jelas;keselamatan;medium;Keluarga korban belum mendapat kepastian;Keluarga Korban, Kemhan, Koalisi Sipil, Komnas HAM;src-kompas-santunan,src-koalisi-sipil
+iss-018;Tim Investigasi Kemhan-Kemenkes;tata_kelola;medium;Respons institusional terhadap krisis, efektivitas dipertanyakan;Kemhan, Kemenkes, Peserta SPPI, Keluarga Korban;src-viva-tim-investigasi
+iss-019;PMK 15/2026 Gantikan PMK 49/2025 dan 63/2025;regulasi;medium;Perubahan kerangka hukum pembiayaan;Pemerintah, Bank Himbara, Pelaksana Kopdes;src-pmk-15-2026
+iss-020;Proyek tanpa Studi Layak dan Sentralistik;perencanaan;high;Kredibilitas program dipertanyakan oleh akademisi dan pakar;Masyarakat Desa, Pemerintah, KPK, BPK, KPPU;src-tribun-evaluasi-total,src-agus-pambagio,src-pspk-ugm,src-ugm-diskusi-publik

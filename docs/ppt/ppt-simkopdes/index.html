@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIMKOPDES — Hackathon Digital Cooperatives Expo 2026</title>
+<title>KONECT — Jendela Transparansi Keterlibatan Masyarakat dengan Kopdes</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,14 +16,17 @@
     --bg-secondary: #f3f0ea;
     --text-primary: #1e1e2a;
     --text-secondary: #6b6b7a;
-    --accent-red: #a31d22;
-    --accent-red-light: #fdf0ef;
     --accent-green: #1a6b3c;
     --accent-green-light: #edf7f0;
+    --accent-green-dark: #0f4d2a;
     --accent-blue: #1e4a7a;
     --accent-blue-light: #eef4fa;
+    --accent-red: #a31d22;
+    --accent-red-light: #fdf0ef;
     --accent-gold: #b45309;
     --accent-gold-light: #fef7ed;
+    --accent-teal: #0d7377;
+    --accent-teal-light: #e6f6f6;
     --border-color: #e2ddd4;
     --border-light: #efeae2;
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -48,7 +51,36 @@
     padding: 60px 100px;
   }
 
-  /* ===== COVER ===== */
+  .slide-content.top {
+    justify-content: flex-start;
+    padding-top: 50px;
+  }
+
+  .slide-title {
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+
+  .slide-title .green { color: var(--accent-green); }
+  .slide-title .blue { color: var(--accent-blue); }
+  .slide-title .red { color: var(--accent-red); }
+  .slide-title .teal { color: var(--accent-teal); }
+
+  .subtitle {
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 1.5;
+    max-width: 900px;
+  }
+
   .cover-box {
     border: 1px solid var(--border-color);
     padding: 60px 80px;
@@ -58,7 +90,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: transparent;
     position: relative;
   }
   .cover-box::before {
@@ -83,117 +114,42 @@
   .cover-divider {
     width: 70px;
     height: 3px;
-    background: var(--accent-red);
     margin: 28px 0;
   }
+  .cover-divider.green { background: var(--accent-green); }
 
-  /* ===== STANDARD SLIDE LAYOUT ===== */
-  .slide-title {
-    font-size: 42px;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-align: center;
-    margin-bottom: 40px;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-  }
-  .slide-title .highlight {
-    color: var(--accent-red);
-  }
-
-  /* ===== PROBLEM GRID ===== */
-  .problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    width: 100%;
-    max-width: 1200px;
-  }
-  .problem-card {
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary);
-    padding: 28px 32px;
+  .cover-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    color: white;
     display: flex;
-    flex-direction: column;
-    border-top: 3px solid var(--accent-red);
-  }
-  .problem-card.gold {
-    border-top-color: var(--accent-gold);
-  }
-  .problem-card.green {
-    border-top-color: var(--accent-green);
-  }
-  .problem-num {
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text-secondary);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .problem-card.gold .problem-num { color: var(--accent-gold); }
-  .problem-card.green .problem-num { color: var(--accent-green); }
-  .problem-card.red .problem-num { color: var(--accent-red); }
-  .problem-title {
     font-size: 20px;
     font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 8px;
-    line-height: 1.3;
+    margin-bottom: 20px;
   }
-  .problem-desc {
-    font-size: 14px;
+
+  .cover-desc {
+    font-size: 18px;
     color: var(--text-secondary);
+    text-align: center;
+    max-width: 750px;
     line-height: 1.5;
   }
-  .problem-stat {
-    font-family: var(--font-mono);
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--accent-red);
-    margin-bottom: 4px;
-  }
-  .problem-card.gold .problem-stat { color: var(--accent-gold); }
 
-  /* ===== SASARAN GRID ===== */
-  .sasaran-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    width: 100%;
-    max-width: 1200px;
-  }
-  .sasaran-card {
-    border: 1px solid var(--border-color);
-    padding: 28px 30px;
-    display: flex;
-    flex-direction: column;
-    border-left: 4px solid var(--accent-red);
-  }
-  .sasaran-card.green { border-left-color: var(--accent-green); }
-  .sasaran-card.blue { border-left-color: var(--accent-blue); }
-  .sasaran-card.gold { border-left-color: var(--accent-gold); }
-  .sasaran-label {
+  .cover-meta {
     font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent-red);
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 40px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .sasaran-card.green .sasaran-label { color: var(--accent-green); }
-  .sasaran-card.blue .sasaran-label { color: var(--accent-blue); }
-  .sasaran-card.gold .sasaran-label { color: var(--accent-gold); }
-  .sasaran-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1.3;
   }
 
-  /* ===== METRICS ROW ===== */
   .metrics-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -210,64 +166,69 @@
     align-items: center;
     text-align: center;
   }
-  .metric-card.red {
-    background: var(--accent-red-light);
-    border-color: rgba(163, 29, 34, 0.2);
-  }
-  .metric-card.green {
-    background: var(--accent-green-light);
-    border-color: rgba(26, 107, 60, 0.2);
-  }
+  .metric-card.red { background: var(--accent-red-light); border-color: rgba(163,29,34,0.2); }
+  .metric-card.gold { background: var(--accent-gold-light); border-color: rgba(180,83,9,0.2); }
   .metric-value {
     font-family: var(--font-mono);
     font-size: 36px;
     font-weight: 700;
-    color: var(--accent-red);
     line-height: 1;
     margin-bottom: 8px;
   }
-  .metric-card.green .metric-value { color: var(--accent-green); }
+  .metric-value.red { color: var(--accent-red); }
+  .metric-value.gold { color: var(--accent-gold); }
   .metric-label {
     font-size: 13px;
     color: var(--text-secondary);
-    line-height: 1.3;
+    line-height: 1.4;
     font-weight: 500;
   }
+  .meta { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); }
 
-  /* ===== PILLAR SECTION ===== */
-  .pillar-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    width: 100%;
-    max-width: 1200px;
-    align-items: center;
+  .pillar-card {
+    border: 1px solid var(--border-color);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    position: relative;
   }
-  .pillar-left {
-    border-left: 4px solid var(--accent-green);
-    padding-left: 28px;
+  .pillar-card.main {
+    border-left: 5px solid var(--accent-green);
+    background: var(--accent-green-light);
   }
-  .pillar-tag {
+  .pillar-card.secondary {
+    border-left: 5px solid var(--accent-teal);
+    background: var(--accent-teal-light);
+  }
+  .pillar-badge {
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 700;
-    color: var(--accent-green);
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid;
+    align-self: flex-start;
   }
+  .pillar-card.main .pillar-badge { color: var(--accent-green); border-color: rgba(26,107,60,0.2); }
+  .pillar-card.secondary .pillar-badge { color: var(--accent-teal); border-color: rgba(13,115,119,0.2); }
   .pillar-title {
     font-size: 28px;
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.25;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
-  .pillar-desc {
-    font-size: 15px;
+  .pillar-card.main .pillar-title { color: var(--accent-green-dark); }
+  .pillar-card.secondary .pillar-title { color: var(--accent-teal); }
+  .pillar-sub {
+    font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    line-height: 1.4;
   }
   .pillar-features {
     display: flex;
@@ -278,430 +239,455 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
     line-height: 1.4;
   }
-  .pillar-feature strong {
-    color: var(--text-primary);
-  }
+  .pillar-feature strong { color: var(--text-primary); }
   .pillar-feature::before {
     content: '';
     min-width: 6px;
     height: 6px;
-    margin-top: 7px;
-    background: var(--accent-green);
+    margin-top: 8px;
     border-radius: 50%;
   }
+  .pillar-card.main .pillar-feature::before { background: var(--accent-green); }
+  .pillar-card.secondary .pillar-feature::before { background: var(--accent-teal); }
 
-  /* ===== ARSITEKTUR ===== */
-  .arsitektur-grid {
+  .benefit-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
     width: 100%;
-    max-width: 1100px;
+    max-width: 1200px;
   }
-  .arsitektur-card {
+  .benefit-card {
     border: 1px solid var(--border-color);
-    padding: 24px;
+    padding: 32px 28px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
     background: var(--bg-secondary);
+    border-top: 4px solid var(--accent-green);
   }
-  .arsitektur-icon {
+  .benefit-card.teal { border-top-color: var(--accent-teal); }
+  .benefit-card.blue { border-top-color: var(--accent-blue); }
+  .benefit-icon {
     font-family: var(--font-mono);
     font-size: 28px;
     font-weight: 700;
-    color: var(--accent-blue);
     margin-bottom: 12px;
   }
-  .arsitektur-title {
-    font-size: 16px;
+  .benefit-icon.green { color: var(--accent-green); }
+  .benefit-icon.teal { color: var(--accent-teal); }
+  .benefit-icon.blue { color: var(--accent-blue); }
+  .benefit-title {
+    font-size: 20px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    line-height: 1.3;
   }
-  .arsitektur-desc {
-    font-size: 13px;
+  .benefit-desc {
+    font-size: 14px;
     color: var(--text-secondary);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
-  /* ===== BIG STAT ===== */
-  .big-stat {
-    font-family: var(--font-mono);
-    font-size: 64px;
-    font-weight: 700;
-    color: var(--accent-red);
-    line-height: 1;
+  .hook-box {
+    max-width: 1100px;
     text-align: center;
+    padding: 28px 40px;
+    border: 1px dashed var(--border-color);
+    background: var(--bg-secondary);
   }
-  .big-stat-label {
+  .hook-box p {
     font-size: 18px;
     color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .hook-box strong { color: var(--text-primary); }
+
+  .closing-title {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -1px;
     text-align: center;
-    margin-top: 8px;
+    line-height: 1.2;
+    max-width: 800px;
   }
 
-  /* ===== UTILITY ===== */
-  .text-red { color: var(--accent-red); }
-  .text-green { color: var(--accent-green); }
-  .text-blue { color: var(--accent-blue); }
-  .text-gold { color: var(--accent-gold); }
-
-  .meta {
+  .transparancy-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    align-items: center;
+  }
+  .transparancy-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .glass-panel {
+    background: rgba(26, 107, 60, 0.04);
+    border: 1px solid rgba(26, 107, 60, 0.15);
+    padding: 24px 28px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .glass-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .glass-row:last-child { border-bottom: none; }
+  .glass-row .kopdes-name { font-weight: 600; color: var(--text-primary); }
+  .glass-row .topic-label { color: var(--text-secondary); font-size: 13px; }
+  .glass-row .status-badge {
     font-family: var(--font-mono);
     font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+  .status-badge.active { background: var(--accent-green-light); color: var(--accent-green); }
+  .status-badge.hot { background: var(--accent-red-light); color: var(--accent-red); }
+
+  .transparancy-right {
+    border-left: 4px solid var(--accent-teal);
+    padding-left: 28px;
+  }
+  .transparancy-right .tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-teal);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .transparancy-right .big-num {
+    font-family: var(--font-mono);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent-teal);
+    line-height: 1;
+  }
+  .transparancy-right .desc {
+    font-size: 15px;
     color: var(--text-secondary);
+    line-height: 1.5;
+    margin-top: 12px;
   }
 
-  .subtitle {
-    font-size: 20px;
+  .text-green { color: var(--accent-green); }
+  .text-teal { color: var(--accent-teal); }
+  .text-red { color: var(--accent-red); }
+  .text-secondary { color: var(--text-secondary); }
+
+  .meta-src {
+    font-family: var(--font-mono);
+    font-size: 12px;
     color: var(--text-secondary);
-    font-weight: 400;
     text-align: center;
-    margin-bottom: 36px;
-    line-height: 1.4;
+    margin-top: 24px;
+  }
+
+  [data-composition-id] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 </style>
 </head>
 <body>
 
-<!-- ============================================================ -->
-<!-- JSON ISLAND — Slide Metadata -->
-<!-- ============================================================ -->
 <script type="application/hyperframes-slideshow+json">
 {
   "slides": [
-    { "sceneId": "cover",     "notes": "Cover — SIMKOPDES Hackathon Digital Cooperatives Expo 2026" },
-    { "sceneId": "latar",     "notes": "Latar Belakang — Program Kopdes Merah Putih menghadapi krisis kepercayaan dan tata kelola" },
-    { "sceneId": "masalah",   "notes": "Rumusan Masalah — 4 masalah utama dari data references" },
-    { "sceneId": "tujuan",    "notes": "Maksud & Tujuan — 4 sasaran strategis nasional hackathon" },
-    { "sceneId": "simkopdes", "notes": "SIMKOPDES Platform — Arsitektur sistem informasi manajemen koperasi desa" },
-    { "sceneId": "data",      "notes": "Data Kopdes — Key metrics dari dashboard resmi SIMKOPDES" },
-    { "sceneId": "konect",    "notes": "KONECT untuk Pilar 3 — Keterlibatan Masyarakat dengan Kopdes" },
-    { "sceneId": "penutup",   "notes": "Penutup — Harapan dan ajakan" }
+    { "sceneId": "cover",     "notes": "Cover — KONECT: Transparansi & Keterlibatan Masyarakat dengan Kopdes" },
+    { "sceneId": "masalah",   "notes": "Krisis Kopdes — 91.1% tidak sehat, 62.5% belum lapor keuangan, 76% perangkat desa menolak" },
+    { "sceneId": "pilar3",    "notes": "Pilar 3: Keterlibatan Masyarakat — Forum, E-Voting, Dashboard Transparansi" },
+    { "sceneId": "pilar4",    "notes": "Pilar 4: Literasi Gen Z — Sifat publik, bisa lihat diskusi Kopdes mana pun" },
+    { "sceneId": "transparansi", "notes": "Konsep Transparansi — Real-time visibility ke semua diskusi Kopdes" },
+    { "sceneId": "fitur",     "notes": "Fitur KONECT — Tiga pilar transparansi" },
+    { "sceneId": "penutup",   "notes": "Penutup — KONECT, Jendela Transparansi Kopdes" }
   ]
 }
 </script>
 
-<!-- ============================================================ -->
-<!-- SLIDE 1 — Cover (0–7s) -->
-<!-- ============================================================ -->
-<div data-hf-id="hf-8lgg" data-composition-id="cover" data-start="0" data-duration="7" data-label="Cover" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
-  <section data-hf-id="hf-v42u" class="clip" data-start="0" data-duration="7" data-track-index="1" style="position:absolute;inset:0">
+<!-- SLIDE 1 — Cover (0–8s) -->
+<div data-hf-id="hf-d9yt" data-composition-id="cover" data-start="0" data-duration="8" data-label="Cover" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
+  <section data-hf-id="hf-93zr" class="clip" data-start="0" data-duration="8" data-track-index="1">
     <div data-hf-id="hf-24t2" id="cover-content" class="slide-content">
       <div data-hf-id="hf-kv79" class="cover-box">
+        <div data-hf-id="hf-pnuc" class="cover-logo">K</div>
         <span data-hf-id="hf-y0yo" class="cover-tag">Hackathon Digital Cooperatives Expo 2026</span>
-        <h1 data-hf-id="hf-q3q4" style="font-family:var(--font-sans);font-size:68px;font-weight:700;letter-spacing:-1px;text-align:center;color:var(--text-primary);line-height:1.15;max-width:850px">
-          SIMKOPDES
+        <h1 data-hf-id="hf-fck3" style="font-family:var(--font-sans);font-size:68px;font-weight:800;letter-spacing:-1px;text-align:center;color:var(--accent-green-dark);line-height:1.15;max-width:850px">
+          KONECT
         </h1>
-        <p data-hf-id="hf-wbvs" style="font-size:24px;color:var(--text-secondary);margin-top:8px;font-weight:500">
-          Sistem Informasi Manajemen Koperasi Desa
+        <p data-hf-id="hf-leqq" style="font-size:24px;color:var(--text-secondary);margin-top:8px;font-weight:500">
+          Jendela Transparansi &amp; Keterlibatan Masyarakat<br data-hf-id="hf-x5px">dengan Kopdes
         </p>
-        <div data-hf-id="hf-txmd" class="cover-divider"></div>
-        <p data-hf-id="hf-rcbb" style="font-size:18px;color:var(--text-secondary);text-align:center;max-width:750px;line-height:1.5">
-          Modernisasi Ekosistem Koperasi Indonesia<br data-hf-id="hf-x5px">
-          melalui Inovasi Digital untuk Kemandirian Ekonomi Desa
+        <div data-hf-id="hf-jihw" class="cover-divider green"></div>
+        <p data-hf-id="hf-qgpt" class="cover-desc">
+          Platform digital yang membuka seluruh proses diskusi, voting, dan tata kelola koperasi desa secara <strong data-hf-id="hf-4ssw">transparan &amp; partisipatif</strong> — siapapun bisa melihat, siapapun bisa terlibat.
         </p>
-        <p data-hf-id="hf-ct3t" style="font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);margin-top:40px;letter-spacing:1px;text-transform:uppercase">
-          Kementerian Koperasi RI · Juni–Juli 2026
+        <p data-hf-id="hf-fviv" class="cover-meta">
+          Kementerian Koperasi RI · Digital Cooperatives Expo 2026
         </p>
       </div>
     </div>
   </section>
 </div>
+    
+  
 
-<!-- ============================================================ -->
-<!-- SLIDE 2 — Latar Belakang (7–14s) -->
-<!-- ============================================================ -->
-<div data-hf-id="hf-qr9y" data-composition-id="latar" data-start="7" data-duration="7" data-label="Latar Belakang" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
-  <section data-hf-id="hf-qrrj" class="clip" data-start="7" data-duration="7" data-track-index="1" style="position:absolute;inset:0">
-    <div data-hf-id="hf-v0iu" class="slide-content" style="justify-content:flex-start;padding-top:50px">
 
-      <h2 data-hf-id="hf-zxmo" class="slide-title" style="margin-bottom:20px">Latar Belakang</h2>
-      <p data-hf-id="hf-te9l" class="subtitle" style="max-width:900px">
-        Program Strategis Nasional Koperasi Desa/Kelurahan Merah Putih (KDKMP) menargetkan 80.000 koperasi — namun realitas di lapangan menunjukkan <strong data-hf-id="hf-1idu">kesenjangan serius</strong> antara target dan kondisi aktual.
+<!-- SLIDE 2 — Rumusan Masalah (8–16s) -->
+<div data-hf-id="hf-zpoa" data-composition-id="masalah" data-start="8" data-duration="8" data-label="Rumusan Masalah" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
+  <section data-hf-id="hf-xlrz" class="clip" data-start="8" data-duration="8" data-track-index="1">
+    <div data-hf-id="hf-rz3x" class="slide-content top" id="masalah-content">
+      <h2 data-hf-id="hf-pmir" class="slide-title">
+        Mengapa <span data-hf-id="hf-c4pw" class="green">Transparansi</span> Mendesak?
+      </h2>
+      <p data-hf-id="hf-or7u" class="subtitle" style="max-width:950px">
+        Dari <strong data-hf-id="hf-yz8e">83.382</strong> koperasi yang sudah berbadan hukum, mayoritas tidak sehat dan tidak transparan. Masyarakat tidak punya <strong data-hf-id="hf-hnt9">akses melihat</strong> apa yang terjadi.
       </p>
-
-      <div data-hf-id="hf-493x" class="metrics-row" style="margin-top:10px">
+      <div data-hf-id="hf-5pzo" class="metrics-row">
         <div data-hf-id="hf-2oiq" class="metric-card red">
-          <div data-hf-id="hf-n3mc" class="metric-value">83.382</div>
-          <div data-hf-id="hf-6m26" class="metric-label">Koperasi Berbadan Hukum<br data-hf-id="hf-rsrt"><span data-hf-id="hf-aylr" class="meta">(104,2% dari target 80K)</span></div>
+          <div data-hf-id="hf-axvb" class="metric-value red">91,1%</div>
+          <div data-hf-id="hf-3mi5" class="metric-label">Koperasi Tidak Sehat<br data-hf-id="hf-rsrt"><span data-hf-id="hf-rgeu" class="meta">dari 31.265 yang lapor</span></div>
         </div>
         <div data-hf-id="hf-nedi" class="metric-card red">
-          <div data-hf-id="hf-551k" class="metric-value">91,1%</div>
-          <div data-hf-id="hf-3mi5" class="metric-label">Koperasi Tidak Sehat<br data-hf-id="hf-szow"><span data-hf-id="hf-kmtl" class="meta">(dari 31.265 yang lapor)</span></div>
+          <div data-hf-id="hf-cbw9" class="metric-value red">62,5%</div>
+          <div data-hf-id="hf-0bj8" class="metric-label">Belum Lapor Keuangan<br data-hf-id="hf-szow"><span data-hf-id="hf-vxty" class="meta">52.117 dari 83.382 koperasi</span></div>
+        </div>
+        <div data-hf-id="hf-tcun" class="metric-card gold">
+          <div data-hf-id="hf-v8wy" class="metric-value gold">76%</div>
+          <div data-hf-id="hf-c0lz" class="metric-label">Perangkat Desa Menolak Skema<br data-hf-id="hf-sldv"><span data-hf-id="hf-ejhm" class="meta">Survei CELIOS (n=108)</span></div>
         </div>
         <div data-hf-id="hf-nsoj" class="metric-card red">
-          <div data-hf-id="hf-4r7e" class="metric-value">62,5%</div>
-          <div data-hf-id="hf-0bj8" class="metric-label">Belum Lapor Keuangan<br data-hf-id="hf-sldv"><span data-hf-id="hf-oihx" class="meta">(52.117 dari 83.382)</span></div>
-        </div>
-        <div data-hf-id="hf-swxr" class="metric-card">
-          <div data-hf-id="hf-z3zt" class="metric-value" style="color:var(--accent-gold)">Rp2,7 Jt</div>
-          <div data-hf-id="hf-nycm" class="metric-label">Rata-rata Pendapatan per Koperasi/Tahun<br data-hf-id="hf-qluq"><span data-hf-id="hf-1krq" class="meta">vs biaya Rp3–5 M/unit</span></div>
+          <div data-hf-id="hf-5tey" class="metric-value red">59%</div>
+          <div data-hf-id="hf-0rvj" class="metric-label">Sentimen Negatif Publik<br data-hf-id="hf-qluq"><span data-hf-id="hf-583y" class="meta">Analisis BeData (TikTok)</span></div>
         </div>
       </div>
-
-      <p data-hf-id="hf-l4hf" class="meta" style="margin-top:24px;text-align:center">
+      <p data-hf-id="hf-00bp" class="meta-src" style="margin-top:20px">
         Sumber: Dashboard SIMKOPDES (9 Juli 2026) · Riset CELIOS · BeData Technology
       </p>
     </div>
   </section>
 </div>
 
-<!-- ============================================================ -->
-<!-- SLIDE 3 — Rumusan Masalah (14–21s) -->
-<!-- ============================================================ -->
-<div data-hf-id="hf-uscm" data-composition-id="masalah" data-start="14" data-duration="7" data-label="Rumusan Masalah" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
-  <section data-hf-id="hf-h2n1" class="clip" data-start="14" data-duration="7" data-track-index="1" style="position:absolute;inset:0">
-    <div data-hf-id="hf-70mi" class="slide-content" style="justify-content:flex-start;padding-top:50px">
-
-      <h2 data-hf-id="hf-fzut" class="slide-title" style="margin-bottom:28px">Rumusan Masalah</h2>
-
-      <div data-hf-id="hf-l2zm" class="problem-grid">
-        <div data-hf-id="hf-bv5l" class="problem-card red">
-          <span data-hf-id="hf-dn84" class="problem-num">Masalah 1 · Tata Kelola</span>
-          <div data-hf-id="hf-vasg" class="problem-stat">76%</div>
-          <div data-hf-id="hf-q4tm" class="problem-title">Perangkat Desa Menolak Skema</div>
-          <div data-hf-id="hf-81ar" class="problem-desc">Mayoritas aparatur desa menolak skema pembiayaan Himbara. 65% melihat celah korupsi besar. Kopdes dibentuk top-down via Inpres, tanpa partisipasi warga.</div>
-        </div>
-        <div data-hf-id="hf-b3qu" class="problem-card gold">
-          <span data-hf-id="hf-i2yb" class="problem-num">Masalah 2 · Keuangan</span>
-          <div data-hf-id="hf-b7yo" class="problem-stat" style="color:var(--accent-gold)">91,1%</div>
-          <div data-hf-id="hf-nb2g" class="problem-title">Koperasi Tidak Sehat</div>
-          <div data-hf-id="hf-bq2j" class="problem-desc">Hanya 2,2% koperasi yang sehat. 62,5% belum pernah lapor keuangan. Rp85 M pendapatan nasional dari 31.265 koperasi — sangat kecil vs investasi Rp240 T.</div>
-        </div>
-        <div data-hf-id="hf-z0gq" class="problem-card gold">
-          <span data-hf-id="hf-te3j" class="problem-num">Masalah 3 · Partisipasi</span>
-          <div data-hf-id="hf-0vau" class="problem-stat" style="color:var(--accent-gold)">60,3%</div>
-          <div data-hf-id="hf-30a3" class="problem-title">RAT Rendah &amp; Anggota Pasif</div>
-          <div data-hf-id="hf-uypj" class="problem-desc">22,5% belum RAT. Simpanan wajib rendah (4:1 vs simpanan pokok). Anggota tidak aktif berpartisipasi dalam pengambilan keputusan koperasi.</div>
-        </div>
-        <div data-hf-id="hf-hkm4" class="problem-card">
-          <span data-hf-id="hf-xh03" class="problem-num">Masalah 4 · Kepercayaan</span>
-          <div data-hf-id="hf-ypbw" class="problem-stat" style="color:var(--accent-red)">59%</div>
-          <div data-hf-id="hf-pezk" class="problem-title">Sentimen Negatif Publik</div>
-          <div data-hf-id="hf-ehpg" class="problem-desc">Sentimen negatif di TikTok dominan (59%). Kata kunci: "korupsi", "anggaran", "proyek". Publik tidak percaya pada tata kelola dan implementasi program.</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-</div>
-
-<!-- ============================================================ -->
-<!-- SLIDE 4 — Maksud & Tujuan Hackathon (21–28s) -->
-<!-- ============================================================ -->
-<div data-hf-id="hf-4vu2" data-composition-id="tujuan" data-start="21" data-duration="7" data-label="Maksud & Tujuan" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
-  <section data-hf-id="hf-rbot" class="clip" data-start="21" data-duration="7" data-track-index="1" style="position:absolute;inset:0">
-    <div data-hf-id="hf-7exj" class="slide-content" style="justify-content:flex-start;padding-top:50px">
-
-      <h2 data-hf-id="hf-gspt" class="slide-title" style="margin-bottom:8px">Maksud &amp; Tujuan</h2>
-      <p data-hf-id="hf-yotg" class="subtitle" style="max-width:850px">
-        Hackathon Digital Cooperatives Expo 2026 menjaring talenta digital untuk menciptakan solusi MVP yang menjawab tantangan transformasi koperasi — berintegrasi dengan platform <strong data-hf-id="hf-0cjj">SIMKOPDES</strong>.
-      </p>
-
-      <div data-hf-id="hf-4t33" class="sasaran-grid" style="margin-top:12px">
-        <div data-hf-id="hf-76x2" class="sasaran-card">
-          <span data-hf-id="hf-3ndx" class="sasaran-label">Sasaran 1</span>
-          <h4 data-hf-id="hf-vw6t" class="sasaran-title">Peningkatan Volume Usaha Koperasi</h4>
-          <p data-hf-id="hf-bs4r" style="font-size:13px;color:var(--text-secondary);margin-top:8px;line-height:1.4">
-            Mendorong efisiensi operasional dan perluasan layanan koperasi melalui digitalisasi transaksi dan manajemen inventaris.
-          </p>
-        </div>
-        <div data-hf-id="hf-w3kj" class="sasaran-card green">
-          <span data-hf-id="hf-19t5" class="sasaran-label">Sasaran 2 · <strong data-hf-id="hf-kg25">PILAR 3</strong></span>
-          <h4 data-hf-id="hf-xomn" class="sasaran-title">Peningkatan Keterlibatan Masyarakat</h4>
-          <p data-hf-id="hf-llnp" style="font-size:13px;color:var(--text-secondary);margin-top:8px;line-height:1.4">
-            Partisipasi aktif anggota melalui forum diskusi, e-voting, dan transparansi tata kelola — membangun kembali kepercayaan warga desa.
-          </p>
-        </div>
-        <div data-hf-id="hf-v7xu" class="sasaran-card blue">
-          <span data-hf-id="hf-4fzz" class="sasaran-label">Sasaran 3</span>
-          <h4 data-hf-id="hf-d93n" class="sasaran-title">Optimalisasi Potensi Ekonomi Desa</h4>
-          <p data-hf-id="hf-lz9s" style="font-size:13px;color:var(--text-secondary);margin-top:8px;line-height:1.4">
-            Menghubungkan produk desa dengan pasar, memanfaatkan rantai distribusi pupuk &amp; kebutuhan pokok yang sudah berjalan.
-          </p>
-        </div>
-        <div data-hf-id="hf-lfto" class="sasaran-card gold">
-          <span data-hf-id="hf-5mx2" class="sasaran-label">Sasaran 4</span>
-          <h4 data-hf-id="hf-zqmv" class="sasaran-title">Literasi &amp; Partisipasi Gen Z &amp; Alpha</h4>
-          <p data-hf-id="hf-buts" style="font-size:13px;color:var(--text-secondary);margin-top:8px;line-height:1.4">
-            Menarik generasi muda ke ekosistem koperasi melalui antarmuka digital modern dan relevansi ekonomi kreatif.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-</div>
-
-<!-- ============================================================ -->
-<!-- SLIDE 5 — SIMKOPDES Platform (28–35s) -->
-<!-- ============================================================ -->
-<div data-hf-id="hf-671e" data-composition-id="simkopdes" data-start="28" data-duration="7" data-label="SIMKOPDES" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
-  <section data-hf-id="hf-jrla" class="clip" data-start="28" data-duration="7" data-track-index="1" style="position:absolute;inset:0">
-    <div data-hf-id="hf-7t8k" class="slide-content" style="justify-content:flex-start;padding-top:50px">
-
-      <h2 data-hf-id="hf-iw9b" class="slide-title" style="margin-bottom:8px">SIMKOPDES — Platform Digital</h2>
-      <p data-hf-id="hf-rv1j" class="subtitle" style="max-width:750px">
-        Sistem Informasi Modernisasi Koperasi Desa — ekosistem digital nasional yang menghubungkan <strong data-hf-id="hf-zzkq">83.382 koperasi</strong> dan <strong data-hf-id="hf-f2jo">2+ juta anggota</strong> dalam satu platform terpadu.
-      </p>
-
-      <div data-hf-id="hf-2qna" class="arsitektur-grid" style="margin-top:12px">
-        <div data-hf-id="hf-35lr" class="arsitektur-card">
-          <div data-hf-id="hf-7ipo" class="arsitektur-icon">DB</div>
-          <h4 data-hf-id="hf-384y" class="arsitektur-title">Manajemen Data Koperasi</h4>
-          <p data-hf-id="hf-j896" class="arsitektur-desc">Database terpusat: profiling koperasi, legalitas, anggota, dan dokumen — memastikan akurasi data nasional.</p>
-        </div>
-        <div data-hf-id="hf-eun3" class="arsitektur-card">
-          <div data-hf-id="hf-nend" class="arsitektur-icon" style="color:var(--accent-green)">TX</div>
-          <h4 data-hf-id="hf-blsa" class="arsitektur-title">Transaksi &amp; Keuangan</h4>
-          <p data-hf-id="hf-7hhm" class="arsitektur-desc">Pencatatan transaksi, pinjaman, simpanan anggota, dan laporan keuangan otomatis — real-time, transparan.</p>
-        </div>
-        <div data-hf-id="hf-egc2" class="arsitektur-card">
-          <div data-hf-id="hf-ic8f" class="arsitektur-icon" style="color:var(--accent-gold)">EWS</div>
-          <h4 data-hf-id="hf-pi00" class="arsitektur-title">Early Warning System</h4>
-          <p data-hf-id="hf-10g9" class="arsitektur-desc">Deteksi dini kesehatan keuangan koperasi — peringatan dini sebelum koperasi masuk kategori tidak sehat.</p>
-        </div>
-      </div>
-
-      <div data-hf-id="hf-yoa3" style="margin-top:24px;padding:16px 28px;border:1px dashed var(--border-color);text-align:center;max-width:900px">
-        <p data-hf-id="hf-xyqd" style="font-size:14px;color:var(--text-secondary)">
-          <strong data-hf-id="hf-2hiw" style="color:var(--text-primary)">Integrasi MVP Hackathon:</strong> Solusi digital yang dikembangkan peserta akan terhubung langsung dengan ekosistem SIMKOPDES — memperkuat data-based cooperative governance nasional.
-        </p>
-      </div>
-
-    </div>
-  </section>
-</div>
-
-<!-- ============================================================ -->
-<!-- SLIDE 6 — Data Kopdes (35–42s) -->
-<!-- ============================================================ -->
-<div data-hf-id="hf-eoho" data-composition-id="data" data-start="35" data-duration="7" data-label="Data Kopdes" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
-  <section data-hf-id="hf-xb0g" class="clip" data-start="35" data-duration="7" data-track-index="1" style="position:absolute;inset:0">
-    <div data-hf-id="hf-87jl" class="slide-content" style="justify-content:flex-start;padding-top:50px">
-
-      <h2 data-hf-id="hf-6hy6" class="slide-title" style="margin-bottom:28px">Data Kopdes Merah Putih</h2>
-
-      <div data-hf-id="hf-5pzo" class="metrics-row">
-        <div data-hf-id="hf-djun" class="metric-card">
-          <div data-hf-id="hf-n6cn" class="metric-value" style="color:var(--text-primary)">83.382</div>
-          <div data-hf-id="hf-echz" class="metric-label">Total Koperasi<br data-hf-id="hf-q7jp"><span data-hf-id="hf-cg4z" class="meta">104,2% target</span></div>
-        </div>
-        <div data-hf-id="hf-0h8y" class="metric-card green">
-          <div data-hf-id="hf-8el7" class="metric-value" style="color:var(--accent-green)">Rp56,6 M</div>
-          <div data-hf-id="hf-6xa6" class="metric-label">Nilai Transaksi 2026<br data-hf-id="hf-regs"><span data-hf-id="hf-cfdi" class="meta">53.262 volume transaksi</span></div>
-        </div>
-        <div data-hf-id="hf-d5jm" class="metric-card">
-          <div data-hf-id="hf-bh2d" class="metric-value" style="color:var(--accent-blue)">60.773</div>
-          <div data-hf-id="hf-kani" class="metric-label">Sudah Punya NIB<br data-hf-id="hf-r05r"><span data-hf-id="hf-ddsh" class="meta">72,9% dari total</span></div>
-        </div>
-        <div data-hf-id="hf-cr8l" class="metric-card">
-          <div data-hf-id="hf-yq5r" class="metric-value" style="color:var(--accent-gold)">50.264</div>
-          <div data-hf-id="hf-whbs" class="metric-label">Sudah RAT 2025<br data-hf-id="hf-p0mm"><span data-hf-id="hf-b2ts" class="meta">60,3% dari total</span></div>
-        </div>
-      </div>
-
-      <div data-hf-id="hf-2x25" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;max-width:1200px;margin-top:24px">
-        <div data-hf-id="hf-vve6" style="border:1px solid var(--border-color);padding:20px 24px;background:var(--bg-secondary)">
-          <p data-hf-id="hf-ac5a" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent-red);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Top 3 Provinsi</p>
-          <table data-hf-id="hf-81l9" style="width:100%;font-size:14px;border-collapse:collapse">
-            <tr data-hf-id="hf-p3r7"><td data-hf-id="hf-ko0p" style="padding:6px 0;color:var(--text-secondary)">Jawa Tengah</td><td data-hf-id="hf-smdc" style="padding:6px 0;font-family:var(--font-mono);text-align:right">8.524</td></tr>
-            <tr data-hf-id="hf-ddj7"><td data-hf-id="hf-9dhx" style="padding:6px 0;color:var(--text-secondary);border-top:1px solid var(--border-light)">Jawa Timur</td><td data-hf-id="hf-hyc8" style="padding:6px 0;font-family:var(--font-mono);text-align:right;border-top:1px solid var(--border-light)">8.494</td></tr>
-            <tr data-hf-id="hf-cz86"><td data-hf-id="hf-pwas" style="padding:6px 0;color:var(--text-secondary);border-top:1px solid var(--border-light)">Aceh</td><td data-hf-id="hf-4j7b" style="padding:6px 0;font-family:var(--font-mono);text-align:right;border-top:1px solid var(--border-light)">6.534</td></tr>
-          </table>
-        </div>
-        <div data-hf-id="hf-anjm" style="border:1px solid var(--border-color);padding:20px 24px;background:var(--bg-secondary)">
-          <p data-hf-id="hf-7zrs" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent-gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Dominasi Produk</p>
-          <table data-hf-id="hf-8d35" style="width:100%;font-size:14px;border-collapse:collapse">
-            <tr data-hf-id="hf-ckx5"><td data-hf-id="hf-090d" style="padding:6px 0;color:var(--text-secondary)">Pupuk NPK + Urea</td><td data-hf-id="hf-lvhw" style="padding:6px 0;font-family:var(--font-mono);text-align:right">46,6%</td></tr>
-            <tr data-hf-id="hf-c6m4"><td data-hf-id="hf-jha2" style="padding:6px 0;color:var(--text-secondary);border-top:1px solid var(--border-light)">Minyak Goreng</td><td data-hf-id="hf-iu58" style="padding:6px 0;font-family:var(--font-mono);text-align:right;border-top:1px solid var(--border-light)">6,4%</td></tr>
-            <tr data-hf-id="hf-bsb3"><td data-hf-id="hf-pp4x" style="padding:6px 0;color:var(--text-secondary);border-top:1px solid var(--border-light)">Beras SPHP</td><td data-hf-id="hf-hin1" style="padding:6px 0;font-family:var(--font-mono);text-align:right;border-top:1px solid var(--border-light)">4,3%</td></tr>
-          </table>
-        </div>
-      </div>
-
-      <p data-hf-id="hf-3nrr" class="meta" style="margin-top:20px;text-align:center">
-        Sumber: Dashboard Resmi SIMKOPDES · simkopdes.go.id (9 Juli 2026)
-      </p>
-    </div>
-  </section>
-</div>
-
-<!-- ============================================================ -->
-<!-- SLIDE 7 — KONECT untuk Pilar 3 (42–49s) -->
-<!-- ============================================================ -->
-<div data-hf-id="hf-e8nd" data-composition-id="konect" data-start="42" data-duration="7" data-label="KONECT Pilar 3" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
-  <section data-hf-id="hf-y7zm" class="clip" data-start="42" data-duration="7" data-track-index="1" style="position:absolute;inset:0">
-    <div data-hf-id="hf-8lum" class="slide-content" style="justify-content:flex-start;padding-top:50px">
-
-      <h2 data-hf-id="hf-oncn" class="slide-title" style="margin-bottom:8px">
-        KONECT — <span data-hf-id="hf-dbyu" class="highlight">Pilar 3</span>
+<!-- SLIDE 3 — Pilar 3: Keterlibatan Masyarakat (16–24s) -->
+<div data-hf-id="hf-yu80" data-composition-id="pilar3" data-start="16" data-duration="8" data-label="Pilar 3" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
+  <section data-hf-id="hf-ir00" class="clip" data-start="16" data-duration="8" data-track-index="1">
+    <div data-hf-id="hf-bos1" class="slide-content top" id="pilar3-content">
+      <h2 data-hf-id="hf-mx30" class="slide-title">
+        Pilar 3: <span data-hf-id="hf-i896" class="green">Keterlibatan Masyarakat</span>
       </h2>
-      <p data-hf-id="hf-45a2" class="subtitle" style="max-width:800px">
-        Meningkatkan <strong data-hf-id="hf-ty8i">Keterlibatan Masyarakat</strong> dengan Kopdes melalui platform digital partisipatif yang transparan dan inklusif.
+      <p data-hf-id="hf-bacl" class="subtitle" style="max-width:900px">
+        Akses publik secara real-time terhadap seluruh proses diskusi dan pengambilan keputusan koperasi. Setiap warga bisa <strong data-hf-id="hf-hyen">melihat, berpartisipasi, dan mengawasi</strong>.
       </p>
-
-      <div data-hf-id="hf-zyjr" class="pillar-layout" style="margin-top:8px">
-        <div data-hf-id="hf-gq1y" class="pillar-left">
-          <span data-hf-id="hf-tetd" class="pillar-tag">Solusi untuk Sasaran 2</span>
-          <h3 data-hf-id="hf-zhpw" class="pillar-title">Keterlibatan Masyarakat<br data-hf-id="hf-ombl">dalam Ekosistem Kopdes</h3>
-          <p data-hf-id="hf-r6zj" class="pillar-desc">
-            Data menunjukkan 76% perangkat desa menolak skema dan 59% sentimen negatif publik. KONECT menjawab krisis kepercayaan ini dengan:
-          </p>
+      <div data-hf-id="hf-tjbw" style="display:grid;grid-template-columns:1.4fr 1fr;gap:40px;width:100%;max-width:1200px;align-items:stretch">
+        <div data-hf-id="hf-p91m" class="pillar-card main">
+          <span data-hf-id="hf-p9sx" class="pillar-badge">Solusi Pilar 3</span>
+          <h3 data-hf-id="hf-jht1" class="pillar-title" style="margin-bottom:16px">Keterlibatan Masyarakat dalam Ekosistem Kopdes</h3>
           <div data-hf-id="hf-j3uk" class="pillar-features">
-            <div data-hf-id="hf-xqh9" class="pillar-feature"><strong data-hf-id="hf-dzci">Forum Diskusi Online</strong> — Ruang deliberasi warga untuk membahas kebijakan koperasi secara bottom-up</div>
-            <div data-hf-id="hf-rxss" class="pillar-feature"><strong data-hf-id="hf-d50n">E-Voting Terenkripsi</strong> — Pemilihan pengurus &amp; keputusan strategis yang transparan, mencegah konflik kepentingan kades rangkap ketua</div>
-            <div data-hf-id="hf-zs27" class="pillar-feature"><strong data-hf-id="hf-dhvc">Dashboard Transparansi</strong> — Laporan keuangan real-time, akses terbuka untuk seluruh anggota koperasi</div>
+            <div data-hf-id="hf-ox08" class="pillar-feature"><strong data-hf-id="hf-dzci">Forum Diskusi Online</strong> — Ruang deliberasi warga untuk membahas kebijakan koperasi. Setiap pendapat terdokumentasi dan transparan.</div>
+            <div data-hf-id="hf-rbrp" class="pillar-feature"><strong data-hf-id="hf-1qr9">E-Voting Terverifikasi</strong> — Pemilihan pengurus &amp; keputusan strategis. Setiap suara tercatat, mencegah konflik kepentingan.</div>
+            <div data-hf-id="hf-j4tv" class="pillar-feature"><strong data-hf-id="hf-dhvc">Dashboard Transparansi</strong> — Laporan keuangan real-time, akses terbuka untuk seluruh anggota koperasi.</div>
           </div>
         </div>
-        <div data-hf-id="hf-c1cr" style="border:1px solid var(--border-color);padding:32px;background:var(--bg-secondary);display:flex;flex-direction:column;justify-content:center">
-          <div data-hf-id="hf-o2qq" class="big-stat" style="font-size:48px;text-align:left;color:var(--accent-green)">4 Sasaran</div>
-          <p data-hf-id="hf-8mrb" style="font-size:15px;color:var(--text-secondary);margin-top:12px;line-height:1.5">
-            KONECT berkontribusi langsung pada <strong data-hf-id="hf-4iet">Sasaran 2</strong> (Keterlibatan Masyarakat) dan <strong data-hf-id="hf-6w8z">Sasaran 4</strong> (Literasi Digital Gen Z) dari Hackathon Digital Cooperatives Expo 2026.
+        <div data-hf-id="hf-shj0" style="border:1px solid var(--border-color);background:var(--bg-secondary);padding:32px;display:flex;flex-direction:column;justify-content:center;text-align:center">
+          <p data-hf-id="hf-e8x6" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--text-secondary);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Dampak Langsung</p>
+          <div data-hf-id="hf-pezi" style="display:flex;flex-direction:column;gap:16px">
+            <div data-hf-id="hf-frtr" style="padding:16px;border:1px solid var(--border-color);background:var(--bg-primary)">
+              <span data-hf-id="hf-xoqq" style="font-family:var(--font-mono);font-size:28px;font-weight:700;color:var(--accent-green)">↓</span>
+              <p data-hf-id="hf-sfps" style="font-size:14px;color:var(--text-secondary);margin-top:4px">Risiko konflik kepentingan dan korupsi tata kelola menurun</p>
+            </div>
+            <div data-hf-id="hf-gvfj" style="padding:16px;border:1px solid var(--border-color);background:var(--bg-primary)">
+              <span data-hf-id="hf-yhcs" style="font-family:var(--font-mono);font-size:28px;font-weight:700;color:var(--accent-green)">↑</span>
+              <p data-hf-id="hf-bl6m" style="font-size:14px;color:var(--text-secondary);margin-top:4px">Partisipasi dan rasa memiliki warga terhadap koperasi meningkat</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SLIDE 4 — Pilar 4: Literasi Gen Z (24–32s) -->
+<div data-hf-id="hf-lb7b" data-composition-id="pilar4" data-start="24" data-duration="8" data-label="Pilar 4" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
+  <section data-hf-id="hf-cp51" class="clip" data-start="24" data-duration="8" data-track-index="1">
+    <div data-hf-id="hf-vvem" class="slide-content top" id="pilar4-content">
+      <h2 data-hf-id="hf-cns7" class="slide-title">
+        Pilar 4: <span data-hf-id="hf-yxjc" class="teal">Literasi Gen Z &amp; Alpha</span>
+      </h2>
+      <p data-hf-id="hf-2dsr" class="subtitle" style="max-width:950px">
+        Karena <strong data-hf-id="hf-vo8t">sifatnya publik dan terbuka</strong>, KONECT menjadi sarana literasi — siapapun bisa melihat kapanpun, Kopdes manapun, diskusi apa yang sedang terjadi.
+      </p>
+      <div data-hf-id="hf-vs2l" class="transparancy-layout">
+        <div data-hf-id="hf-clmj" class="transparancy-visual">
+          <div data-hf-id="hf-kh3d" class="glass-panel">
+            <div data-hf-id="hf-sxd4" style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--accent-teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;text-align:center">
+              Pantau Real-Time — Seluruh Kopdes
+            </div>
+            <div data-hf-id="hf-7923" class="glass-row">
+              <span data-hf-id="hf-nsfy" class="kopdes-name">Kopdes Sumber Makmur</span>
+              <span data-hf-id="hf-ir5u" class="topic-label">Diskusi: Alokasi Pupuk</span>
+              <span data-hf-id="hf-jvl0" class="status-badge active">12 suara</span>
+            </div>
+            <div data-hf-id="hf-fs2j" class="glass-row">
+              <span data-hf-id="hf-aqvh" class="kopdes-name">Kopdes Harapan Jaya</span>
+              <span data-hf-id="hf-x32p" class="topic-label">Voting: Pemilihan Ketua</span>
+              <span data-hf-id="hf-cfl5" class="status-badge hot">89 suara</span>
+            </div>
+            <div data-hf-id="hf-fdri" class="glass-row">
+              <span data-hf-id="hf-00pq" class="kopdes-name">Kopdes Sejahtera</span>
+              <span data-hf-id="hf-ua5w" class="topic-label">Forum: Harga Pupuk</span>
+              <span data-hf-id="hf-emiv" class="status-badge active">45 komentar</span>
+            </div>
+            <div data-hf-id="hf-ezgh" class="glass-row">
+              <span data-hf-id="hf-pvbe" class="kopdes-name">Kopdes Tani Maju</span>
+              <span data-hf-id="hf-iaff" class="topic-label">RAT Tahunan 2026</span>
+              <span data-hf-id="hf-d55s" class="status-badge hot">234 anggota</span>
+            </div>
+          </div>
+          <p data-hf-id="hf-lanb" class="meta" style="margin-top:12px;text-align:center">Tampilan publik — tanpa login, tanpa batas</p>
+        </div>
+        <div data-hf-id="hf-qo0n" class="transparancy-right">
+          <span data-hf-id="hf-iacj" class="tag">Nilai Tambah Pilar 4</span>
+          <div data-hf-id="hf-uxco" class="big-num">#LihatKopdes</div>
+          <p data-hf-id="hf-sw4v" class="desc" style="margin-top:8px">
+            Generasi muda belajar bagaimana koperasi desa berjalan secara real-time — dari diskusi pupuk hingga RAT. <strong data-hf-id="hf-5mgb">Literasi terjadi organik</strong> karena semua proses terbuka.
           </p>
-          <div data-hf-id="hf-kv4r" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-color)">
-            <p data-hf-id="hf-wlf9" class="meta" style="text-align:left">
-              Terintegrasi dengan SIMKOPDES · Supabase + FastAPI · ML Relevance Scoring
+          <div data-hf-id="hf-lca0" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border-color)">
+            <p data-hf-id="hf-7tb8" class="meta" style="text-align:left">
+              Gen Z paham tata kelola koperasi tanpa perlu jadi anggota
             </p>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 </div>
 
-<!-- ============================================================ -->
-<!-- SLIDE 8 — Penutup (49–56s) -->
-<!-- ============================================================ -->
-<div data-hf-id="hf-kbqp" data-composition-id="penutup" data-start="49" data-duration="7" data-label="Penutup" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
-  <section data-hf-id="hf-cfpj" class="clip" data-start="49" data-duration="7" data-track-index="1" style="position:absolute;inset:0">
-    <div data-hf-id="hf-8gon" class="slide-content">
+<!-- SLIDE 5 — Konsep Transparansi (32–39s) -->
+<div data-hf-id="hf-5zex" data-composition-id="transparansi" data-start="32" data-duration="7" data-label="Konsep Transparansi" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
+  <section data-hf-id="hf-hn23" class="clip" data-start="32" data-duration="7" data-track-index="1">
+    <div data-hf-id="hf-icau" class="slide-content top" id="transparansi-content">
+      <h2 data-hf-id="hf-br27" class="slide-title">
+        Konsep: <span data-hf-id="hf-85ez" class="teal">Transparansi Total</span>
+      </h2>
+      <p data-hf-id="hf-nx3y" class="subtitle" style="max-width:800px">
+        Bukan sekadar aplikasi diskusi — KONECT adalah <strong data-hf-id="hf-l3g6">jendela keterbukaan</strong> yang mengubah hubungan antara warga, koperasi, dan pemerintah.
+      </p>
+      <div data-hf-id="hf-wy4i" class="benefit-grid">
+        <div data-hf-id="hf-eayk" class="benefit-card">
+          <div data-hf-id="hf-nbyz" class="benefit-icon green">01</div>
+          <h4 data-hf-id="hf-58rg" class="benefit-title">Lihat Semua Diskusi</h4>
+          <p data-hf-id="hf-nlo7" class="benefit-desc">
+            Setiap topik, pendapat, dan voting di Kopdes mana pun bisa dilihat publik secara real-time. Tidak ada diskusi yang terjadi di balik pintu tertutup.
+          </p>
+        </div>
+        <div data-hf-id="hf-ikdy" class="benefit-card teal">
+          <div data-hf-id="hf-6jn7" class="benefit-icon teal">02</div>
+          <h4 data-hf-id="hf-460w" class="benefit-title">Partisipasi Terbuka</h4>
+          <p data-hf-id="hf-1wt1" class="benefit-desc">
+            Warga memberikan pendapat dan voting tanpa takut diintimidasi. Opsi anonim tersedia. Setiap suara berarti dan tercatat.
+          </p>
+        </div>
+        <div data-hf-id="hf-yfoo" class="benefit-card blue">
+          <div data-hf-id="hf-bg86" class="benefit-icon blue">03</div>
+          <h4 data-hf-id="hf-ldms" class="benefit-title">Belajar dari Mana Saja</h4>
+          <p data-hf-id="hf-4fl5" class="benefit-desc">
+            Generasi muda belajar bagaimana Kopdes berjalan — dari pengelolaan pupuk hingga RAT. Koperasi bukan lagi entitas tertutup.
+          </p>
+        </div>
+      </div>
+      <div data-hf-id="hf-0mzh" class="hook-box" style="margin-top:24px">
+        <p data-hf-id="hf-xxxm">
+          <strong data-hf-id="hf-6kyb">Transparansi adalah fondasi kepercayaan.</strong> KONECT membuka semua proses keterlibatan masyarakat dengan Kopdes — kepercayaan publik hanya bisa dibangun dengan keterbukaan total.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SLIDE 6 — Fitur KONECT (39–46s) -->
+<div data-hf-id="hf-jp38" data-composition-id="fitur" data-start="39" data-duration="7" data-label="Fitur" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
+  <section data-hf-id="hf-y63m" class="clip" data-start="39" data-duration="7" data-track-index="1">
+    <div data-hf-id="hf-odd0" class="slide-content top" id="fitur-content">
+      <h2 data-hf-id="hf-umhe" class="slide-title">
+        Tiga Pilar <span data-hf-id="hf-3sf0" class="green">Transparansi</span> KONECT
+      </h2>
+      <p data-hf-id="hf-yr06" class="subtitle" style="max-width:750px">
+        Setiap fitur dirancang untuk satu tujuan: <strong data-hf-id="hf-eyie">membuka proses keterlibatan masyarakat</strong> dengan Kopdes secara total.
+      </p>
+      <div data-hf-id="hf-1352" class="benefit-grid">
+        <div data-hf-id="hf-ftkk" class="benefit-card">
+          <div data-hf-id="hf-34cq" class="benefit-icon green">F</div>
+          <h4 data-hf-id="hf-zs71" class="benefit-title">Forum Diskusi Terstruktur</h4>
+          <p data-hf-id="hf-8wtu" class="benefit-desc">
+            Topik → Pendapat → Komentar. Hierarki jelas. Publik bisa melihat argumen paling relevan via <strong data-hf-id="hf-qtc9">ML Relevance Scoring</strong>.
+          </p>
+        </div>
+        <div data-hf-id="hf-10yi" class="benefit-card teal">
+          <div data-hf-id="hf-owit" class="benefit-icon teal">V</div>
+          <h4 data-hf-id="hf-phm8" class="benefit-title">E-Voting Transparan</h4>
+          <p data-hf-id="hf-7wbd" class="benefit-desc">
+            Setiap pendapat adalah vote (agree/disagree). <strong data-hf-id="hf-kfvt">Hasil real-time</strong> dan bisa diaudit. Tidak ada kecurangan karena semua tercatat.
+          </p>
+        </div>
+        <div data-hf-id="hf-sgyo" class="benefit-card blue">
+          <div data-hf-id="hf-nxn8" class="benefit-icon blue">G</div>
+          <h4 data-hf-id="hf-e5as" class="benefit-title">Node Graph Interaktif</h4>
+          <p data-hf-id="hf-gvif" class="benefit-desc">
+            Visualisasi force-directed graph — <strong data-hf-id="hf-av7w">peta ide dan sentimen</strong> warga. Topik relevan di pusat, outlier tersingkir otomatis.
+          </p>
+        </div>
+      </div>
+      <p data-hf-id="hf-s1nu" class="meta-src" style="margin-top:24px">
+        Teknologi: Flutter · Supabase (PostgreSQL + pgvector) · ML Relevance Scoring (OpenRouter)
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- SLIDE 7 — Penutup (46–53s) -->
+<div data-hf-id="hf-29c6" data-composition-id="penutup" data-start="46" data-duration="7" data-label="Penutup" data-width="1920" data-height="1080" style="position:absolute;width:1920px;height:1080px;overflow:hidden;background:var(--bg-primary)">
+  <section data-hf-id="hf-e3go" class="clip" data-start="46" data-duration="7" data-track-index="1">
+    <div data-hf-id="hf-r5xi" class="slide-content" id="penutup-content">
       <div data-hf-id="hf-keuh" class="cover-box">
+        <div data-hf-id="hf-mgwc" class="cover-logo">K</div>
         <span data-hf-id="hf-kun3" class="cover-tag">Digital Cooperatives Expo 2026</span>
-        <h1 data-hf-id="hf-8uvr" style="font-family:var(--font-sans);font-size:56px;font-weight:700;letter-spacing:-1px;text-align:center;color:var(--text-primary);line-height:1.2;max-width:800px">
-          Membangun Kepercayaan,<br data-hf-id="hf-qsyj">Memperkuat Partisipasi
+        <h1 data-hf-id="hf-8cuq" class="closing-title" style="color:var(--accent-green-dark);font-size:52px">
+          Transparansi adalah<br data-hf-id="hf-q7jp">
+          <span data-hf-id="hf-i7fp" class="teal">Jembatan Kepercayaan</span>
         </h1>
-        <div data-hf-id="hf-8re1" class="cover-divider"></div>
-        <p data-hf-id="hf-gx7n" style="font-size:20px;color:var(--text-secondary);text-align:center;max-width:700px;line-height:1.5">
-          KONECT hadir sebagai solusi digital untuk menghubungkan kebijakan dengan suara warga desa — mewujudkan koperasi yang transparan, partisipatif, dan dipercaya.
+        <div data-hf-id="hf-tzj0" class="cover-divider green"></div>
+        <p data-hf-id="hf-sxdr" class="cover-desc" style="max-width:800px">
+          KONECT hadir untuk membuka seluruh proses keterlibatan masyarakat dengan Kopdes — 
+          dari forum diskusi, e-voting, hingga dashboard transparansi. 
+          <strong data-hf-id="hf-wq1f">Karena kepercayaan publik hanya bisa dibangun dengan keterbukaan total.</strong>
         </p>
         <div data-hf-id="hf-a90p" style="margin-top:36px;display:flex;gap:40px;align-items:center">
           <div data-hf-id="hf-81i5" style="text-align:center">
-            <p data-hf-id="hf-0vxz" style="font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);letter-spacing:1px;text-transform:uppercase">Hackathon</p>
-            <p data-hf-id="hf-auvg" style="font-size:16px;font-weight:600;margin-top:4px">Digital Cooperatives Expo 2026</p>
+            <p data-hf-id="hf-t4qn" style="font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);letter-spacing:1px;text-transform:uppercase">Team</p>
+            <p data-hf-id="hf-brtu" style="font-size:16px;font-weight:600;margin-top:4px">Group 3B</p>
           </div>
           <div data-hf-id="hf-v57a" style="width:1px;height:30px;background:var(--border-color)"></div>
           <div data-hf-id="hf-567l" style="text-align:center">
-            <p data-hf-id="hf-rdyi" style="font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);letter-spacing:1px;text-transform:uppercase">Terima Kasih</p>
-            <p data-hf-id="hf-kyxl" style="font-size:16px;font-weight:600;margin-top:4px">#HackTheCooperatives</p>
+            <p data-hf-id="hf-7ll8" style="font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);letter-spacing:1px;text-transform:uppercase">Tagline</p>
+            <p data-hf-id="hf-boce" style="font-size:16px;font-weight:600;margin-top:4px">#BukaTransparansiKopdes</p>
           </div>
         </div>
       </div>
@@ -709,49 +695,24 @@
   </section>
 </div>
 
-<!-- Master Root -->
-<div data-hf-id="hf-deo2" data-composition-id="root" data-start="0" data-duration="56" style="display:none"></div>
-
-<style>
-  [data-composition-id]:not([data-composition-id="root"]) {
-    position: absolute;
-    top: 0; left: 0;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
-  }
-</style>
-
 <script>
 window.__timelines = window.__timelines || {};
 (function () {
-  var TOTAL = 56;
+  var TOTAL = 53;
   var FPS = 30;
-
   var scenes = [
-    { id: "cover",     start: 0,  end: 7  },
-    { id: "latar",     start: 7,  end: 14 },
-    { id: "masalah",   start: 14, end: 21 },
-    { id: "tujuan",    start: 21, end: 28 },
-    { id: "simkopdes", start: 28, end: 35 },
-    { id: "data",      start: 35, end: 42 },
-    { id: "konect",    start: 42, end: 49 },
-    { id: "penutup",   start: 49, end: 56 }
+    { id: "cover",        start: 0,  end: 8  },
+    { id: "masalah",      start: 8,  end: 16 },
+    { id: "pilar3",       start: 16, end: 24 },
+    { id: "pilar4",       start: 24, end: 32 },
+    { id: "transparansi", start: 32, end: 39 },
+    { id: "fitur",        start: 39, end: 46 },
+    { id: "penutup",      start: 46, end: 53 }
   ];
 
   var root = gsap.timeline({ paused: true });
   root.to("#cover-content", { duration: TOTAL }, 0);
-  window.__timelines["root"] = root;
-
-  var lastActiveId = null;
-
-  var slideDivs = document.querySelectorAll('[data-composition-id]:not([data-composition-id="root"])');
-  for (var i = 0; i < slideDivs.length; i++) {
-    slideDivs[i].style.position = "absolute";
-    slideDivs[i].style.top = "0";
-    slideDivs[i].style.left = "0";
-  }
+  window.__timelines["cover"] = root;
 
   function updateVisibility(t) {
     for (var i = 0; i < scenes.length; i++) {
@@ -762,36 +723,20 @@ window.__timelines = window.__timelines || {};
       el.style.opacity = active ? "1" : "0";
       el.style.visibility = active ? "visible" : "hidden";
       el.style.pointerEvents = active ? "auto" : "none";
-      if (active && lastActiveId !== s.id) {
-        lastActiveId = s.id;
-      }
     }
   }
 
   window.__hfSetTime = updateVisibility;
   updateVisibility(0);
-
-  root.eventCallback("onUpdate", function () {
-    updateVisibility(root.time());
-  });
+  root.eventCallback("onUpdate", function () { updateVisibility(root.time()); });
 
   var totalFrames = TOTAL * FPS;
-  var timelinePayload = { source: "hf-preview", type: "timeline", durationInFrames: totalFrames };
-  timelinePayload.scenes = scenes.map(function (s) {
-    return { id: s.id, start: s.start, duration: s.end - s.start };
-  });
-
-  function postToParent() {
-    try { parent.postMessage(timelinePayload, "*"); } catch (e) {}
-  }
-
-  if (document.readyState === "complete") {
-    setTimeout(postToParent, 300);
-  } else {
-    window.addEventListener("load", function () { setTimeout(postToParent, 300); });
-  }
+  var payload = { source: "hf-preview", type: "timeline", durationInFrames: totalFrames };
+  payload.scenes = scenes.map(function (s) { return { id: s.id, start: s.start, duration: s.end - s.start }; });
+  function postToParent() { try { parent.postMessage(payload, "*"); } catch (e) {} }
+  if (document.readyState === "complete") { setTimeout(postToParent, 300); }
+  else { window.addEventListener("load", function () { setTimeout(postToParent, 300); }); }
 })();
 </script>
-
 </body>
 </html>
