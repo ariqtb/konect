@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- Geolocation: butuh izin lokasi untuk fitur koperasi/room terdekat. -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Konect butuh akses lokasi Anda untuk menampilkan koperasi dan ruang diskusi terdekat di sekitar Anda.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Konect butuh akses lokasi untuk memverifikasi Anda berada di area koperasi saat mengirim pendapat atau komentar.</string>
 </dict>
 </plist>

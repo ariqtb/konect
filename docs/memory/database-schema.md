@@ -15,7 +15,7 @@
 | **Hosting** | Shared Hackathon (34.101.155.200:5432) |
 | **Prefix** | `group3b_` (wajib untuk semua tabel) |
 | **Extension** | `uuid-ossp`, `pgcrypto`, `vector` |
-| **Migration Files** | `database/001_init_schema.sql`, `database/002_relevance_ml.sql` |
+| **Migration Files** | `database/001_init_schema.sql`, `database/002_relevance_ml.sql`, `database/003_create_rooms.sql` |
 
 ---
 

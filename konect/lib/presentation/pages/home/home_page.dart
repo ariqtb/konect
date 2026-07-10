@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants.dart';
+import '../../widgets/location_permission_banner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +28,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Location permission banner — auto-hides saat granted.
+              const LocationPermissionBanner(),
               // MainHeader
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),

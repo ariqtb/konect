@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/cooperative/cooperative_bloc.dart';
+import '../../widgets/location_permission_banner.dart';
 import '../../../data/models/cooperative.dart';
 
 class CooperativePage extends StatefulWidget {
@@ -90,6 +91,8 @@ class _CooperativePageState extends State<CooperativePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Location permission banner — auto-hides saat granted.
+                        const LocationPermissionBanner(),
                         // Search Bar
                         _buildSearchBar(context, state.searchQuery),
                         const SizedBox(height: 16),

@@ -19,6 +19,7 @@ class AppConstants {
   static const String createArticleRoute = '/create-article';
   static const String redeemRoute = '/redeem';
   static const String roomDiscussionRoute = '/room-discussion';
+  static const String createRoomRoute = '/create-room';
 
   // Storage Keys
   static const String tokenKey = 'auth_token';
@@ -28,4 +29,3 @@ class AppConstants {
   static const String baseUrl = 'https://api.konect.id';
   static const Duration apiTimeout = Duration(seconds: 30);
 }
-
