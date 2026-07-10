@@ -21,76 +21,99 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC), // brand.surface
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 100), // Space for bottom nav
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // MainHeader
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
+        children: [
+          // Red Header Background
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 250,
+            child: Container(
+              color: const Color(0xFFDC2626),
+            ),
+          ),
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 100), // Space for bottom nav
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // MainHeader
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Konect',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF0F172A), // Slate-900
-                            letterSpacing: -0.75,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/logo.png',
+                                  height: 32,
+                                  color: Colors.white,
+                                  colorBlendMode: BlendMode.srcIn,
+                                ),
+                                const SizedBox(width: 8),
+                                const Text(
+                                  'Konect',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    letterSpacing: -0.75,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 4),
+                            const Text(
+                              'Akses layanan desa Anda hari ini.',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white70,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 4),
-                        Text(
-                          'Akses layanan desa Anda hari ini.',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF64748B), // Slate-500
+                        GestureDetector(
+                          onTap: () => Navigator.pushNamed(context, '/leaderboard'),
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.15), 
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.emoji_events_outlined, 
+                              color: Colors.white,
+                              size: 22,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, '/leaderboard'),
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white, 
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(
-                          Icons.emoji_events_outlined, 
-                          color: Color(0xFFE21E49),
-                          size: 22,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  ),
 
-              // HeroDiscussion Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Diskusi Koperasi Desa di lokasi anda',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E293B),
-                        height: 1.2,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+                  // HeroDiscussion Section
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Diskusi Koperasi Desa di lokasi anda',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            height: 1.2,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
                     Container(
                       padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(
@@ -114,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFE0E7FF), // indigo-100
+                                  color: const Color(0xFFD1FAE5), // emerald-100
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 child: const Text(
@@ -122,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF4338CA), // indigo-700
+                                    color: Color(0xFF065F46), // emerald-800
                                   ),
                                 ),
                               ),
@@ -182,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFE0E7FF),
+                                  color: const Color(0xFFF1F5F9),
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 child: const Text(
@@ -190,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF4338CA),
+                                    color: Color(0xFF475569),
                                   ),
                                 ),
                               ),
@@ -201,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFE21E49), // brand-secondary red
+                                backgroundColor: const Color(0xFFDC2626), // brand-secondary red
                                 foregroundColor: Colors.white,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
@@ -224,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(width: 8),
-                                  Icon(Icons.arrow_forward_rounded, size: 20),
+                                  Icon(Icons.arrow_forward_outlined, size: 20),
                                 ],
                               ),
                             ),
@@ -260,7 +283,7 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFFE21E49),
+                              color: Color(0xFFDC2626),
                             ),
                           ),
                         ),
@@ -350,7 +373,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(color: Color(0xFFE21E49), width: 2),
+                                borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
                               ),
                             ),
                           ),
@@ -359,7 +382,7 @@ class _HomePageState extends State<HomePage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFE21E49),
+                                backgroundColor: const Color(0xFFDC2626),
                                 foregroundColor: Colors.white,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
@@ -421,7 +444,7 @@ class _HomePageState extends State<HomePage> {
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.login_rounded, size: 20),
+                                  Icon(Icons.login_outlined, size: 20),
                                   SizedBox(width: 8),
                                   Text(
                                     'Gabung Rapat',
@@ -440,7 +463,7 @@ class _HomePageState extends State<HomePage> {
 
               // HistorySection
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   children: [
                     Row(
@@ -455,7 +478,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.tune_rounded, color: Color(0xFF475569)),
+                          constraints: const BoxConstraints(),
+                          padding: EdgeInsets.zero,
+                          icon: const Icon(Icons.tune_outlined, color: Color(0xFF475569)),
                           onPressed: () {},
                         ),
                       ],
@@ -463,24 +488,24 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 16),
                     _buildHistoryItem(
                       icon: Icons.volume_up_outlined,
-                      iconBg: const Color(0xFFE0E7FF),
-                      iconColor: const Color(0xFF4338CA),
+                      iconBg: const Color(0xFFF1F5F9),
+                      iconColor: const Color(0xFF1E293B),
                       title: 'Musyawarah Pembangunan Jalan',
                       subtitle: '12 Oktober 2024 • 14:00 WIB',
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     _buildHistoryItem(
                       icon: Icons.local_shipping_outlined,
-                      iconBg: const Color(0xFFD1FAE5),
-                      iconColor: const Color(0xFF059669),
+                      iconBg: const Color(0xFFF1F5F9),
+                      iconColor: const Color(0xFF1E293B),
                       title: 'Distribusi Pupuk Subsidi',
                       subtitle: '08 Oktober 2024 • 09:30 WIB',
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     _buildHistoryItem(
                       icon: Icons.groups_outlined,
-                      iconBg: const Color(0xFFFFE4E6),
-                      iconColor: const Color(0xFFE21E49),
+                      iconBg: const Color(0xFFF1F5F9),
+                      iconColor: const Color(0xFF1E293B),
                       title: 'Rapat Karang Taruna',
                       subtitle: '01 Oktober 2024 • 19:00 WIB',
                     ),
@@ -490,6 +515,8 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+      ),
+        ],
       ),
     );
   }
@@ -593,7 +620,7 @@ class _HomePageState extends State<HomePage> {
       },
       borderRadius: BorderRadius.circular(24),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
           color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(24),
@@ -634,7 +661,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right_rounded, color: Color(0xFF94A3B8), size: 20),
+            const Icon(Icons.chevron_right_outlined, color: Color(0xFF94A3B8), size: 20),
           ],
         ),
       ),

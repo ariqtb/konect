@@ -36,7 +36,7 @@ class _VotingPageState extends State<VotingPage> {
       body: BlocBuilder<VotingBloc, VotingState>(
         builder: (context, state) {
           if (state is VotingLoading || state is VotingInitial) {
-            return const Center(child: CircularProgressIndicator(color: Color(0xFFE21E49)));
+            return const Center(child: CircularProgressIndicator(color: Color(0xFFDC2626)));
           }
           if (state is VotingError) {
             return Center(
@@ -46,7 +46,7 @@ class _VotingPageState extends State<VotingPage> {
                   const Icon(
                     Icons.error_outline,
                     size: 48,
-                    color: Color(0xFFE21E49),
+                    color: Color(0xFFDC2626),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -60,8 +60,8 @@ class _VotingPageState extends State<VotingPage> {
                   const SizedBox(height: 16),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: const Color(0xFFE21E49),
-                      side: const BorderSide(color: Color(0xFFE21E49)),
+                      foregroundColor: const Color(0xFFDC2626),
+                      side: const BorderSide(color: Color(0xFFDC2626)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24),
                       ),
@@ -108,7 +108,7 @@ class _VotingPageState extends State<VotingPage> {
               );
             }
             return RefreshIndicator(
-              color: const Color(0xFFE21E49),
+              color: const Color(0xFFDC2626),
               onRefresh: () async {
                 context
                     .read<VotingBloc>()
@@ -173,7 +173,7 @@ class _VotingCard extends StatelessWidget {
                       minHeight: 6,
                       backgroundColor: const Color(0xFFF1F5F9),
                       valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color(0xFFE21E49),
+                        Color(0xFFDC2626),
                       ),
                     ),
                   ),
@@ -198,7 +198,7 @@ class _VotingCard extends StatelessWidget {
                     icon: Icons.thumb_up_outlined,
                     count: item.agreeCount,
                     isActive: item.userReaction == 'agree',
-                    activeColor: const Color(0xFFE21E49),
+                    activeColor: const Color(0xFFDC2626),
                     onTap: () => context.read<VotingBloc>().add(
                           VoteCast(id: item.id, reaction: 'agree'),
                         ),

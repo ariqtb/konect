@@ -154,7 +154,7 @@ class _MainShellPageState extends State<MainShellPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: const Color(0xFFE21E49).withOpacity(0.08),
+              color: const Color(0xFFDC2626).withOpacity(0.08),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -162,7 +162,7 @@ class _MainShellPageState extends State<MainShellPage> {
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFE21E49),
+                color: Color(0xFFDC2626),
               ),
             ),
           ),
@@ -256,7 +256,7 @@ class _MainShellPageState extends State<MainShellPage> {
 
   Widget _buildNavItem(int index, IconData icon, String label) {
     final isSelected = _currentIndex == index;
-    const Color activeColor = Color(0xFFE21E49);
+    const Color activeColor = Color(0xFFDC2626);
     const Color inactiveColor = Color(0xFF94A3B8);
 
     return InkWell(
@@ -297,11 +297,11 @@ class _MainShellPageState extends State<MainShellPage> {
         width: 52,
         height: 52,
         decoration: const BoxDecoration(
-          color: Color(0xFFE21E49),
+          color: Color(0xFFDC2626),
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: Color(0xFFE21E49),
+              color: Color(0xFFDC2626),
               blurRadius: 10,
               offset: Offset(0, 4),
             ),

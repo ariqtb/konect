@@ -51,7 +51,7 @@ class _CreateArticlePageState extends State<CreateArticlePage> {
               height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFFE21E49).withOpacity(0.2), width: 2),
+                border: Border.all(color: const Color(0xFFDC2626).withOpacity(0.2), width: 2),
                 image: const DecorationImage(
                   image: NetworkImage(
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuBu6qxg71ByeRLu4qEJ_GffHdFXpB4dSHCScRJm7-Hsye7Tgqc6FVy-x1c2guOecboeweEkrgFjgtJXzqQ2CBPnRcHaAqYva7YaU9z4u8bgAD0Lyyj77at8fdg6oKjClIL6gjmsT-8SBcxvVFhT237JcL-_ebsq5HhpMNqcpiJP2VWQD9Z5OSOwGe4lrhc8fF62odGMMXX5iEJi7cvGbF1MQCr3KijpvKd3wkCH168ZzZO2SEnXuwNgKQ',
@@ -167,7 +167,7 @@ class _CreateArticlePageState extends State<CreateArticlePage> {
                               ),
                               child: const Icon(
                                 Icons.camera_alt_outlined,
-                                color: Color(0xFFE21E49),
+                                color: Color(0xFFDC2626),
                                 size: 24,
                               ),
                             ),
@@ -213,7 +213,7 @@ class _CreateArticlePageState extends State<CreateArticlePage> {
           child: CustomButton(
             text: 'Kirim Update',
             icon: Icons.send,
-            backgroundColor: const Color(0xFFE21E49),
+            backgroundColor: const Color(0xFFDC2626),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 ScaffoldMessenger.of(context).showSnackBar(
