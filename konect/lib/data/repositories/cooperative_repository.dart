@@ -8,17 +8,26 @@ class CooperativeRepository {
       final from = page * limit;
       final to = from + limit - 1;
       
-      final response = await SupabaseService().client.from('profil_koperasi').select().range(from, to);
+      final response = await SupabaseService().client
+          .from('gerai_koperasi')
+          .select('*, profil_koperasi(*)')
+          .range(from, to);
       
       return (response as List<dynamic>).map((data) {
+        final profil = data['profil_koperasi'] as Map<String, dynamic>?;
+        final name = profil?['nama_koperasi']?.toString() ?? 'Koperasi Tanpa Nama';
+        final category = profil?['kategori_usaha']?.toString() ?? 'Umum';
+        final address = profil?['alamat_lengkap']?.toString() ?? 'Alamat tidak tersedia';
+        
         return CooperativeItem(
           id: data['koperasi_ref']?.toString() ?? '',
-          name: data['nama_koperasi']?.toString() ?? 'Koperasi Tanpa Nama',
-          category: data['kategori_usaha']?.toString() ?? 'Umum',
-          isOpen: data['status_registrasi'] == 'Approved',
-          address: data['alamat_lengkap']?.toString() ?? 'Alamat tidak tersedia',
-          distance: 'Koperasi Terdekat',
-          imageUrl: 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(data['nama_koperasi']?.toString() ?? 'K')}&background=random',
+          name: name,
+          category: category,
+          isOpen: data['status_gerai'] == 'Aktif',
+          address: address,
+          distance: 'Gerai Koperasi',
+          imageUrl: data['foto_gerai']?.toString() ?? 
+              'https://ui-avatars.com/api/?name=${Uri.encodeComponent(name)}&background=random',
         );
       }).toList();
     } catch (e) {
