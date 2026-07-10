@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF8FF), // brand.surface
+      backgroundColor: const Color(0xFFF8FAFC), // brand.surface
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.only(bottom: 100), // Space for bottom nav
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                           border: Border.all(color: const Color(0xFFE2E8F0)),
                         ),
                         child: const Icon(
-                          Icons.person_pin_outlined, // non-generic profile icon
+                          Icons.person_pin_outlined, 
                           color: Color(0xFF475569),
                           size: 22,
                         ),
@@ -516,7 +516,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    const Icon(Icons.map_pin_rounded ?? Icons.location_on_outlined, size: 14, color: Color(0xFF94A3B8)),
+                    const Icon(Icons.location_on_outlined, size: 14, color: Color(0xFF94A3B8)),
                     const SizedBox(width: 4),
                     Text(
                       distance,

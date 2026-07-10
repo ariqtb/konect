@@ -5,8 +5,12 @@ class AppConstants {
 
   // Routes
   static const String mainShellRoute = '/';
+  static const String loginRoute = '/login';
   static const String homeRoute = '/home';
   static const String koperasiRoute = '/koperasi';
+  static const String cooperativeRoute = '/cooperative';
+  static const String leaderboardRoute = '/leaderboard';
+  static const String cooperativeDetailRoute = '/cooperative-detail';
   static const String voucherRoute = '/voucher';
   static const String profileRoute = '/profile';
   static const String forumRoute = '/forum';

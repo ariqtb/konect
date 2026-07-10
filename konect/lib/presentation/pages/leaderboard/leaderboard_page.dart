@@ -20,7 +20,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
   @override
   Widget build(BuildContext context) {
     // Design System Tokens (from documents/design.md)
-    const Color colorSurface = Color(0xFFFAF8FF);
+    const Color colorSurface = Color(0xFFF8FAFC);
     const Color colorOnSurface = Color(0xFF111C2D);
     const Color colorSecondaryContainer = Color(0xFFE21E49); // Rose / Red Accent
 

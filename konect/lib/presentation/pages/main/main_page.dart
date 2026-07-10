@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../blocs/auth/auth_bloc.dart';
 import '../../../core/constants.dart';
+import '../koperasi/koperasi_page.dart';
+import '../voucher/voucher_page.dart';
+import '../profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -21,28 +26,48 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF8FF),
+      backgroundColor: const Color(0xFFF8FAFC),
       body: Stack(
         children: [
-          // Scrollable Content
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.only(bottom: 100.0), // Padding to avoid overlap with bottom navigation bar
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildHeader(),
-                  const SizedBox(height: 24),
-                  _buildHeroDiscussion(),
-                  const SizedBox(height: 32),
-                  _buildNearestCoop(),
-                  const SizedBox(height: 32),
-                  _buildJoinRoom(),
-                  const SizedBox(height: 32),
-                  _buildHistorySection(),
-                ],
+          IndexedStack(
+            index: _currentIndex,
+            children: [
+              // Index 0: Home Content
+              SafeArea(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(bottom: 100.0), // Padding to avoid overlap with bottom navigation bar
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildHeader(),
+                      const SizedBox(height: 24),
+                      _buildHeroDiscussion(),
+                      const SizedBox(height: 32),
+                      _buildNearestCoop(),
+                      const SizedBox(height: 32),
+                      _buildJoinRoom(),
+                      const SizedBox(height: 32),
+                      _buildHistorySection(),
+                    ],
+                  ),
+                ),
               ),
-            ),
+              // Index 1: Koperasi
+              const Padding(
+                padding: EdgeInsets.only(bottom: 90.0),
+                child: KoperasiPage(),
+              ),
+              // Index 2: Voucher
+              const Padding(
+                padding: EdgeInsets.only(bottom: 90.0),
+                child: VoucherPage(),
+              ),
+              // Index 3: Profile
+              const Padding(
+                padding: EdgeInsets.only(bottom: 90.0),
+                child: ProfilePage(),
+              ),
+            ],
           ),
           // Floating Translucent Bottom Navigation Bar
           Positioned(
@@ -50,6 +75,15 @@ class _MainPageState extends State<MainPage> {
             right: 0,
             bottom: 0,
             child: _buildBottomNavigationBar(),
+          ),
+          // Floating Center Action Button (Centering horizontally, non-clipping)
+          Positioned(
+            bottom: 50,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: _buildCenterActionButton(),
+            ),
           ),
         ],
       ),
@@ -93,12 +127,12 @@ class _MainPageState extends State<MainPage> {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: const Color(0xFFF2F3FF),
+              color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFCBD5E1)),
+              border: Border.all(color: Colors.black, width: 1.5),
             ),
             child: IconButton(
-              icon: const Icon(Icons.person_outline, color: Color(0xFF111C2D)),
+              icon: const Icon(Icons.emoji_events_outlined, color: Colors.black),
               onPressed: () {
                 Navigator.pushNamed(context, AppConstants.leaderboardRoute);
               },
@@ -127,7 +161,7 @@ class _MainPageState extends State<MainPage> {
           const SizedBox(height: 16),
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xFFF2F3FF),
+              color: Colors.white,
               borderRadius: BorderRadius.circular(32),
               border: Border.all(color: const Color(0xFFE2E8F0)),
               boxShadow: [
@@ -241,7 +275,11 @@ class _MainPageState extends State<MainPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppConstants.forumRoute);
+                      Navigator.pushNamed(
+                        context,
+                        AppConstants.roomDiscussionRoute,
+                        arguments: 'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik',
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFE21E49),
@@ -355,8 +393,16 @@ class _MainPageState extends State<MainPage> {
             itemCount: coops.length,
             itemBuilder: (context, index) {
               final coop = coops[index];
-              return Container(
-                width: 280,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    AppConstants.cooperativeDetailRoute,
+                    arguments: coop['title']!,
+                  );
+                },
+                child: Container(
+                  width: 280,
                 margin: const EdgeInsets.only(right: 16),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -456,6 +502,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ],
                 ),
+              ),
               );
             },
           ),
@@ -483,7 +530,7 @@ class _MainPageState extends State<MainPage> {
           Container(
             padding: const EdgeInsets.all(28.0),
             decoration: BoxDecoration(
-              color: const Color(0xFFF2F3FF),
+              color: Colors.white,
               borderRadius: BorderRadius.circular(32),
               border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
@@ -512,9 +559,11 @@ class _MainPageState extends State<MainPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_roomCodeController.text.isNotEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Bergabung ke ruang: ${_roomCodeController.text}')),
+                      if (_roomCodeController.text.trim().isNotEmpty) {
+                        Navigator.pushNamed(
+                          context,
+                          AppConstants.roomDiscussionRoute,
+                          arguments: _roomCodeController.text.trim(),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -614,15 +663,17 @@ class _MainPageState extends State<MainPage> {
               final item = historyItems[index];
               return InkWell(
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Membuka riwayat: ${item['title']}')),
+                  Navigator.pushNamed(
+                    context,
+                    AppConstants.roomDiscussionRoute,
+                    arguments: item['title'] as String,
                   );
                 },
                 borderRadius: BorderRadius.circular(24),
                 child: Container(
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF2F3FF).withOpacity(0.5),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(color: const Color(0xFFF1F5F9)),
                   ),
@@ -704,7 +755,7 @@ class _MainPageState extends State<MainPage> {
             children: [
               _buildNavItem(Icons.home, 'Home', 0),
               _buildNavItem(Icons.storefront, 'Co-op', 1),
-              _buildCenterActionButton(),
+              const SizedBox(width: 64),
               _buildNavItem(Icons.confirmation_number_outlined, 'Voucher', 2),
               _buildNavItem(Icons.person_outline, 'Profile', 3),
             ],
@@ -724,13 +775,6 @@ class _MainPageState extends State<MainPage> {
         setState(() {
           _currentIndex = index;
         });
-        if (index == 1) {
-          Navigator.pushNamed(context, AppConstants.cooperativeRoute);
-        } else if (index == 2 || index == 3) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Navigasi ke $label')),
-          );
-        }
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -757,39 +801,282 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildCenterActionButton() {
+    final authState = context.read<AuthBloc>().state;
+    final bool isLoggedIn = authState is AuthAuthenticated;
+    final bool isKopdes = isLoggedIn && (authState.user.role == 'kopdes' || authState.user.role == 'admin');
+
     return Container(
-      transform: Matrix4.translationValues(0, -12, 0),
-      child: Container(
-        width: 56,
-        height: 56,
-        decoration: BoxDecoration(
-          color: const Color(0xFFE21E49),
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.white, width: 4),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFFE21E49).withOpacity(0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            customBorder: const CircleBorder(),
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Menu Tambah / Aksi Cepat')),
-              );
-            },
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 28,
-            ),
+      width: 64,
+      height: 64,
+      decoration: BoxDecoration(
+        color: const Color(0xFFE21E49),
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFE21E49).withOpacity(0.3),
+            blurRadius: 16,
+            offset: const Offset(0, 8),
+          ),
+        ],
+        border: Border.all(color: Colors.white, width: 4),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          customBorder: const CircleBorder(),
+          onTap: () {
+            if (isKopdes) {
+              _showAdminAddOptionsModal(context);
+            } else {
+              _showRoomHistoryModal(context);
+            }
+          },
+          child: Icon(
+            isKopdes ? Icons.add : Icons.history_rounded,
+            color: Colors.white,
+            size: 28,
           ),
         ),
+      ),
+    );
+  }
+
+  void _showAdminAddOptionsModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFD1D5DB),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'PILIH AKSI',
+                style: TextStyle(
+                  fontFamily: 'Outfit',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.0,
+                  color: Color(0xFF64748B),
+                ),
+              ),
+              const SizedBox(height: 20),
+              ListTile(
+                leading: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE21E49).withOpacity(0.08),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.forum_outlined, color: Color(0xFFE21E49)),
+                ),
+                title: const Text(
+                  'Buat Room Diskusi Baru',
+                  style: TextStyle(fontFamily: 'Outfit', fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                subtitle: const Text('Mulai sesi musyawarah warga baru di canvas'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/create-room');
+                },
+              ),
+              const Divider(height: 24),
+              ListTile(
+                leading: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E293B).withOpacity(0.08),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.article_outlined, color: Color(0xFF1E293B)),
+                ),
+                title: const Text(
+                  'Kirim Progress Baru (Artikel)',
+                  style: TextStyle(fontFamily: 'Outfit', fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                subtitle: const Text('Posting berita atau update perkembangan koperasi'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, AppConstants.createArticleRoute);
+                },
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showRoomHistoryModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.5,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Pull bar
+              const SizedBox(height: 12),
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD1D5DB),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Title
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  'Riwayat Room Diskusi',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1E293B),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 6),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  'Daftar ruang diskusi yang pernah Anda masuki dari perangkat ini.',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF64748B),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // History list
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  children: [
+                    _buildHistoryItemModal(
+                      code: '09IO08',
+                      title: 'Barang Belanja Koperasi Periode Juli',
+                      date: 'Hari ini, 14:20',
+                    ),
+                    const SizedBox(height: 10),
+                    _buildHistoryItemModal(
+                      code: '12TR90',
+                      title: 'Diskusi Rencana Panel Surya Dusun 2',
+                      date: 'Kemarin, 09:15',
+                    ),
+                    const SizedBox(height: 10),
+                    _buildHistoryItemModal(
+                      code: '04OP55',
+                      title: 'Evaluasi Pembagian Sembako Murah',
+                      date: '3 Juli 2026',
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildHistoryItemModal({
+    required String code,
+    required String title,
+    required String date,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8FAFC),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE21E49).withOpacity(0.08),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              code,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFE21E49),
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF1E293B),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  date,
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF94A3B8),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xFF64748B), size: 18),
+            onPressed: () {
+              Navigator.pop(context); // Close sheet
+              Navigator.pushNamed(
+                context,
+                AppConstants.roomDiscussionRoute,
+                arguments: title,
+              );
+            },
+          ),
+        ],
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'core/constants.dart';
 import 'routes.dart';
 import 'presentation/blocs/auth/auth_bloc.dart';
 import 'presentation/blocs/voting/voting_bloc.dart';
+import 'presentation/blocs/forum/forum_bloc.dart';
 import 'presentation/blocs/cooperative/cooperative_bloc.dart';
 import 'presentation/blocs/cooperative/cooperative_detail_bloc.dart';
 import 'presentation/blocs/leaderboard/leaderboard_bloc.dart';
@@ -15,6 +16,11 @@ import 'presentation/pages/main/main_page.dart';
 import 'presentation/pages/cooperative/cooperative_page.dart';
 import 'presentation/pages/leaderboard/leaderboard_page.dart';
 import 'presentation/pages/cooperative_detail/cooperative_detail_page.dart';
+import 'presentation/pages/voucher/voucher_page.dart';
+import 'presentation/pages/profile/profile_page.dart';
+import 'presentation/pages/room/room_discussion_page.dart';
+import 'presentation/pages/room/create_room_page.dart';
+import 'presentation/pages/reedem/redeem_voucher_page.dart';
 
 class KonectApp extends StatelessWidget {
   const KonectApp({super.key});
@@ -40,7 +46,7 @@ class KonectApp extends StatelessWidget {
         onGenerateRoute: (settings) {
           switch (settings.name) {
             case AppConstants.loginRoute:
-              return MaterialPageRoute(builder: (_) => const LoginPage());
+              return MaterialPageRoute(builder: (_) => const MainPage());
             case AppConstants.homeRoute:
               return MaterialPageRoute(builder: (_) => const MainPage());
             case AppConstants.forumRoute:
@@ -56,9 +62,22 @@ class KonectApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => CooperativeDetailPage(coopId: coopId),
               );
+            case AppConstants.voucherRoute:
+              return MaterialPageRoute(builder: (_) => const VoucherPage());
+            case AppConstants.profileRoute:
+              return MaterialPageRoute(builder: (_) => const ProfilePage());
+            case AppConstants.roomDiscussionRoute:
+              return MaterialPageRoute(
+                builder: (_) => const RoomDiscussionPage(),
+                settings: settings,
+              );
+            case AppConstants.redeemRoute:
+              return MaterialPageRoute(builder: (_) => const RedeemVoucherPage());
+            case '/create-room':
+              return MaterialPageRoute(builder: (_) => const CreateRoomPage());
             default:
               return MaterialPageRoute(
-                builder: (_) => const LoginPage(),
+                builder: (_) => const MainPage(),
               );
           }
         },

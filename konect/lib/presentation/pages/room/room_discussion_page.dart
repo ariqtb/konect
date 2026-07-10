@@ -153,16 +153,16 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
     final double canvasWidth = screenWidth.clamp(320.0, 480.0);
 
     // Coordinate layout math
-    double currentY = 180.0; // Y offset starting point
+    double currentY = 220.0; // Y offset starting point
     final List<CanvasConnection> connections = [];
     final List<Widget> positionedWidgets = [];
 
     // Center Topic coordinates
-    const double topicX = 40.0;
+    const double topicWidth = 340.0;
+    final double topicX = (canvasWidth - topicWidth) / 2;
     const double topicY = 20.0;
-    const double topicWidth = 280.0;
-    const double topicHeight = 110.0;
-    const Offset topicBottomCenter = Offset(topicX + topicWidth / 2, topicY + topicHeight);
+    const double topicHeight = 150.0;
+    final Offset topicBottomCenter = Offset(topicX + topicWidth / 2, topicY + topicHeight);
 
     // Topic Card Widget
     positionedWidgets.add(
@@ -171,44 +171,72 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
         top: topicY,
         width: topicWidth,
         height: topicHeight,
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 15,
-                offset: const Offset(0, 4),
-              ),
-            ],
-            border: Border.all(color: const Color(0xFFF1F5F9)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Topik Rapat',
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.3,
-                  color: Color(0xFFE21E49),
+        child: GestureDetector(
+          onTap: () => _showTopicDetailModal(context, topic),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.06),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8),
                 ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                topic,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF1E293B),
+              ],
+              border: Border.all(color: const Color(0xFFE2E8F0)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'TOPIK RAPAT',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                        color: Color(0xFFE21E49),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF1F5F9),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.info_outline, size: 10, color: Color(0xFF64748B)),
+                          SizedBox(width: 4),
+                          Text(
+                            'Detail',
+                            style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: Color(0xFF64748B)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+                const SizedBox(height: 10),
+                Expanded(
+                  child: Text(
+                    topic,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1E293B),
+                      height: 1.3,
+                    ),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -376,9 +404,9 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
     final double totalCanvasHeight = currentY + 120.0;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F6F2),
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        backgroundColor: Colors.white.withOpacity(0.85),
+        backgroundColor: Colors.white,
         elevation: 1,
         shadowColor: Colors.black.withOpacity(0.05),
         centerTitle: true,
@@ -776,6 +804,119 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
           },
         );
       },
+    );
+  }
+
+  void _showTopicDetailModal(BuildContext context, String topic) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.5,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Pull bar
+              const SizedBox(height: 12),
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD1D5DB),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              
+              // Content
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE21E49).withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Text(
+                        'TOPIK AKTIF',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFE21E49),
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      topic,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF1E293B),
+                        height: 1.3,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Divider(color: Color(0xFFE2E8F0)),
+                    const SizedBox(height: 16),
+                    _buildModalInfoRow(Icons.storefront_outlined, 'Penyelenggara', 'Koperasi Sukatani Mandiri'),
+                    const SizedBox(height: 12),
+                    _buildModalInfoRow(Icons.access_time, 'Waktu', 'Hari ini, 14:00 WIB - Selesai'),
+                    const SizedBox(height: 12),
+                    _buildModalInfoRow(Icons.description_outlined, 'Deskripsi', 'Rapat koordinasi warga desa untuk menampung ide, pendapat, dan usulan pemanfaatan serta peningkatan alokasi ketahanan pangan desa Sukatani.'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildModalInfoRow(IconData icon, String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, size: 18, color: const Color(0xFF94A3B8)),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFF94A3B8),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Color(0xFF334155),
+                  height: 1.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
