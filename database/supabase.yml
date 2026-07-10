@@ -677,3 +677,7 @@ services:
 volumes:
   db-config:
   deno-cache:
+
+networks:
+  traefik:
+    driver: bridge

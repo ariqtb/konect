@@ -86,7 +86,8 @@ class AppTheme {
         ),
       ),
       cardTheme: CardThemeData(
-        elevation: 2,
+        elevation: 0,
+        color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32), // large components rounded-4xl = 32px
         ),
@@ -134,3 +135,4 @@ class AppTheme {
     );
   }
 }
+

@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
-import '../presentation/pages/article/article_detail_page.dart';
-import '../presentation/pages/article/create_article_page.dart';
-import '../presentation/pages/reedem/redeem_voucher_page.dart';
-import '../presentation/pages/room/room_discussion_page.dart';
-import '../presentation/pages/main_shell_page.dart';
+import '../presentation/pages/auth/login_page.dart';
+import '../presentation/pages/forum/forum_page.dart';
+import '../presentation/pages/voting/voting_page.dart';
+import '../presentation/pages/main/main_page.dart';
+import '../presentation/pages/cooperative/cooperative_page.dart';
+import '../presentation/pages/leaderboard/leaderboard_page.dart';
+import '../presentation/pages/cooperative_detail/cooperative_detail_page.dart';
 import '../core/constants.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppConstants.mainShellRoute:
-        return MaterialPageRoute(builder: (_) => const MainShellPage());
-      case AppConstants.articleDetailRoute:
-        return MaterialPageRoute(builder: (_) => const ArticleDetailPage());
-      case AppConstants.createArticleRoute:
-        return MaterialPageRoute(builder: (_) => const CreateArticlePage());
-      case AppConstants.redeemRoute:
-        return MaterialPageRoute(builder: (_) => const RedeemVoucherPage());
-      case AppConstants.roomDiscussionRoute:
-        return MaterialPageRoute(builder: (_) => const RoomDiscussionPage());
+      case AppConstants.loginRoute:
+        return MaterialPageRoute(builder: (_) => const LoginPage());
+      case AppConstants.homeRoute:
+        return MaterialPageRoute(builder: (_) => const MainPage());
+      case AppConstants.forumRoute:
+        return MaterialPageRoute(builder: (_) => const ForumPage());
+      case AppConstants.votingRoute:
+        return MaterialPageRoute(builder: (_) => const VotingPage());
+      case AppConstants.cooperativeRoute:
+        return MaterialPageRoute(builder: (_) => const CooperativePage());
+      case AppConstants.leaderboardRoute:
+        return MaterialPageRoute(builder: (_) => const LeaderboardPage());
+      case AppConstants.cooperativeDetailRoute:
+        final coopId = settings.arguments as String? ?? '';
+        return MaterialPageRoute(
+          builder: (_) => CooperativeDetailPage(coopId: coopId),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
