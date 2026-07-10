@@ -192,9 +192,8 @@ class _VoucherPageState extends State<VoucherPage> {
               Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFFF1F5F9),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.brandRed, width: 1.5),
                 ),
                 child: Row(
                   children: [
@@ -226,21 +225,15 @@ class _VoucherPageState extends State<VoucherPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: isSelected ? AppColors.brandRed : Colors.white,
+                            color: isSelected ? AppColors.brandRed : const Color(0xFFF1F5F9),
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: isSelected 
-                                  ? AppColors.brandRed 
-                                  : AppColors.brandRed.withValues(alpha: 0.3),
-                              width: 1.5,
-                            ),
                           ),
                           child: Text(
                             cat,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color: isSelected ? Colors.white : AppColors.brandRed,
+                              color: isSelected ? Colors.white : const Color(0xFF475569),
                             ),
                           ),
                         ),
@@ -503,7 +496,7 @@ class _VoucherPageState extends State<VoucherPage> {
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: isActive ? Colors.white : AppColors.brandRed,
+              color: isActive ? Colors.white : const Color(0xFF475569),
             ),
           ),
         ),

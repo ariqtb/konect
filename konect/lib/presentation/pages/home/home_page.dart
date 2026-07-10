@@ -440,7 +440,7 @@ class _HomePageState extends State<HomePage> {
 
               // HistorySection
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   children: [
                     Row(
@@ -455,6 +455,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         IconButton(
+                          constraints: const BoxConstraints(),
+                          padding: EdgeInsets.zero,
                           icon: const Icon(Icons.tune_outlined, color: Color(0xFF475569)),
                           onPressed: () {},
                         ),
@@ -468,7 +470,7 @@ class _HomePageState extends State<HomePage> {
                       title: 'Musyawarah Pembangunan Jalan',
                       subtitle: '12 Oktober 2024 • 14:00 WIB',
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     _buildHistoryItem(
                       icon: Icons.local_shipping_outlined,
                       iconBg: const Color(0xFFF1F5F9),
@@ -476,7 +478,7 @@ class _HomePageState extends State<HomePage> {
                       title: 'Distribusi Pupuk Subsidi',
                       subtitle: '08 Oktober 2024 • 09:30 WIB',
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     _buildHistoryItem(
                       icon: Icons.groups_outlined,
                       iconBg: const Color(0xFFF1F5F9),
@@ -593,7 +595,7 @@ class _HomePageState extends State<HomePage> {
       },
       borderRadius: BorderRadius.circular(24),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
           color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(24),

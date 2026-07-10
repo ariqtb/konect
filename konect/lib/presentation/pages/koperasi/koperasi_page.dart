@@ -133,15 +133,8 @@ class _KoperasiPageState extends State<KoperasiPage> {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? const Color(0xFFDC2626)
-                              : Colors.white,
+                              : const Color(0xFFF1F5F9),
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: isSelected
-                                ? const Color(0xFFDC2626)
-                                : const Color(0xFFDC2626)
-                                    .withValues(alpha: 0.3),
-                            width: 1.5,
-                          ),
                         ),
                         child: Text(
                           _categories[index],
@@ -150,7 +143,7 @@ class _KoperasiPageState extends State<KoperasiPage> {
                             fontWeight: FontWeight.w600,
                             color: isSelected
                                 ? Colors.white
-                                : const Color(0xFFDC2626),
+                                : const Color(0xFF475569),
                           ),
                         ),
                       ),
