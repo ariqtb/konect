@@ -4,6 +4,9 @@ import '../presentation/pages/article/create_article_page.dart';
 import '../presentation/pages/reedem/redeem_voucher_page.dart';
 import '../presentation/pages/room/room_discussion_page.dart';
 import '../presentation/pages/main_shell_page.dart';
+import '../presentation/pages/leaderboard/leaderboard_page.dart';
+import '../presentation/pages/koperasi/detail_koperasi_page.dart';
+import '../presentation/pages/room/create_room_page.dart';
 import '../core/constants.dart';
 
 class AppRouter {
@@ -18,7 +21,16 @@ class AppRouter {
       case AppConstants.redeemRoute:
         return MaterialPageRoute(builder: (_) => const RedeemVoucherPage());
       case AppConstants.roomDiscussionRoute:
-        return MaterialPageRoute(builder: (_) => const RoomDiscussionPage());
+        return MaterialPageRoute(
+          builder: (_) => const RoomDiscussionPage(),
+          settings: settings,
+        );
+      case '/leaderboard':
+        return MaterialPageRoute(builder: (_) => const LeaderboardPage());
+      case '/detail-koperasi':
+        return MaterialPageRoute(builder: (_) => const DetailKoperasiPage());
+      case '/create-room':
+        return MaterialPageRoute(builder: (_) => const CreateRoomPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

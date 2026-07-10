@@ -23,46 +23,101 @@ class RoomDiscussionPage extends StatefulWidget {
 }
 
 class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
-  final List<RoomOpinion> _opinions = [
-    RoomOpinion(
-      id: '1',
-      text: 'Pelebaran jalan di pertigaan pasar sangat mendesak.',
-      likes: 12,
-      comments: [
-        'Setuju banget, motor sering numpuk.',
-        'Betul, parit sekarang sudah dangkal.',
-      ],
-    ),
-    RoomOpinion(
-      id: '2',
-      text: 'Gunakan aspal kualitas premium agar awet.',
-      likes: 8,
-      comments: [
-        'Sedang dikaji anggarannya.',
-      ],
-    ),
-    RoomOpinion(
-      id: '3',
-      text: 'Perbaikan drainase samping jalan prioritas.',
-      likes: 5,
-      comments: [],
-    ),
-  ];
+  // We'll initialize the opinions based on the route argument topic
+  List<RoomOpinion>? _opinions;
+  String? _lastTopic;
 
   final TextEditingController _opinionController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
+  final TransformationController _transformationController = TransformationController();
 
   @override
   void dispose() {
     _opinionController.dispose();
-    _scrollController.dispose();
+    _transformationController.dispose();
     super.dispose();
+  }
+
+  void _initializeOpinions(String topic) {
+    if (_lastTopic == topic && _opinions != null) return;
+    _lastTopic = topic;
+
+    if (topic.contains('Padi') || topic.contains('Pupuk')) {
+      _opinions = [
+        RoomOpinion(
+          id: '1',
+          text: 'Apakah subsidi pupuk bisa dibagikan langsung lewat Koperasi Tani?',
+          likes: 14,
+          comments: [
+            'Setuju, biar tidak salah sasaran.',
+            'Betul, lewat koperasi lebih transparan.',
+          ],
+        ),
+        RoomOpinion(
+          id: '2',
+          text: 'Bibit Padi Q3 sangat tahan hama, sebaiknya segera didistribusikan.',
+          likes: 8,
+          comments: [
+            'Bagaimana cara pembagian kuotanya?',
+          ],
+        ),
+        RoomOpinion(
+          id: '3',
+          text: 'Kita butuh pelatihan cara tanam padi Q3 yang optimal.',
+          likes: 5,
+          comments: [],
+        ),
+      ];
+    } else if (topic.contains('Jalan') || topic.contains('Jembatan')) {
+      _opinions = [
+        RoomOpinion(
+          id: '1',
+          text: 'Pelebaran jalan di pertigaan pasar sangat mendesak.',
+          likes: 12,
+          comments: [
+            'Setuju banget, motor sering numpuk.',
+            'Betul, parit sekarang sudah dangkal.',
+          ],
+        ),
+        RoomOpinion(
+          id: '2',
+          text: 'Gunakan aspal kualitas premium agar awet.',
+          likes: 8,
+          comments: [
+            'Sedang dikaji anggarannya.',
+          ],
+        ),
+        RoomOpinion(
+          id: '3',
+          text: 'Perbaikan drainase samping jalan prioritas.',
+          likes: 5,
+          comments: [],
+        ),
+      ];
+    } else {
+      // Default / fallback opinions
+      _opinions = [
+        RoomOpinion(
+          id: '1',
+          text: 'Mari kita mulai pembahasan mengenai topik: $topic',
+          likes: 3,
+          comments: [
+            'Siap mendukung hasil keputusan rapat.',
+          ],
+        ),
+        RoomOpinion(
+          id: '2',
+          text: 'Ide awal dan usulan warga bisa ditambahkan di sini.',
+          likes: 2,
+          comments: [],
+        ),
+      ];
+    }
   }
 
   void _addOpinion(String text) {
     if (text.trim().isEmpty) return;
     setState(() {
-      _opinions.add(
+      _opinions?.add(
         RoomOpinion(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
           text: text.trim(),
@@ -72,14 +127,6 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
       );
     });
     _opinionController.clear();
-    // Scroll to bottom after rebuild
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeOut,
-      );
-    });
   }
 
   void _addComment(RoomOpinion opinion, String commentText) {
@@ -97,6 +144,11 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final String topic = ModalRoute.of(context)?.settings.arguments as String? ??
+        'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik';
+
+    _initializeOpinions(topic);
+
     final double screenWidth = MediaQuery.of(context).size.width;
     final double canvasWidth = screenWidth.clamp(320.0, 480.0);
 
@@ -133,11 +185,11 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
             ],
             border: Border.all(color: const Color(0xFFF1F5F9)),
           ),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Topik',
+              const Text(
+                'Topik Rapat',
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -145,14 +197,16 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                   color: Color(0xFFE21E49),
                 ),
               ),
-              SizedBox(height: 6),
+              const SizedBox(height: 6),
               Text(
-                'Pelebaran jalan di pertigaan pasar sangat mendesak.',
-                style: TextStyle(
+                topic,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF1E293B),
                 ),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -160,9 +214,11 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
       ),
     );
 
+    final opinionsList = _opinions ?? [];
+
     // Lay out opinions and comments sequentially
-    for (int i = 0; i < _opinions.length; i++) {
-      final opinion = _opinions[i];
+    for (int i = 0; i < opinionsList.length; i++) {
+      final opinion = opinionsList[i];
       final bool isLeft = i % 2 == 0;
       const double cardWidth = 260.0;
       final double cardX = isLeft ? 16.0 : (canvasWidth - cardWidth - 16.0);
@@ -326,10 +382,14 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
         elevation: 1,
         shadowColor: Colors.black.withOpacity(0.05),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
+          onPressed: () => Navigator.pop(context),
+        ),
         title: Column(
           children: [
             const Text(
-              'Kode: 09IO08',
+              'Kode Rapat: AKTIF',
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
@@ -342,12 +402,15 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Barang belanja Koperasi...',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF1E293B),
+                Flexible(
+                  child: Text(
+                    topic,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF1E293B),
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -369,9 +432,9 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         ),
                       ),
                       const SizedBox(width: 4),
-                      const Text(
-                        '24',
-                        style: TextStyle(
+                      Text(
+                        '${42 + opinionsList.length}',
+                        style: const TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w600,
                           color: Color(0xFF475569),
@@ -387,9 +450,15 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
       ),
       body: Stack(
         children: [
-          // Canvas Scroll Area
-          SingleChildScrollView(
-            controller: _scrollController,
+          // Canvas Interactive Area (FigJam Style: Zoomable & Pannable)
+          InteractiveViewer(
+            transformationController: _transformationController,
+            constrained: false, // Allows the child to exceed InteractiveViewer's boundaries
+            boundaryMargin: const EdgeInsets.all(400.0), // Padding margins around canvas
+            minScale: 0.5,
+            maxScale: 2.0,
+            scaleEnabled: true,
+            panEnabled: true,
             child: CustomPaint(
               painter: GridBackgroundPainter(),
               child: CustomPaint(

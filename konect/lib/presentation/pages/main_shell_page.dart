@@ -42,8 +42,8 @@ class _MainShellPageState extends State<MainShellPage> {
     final bool isKopdes = isLoggedIn && (authState.user.role == 'kopdes' || authState.user.role == 'admin');
 
     if (isKopdes) {
-      // Buka halaman room baru
-      Navigator.pushNamed(context, AppConstants.roomDiscussionRoute);
+      // Buka halaman room baru (admin create/update room)
+      Navigator.pushNamed(context, '/create-room');
     } else {
       // Tampilkan bottom sheet modal riwayat room
       _showRoomHistoryModal();
