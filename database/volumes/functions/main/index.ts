@@ -12,6 +12,12 @@ Deno.serve(async (req: Request) => {
     return await mod.default(req);
   }
 
+  // Route to compute-embedding (relevance scoring)
+  if (path === "/compute-embedding") {
+    const mod = await import("../compute-embedding/index.ts");
+    return await mod.default(req);
+  }
+
   // Health check
   if (path === "/" || path === "/health") {
     return new Response(
