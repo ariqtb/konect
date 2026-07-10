@@ -34,23 +34,47 @@ class _MainPageState extends State<MainPage> {
             index: _currentIndex,
             children: [
               // Index 0: Home Content
-              SafeArea(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.only(bottom: 100.0), // Padding to avoid overlap with bottom navigation bar
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildHeader(),
-                      const SizedBox(height: 24),
-                      _buildHeroDiscussion(),
-                      const SizedBox(height: 32),
-                      _buildNearestCoop(),
-                      const SizedBox(height: 32),
-                      _buildJoinRoom(),
-                      const SizedBox(height: 32),
-                      _buildHistorySection(),
-                    ],
-                  ),
+              SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: 100.0), // Padding to avoid overlap with bottom navigation bar
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        // Red background container
+                        Container(
+                          height: 250,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: AppColors.brandRed,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                            ),
+                          ),
+                        ),
+                        // Content column (header + card)
+                        SafeArea(
+                          bottom: false,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _buildHeader(),
+                              const SizedBox(height: 16),
+                              _buildHeroDiscussion(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 32),
+                    _buildNearestCoop(),
+                    const SizedBox(height: 32),
+                    _buildJoinRoom(),
+                    const SizedBox(height: 32),
+                    _buildHistorySection(),
+                  ],
                 ),
               ),
               // Index 1: Koperasi
@@ -98,16 +122,16 @@ class _MainPageState extends State<MainPage> {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF111C2D),
+                    color: Colors.white,
                     letterSpacing: -0.025 * 32,
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                Text(
                   'Akses layanan desa Anda hari ini.',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Color(0xFF64748B),
+                    color: Colors.white.withValues(alpha: 0.8),
                   ),
                 ),
               ],
@@ -117,11 +141,11 @@ class _MainPageState extends State<MainPage> {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(16),
             ),
             child: IconButton(
-              icon: const Icon(Icons.emoji_events_outlined, color: Color(0xFFDC2626)),
+              icon: const Icon(Icons.emoji_events_outlined, color: Colors.white),
               onPressed: () {
                 Navigator.pushNamed(context, AppConstants.leaderboardRoute);
               },
@@ -143,7 +167,7 @@ class _MainPageState extends State<MainPage> {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF111C2D),
+              color: Colors.white,
             ),
           ),
           const SizedBox(height: 16),

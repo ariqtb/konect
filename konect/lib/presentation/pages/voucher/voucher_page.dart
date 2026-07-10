@@ -192,8 +192,9 @@ class _VoucherPageState extends State<VoucherPage> {
               Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: AppColors.slate100,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColors.brandRed, width: 1.5),
                 ),
                 child: Row(
                   children: [
@@ -225,15 +226,21 @@ class _VoucherPageState extends State<VoucherPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: isSelected ? AppColors.brandNavy : AppColors.slate100,
+                            color: isSelected ? AppColors.brandRed : Colors.white,
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: isSelected 
+                                  ? AppColors.brandRed 
+                                  : AppColors.brandRed.withValues(alpha: 0.3),
+                              width: 1.5,
+                            ),
                           ),
                           child: Text(
                             cat,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color: isSelected ? Colors.white : AppColors.slate500,
+                              color: isSelected ? Colors.white : AppColors.brandRed,
                             ),
                           ),
                         ),
@@ -329,8 +336,8 @@ class _VoucherPageState extends State<VoucherPage> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: isActive ? Colors.white : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
+            color: isActive ? AppColors.brandRed : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
           ),
           alignment: Alignment.center,
           child: Text(
@@ -338,7 +345,7 @@ class _VoucherPageState extends State<VoucherPage> {
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: isActive ? AppColors.brandNavy : AppColors.slate500,
+              color: isActive ? Colors.white : AppColors.brandRed,
             ),
           ),
         ),

@@ -170,12 +170,12 @@ class _RedeemHistoryPageState extends State<RedeemHistoryPage> {
             ),
             const SizedBox(height: 24),
 
-            // Segmented Control (Tabs)
             Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: const Color(0xFFF1F5F9),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.brandRed, width: 1.5),
               ),
               child: Row(
                 children: [
@@ -259,8 +259,8 @@ class _RedeemHistoryPageState extends State<RedeemHistoryPage> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: isActive ? Colors.white : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
+            color: isActive ? AppColors.brandRed : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
           ),
           alignment: Alignment.center,
           child: Text(
@@ -268,7 +268,7 @@ class _RedeemHistoryPageState extends State<RedeemHistoryPage> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: isActive ? AppColors.brandNavy : AppColors.slate500,
+              color: isActive ? Colors.white : AppColors.brandRed,
             ),
           ),
         ),

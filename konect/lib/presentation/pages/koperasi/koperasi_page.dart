@@ -124,15 +124,21 @@ class _KoperasiPageState extends State<KoperasiPage> {
                         margin: const EdgeInsets.only(right: 10),
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                         decoration: BoxDecoration(
-                          color: isSelected ? const Color(0xFFDC2626) : const Color(0xFFF2F3FF),
-                          borderRadius: BorderRadius.circular(100), // chip rounded
+                          color: isSelected ? const Color(0xFFDC2626) : Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: isSelected 
+                                ? const Color(0xFFDC2626) 
+                                : const Color(0xFFDC2626).withValues(alpha: 0.3),
+                            width: 1.5,
+                          ),
                         ),
                         child: Text(
                           _categories[index],
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: isSelected ? Colors.white : const Color(0xFF64748B),
+                            color: isSelected ? Colors.white : const Color(0xFFDC2626),
                           ),
                         ),
                       ),
