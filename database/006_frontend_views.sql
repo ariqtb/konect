@@ -396,8 +396,8 @@ BEGIN
     RETURN QUERY
     SELECT
         u.id,
-        u.full_name                                      AS name,
-        u.username,
+        u.full_name::TEXT                                AS name,
+        u.username::TEXT,
         u.avatar_color,
         u.points_balance                                 AS score,
         u.village_id,

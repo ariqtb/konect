@@ -45,7 +45,7 @@ VALUES (
 -- ============================================================================
 
 -- Stub 1: link ke KOP-02AFA0134DB2 (KOPERASI DESA MERAH PUTIH KARTINI KAMPUNG LESTARI CAHAYA)
-INSERT INTO cooperatives (id, legacy_ref, village_id, name, slug, description, address, is_active)
+INSERT INTO cooperatives (id, legacy_ref, village_id, name, slug, description, address, latitude, longitude, is_active)
 VALUES (
     '00000000-0000-0000-0000-0000000000a1'::UUID,
     'KOP-02AFA0134DB2',
@@ -54,11 +54,12 @@ VALUES (
     'koperasi-desa-merah-putih-kartini',
     'Stub link ke 003.profil_koperasi. Data lengkap ada di 003.',
     'Stub address — lihat 003.profil_koperasi.alamat_lengkap',
+    -6.595000, 106.816000,
     true
 ) ON CONFLICT (id) DO NOTHING;
 
 -- Stub 2: link ke KOP-5640DE941587
-INSERT INTO cooperatives (id, legacy_ref, village_id, name, slug, description, address, is_active)
+INSERT INTO cooperatives (id, legacy_ref, village_id, name, slug, description, address, latitude, longitude, is_active)
 VALUES (
     '00000000-0000-0000-0000-0000000000a2'::UUID,
     'KOP-5640DE941587',
@@ -67,6 +68,7 @@ VALUES (
     'koperasi-kelurahan-nirmala',
     'Stub link ke 003.profil_koperasi. Data lengkap ada di 003.',
     'Stub address — lihat 003.profil_koperasi.alamat_lengkap',
+    -6.596000, 106.817000,
     true
 ) ON CONFLICT (id) DO NOTHING;
 
