@@ -20,29 +20,34 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
   @override
   void initState() {
     super.initState();
-    context.read<CooperativeDetailBloc>().add(CooperativeDetailLoadRequested(widget.coopId));
+    context
+        .read<CooperativeDetailBloc>()
+        .add(CooperativeDetailLoadRequested(widget.coopId));
   }
 
   @override
   Widget build(BuildContext context) {
     // Design System Tokens (from documents/design.md)
     const Color colorSurface = Color(0xFFF8FAFC);
-    const Color colorSecondaryContainer = Color(0xFFE21E49); // Brand Red/Rose
-
+    const Color colorSecondaryContainer = Color(0xFFDC2626); // Brand Red/Rose
 
     return Scaffold(
       backgroundColor: colorSurface,
       body: BlocBuilder<CooperativeDetailBloc, CooperativeDetailState>(
         builder: (context, state) {
-          if (state is CooperativeDetailLoading || state is CooperativeDetailInitial) {
-            return const Center(child: CircularProgressIndicator(color: colorSecondaryContainer));
+          if (state is CooperativeDetailLoading ||
+              state is CooperativeDetailInitial) {
+            return const Center(
+                child:
+                    CircularProgressIndicator(color: colorSecondaryContainer));
           }
           if (state is CooperativeDetailError) {
             return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.error_outline, size: 48, color: colorSecondaryContainer),
+                  const Icon(Icons.error_outline,
+                      size: 48, color: colorSecondaryContainer),
                   const SizedBox(height: 8),
                   Text(state.message, textAlign: TextAlign.center),
                   const SizedBox(height: 12),
@@ -67,7 +72,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                   _buildHeroSection(context, details),
                   // Main Content
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 32.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -110,7 +116,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             errorBuilder: (context, error, stackTrace) {
               return Container(
                 color: colorNavy,
-                child: const Icon(Icons.storefront, color: Colors.white70, size: 64),
+                child: const Icon(Icons.storefront,
+                    color: Colors.white70, size: 64),
               );
             },
           ),
@@ -170,7 +177,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             children: [
               // Badge "Mitra Utama"
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(100),
@@ -178,7 +186,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                 child: const Text(
                   'Mitra Utama',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: colorNavy,
@@ -187,10 +194,9 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               ),
               const SizedBox(height: 12),
               // Cooperative Title
-              const Text(
-                'Kopdes Makmur Jaya',
-                style: TextStyle(
-                  fontFamily: 'Outfit',
+              Text(
+                details.name,
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -198,19 +204,34 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               ),
               const SizedBox(height: 6),
               // Address Row
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.location_on_outlined, color: Colors.white70, size: 16),
-                  SizedBox(width: 4),
-                  Text(
-                    'Desa Sukatani, Jawa Barat',
-                    style: TextStyle(
-                      fontFamily: 'Outfit',
-                      fontSize: 14,
-                      color: Colors.white70,
+                  const Icon(Icons.location_on_outlined,
+                      color: Colors.white70, size: 16),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      details.address,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white70,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                details.about,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                  height: 1.5,
+                ),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -219,7 +240,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildRoomsSection(BuildContext context, CooperativeDetailLoaded state) {
+  Widget _buildRoomsSection(
+      BuildContext context, CooperativeDetailLoaded state) {
     const Color colorNavy = Color(0xFF1E293B);
 
     return Column(
@@ -228,7 +250,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
         const Text(
           'Ruang yang Dibuat',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 22,
             fontWeight: FontWeight.bold,
             color: colorNavy,
@@ -238,7 +259,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
         const Text(
           'Partisipasi aktif dalam pembangunan desa',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 14,
             color: Color(0xFF64748B),
           ),
@@ -251,7 +271,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             const Text(
               'Filter Status Ruangan',
               style: TextStyle(
-                fontFamily: 'Outfit',
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: Color(0xFF475569),
@@ -271,19 +290,21 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                   value: state.selectedFilter,
                   icon: const Padding(
                     padding: EdgeInsets.only(left: 8.0),
-                    child: Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 18),
+                    child: Icon(Icons.keyboard_arrow_down,
+                        color: Colors.white, size: 18),
                   ),
                   underline: const SizedBox.shrink(),
                   dropdownColor: colorNavy,
                   style: const TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                   onChanged: (val) {
                     if (val != null) {
-                      context.read<CooperativeDetailBloc>().add(CooperativeDetailFilterRooms(val));
+                      context
+                          .read<CooperativeDetailBloc>()
+                          .add(CooperativeDetailFilterRooms(val));
                     }
                   },
                   items: const [
@@ -305,7 +326,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               child: Text(
                 'Tidak ada ruangan dengan status ini.',
                 style: TextStyle(
-                  fontFamily: 'Outfit',
                   color: Color(0xFF64748B),
                   fontSize: 14,
                 ),
@@ -334,9 +354,10 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildActiveDiscussionCard(BuildContext context, CoopDiscussionRoom room) {
+  Widget _buildActiveDiscussionCard(
+      BuildContext context, CoopDiscussionRoom room) {
     const Color colorNavy = Color(0xFF1E293B);
-    const Color colorSecondaryContainer = Color(0xFFE21E49);
+    const Color colorSecondaryContainer = Color(0xFFDC2626);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -360,7 +381,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             children: [
               // Badge status Aktif
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: const Color(0xFFEEF2FF), // indigo-50
                   borderRadius: BorderRadius.circular(100),
@@ -368,7 +390,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                 child: const Text(
                   'Aktif',
                   style: TextStyle(
-                    fontFamily: 'Outfit',
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF4F46E5), // indigo-600
@@ -378,7 +399,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               Text(
                 room.date,
                 style: const TextStyle(
-                  fontFamily: 'Outfit',
                   fontSize: 12,
                   color: Color(0xFF94A3B8),
                 ),
@@ -389,7 +409,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           Text(
             room.title,
             style: const TextStyle(
-              fontFamily: 'Outfit',
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: colorNavy,
@@ -400,7 +419,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           Text(
             room.description,
             style: const TextStyle(
-              fontFamily: 'Outfit',
               fontSize: 14,
               height: 1.5,
               color: Color(0xFF475569),
@@ -427,7 +445,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                               height: 32,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 2),
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
                                 image: DecorationImage(
                                   image: NetworkImage(room.avatars[idx]),
                                   fit: BoxFit.cover,
@@ -440,7 +459,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                     ),
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       color: const Color(0xFFEEF2FF),
                       borderRadius: BorderRadius.circular(100),
@@ -448,7 +468,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                     child: Text(
                       '+${room.membersCount - room.avatars.length} Lainnya',
                       style: const TextStyle(
-                        fontFamily: 'Outfit',
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF4F46E5),
@@ -465,7 +484,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             child: ElevatedButton(
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Bergabung ke diskusi: ${room.title}')),
+                  SnackBar(
+                      content: Text('Bergabung ke diskusi: ${room.title}')),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -481,7 +501,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                   Text(
                     'Ikuti Diskusi',
                     style: TextStyle(
-                      fontFamily: 'Outfit',
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -498,7 +517,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildCompletedDiscussionCard(BuildContext context, CoopDiscussionRoom room) {
+  Widget _buildCompletedDiscussionCard(
+      BuildContext context, CoopDiscussionRoom room) {
     const Color colorNavy = Color(0xFF1E293B);
 
     return Container(
@@ -518,7 +538,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               Text(
                 'Selesai • ${room.date}',
                 style: const TextStyle(
-                  fontFamily: 'Outfit',
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFF64748B),
@@ -530,7 +549,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           Text(
             room.title,
             style: const TextStyle(
-              fontFamily: 'Outfit',
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: colorNavy,
@@ -540,7 +558,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           Text(
             room.description,
             style: const TextStyle(
-              fontFamily: 'Outfit',
               fontSize: 14,
               color: Color(0xFF64748B),
             ),
@@ -565,7 +582,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             borderRadius: BorderRadius.circular(12),
           ),
           alignment: Alignment.center,
-          child: const Text('1', style: TextStyle(fontFamily: 'Outfit', color: Colors.white, fontWeight: FontWeight.bold)),
         ),
         const SizedBox(width: 8),
         _buildPaginationButton('2'),
@@ -573,7 +589,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
         _buildPaginationButton('3'),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 4.0),
-          child: Text('...', style: TextStyle(fontFamily: 'Outfit', color: Color(0xFF94A3B8))),
         ),
         _buildPaginationButton('67'),
         const SizedBox(width: 8),
@@ -594,7 +609,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
       child: Text(
         text,
         style: const TextStyle(
-          fontFamily: 'Outfit',
           fontSize: 14,
           color: Color(0xFF475569),
           fontWeight: FontWeight.w600,
@@ -603,9 +617,10 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildUpdatesSection(BuildContext context, List<CoopTimelineUpdate> updates) {
+  Widget _buildUpdatesSection(
+      BuildContext context, List<CoopTimelineUpdate> updates) {
     const Color colorNavy = Color(0xFF1E293B);
-    const Color colorSecondaryContainer = Color(0xFFE21E49);
+    const Color colorSecondaryContainer = Color(0xFFDC2626);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -613,7 +628,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
         const Text(
           'Update Terkini',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 22,
             fontWeight: FontWeight.bold,
             color: colorNavy,
@@ -642,15 +656,20 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               itemBuilder: (context, index) {
                 final update = updates[index];
                 final isWarning = update.type == 'warning';
-                final dotColor = isWarning ? const Color(0xFFFF7A3D) : const Color(0xFF94A3B8);
-                final dotBorderColor = isWarning ? const Color(0xFFFFEDD5) : const Color(0xFFF1F5F9);
+                final dotColor = isWarning
+                    ? const Color(0xFFFF7A3D)
+                    : const Color(0xFF94A3B8);
+                final dotBorderColor = isWarning
+                    ? const Color(0xFFFFEDD5)
+                    : const Color(0xFFF1F5F9);
 
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Timeline Point
                     Container(
-                      margin: const EdgeInsets.only(left: 16, right: 16, top: 12),
+                      margin:
+                          const EdgeInsets.only(left: 16, right: 16, top: 12),
                       width: 16,
                       height: 16,
                       decoration: BoxDecoration(
@@ -663,54 +682,53 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, AppConstants.articleDetailRoute);
+                          Navigator.pushNamed(
+                              context, AppConstants.articleDetailRoute);
                         },
                         child: Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(32), // rounded-vox
+                            borderRadius:
+                                BorderRadius.circular(32), // rounded-vox
                             border: Border.all(color: const Color(0xFFF1F5F9)),
                           ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              update.date,
-                              style: const TextStyle(
-                                fontFamily: 'Outfit',
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF64748B),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                update.date,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF64748B),
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              update.title,
-                              style: const TextStyle(
-                                fontFamily: 'Outfit',
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: colorNavy,
+                              const SizedBox(height: 6),
+                              Text(
+                                update.title,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: colorNavy,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              update.description,
-                              style: const TextStyle(
-                                fontFamily: 'Outfit',
-                                fontSize: 14,
-                                color: Color(0xFF64748B),
-                                height: 1.4,
+                              const SizedBox(height: 4),
+                              Text(
+                                update.description,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xFF64748B),
+                                  height: 1.4,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              );
+                  ],
+                );
               },
             ),
           ],
@@ -722,14 +740,15 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           child: ElevatedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Membuka formulir saran & masukan')),
+                const SnackBar(
+                    content: Text('Membuka formulir saran & masukan')),
               );
             },
-            icon: const Icon(Icons.chat_bubble_outline, color: Colors.white, size: 18),
+            icon: const Icon(Icons.chat_bubble_outline,
+                color: Colors.white, size: 18),
             label: const Text(
               'Ruang saran dan masukan',
               style: TextStyle(
-                fontFamily: 'Outfit',
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -748,7 +767,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildDetailKoperasiSection(BuildContext context, CooperativeDetail details) {
+  Widget _buildDetailKoperasiSection(
+      BuildContext context, CooperativeDetail details) {
     const Color colorNavy = Color(0xFF1E293B);
 
     return Column(
@@ -757,7 +777,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
         const Text(
           'Detail Koperasi',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 22,
             fontWeight: FontWeight.bold,
             color: colorNavy,
@@ -850,7 +869,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             Text(
               label,
               style: const TextStyle(
-                fontFamily: 'Outfit',
                 fontSize: 12,
                 color: Color(0xFF94A3B8),
                 fontWeight: FontWeight.w500,
@@ -860,7 +878,6 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             Text(
               value,
               style: const TextStyle(
-                fontFamily: 'Outfit',
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: colorNavy,
@@ -875,60 +892,69 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
   Widget _buildContactSection(BuildContext context, CooperativeDetail details) {
     const Color colorNavy = Color(0xFF1E293B);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(32), // rounded-vox (32px)
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Kontak Koperasi',
-            style: TextStyle(
-              fontFamily: 'Outfit',
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: colorNavy,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Kontak Koperasi',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: colorNavy,
           ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              const Icon(Icons.phone_outlined, color: colorNavy, size: 20),
-              const SizedBox(width: 12),
-              Text(
-                details.phone,
-                style: const TextStyle(
-                  fontFamily: 'Outfit',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF334155),
-                ),
+        ),
+        const SizedBox(height: 20),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(32), // rounded-vox (32px)
+            border: Border.all(color: const Color(0xFFF1F5F9)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.03),
+                blurRadius: 16,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.mail_outline, color: colorNavy, size: 20),
-              const SizedBox(width: 12),
-              Text(
-                details.email,
-                style: const TextStyle(
-                  fontFamily: 'Outfit',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF334155),
-                ),
+              Row(
+                children: [
+                  const Icon(Icons.phone_outlined, color: colorNavy, size: 20),
+                  const SizedBox(width: 12),
+                  Text(
+                    details.phone,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF334155),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  const Icon(Icons.mail_outline, color: colorNavy, size: 20),
+                  const SizedBox(width: 12),
+                  Text(
+                    details.email,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF334155),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

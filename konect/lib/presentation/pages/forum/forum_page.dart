@@ -37,7 +37,7 @@ class _ForumPageState extends State<ForumPage> {
       body: BlocBuilder<ForumBloc, ForumState>(
         builder: (context, state) {
           if (state is ForumLoading || state is ForumInitial) {
-            return const Center(child: CircularProgressIndicator(color: Color(0xFFE21E49)));
+            return const Center(child: CircularProgressIndicator(color: Color(0xFFDC2626)));
           }
           if (state is ForumError) {
             return _ErrorView(
@@ -80,7 +80,7 @@ class _ForumPageState extends State<ForumPage> {
               );
             }
             return RefreshIndicator(
-              color: const Color(0xFFE21E49),
+              color: const Color(0xFFDC2626),
               onRefresh: () async {
                 context
                     .read<ForumBloc>()
@@ -99,7 +99,7 @@ class _ForumPageState extends State<ForumPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showCreateTopicSheet(context),
-        backgroundColor: const Color(0xFFE21E49),
+        backgroundColor: const Color(0xFFDC2626),
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add),
         label: const Text(
@@ -175,7 +175,7 @@ class _ForumPageState extends State<ForumPage> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: const BorderSide(color: Color(0xFFE21E49), width: 2),
+                      borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
                     ),
                   ),
                   validator: (v) => (v == null || v.isEmpty)
@@ -202,7 +202,7 @@ class _ForumPageState extends State<ForumPage> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: const BorderSide(color: Color(0xFFE21E49), width: 2),
+                      borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
                     ),
                   ),
                   maxLines: 3,
@@ -215,7 +215,7 @@ class _ForumPageState extends State<ForumPage> {
                   width: double.infinity,
                   child: FilledButton(
                     style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xFFE21E49),
+                      backgroundColor: const Color(0xFFDC2626),
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
@@ -351,7 +351,7 @@ class _ErrorView extends StatelessWidget {
           const Icon(
             Icons.error_outline,
             size: 48,
-            color: Color(0xFFE21E49),
+            color: Color(0xFFDC2626),
           ),
           const SizedBox(height: 8),
           Text(
@@ -365,8 +365,8 @@ class _ErrorView extends StatelessWidget {
           const SizedBox(height: 16),
           OutlinedButton(
             style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFFE21E49),
-              side: const BorderSide(color: Color(0xFFE21E49)),
+              foregroundColor: const Color(0xFFDC2626),
+              side: const BorderSide(color: Color(0xFFDC2626)),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
               ),

@@ -22,19 +22,68 @@ class RoomDiscussionPage extends StatefulWidget {
   State<RoomDiscussionPage> createState() => _RoomDiscussionPageState();
 }
 
-class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
+class _RoomDiscussionPageState extends State<RoomDiscussionPage>
+    with SingleTickerProviderStateMixin {
   // We'll initialize the opinions based on the route argument topic
   List<RoomOpinion>? _opinions;
   String? _lastTopic;
 
   final TextEditingController _opinionController = TextEditingController();
-  final TransformationController _transformationController = TransformationController();
+  final TransformationController _transformationController =
+      TransformationController();
+
+  late final AnimationController _flyAnimController;
+  Animation<Matrix4>? _flyAnimation;
+
+  // Stores the canvas position to fly to after the next build
+  Offset? _pendingSpotlight;
+
+  // The id of the most recently added opinion (for highlight glow)
+  String? _newlyAddedId;
+
+  @override
+  void initState() {
+    super.initState();
+    _flyAnimController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _flyAnimController.addListener(() {
+      if (_flyAnimation != null) {
+        _transformationController.value = _flyAnimation!.value;
+      }
+    });
+  }
 
   @override
   void dispose() {
     _opinionController.dispose();
     _transformationController.dispose();
+    _flyAnimController.dispose();
     super.dispose();
+  }
+
+  /// Smoothly animate the canvas to center on [canvasPoint].
+  /// [canvasPoint] is in canvas-local coordinates (before any transform).
+  void _spotlightPoint(Offset canvasPoint, Size viewportSize) {
+    final double targetScale = 1.15;
+
+    // Target: place `canvasPoint` at the center of the viewport
+    final double tx = viewportSize.width / 2 - canvasPoint.dx * targetScale;
+    final double ty = viewportSize.height / 2 - canvasPoint.dy * targetScale;
+
+    final Matrix4 targetMatrix = Matrix4.translationValues(tx, ty, 0)
+      ..multiply(Matrix4.diagonal3Values(targetScale, targetScale, 1));
+
+    final Matrix4 from = _transformationController.value.clone();
+
+    _flyAnimation = Matrix4Tween(begin: from, end: targetMatrix).animate(
+      CurvedAnimation(parent: _flyAnimController, curve: Curves.easeInOutCubic),
+    );
+
+    _flyAnimController
+      ..reset()
+      ..forward();
   }
 
   void _initializeOpinions(String topic) {
@@ -45,7 +94,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
       _opinions = [
         RoomOpinion(
           id: '1',
-          text: 'Apakah subsidi pupuk bisa dibagikan langsung lewat Koperasi Tani?',
+          text:
+              'Apakah subsidi pupuk bisa dibagikan langsung lewat Koperasi Tani?',
           likes: 14,
           comments: [
             'Setuju, biar tidak salah sasaran.',
@@ -54,7 +104,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
         ),
         RoomOpinion(
           id: '2',
-          text: 'Bibit Padi Q3 sangat tahan hama, sebaiknya segera didistribusikan.',
+          text:
+              'Bibit Padi Q3 sangat tahan hama, sebaiknya segera didistribusikan.',
           likes: 8,
           comments: [
             'Bagaimana cara pembagian kuotanya?',
@@ -116,17 +167,53 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
 
   void _addOpinion(String text) {
     if (text.trim().isEmpty) return;
+
+    // Compute where the NEW opinion node will be placed (before setState)
+    // so we can spotlight it right after the next frame.
+    final int newIndex = (_opinions?.length ?? 0);
+    final double screenW = MediaQuery.of(context).size.width;
+    final double canvasWidth = screenW.clamp(320.0, 480.0);
+    final bool isLeft = newIndex % 2 == 0;
+    const double cardWidth = 260.0;
+    final double cardX = isLeft ? 16.0 : (canvasWidth - cardWidth - 16.0);
+
+    // Estimate Y by re-running the same accumulation logic
+    double estimatedY = 220.0;
+    for (int i = 0; i < newIndex; i++) {
+      final int commentCount = _opinions?[i].comments.length ?? 0;
+      estimatedY += 100.0 + commentCount * 65.0 + 70.0;
+    }
+
+    // Center of the new card
+    _pendingSpotlight = Offset(cardX + cardWidth / 2, estimatedY + 60.0);
+
+    final String newId = DateTime.now().millisecondsSinceEpoch.toString();
     setState(() {
       _opinions?.add(
         RoomOpinion(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          id: newId,
           text: text.trim(),
           likes: 0,
           comments: [],
         ),
       );
+      _newlyAddedId = newId;
     });
     _opinionController.clear();
+
+    // Clear the highlight after 2 seconds
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) setState(() => _newlyAddedId = null);
+    });
+
+    // Fly to the new node after the frame is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_pendingSpotlight != null && mounted) {
+        final Size viewport = MediaQuery.of(context).size;
+        _spotlightPoint(_pendingSpotlight!, viewport);
+        _pendingSpotlight = null;
+      }
+    });
   }
 
   void _addComment(RoomOpinion opinion, String commentText) {
@@ -144,8 +231,9 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final String topic = ModalRoute.of(context)?.settings.arguments as String? ??
-        'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik';
+    final String topic =
+        ModalRoute.of(context)?.settings.arguments as String? ??
+            'Pembahasan Bibit Padi Q3 & Subsidi Pupuk Organik';
 
     _initializeOpinions(topic);
 
@@ -162,7 +250,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
     final double topicX = (canvasWidth - topicWidth) / 2;
     const double topicY = 20.0;
     const double topicHeight = 150.0;
-    final Offset topicBottomCenter = Offset(topicX + topicWidth / 2, topicY + topicHeight);
+    final Offset topicBottomCenter =
+        Offset(topicX + topicWidth / 2, topicY + topicHeight);
 
     // Topic Card Widget
     positionedWidgets.add(
@@ -199,22 +288,27 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 0.5,
-                        color: Color(0xFFE21E49),
+                        color: Color(0xFFDC2626),
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
                         color: const Color(0xFFF1F5F9),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Row(
                         children: [
-                          Icon(Icons.info_outline, size: 10, color: Color(0xFF64748B)),
+                          Icon(Icons.info_outline,
+                              size: 10, color: Color(0xFF64748B)),
                           SizedBox(width: 4),
                           Text(
                             'Detail',
-                            style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: Color(0xFF64748B)),
+                            style: TextStyle(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF64748B)),
                           ),
                         ],
                       ),
@@ -254,11 +348,13 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
 
       // Opinion node center top
       final Offset opinionTopCenter = Offset(cardX + cardWidth / 2, cardY);
-      
-      // Dashed line from topic to opinion
-      connections.add(CanvasConnection(start: topicBottomCenter, end: opinionTopCenter));
 
-      // Opinion Card Widget
+      // Dashed line from topic to opinion
+      connections.add(
+          CanvasConnection(start: topicBottomCenter, end: opinionTopCenter));
+
+      // Opinion Card Widget — show a red glow ring if this is the newly added card
+      final bool isNew = opinion.id == _newlyAddedId;
       positionedWidgets.add(
         Positioned(
           left: cardX,
@@ -266,19 +362,32 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
           width: cardWidth,
           child: GestureDetector(
             onTap: () => _showOpinionDetailModal(context, opinion),
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 400),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
-                    blurRadius: 15,
-                    offset: const Offset(0, 4),
-                  ),
+                  if (isNew)
+                    BoxShadow(
+                      color: const Color(0xFFDC2626).withOpacity(0.25),
+                      blurRadius: 24,
+                      spreadRadius: 4,
+                      offset: const Offset(0, 4),
+                    )
+                  else
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.04),
+                      blurRadius: 15,
+                      offset: const Offset(0, 4),
+                    ),
                 ],
-                border: Border.all(color: const Color(0xFFF1F5F9)),
+                border: Border.all(
+                  color:
+                      isNew ? const Color(0xFFDC2626) : const Color(0xFFF1F5F9),
+                  width: isNew ? 2.0 : 1.0,
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,7 +398,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         onTap: () => _likeOpinion(opinion),
                         child: Row(
                           children: [
-                            const Icon(Icons.thumb_up_outlined, size: 14, color: Color(0xFF94A3B8)),
+                            const Icon(Icons.thumb_up_outlined,
+                                size: 14, color: Color(0xFF94A3B8)),
                             const SizedBox(width: 4),
                             Text(
                               '${opinion.likes}',
@@ -303,22 +413,26 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         ),
                       ),
                       const SizedBox(width: 16),
-                      const Icon(Icons.thumb_down_outlined, size: 14, color: Color(0xFF94A3B8)),
+                      const Icon(Icons.thumb_down_outlined,
+                          size: 14, color: Color(0xFF94A3B8)),
                       if (opinion.comments.isNotEmpty) ...[
                         const Spacer(),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: const Color(0xFFF1F5F9),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.chat_bubble_outline, size: 10, color: Color(0xFF64748B)),
+                              const Icon(Icons.chat_bubble_outline,
+                                  size: 10, color: Color(0xFF64748B)),
                               const SizedBox(width: 4),
                               Text(
                                 '${opinion.comments.length}',
-                                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                                style: const TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -361,7 +475,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
           commentY + 25.0,
         );
 
-        connections.add(CanvasConnection(start: lineStart, end: lineEnd, isLRoute: true));
+        connections.add(
+            CanvasConnection(start: lineStart, end: lineEnd, isLRoute: true));
 
         // Comment Card Widget
         positionedWidgets.add(
@@ -443,7 +558,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                 ),
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: const Color(0xFFE2E8F0)),
@@ -481,8 +597,10 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
           // Canvas Interactive Area (FigJam Style: Zoomable & Pannable)
           InteractiveViewer(
             transformationController: _transformationController,
-            constrained: false, // Allows the child to exceed InteractiveViewer's boundaries
-            boundaryMargin: const EdgeInsets.all(400.0), // Padding margins around canvas
+            constrained:
+                false, // Allows the child to exceed InteractiveViewer's boundaries
+            boundaryMargin:
+                const EdgeInsets.all(400.0), // Padding margins around canvas
             minScale: 0.5,
             maxScale: 2.0,
             scaleEnabled: true,
@@ -501,7 +619,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
               ),
             ),
           ),
-          
+
           // Bottom Input Bar
           Positioned(
             left: 16,
@@ -548,11 +666,12 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                       width: 48,
                       height: 48,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFE21E49),
+                        color: Color(0xFFDC2626),
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
-                      child: const Icon(Icons.send, color: Colors.white, size: 20),
+                      child:
+                          const Icon(Icons.send, color: Colors.white, size: 20),
                     ),
                   ),
                 ],
@@ -565,7 +684,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
   }
 
   void _showOpinionDetailModal(BuildContext context, RoomOpinion opinion) {
-    final TextEditingController commentFieldController = TextEditingController();
+    final TextEditingController commentFieldController =
+        TextEditingController();
 
     showModalBottomSheet(
       context: context,
@@ -593,7 +713,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Opinion Title & Detail Section
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -616,14 +736,16 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                             Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFF1F5F9),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Row(
                                     children: [
-                                      const Icon(Icons.thumb_up, size: 12, color: Color(0xFF64748B)),
+                                      const Icon(Icons.thumb_up,
+                                          size: 12, color: Color(0xFF64748B)),
                                       const SizedBox(width: 4),
                                       Text(
                                         '${opinion.likes}',
@@ -642,7 +764,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                                     color: const Color(0xFFF1F5F9),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
-                                  child: const Icon(Icons.thumb_down, size: 12, color: Color(0xFF64748B)),
+                                  child: const Icon(Icons.thumb_down,
+                                      size: 12, color: Color(0xFF64748B)),
                                 ),
                               ],
                             ),
@@ -662,7 +785,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  
+
                   // Comments Header Badge
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -678,7 +801,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: const Color(0xFF94A3B8),
                             borderRadius: BorderRadius.circular(100),
@@ -696,7 +820,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  
+
                   // Comments List Area
                   Expanded(
                     child: ListView.builder(
@@ -753,13 +877,15 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
                               child: TextField(
                                 controller: commentFieldController,
                                 style: const TextStyle(fontSize: 14),
                                 decoration: const InputDecoration(
                                   hintText: 'Tambahkan komentar',
-                                  hintStyle: TextStyle(color: Color(0xFF94A3B8)),
+                                  hintStyle:
+                                      TextStyle(color: Color(0xFF94A3B8)),
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
@@ -787,11 +913,12 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                               width: 40,
                               height: 40,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFE21E49),
+                                color: Color(0xFFDC2626),
                                 shape: BoxShape.circle,
                               ),
                               alignment: Alignment.center,
-                              child: const Icon(Icons.arrow_upward, color: Colors.white, size: 18),
+                              child: const Icon(Icons.arrow_upward,
+                                  color: Colors.white, size: 18),
                             ),
                           ),
                         ],
@@ -835,7 +962,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                 ),
               ),
               const SizedBox(height: 24),
-              
+
               // Content
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 28.0),
@@ -843,9 +970,10 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE21E49).withOpacity(0.08),
+                        color: const Color(0xFFDC2626).withOpacity(0.08),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
@@ -853,7 +981,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFE21E49),
+                          color: Color(0xFFDC2626),
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -871,11 +999,14 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage> {
                     const SizedBox(height: 16),
                     const Divider(color: Color(0xFFE2E8F0)),
                     const SizedBox(height: 16),
-                    _buildModalInfoRow(Icons.storefront_outlined, 'Penyelenggara', 'Koperasi Sukatani Mandiri'),
+                    _buildModalInfoRow(Icons.storefront_outlined,
+                        'Penyelenggara', 'Koperasi Sukatani Mandiri'),
                     const SizedBox(height: 12),
-                    _buildModalInfoRow(Icons.access_time, 'Waktu', 'Hari ini, 14:00 WIB - Selesai'),
+                    _buildModalInfoRow(Icons.access_time, 'Waktu',
+                        'Hari ini, 14:00 WIB - Selesai'),
                     const SizedBox(height: 12),
-                    _buildModalInfoRow(Icons.description_outlined, 'Deskripsi', 'Rapat koordinasi warga desa untuk menampung ide, pendapat, dan usulan pemanfaatan serta peningkatan alokasi ketahanan pangan desa Sukatani.'),
+                    _buildModalInfoRow(Icons.description_outlined, 'Deskripsi',
+                        'Rapat koordinasi warga desa untuk menampung ide, pendapat, dan usulan pemanfaatan serta peningkatan alokasi ketahanan pangan desa Sukatani.'),
                   ],
                 ),
               ),

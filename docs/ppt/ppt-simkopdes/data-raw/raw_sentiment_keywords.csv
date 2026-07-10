@@ -1,0 +1,10 @@
+Sentiment;Keyword;Bobot;Isu_Terkait
+negatif;korupsi;high;iss-007,iss-002
+negatif;anggaran;high;iss-001,iss-007
+negatif;proyek;high;iss-001,iss-006
+negatif;dana desa;high;iss-001
+negatif;tni;medium;iss-004
+negatif;militer;medium;iss-004,iss-005
+positif;ekonomi;medium;
+positif;produk lokal;medium;
+positif;memajukan;low;

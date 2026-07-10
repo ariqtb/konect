@@ -90,6 +90,7 @@ services:
     environment:
       KONG_DATABASE: "off"
       KONG_DECLARATIVE_CONFIG: /usr/local/kong/kong.yml
+      KONG_ROUTER_FLAVOR: expressions
       # https://github.com/supabase/cli/issues/14
       KONG_DNS_ORDER: LAST,A,CNAME
       KONG_DNS_NOT_FOUND_TTL: 1
@@ -519,6 +520,7 @@ services:
       # GOOGLE_PROJECT_NUMBER: ${GOOGLE_PROJECT_NUMBER}
 
   # Fully local Postgres (no external DB dependency)
+  # Comment out everything below this point if you are using an external Postgres database
   db:
     container_name: supabase-db
     image: supabase/postgres:17.6.1.084
@@ -567,13 +569,13 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXP: ${JWT_EXPIRY}
     command:
-  #     [
-  #       "postgres",
-  #       "-c",
-  #       "config_file=/etc/postgresql/postgresql.conf",
-  #       "-c",
-  #       "log_min_messages=fatal" # prevents Realtime polling queries from appearing in logs
-  #     ]
+      [
+        "postgres",
+        "-c",
+        "config_file=/etc/postgresql/postgresql.conf",
+        "-c",
+        "log_min_messages=fatal" # prevents Realtime polling queries from appearing in logs
+      ]
 
   vector:
     container_name: supabase-vector

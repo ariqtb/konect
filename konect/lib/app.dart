@@ -26,7 +26,7 @@ import 'presentation/pages/voucher/voucher_page.dart';
 import 'presentation/pages/profile/profile_page.dart';
 import 'presentation/pages/room/room_discussion_page.dart';
 import 'presentation/pages/room/create_room_page.dart';
-import 'presentation/pages/reedem/redeem_voucher_page.dart';
+import 'presentation/pages/reedem/redeem_history_page.dart';
 
 class KonectApp extends StatefulWidget {
   const KonectApp({super.key});
@@ -122,7 +122,7 @@ class _KonectAppState extends State<KonectApp> {
                 settings: settings,
               );
             case AppConstants.redeemRoute:
-              return MaterialPageRoute(builder: (_) => const RedeemVoucherPage());
+              return MaterialPageRoute(builder: (_) => const RedeemHistoryPage());
             case '/create-room':
               return MaterialPageRoute(builder: (_) => const CreateRoomPage());
             default:

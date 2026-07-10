@@ -5,7 +5,8 @@ import '../../widgets/location_permission_banner.dart';
 import '../../../data/models/cooperative.dart';
 
 class CooperativePage extends StatefulWidget {
-  const CooperativePage({super.key});
+  final bool showBackButton;
+  const CooperativePage({super.key, this.showBackButton = true});
 
   @override
   State<CooperativePage> createState() => _CooperativePageState();
@@ -13,15 +14,24 @@ class CooperativePage extends StatefulWidget {
 
 class _CooperativePageState extends State<CooperativePage> {
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     context.read<CooperativeBloc>().add(const CooperativeLoadRequested());
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200) {
+      context.read<CooperativeBloc>().add(const CooperativeLoadMoreRequested());
+    }
   }
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _searchController.dispose();
     super.dispose();
   }
@@ -39,7 +49,6 @@ class _CooperativePageState extends State<CooperativePage> {
         title: const Text(
           'Daftar Koperasi',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontWeight: FontWeight.bold,
             color: brandSecondary,
           ),
@@ -47,10 +56,12 @@ class _CooperativePageState extends State<CooperativePage> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: brandSecondary, size: 20),
-          onPressed: () => Navigator.pop(context),
-        ),
+        leading: widget.showBackButton
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new, color: brandSecondary, size: 20),
+                onPressed: () => Navigator.pop(context),
+              )
+            : null,
       ),
       body: BlocBuilder<CooperativeBloc, CooperativeState>(
         builder: (context, state) {
@@ -82,6 +93,7 @@ class _CooperativePageState extends State<CooperativePage> {
                 // Scrollable Content
                 SafeArea(
                   child: SingleChildScrollView(
+                    controller: _scrollController,
                     padding: const EdgeInsets.only(
                       left: 16.0,
                       right: 16.0,
@@ -95,9 +107,6 @@ class _CooperativePageState extends State<CooperativePage> {
                         const LocationPermissionBanner(),
                         // Search Bar
                         _buildSearchBar(context, state.searchQuery),
-                        const SizedBox(height: 16),
-                        // Category Chips
-                        _buildCategoryChips(context, state.selectedCategory),
                         const SizedBox(height: 24),
                         // Section Header
                         _buildSectionHeader(context),
@@ -110,7 +119,6 @@ class _CooperativePageState extends State<CooperativePage> {
                               child: Text(
                                 'Tidak ada koperasi yang cocok.',
                                 style: TextStyle(
-                                  fontFamily: 'Outfit',
                                   fontSize: 15,
                                   color: Color(0xFF6B7280),
                                 ),
@@ -130,16 +138,14 @@ class _CooperativePageState extends State<CooperativePage> {
                               );
                             },
                           ),
+                        if (state.filteredCooperatives.isNotEmpty && !state.hasReachedMax)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 24.0),
+                            child: Center(child: CircularProgressIndicator(color: brandPrimary)),
+                          ),
                       ],
                     ),
                   ),
-                ),
-                // Bottom Navigation Overlay (matching design layout)
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: _buildBottomNavigationBar(context),
                 ),
               ],
             );
@@ -179,7 +185,6 @@ class _CooperativePageState extends State<CooperativePage> {
         decoration: InputDecoration(
           hintText: 'Cari nama koperasi...',
           hintStyle: const TextStyle(
-            fontFamily: 'Outfit',
             color: Color(0xFF9CA3AF),
             fontSize: 14,
           ),
@@ -197,48 +202,6 @@ class _CooperativePageState extends State<CooperativePage> {
     );
   }
 
-  Widget _buildCategoryChips(BuildContext context, String activeCategory) {
-    final categories = ['Semua', 'Sembako', 'Simpan Pinjam', 'Pertanian'];
-
-    return SizedBox(
-      height: 40,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          final category = categories[index];
-          final isActive = category == activeCategory;
-
-          return Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: InkWell(
-              onTap: () {
-                context.read<CooperativeBloc>().add(CooperativeFilterChanged(category));
-              },
-              borderRadius: BorderRadius.circular(100),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                decoration: BoxDecoration(
-                  color: isActive ? const Color(0xFFE14242) : const Color(0xFFF2F3FF),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  category,
-                  style: TextStyle(
-                    fontFamily: 'Outfit',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: isActive ? Colors.white : const Color(0xFF4B5563),
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
 
   Widget _buildSectionHeader(BuildContext context) {
     return Row(
@@ -247,7 +210,6 @@ class _CooperativePageState extends State<CooperativePage> {
         const Text(
           'Paling Dekat',
           style: TextStyle(
-            fontFamily: 'Outfit',
             fontSize: 22,
             fontWeight: FontWeight.bold,
             color: Color(0xFF1A2E44),
@@ -263,7 +225,6 @@ class _CooperativePageState extends State<CooperativePage> {
           label: const Text(
             'Atur Lokasi',
             style: TextStyle(
-              fontFamily: 'Outfit',
               color: Color(0xFFE14242),
               fontWeight: FontWeight.bold,
               fontSize: 14,
@@ -329,7 +290,6 @@ class _CooperativePageState extends State<CooperativePage> {
                       child: Text(
                         item.name,
                         style: const TextStyle(
-                          fontFamily: 'Outfit',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: brandSecondary,
@@ -361,7 +321,6 @@ class _CooperativePageState extends State<CooperativePage> {
                           Text(
                             item.isOpen ? 'Buka' : 'Tutup',
                             style: const TextStyle(
-                              fontFamily: 'Outfit',
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: brandSecondary,
@@ -383,7 +342,6 @@ class _CooperativePageState extends State<CooperativePage> {
                       child: Text(
                         item.address,
                         style: const TextStyle(
-                          fontFamily: 'Outfit',
                           fontSize: 14,
                           color: Color(0xFF6B7280),
                         ),
@@ -396,50 +354,57 @@ class _CooperativePageState extends State<CooperativePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF2F3FF),
-                            borderRadius: BorderRadius.circular(12),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF2F3FF),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(Icons.near_me_outlined, color: brandSecondary, size: 20),
                           ),
-                          child: const Icon(Icons.near_me_outlined, color: brandSecondary, size: 20),
-                        ),
-                        const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Jarak',
-                              style: TextStyle(
-                                fontFamily: 'Outfit',
-                                fontSize: 12,
-                                color: Color(0xFF9CA3AF),
-                              ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Jarak',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Color(0xFF9CA3AF),
+                                  ),
+                                ),
+                                Text(
+                                  item.distance,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: brandSecondary,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
                             ),
-                            Text(
-                              item.distance,
-                              style: const TextStyle(
-                                fontFamily: 'Outfit',
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: brandSecondary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     ElevatedButton(
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Membuka detail: ${item.name}')),
+                        Navigator.pushNamed(
+                          context,
+                          '/cooperative-detail',
+                          arguments: item.id,
                         );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: brandPrimary,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -447,7 +412,6 @@ class _CooperativePageState extends State<CooperativePage> {
                       child: const Text(
                         'Lihat Detail',
                         style: TextStyle(
-                          fontFamily: 'Outfit',
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -464,174 +428,4 @@ class _CooperativePageState extends State<CooperativePage> {
     );
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context) {
-    const Color brandPrimary = Color(0xFFE14242);
-    const Color brandSecondary = Color(0xFF1A2E44);
-    const Color grayColor = Color(0xFF9CA3AF);
-
-    return Container(
-      height: 90,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: const Border(
-          top: BorderSide(color: Color(0xFFF1F5F9), width: 1),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 20,
-            offset: const Offset(0, -5),
-          ),
-        ],
-      ),
-      child: ClipRect(
-        child: SafeArea(
-          top: false,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  // Nav Item: Home
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context); // Pop to go back to Home screen
-                    },
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home_outlined, color: grayColor, size: 26),
-                        SizedBox(height: 4),
-                        Text(
-                          'HOME',
-                          style: TextStyle(
-                            fontFamily: 'Outfit',
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: grayColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Nav Item: Koperasi (Active)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: brandSecondary,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.storefront, color: Colors.white, size: 20),
-                        SizedBox(width: 6),
-                        Text(
-                          'KOPERASI',
-                          style: TextStyle(
-                            fontFamily: 'Outfit',
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Spacer for FAB
-                  const SizedBox(width: 48),
-                  // Nav Item: Voucher
-                  GestureDetector(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Navigasi ke Voucher')),
-                      );
-                    },
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.confirmation_number_outlined, color: grayColor, size: 26),
-                        SizedBox(height: 4),
-                        Text(
-                          'VOUCHER',
-                          style: TextStyle(
-                            fontFamily: 'Outfit',
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: grayColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Nav Item: Profil
-                  GestureDetector(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Navigasi ke Profil')),
-                      );
-                    },
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.person_outline, color: grayColor, size: 26),
-                        SizedBox(height: 4),
-                        Text(
-                          'PROFIL',
-                          style: TextStyle(
-                            fontFamily: 'Outfit',
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: grayColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              // Floating Action Button
-              Positioned(
-                top: -24,
-                left: MediaQuery.of(context).size.width / 2 - 28,
-                child: Container(
-                  width: 56,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    color: brandPrimary,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 4),
-                    boxShadow: [
-                      BoxShadow(
-                        color: brandPrimary.withValues(alpha: 0.3),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      customBorder: const CircleBorder(),
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Menu Tambah / Aksi Cepat')),
-                        );
-                      },
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 28,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
