@@ -555,11 +555,7 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             separatorBuilder: (_, __) => const SizedBox(height: 16),
             itemBuilder: (context, index) {
               final room = state.filteredRooms[index];
-              if (room.status == 'Aktif') {
-                return _buildActiveDiscussionCard(context, room);
-              } else {
-                return _buildCompletedDiscussionCard(context, room);
-              }
+              return _buildDiscussionRoomItem(context, room);
             },
           ),
         const SizedBox(height: 24),
@@ -569,186 +565,12 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     );
   }
 
-  Widget _buildActiveDiscussionCard(
+  Widget _buildDiscussionRoomItem(
       BuildContext context, CoopDiscussionRoom room) {
     const Color colorNavy = Color(0xFF1E293B);
-    const Color colorSecondaryContainer = Color(0xFFDC2626);
-
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(32), // rounded-vox (32px)
-        border: Border.all(color: const Color(0xFFF1F5F9)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Badge status Aktif
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFEEF2FF), // indigo-50
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: const Text(
-                  'Aktif',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF4F46E5), // indigo-600
-                  ),
-                ),
-              ),
-              Text(
-                room.date,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF94A3B8),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            room.title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: colorNavy,
-              height: 1.25,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            room.description,
-            style: const TextStyle(
-              fontSize: 14,
-              height: 1.5,
-              color: Color(0xFF475569),
-            ),
-          ),
-          const SizedBox(height: 24),
-          // Avatars & Join Button Row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  // Avatars Stack
-                  if (room.avatars.isNotEmpty)
-                    SizedBox(
-                      height: 32,
-                      width: 32 + (room.avatars.length - 1) * 20.0,
-                      child: Stack(
-                        children: List.generate(room.avatars.length, (idx) {
-                          final avatarVal = room.avatars[idx];
-                          final isHex = avatarVal.startsWith('#');
-                          final Color bgColor = isHex ? _parseHexColor(avatarVal) : const Color(0xFFDC2626);
-                          
-                          // Determine letter dynamically (e.g. A, R, B)
-                          final String letter = idx == 0 ? 'A' : (idx == 1 ? 'R' : 'B');
-
-                          return Positioned(
-                            left: idx * 20.0,
-                            child: Container(
-                              width: 32,
-                              height: 32,
-                              decoration: BoxDecoration(
-                                color: bgColor,
-                                shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  letter,
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
-                    ),
-                  const SizedBox(width: 8),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFEEF2FF),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Text(
-                      '+${room.membersCount - room.avatars.length} Lainnya',
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF4F46E5),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppConstants.roomDiscussionRoute,
-                  arguments: room.id,
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: colorSecondaryContainer,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Ikuti Diskusi',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  Icon(Icons.arrow_forward, color: Colors.white, size: 16),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCompletedDiscussionCard(
-      BuildContext context, CoopDiscussionRoom room) {
-    const Color colorNavy = Color(0xFF1E293B);
+    final String dateRange = (room.startDate != null && room.endDate != null)
+        ? '${room.startDate} - ${room.endDate}'
+        : room.date;
 
     return InkWell(
       onTap: () {
@@ -758,26 +580,34 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           arguments: room.id,
         );
       },
-      borderRadius: BorderRadius.circular(32),
+      borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(32), // rounded-vox (32px)
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(color: const Color(0xFFE2E8F0)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.access_time, color: Color(0xFF64748B), size: 16),
-                const SizedBox(width: 6),
                 Text(
-                  'Selesai • ${room.date}',
+                  'Status: ${room.status}',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: room.status == 'Aktif'
+                        ? const Color(0xFF475569)
+                        : const Color(0xFF94A3B8),
+                  ),
+                ),
+                Text(
+                  dateRange,
                   style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 13,
                     color: Color(0xFF64748B),
                   ),
                 ),
@@ -787,18 +617,50 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
             Text(
               room.title,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: colorNavy,
               ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              room.description,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color(0xFF64748B),
+            if (room.description.isNotEmpty) ...[
+              const SizedBox(height: 6),
+              Text(
+                room.description,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Color(0xFF64748B),
+                  height: 1.4,
+                ),
               ),
+            ],
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${room.membersCount} Partisipan',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF64748B),
+                  ),
+                ),
+                if (room.status == 'Aktif')
+                  const Row(
+                    children: [
+                      Text(
+                        'Ikuti Diskusi',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: colorNavy,
+                        ),
+                      ),
+                      SizedBox(width: 4),
+                      Icon(Icons.arrow_forward_ios,
+                          size: 12, color: colorNavy),
+                    ],
+                  ),
+              ],
             ),
           ],
         ),

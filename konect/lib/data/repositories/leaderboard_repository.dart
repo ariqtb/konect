@@ -29,30 +29,33 @@ class LeaderboardRepository {
 
       return rankings;
     } catch (e) {
-      // Fallback ke mock data jika view leaderboard belum ada di database
-      return [
-        const LeaderboardUser(
-          id: 'u1',
-          name: 'Ibu Rahayu',
-          score: 9850,
-          rank: 1,
-          isCurrentUser: false,
-        ),
-        const LeaderboardUser(
-          id: 'u2',
-          name: 'Ahmad Sulaiman',
-          score: 8450,
-          rank: 2,
-          isCurrentUser: true,
-        ),
-        const LeaderboardUser(
-          id: 'u3',
-          name: 'Rian',
-          score: 8230,
-          rank: 3,
-          isCurrentUser: false,
-        ),
-      ];
+      // Fallback: query users table directly if RPC fails
+      try {
+        final currentUser = await authRepository.getCurrentUser();
+        final currentUserId = currentUser?.id;
+        
+        final rows = await _supabase
+            .from('users')
+            .select('id, full_name, username, points_balance')
+            .eq('is_active', true)
+            .order('points_balance', ascending: false)
+            .limit(20);
+        
+        int rank = 0;
+        return (rows as List).map((data) {
+          rank++;
+          return LeaderboardUser(
+            id: data['id'] ?? '',
+            name: data['full_name'] ?? data['username'] ?? 'Warga',
+            score: data['points_balance'] ?? 0,
+            rank: rank,
+            isCurrentUser: data['id'] == currentUserId,
+          );
+        }).toList();
+      } catch (_) {
+        // Ultimate fallback if even direct query fails
+        return [];
+      }
     }
   }
 

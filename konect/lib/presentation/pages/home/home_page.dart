@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../../core/constants.dart';
-import '../../widgets/location_permission_banner.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -41,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final authState = context.watch<AuthBloc>().state;
     final bool isLoggedIn = authState is AuthAuthenticated;
-    final bool isAdmin = isLoggedIn && (authState.user.role == 'admin' || authState.user.role == 'kopdes');
+    final bool isAdmin = isLoggedIn && authState.user.isAdmin;
 
     if (_isLoading) {
       return Scaffold(

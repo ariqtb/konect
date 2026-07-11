@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sp;
 import '../../blocs/auth/auth_bloc.dart';
-import '../../../data/repositories/leaderboard_repository.dart';
-import '../../../data/models/leaderboard_user.dart';
-import '../../../data/repositories/cooperative_repository.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -32,43 +29,80 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _loadUserStats(String userId) async {
-    if (_lastUserId == userId && _userPoints != 0) return;
-    _lastUserId = userId;
-    
+    // Jangan skip jika coopName belum dimuat
     final authState = context.read<AuthBloc>().state;
+    final bool isKopdes = authState is AuthAuthenticated && authState.user.isKopdes;
+    if (_lastUserId == userId && _userPoints != 0 && (!isKopdes || _adminCoopName != null)) return;
+    _lastUserId = userId;
     
     setState(() => _loadingStats = true);
     try {
       final client = sp.Supabase.instance.client;
       
-      final leaderboard = await leaderboardRepository.getLeaderboard();
-      final currentUser = leaderboard.firstWhere(
-        (u) => u.isCurrentUser,
-        orElse: () => const LeaderboardUser(id: '', name: '', score: 0, rank: 0, isCurrentUser: false),
-      );
+      // Fetch points_balance directly from users table for accuracy
+      // (Karyawan koperasi mungkin tidak ada di tabel users, sehingga points = 0)
+      int points = 0;
+      try {
+        final userRow = await client
+            .from('users')
+            .select('points_balance')
+            .eq('id', userId)
+            .maybeSingle();
+        points = userRow?['points_balance'] ?? 0;
+      } catch (_) {}
       
-      final roomPartCount = await client
-          .from('room_participants')
-          .select()
-          .eq('user_id', userId);
-      
-      final count = (roomPartCount as List).length;
+      int count = 0;
+      try {
+        final roomPartCount = await client
+            .from('room_participants')
+            .select()
+            .eq('user_id', userId);
+        count = (roomPartCount as List).length;
+      } catch (_) {}
 
       String? coopName;
-      if (authState is AuthAuthenticated &&
-          (authState.user.role == 'admin' || authState.user.role == 'kopdes')) {
-        final coopId = await cooperativeRepository.getAdminCooperative(userId);
-        final coop = await client
-            .from('cooperatives')
-            .select('name')
-            .eq('id', coopId)
-            .maybeSingle();
-        coopName = coop?['name'] ?? 'Koperasi Terkait';
+      if (authState is AuthAuthenticated && authState.user.isKopdes) {
+        // Ambil nama koperasi dari profil_koperasi via koperasiRef
+        final koperasiRef = authState.user.koperasiRef;
+        if (koperasiRef != null) {
+          try {
+            final coop = await client
+                .from('profil_koperasi')
+                .select('nama_koperasi')
+                .eq('koperasi_ref', koperasiRef)
+                .maybeSingle();
+            coopName = coop?['nama_koperasi'] as String?;
+          } catch (_) {}
+        }
+        // Fallback: coba dari karyawan_koperasi jika koperasiRef belum terisi di User
+        if (coopName == null) {
+          try {
+            final karyawan = await client
+                .from('karyawan_koperasi')
+                .select('koperasi_ref, profil_koperasi(nama_koperasi)')
+                .eq('karyawan_ref', userId)
+                .maybeSingle();
+            if (karyawan != null) {
+              final profil = karyawan['profil_koperasi'];
+              if (profil is Map) {
+                coopName = profil['nama_koperasi'] as String?;
+              } else if (karyawan['koperasi_ref'] != null) {
+                final coop = await client
+                    .from('profil_koperasi')
+                    .select('nama_koperasi')
+                    .eq('koperasi_ref', karyawan['koperasi_ref'])
+                    .maybeSingle();
+                coopName = coop?['nama_koperasi'] as String?;
+              }
+            }
+          } catch (_) {}
+        }
+        coopName ??= 'Koperasi Terkait';
       }
 
       if (mounted) {
         setState(() {
-          _userPoints = currentUser.score;
+          _userPoints = points;
           _userRoomsCount = count;
           _adminCoopName = coopName;
           _loadingStats = false;
@@ -78,6 +112,18 @@ class _ProfilePageState extends State<ProfilePage> {
       if (mounted) {
         setState(() => _loadingStats = false);
       }
+    }
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final authState = context.read<AuthBloc>().state;
+    if (authState is AuthAuthenticated) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _loadUserStats(authState.user.id);
+        }
+      });
     }
   }
 
@@ -94,7 +140,11 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             }
             if (state is AuthAuthenticated) {
-              _loadUserStats(state.user.id);
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted) {
+                  _loadUserStats(state.user.id);
+                }
+              });
             }
           },
           child: BlocBuilder<AuthBloc, AuthState>(
@@ -104,11 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
               final String emailOrMac = isLoggedIn ? state.user.email : 'MAC: 02:42:AC:11:00:02';
               final String role = isLoggedIn ? state.user.role.toUpperCase() : 'MASYARAKAT';
               final String? avatarUrl = isLoggedIn ? state.user.avatarUrl : null;
-              final bool isKopdesOrAdmin = isLoggedIn && (state.user.role == 'admin' || state.user.role == 'kopdes');
-
-              if (isLoggedIn) {
-                _loadUserStats(state.user.id);
-              }
+              final bool isKopdesOrAdmin = isLoggedIn && state.user.isKopdes;
 
               return SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 120),

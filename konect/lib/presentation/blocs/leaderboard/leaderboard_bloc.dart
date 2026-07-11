@@ -110,11 +110,14 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     emit(const LeaderboardLoading());
     try {
       final rankings = await leaderboardRepository.getLeaderboard();
-      final currentUser = rankings.firstWhere((u) => u.isCurrentUser);
+      final currentUser = rankings.firstWhere(
+        (u) => u.isCurrentUser,
+        orElse: () => rankings.isNotEmpty ? rankings.first : const LeaderboardUser(id: '', name: '', score: 0, rank: 0, isCurrentUser: false),
+      );
       emit(LeaderboardLoaded(
         rankings: rankings,
         currentUser: currentUser,
-        currentPoints: 8450,
+        currentPoints: currentUser.score,
         targetPoints: 10000,
         rewardTitle: 'Voucher Belanja Sembako',
       ));

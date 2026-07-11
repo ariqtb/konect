@@ -82,6 +82,8 @@ class CoopDiscussionRoom {
   final String date;
   final int membersCount;
   final List<String> avatars;
+  final String? startDate;
+  final String? endDate;
 
   const CoopDiscussionRoom({
     required this.id,
@@ -91,6 +93,8 @@ class CoopDiscussionRoom {
     required this.date,
     required this.membersCount,
     required this.avatars,
+    this.startDate,
+    this.endDate,
   });
 
   factory CoopDiscussionRoom.fromJson(Map<String, dynamic> json) {
@@ -102,6 +106,8 @@ class CoopDiscussionRoom {
       date: json['date'] ?? '',
       membersCount: json['members_count'] ?? 0,
       avatars: List<String>.from(json['avatars'] ?? []),
+      startDate: json['start_date'],
+      endDate: json['end_date'],
     );
   }
 
@@ -114,6 +120,8 @@ class CoopDiscussionRoom {
       'date': date,
       'members_count': membersCount,
       'avatars': avatars,
+      'start_date': startDate,
+      'end_date': endDate,
     };
   }
 }

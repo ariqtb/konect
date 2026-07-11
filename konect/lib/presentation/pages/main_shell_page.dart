@@ -40,7 +40,7 @@ class _MainShellPageState extends State<MainShellPage> {
   void _handleMiddleButton() {
     final authState = context.read<AuthBloc>().state;
     final bool isLoggedIn = authState is AuthAuthenticated;
-    final bool isKopdes = isLoggedIn && (authState.user.role == 'kopdes' || authState.user.role == 'admin');
+    final bool isKopdes = isLoggedIn && authState.user.isKopdes;
 
     if (isKopdes) {
       _showAdminMenuModal();

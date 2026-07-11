@@ -773,8 +773,26 @@ class _VoucherDetailSheetState extends State<_VoucherDetailSheet> {
       if (!mounted) return;
       setState(() => _isProcessing = false);
       Navigator.pop(context);
+
+      final int uniqueHash = (widget.data['title'].toString().hashCode).abs() % 1000;
+      final String voucherCode = 'VX-$uniqueHash-KNC-${10 + (widget.data['points'].toString().hashCode % 90).abs()}';
+
+      Navigator.pushNamed(
+        context,
+        '/redeem-voucher',
+        arguments: {
+          'title': widget.data['title'] ?? 'Voucher Belanja',
+          'points': widget.data['points'] ?? '1.500',
+          'code': voucherCode,
+          'expiry': '30 Hari dari Sekarang',
+        },
+      );
+
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Voucher berhasil ditukar!')),
+        const SnackBar(
+          content: Text('Voucher berhasil ditukar!'),
+          backgroundColor: Color(0xFF10B981),
+        ),
       );
     });
   }

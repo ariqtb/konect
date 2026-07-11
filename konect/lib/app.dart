@@ -27,6 +27,7 @@ import 'presentation/pages/profile/profile_page.dart';
 import 'presentation/pages/room/room_discussion_page.dart';
 import 'presentation/pages/room/create_room_page.dart';
 import 'presentation/pages/reedem/redeem_history_page.dart';
+import 'presentation/pages/reedem/redeem_voucher_page.dart';
 import 'presentation/pages/article/article_detail_page.dart';
 import 'presentation/pages/article/create_article_page.dart';
 
@@ -131,6 +132,11 @@ class _KonectAppState extends State<KonectApp> {
               );
             case AppConstants.redeemRoute:
               return MaterialPageRoute(builder: (_) => const RedeemHistoryPage());
+            case '/redeem-voucher':
+              final voucherData = settings.arguments as Map<String, dynamic>? ?? {};
+              return MaterialPageRoute(
+                builder: (_) => RedeemVoucherPage(voucherData: voucherData),
+              );
             case '/create-room':
               return MaterialPageRoute(builder: (_) => const CreateRoomPage());
             default:

@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:supabase_flutter/supabase_flutter.dart' as sp;
 
 class RoomRepository {
@@ -8,12 +9,23 @@ class RoomRepository {
       String actualRoomId = roomIdOrTitle;
       
       if (!_isValidUUID(roomIdOrTitle)) {
-        final match = await _supabase
+        // Coba cari berdasarkan code terlebih dahulu (case-insensitive)
+        var match = await _supabase
             .from('discussion_rooms')
             .select('id')
-            .ilike('title', roomIdOrTitle.trim())
+            .eq('code', roomIdOrTitle.trim().toUpperCase())
             .limit(1)
             .maybeSingle();
+
+        if (match == null) {
+          match = await _supabase
+              .from('discussion_rooms')
+              .select('id')
+              .ilike('title', roomIdOrTitle.trim())
+              .limit(1)
+              .maybeSingle();
+        }
+
         if (match != null && match['id'] != null) {
           actualRoomId = match['id'];
         } else {
@@ -87,59 +99,75 @@ class RoomRepository {
     try {
       final response = await _supabase
           .from('discussion_rooms')
-          .select('cooperative_id')
+          .select('koperasi_ref')
           .eq('id', roomId)
           .maybeSingle();
 
-      if (response != null && response['cooperative_id'] != null) {
-        final coopId = response['cooperative_id'];
-        final coop = await _supabase
-            .from('cooperatives')
-            .select('legacy_ref')
-            .eq('id', coopId)
+      if (response != null && response['koperasi_ref'] != null) {
+        final coopRef = response['koperasi_ref'];
+        final profile = await _supabase
+            .from('profil_koperasi')
+            .select('latitude, longitude')
+            .eq('koperasi_ref', coopRef)
             .maybeSingle();
 
-        if (coop != null && coop['legacy_ref'] != null) {
-          final legacyRef = coop['legacy_ref'];
-          final profile = await _supabase
-              .from('profil_koperasi')
-              .select('koordinat_dibulatkan')
-              .eq('koperasi_ref', legacyRef)
-              .maybeSingle();
-
-          if (profile != null && profile['koordinat_dibulatkan'] != null) {
-            final coords = profile['koordinat_dibulatkan'].toString().split(',');
-            if (coords.length == 2) {
-              return {
-                'latitude': double.tryParse(coords[0].trim()) ?? 0.0,
-                'longitude': double.tryParse(coords[1].trim()) ?? 0.0,
-              };
-            }
-          }
+        if (profile != null) {
+          final double lat = (profile['latitude'] as num?)?.toDouble() ?? -6.200000;
+          final double lng = (profile['longitude'] as num?)?.toDouble() ?? 106.816666;
+          return {'latitude': lat, 'longitude': lng};
         }
       }
     } catch (_) {}
     return {'latitude': -6.200000, 'longitude': 106.816666};
   }
 
-  Future<bool> addOpinion({
+  int _uuidToBigInt(String uuid) {
+    int hash = 0;
+    for (int i = 0; i < uuid.length; i++) {
+      hash = (hash * 31 + uuid.codeUnitAt(i)) % 9007199254740991;
+    }
+    return hash;
+  }
+
+  Future<String?> addOpinion({
     required String roomId,
     required String userId,
     required String content,
+    double? coordinateX,
+    double? coordinateY,
   }) async {
     try {
-      final coords = await _getRoomCoopCoordinates(roomId);
-      await _supabase.from('opinions').insert({
+      final bigIntId = _uuidToBigInt(userId);
+      final response = await _supabase.from('opinions').insert({
         'room_id': roomId,
-        'user_id': userId,
+        'user_id': bigIntId,
         'content': content,
         'is_anonymous': false,
-        'latitude': coords['latitude'],
-        'longitude': coords['longitude'],
-      });
-      return true;
-    } catch (_) {
-      return false;
+        'coordinate_x': coordinateX,
+        'coordinate_y': coordinateY,
+      }).select('id').maybeSingle();
+      
+      if (response != null && response['id'] != null) {
+        return response['id'].toString();
+      }
+      return null;
+    } catch (e, stackTrace) {
+      print('[addOpinion] ERROR: $e');
+      print('[addOpinion] STACK: $stackTrace');
+      return null;
+    }
+  }
+
+  Future<bool> moderateComment(String content) async {
+    try {
+      final response = await _supabase.rpc(
+        'moderate_comment',
+        params: {'content': content},
+      );
+      return response as bool;
+    } catch (e) {
+      print('[moderateComment] ERROR: $e');
+      return true; // Fallback if offline
     }
   }
 
@@ -147,29 +175,23 @@ class RoomRepository {
     required String opinionId,
     required String userId,
     required String content,
+    double? coordinateX,
+    double? coordinateY,
   }) async {
     try {
-      final op = await _supabase
-          .from('opinions')
-          .select('room_id')
-          .eq('id', opinionId)
-          .maybeSingle();
-      
-      final String? roomId = op?['room_id'];
-      final coords = roomId != null
-          ? await _getRoomCoopCoordinates(roomId)
-          : {'latitude': -6.200000, 'longitude': 106.816666};
-
-      await _supabase.from('discussion_comments').insert({
+      final bigIntId = _uuidToBigInt(userId);
+      await _supabase.from('opinion_comments').insert({
         'opinion_id': opinionId,
-        'user_id': userId,
+        'user_id': bigIntId,
         'content': content,
         'is_anonymous': false,
-        'latitude': coords['latitude'],
-        'longitude': coords['longitude'],
+        'coordinate_x': coordinateX,
+        'coordinate_y': coordinateY,
       });
       return true;
-    } catch (_) {
+    } catch (e, stackTrace) {
+      print('[addComment] ERROR: $e');
+      print('[addComment] STACK: $stackTrace');
       return false;
     }
   }
@@ -193,6 +215,13 @@ class RoomRepository {
     }
   }
 
+  String _generateRoomCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final rnd = Random();
+    return String.fromCharCodes(Iterable.generate(
+        6, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
+  }
+
   Future<String?> createRoom({
     required String coopRef,
     required String title,
@@ -202,48 +231,39 @@ class RoomRepository {
     required DateTime endDate,
   }) async {
     try {
-      var coop = await _supabase
-          .from('cooperatives')
-          .select('id')
-          .eq('legacy_ref', coopRef)
-          .maybeSingle();
+      print('[createRoom] coopRef=$coopRef | createdBy=$createdBy | title=$title');
+      print('[createRoom] start=${startDate.toUtc().toIso8601String()} | end=${endDate.toUtc().toIso8601String()}');
 
-      String coopId;
-      if (coop == null) {
-        final village = await _supabase.from('villages').select('id').limit(1).maybeSingle();
-        final String villageId = village?['id'] ?? '00000000-0000-0000-0000-000000000001';
-        
-        final newCoop = await _supabase.from('cooperatives').insert({
-          'legacy_ref': coopRef,
-          'village_id': villageId,
-          'name': 'Koperasi Stub',
-          'slug': 'coop-stub-${DateTime.now().millisecondsSinceEpoch}',
-        }).select('id').single();
-        coopId = newCoop['id'];
-      } else {
-        coopId = coop['id'];
-      }
+      final String code = _generateRoomCode();
 
+      // Insert langsung ke discussion_rooms menggunakan koperasi_ref
       final response = await _supabase.from('discussion_rooms').insert({
-        'cooperative_id': coopId,
         'created_by': createdBy,
         'title': title,
         'description': description,
+        'code': code,
         'is_active': true,
-        'start_date': startDate.toIso8601String(),
-        'end_date': endDate.toIso8601String(),
+        'is_anonymous': false,
+        'koperasi_ref': coopRef,
+        'start_date': startDate.toUtc().toIso8601String(),
+        'end_date': endDate.toUtc().toIso8601String(),
       }).select('id').single();
 
       final String roomId = response['id'];
+      print('[createRoom] Berhasil! roomId=$roomId');
 
+      // Daftarkan pembuat sebagai peserta dengan role host
       await _supabase.from('room_participants').insert({
         'room_id': roomId,
         'user_id': createdBy,
         'role': 'host',
       });
+      print('[createRoom] Peserta host berhasil didaftarkan');
 
       return roomId;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('[createRoom] ERROR: $e');
+      print('[createRoom] StackTrace: $stackTrace');
       return null;
     }
   }

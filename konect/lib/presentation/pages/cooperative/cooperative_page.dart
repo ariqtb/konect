@@ -298,37 +298,6 @@ class _CooperativePageState extends State<CooperativePage> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    // Open/Closed Status Chip
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFEFF6FF), // blue-50
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: const Color(0xFFDBEAFE)), // blue-100
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 8,
-                            height: 8,
-                            decoration: BoxDecoration(
-                              color: item.isOpen ? const Color(0xFF2563EB) : const Color(0xFF9CA3AF), // blue-600 or gray-400
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            item.isOpen ? 'Buka' : 'Tutup',
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: brandSecondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(height: 8),

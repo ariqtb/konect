@@ -4,17 +4,37 @@ import '../../widgets/dashed_line.dart';
 import '../../../data/repositories/room_repository.dart';
 import '../../../data/repositories/auth_repository.dart';
 
+class RoomComment {
+  final String id;
+  final String content;
+  double? coordinateX;
+  double? coordinateY;
+
+  RoomComment({
+    required this.id,
+    required this.content,
+    this.coordinateX,
+    this.coordinateY,
+  });
+}
+
 class RoomOpinion {
   final String id;
   final String text;
   int likes;
-  final List<String> comments;
+  final List<RoomComment> comments;
+  final double? relevanceScore;
+  double? coordinateX;
+  double? coordinateY;
 
   RoomOpinion({
     required this.id,
     required this.text,
     this.likes = 0,
     required this.comments,
+    this.relevanceScore,
+    this.coordinateX,
+    this.coordinateY,
   });
 }
 
@@ -49,6 +69,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
 
   // The id of the most recently added opinion (for highlight glow)
   String? _newlyAddedId;
+  bool _hasCentered = false;
 
   @override
   void initState() {
@@ -98,7 +119,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
       .onPostgresChanges(
         event: sp.PostgresChangeEvent.all,
         schema: 'public',
-        table: 'discussion_comments',
+        table: 'opinion_comments',
         callback: (payload) {
           _reloadCanvasSilent();
         },
@@ -123,6 +144,33 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
     }
   }
 
+  List<RoomOpinion> _mapOpinions(List<dynamic> ops) {
+    return ops.map((o) {
+      final commentsDyn = o['comments'] as List<dynamic>? ?? [];
+      final comments = commentsDyn.map((c) {
+        if (c is Map) {
+          return RoomComment(
+            id: c['id'] ?? '',
+            content: c['content'] ?? '',
+            coordinateX: c['coordinate_x'] != null ? (c['coordinate_x'] as num).toDouble() : null,
+            coordinateY: c['coordinate_y'] != null ? (c['coordinate_y'] as num).toDouble() : null,
+          );
+        } else {
+          return RoomComment(id: '', content: c.toString());
+        }
+      }).toList();
+      return RoomOpinion(
+        id: o['id'] ?? '',
+        text: o['text'] ?? '',
+        likes: o['likes'] ?? 0,
+        comments: comments,
+        relevanceScore: o['relevance_score'] != null ? (o['relevance_score'] as num).toDouble() : null,
+        coordinateX: o['coordinate_x'] != null ? (o['coordinate_x'] as num).toDouble() : null,
+        coordinateY: o['coordinate_y'] != null ? (o['coordinate_y'] as num).toDouble() : null,
+      );
+    }).toList();
+  }
+
   Future<void> _reloadCanvasSilent() async {
     if (_roomId == null) return;
     final data = await roomRepository.getRoomCanvas(_roomId!);
@@ -133,16 +181,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
       _topicDescription = data['description'] ?? '';
       
       final ops = data['opinions'] as List<dynamic>? ?? [];
-      _opinions = ops.map((o) {
-        final commentsDyn = o['comments'] as List<dynamic>? ?? [];
-        final comments = commentsDyn.map((c) => c.toString()).toList();
-        return RoomOpinion(
-          id: o['id'] ?? '',
-          text: o['text'] ?? '',
-          likes: o['likes'] ?? 0,
-          comments: comments,
-        );
-      }).toList();
+      _opinions = _mapOpinions(ops);
       
       _participantsCount = ops.length + 1;
     });
@@ -204,8 +243,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                 text: 'Apakah subsidi pupuk bisa dibagikan langsung lewat Koperasi Tani?',
                 likes: 14,
                 comments: [
-                  'Setuju, biar tidak salah sasaran.',
-                  'Betul, lewat koperasi lebih transparan.',
+                  RoomComment(id: 'c1', content: 'Setuju, biar tidak salah sasaran.'),
+                  RoomComment(id: 'c2', content: 'Betul, lewat koperasi lebih transparan.'),
                 ],
               ),
               RoomOpinion(
@@ -213,7 +252,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                 text: 'Bibit Padi Q3 sangat tahan hama, sebaiknya segera didistribusikan.',
                 likes: 8,
                 comments: [
-                  'Bagaimana cara pembagian kuotanya?',
+                  RoomComment(id: 'c3', content: 'Bagaimana cara pembagian kuotanya?'),
                 ],
               ),
             ];
@@ -224,8 +263,8 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                 text: 'Pelebaran jalan di pertigaan pasar sangat mendesak.',
                 likes: 12,
                 comments: [
-                  'Setuju banget, motor sering numpuk.',
-                  'Betul, parit sekarang sudah dangkal.',
+                  RoomComment(id: 'c4', content: 'Setuju banget, motor sering numpuk.'),
+                  RoomComment(id: 'c5', content: 'Betul, parit sekarang sudah dangkal.'),
                 ],
               ),
               RoomOpinion(
@@ -233,7 +272,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                 text: 'Gunakan aspal kualitas premium agar awet.',
                 likes: 8,
                 comments: [
-                  'Sedang dikaji anggarannya.',
+                  RoomComment(id: 'c6', content: 'Sedang dikaji anggarannya.'),
                 ],
               ),
             ];
@@ -244,7 +283,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                 text: 'Mari kita mulai pembahasan mengenai topik: $roomId',
                 likes: 3,
                 comments: [
-                  'Siap mendukung hasil keputusan rapat.',
+                  RoomComment(id: 'c7', content: 'Siap mendukung hasil keputusan rapat.'),
                 ],
               ),
             ];
@@ -260,6 +299,28 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
         _opinions = [];
         _topicTitle = 'Ruang tidak ditemukan';
       });
+      
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext dialogContext) => AlertDialog(
+            title: const Text('Peringatan'),
+            content: const Text('Ruang tidak ditemukan'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(dialogContext); // Close dialog
+                  if (mounted) {
+                    Navigator.pop(context); // Go back
+                  }
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      });
       return;
     }
 
@@ -271,21 +332,22 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
       _topicDescription = data['description'] ?? '';
       
       final ops = data['opinions'] as List<dynamic>? ?? [];
-      _opinions = ops.map((o) {
-        final commentsDyn = o['comments'] as List<dynamic>? ?? [];
-        final comments = commentsDyn.map((c) => c.toString()).toList();
-        return RoomOpinion(
-          id: o['id'] ?? '',
-          text: o['text'] ?? '',
-          likes: o['likes'] ?? 0,
-          comments: comments,
-        );
-      }).toList();
+      _opinions = _mapOpinions(ops);
       
       _participantsCount = ops.length + 1;
     });
 
     _subscribeToRealtime(_roomId!);
+
+    if (!_hasCentered) {
+      _hasCentered = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          final Size viewport = MediaQuery.of(context).size;
+          _spotlightPoint(const Offset(1600.0 / 2, 100.0), viewport);
+        }
+      });
+    }
 
     // Auto join room in background for history
     try {
@@ -300,37 +362,75 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
     if (text.trim().isEmpty) return;
     final String trimmed = text.trim();
 
-    if (_roomId != null && _isValidUUID(_roomId!)) {
-      final currentUser = await authRepository.getCurrentUser();
-      if (currentUser != null) {
-        final success = await roomRepository.addOpinion(
-          roomId: _roomId!,
-          userId: currentUser.id,
-          content: trimmed,
+    // Check banned words
+    final bool isClean = await roomRepository.moderateComment(trimmed);
+    if (!isClean) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Pendapat Anda mengandung kata terlarang!'),
+            backgroundColor: Color(0xFFE14242),
+          ),
         );
-        if (success) {
-          _opinionController.clear();
-          _opinions = null;
-          await _initializeOpinions(_roomId!);
-          return;
-        }
       }
+      return;
     }
 
-    // Compute where the NEW opinion node will be placed (before setState)
-    // so we can spotlight it right after the next frame.
     final int newIndex = (_opinions?.length ?? 0);
-    final double screenW = MediaQuery.of(context).size.width;
-    final double canvasWidth = screenW.clamp(320.0, 480.0);
+    const double canvasWidth = 1600.0;
     final bool isLeft = newIndex % 2 == 0;
     const double cardWidth = 260.0;
-    final double cardX = isLeft ? 16.0 : (canvasWidth - cardWidth - 16.0);
+    
+    // Estimate layout positioning using relevance = 0.5 for new opinion
+    double relevance = 0.5;
+    double centerX = canvasWidth / 2;
+    double maxDistX = 100.0;
+    double distX = maxDistX * (1.0 - relevance);
+    double cardX = isLeft ? centerX - cardWidth - distX : centerX + distX;
 
-    // Estimate Y by re-running the same accumulation logic
     double estimatedY = 220.0;
     for (int i = 0; i < newIndex; i++) {
       final int commentCount = _opinions?[i].comments.length ?? 0;
       estimatedY += 100.0 + commentCount * 65.0 + 70.0;
+    }
+
+    if (_roomId != null && _isValidUUID(_roomId!)) {
+      final currentUser = await authRepository.getCurrentUser();
+      if (currentUser != null) {
+        final newOpinionId = await roomRepository.addOpinion(
+          roomId: _roomId!,
+          userId: currentUser.id,
+          content: trimmed,
+          coordinateX: cardX,
+          coordinateY: estimatedY,
+        );
+        if (newOpinionId != null) {
+          _opinionController.clear();
+          _newlyAddedId = newOpinionId;
+          _opinions = null;
+          await _initializeOpinions(_roomId!);
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (_newlyAddedId != null && _opinions != null && mounted) {
+              try {
+                final targetOp = _opinions!.firstWhere((o) => o.id == _newlyAddedId);
+                if (targetOp.coordinateX != null && targetOp.coordinateY != null) {
+                  final Size viewport = MediaQuery.of(context).size;
+                  _spotlightPoint(
+                    Offset(targetOp.coordinateX! + cardWidth / 2, targetOp.coordinateY! + 60.0),
+                    viewport,
+                  );
+                }
+              } catch (_) {}
+            }
+          });
+
+          Future.delayed(const Duration(seconds: 2), () {
+            if (mounted) setState(() => _newlyAddedId = null);
+          });
+          return;
+        }
+      }
     }
 
     // Center of the new card
@@ -344,6 +444,9 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
           text: trimmed,
           likes: 0,
           comments: [],
+          relevanceScore: 0.5,
+          coordinateX: cardX,
+          coordinateY: estimatedY,
         ),
       );
       _newlyAddedId = newId;
@@ -365,29 +468,65 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
     });
   }
 
-  Future<void> _addComment(RoomOpinion opinion, String commentText) async {
-    if (commentText.trim().isEmpty) return;
+  Future<bool> _addComment(RoomOpinion opinion, String commentText) async {
+    if (commentText.trim().isEmpty) return false;
     final String trimmed = commentText.trim();
+
+    // Check banned words
+    final bool isClean = await roomRepository.moderateComment(trimmed);
+    if (!isClean) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Komentar Anda mengandung kata terlarang!'),
+            backgroundColor: Color(0xFFE14242),
+          ),
+        );
+      }
+      return false;
+    }
 
     if (_roomId != null && _isValidUUID(_roomId!)) {
       final currentUser = await authRepository.getCurrentUser();
       if (currentUser != null) {
+        final int commentIndex = opinion.comments.length;
+        final bool isLeft = (_opinions?.indexOf(opinion) ?? 0) % 2 == 0;
+        
+        final double parentX = opinion.coordinateX ?? (isLeft ? 30.0 : (1600.0 - 260.0 - 30.0));
+        final double parentY = opinion.coordinateY ?? 220.0;
+        final double commentX = isLeft ? parentX + 40.0 : parentX + 20.0;
+        final double commentY = parentY + 100.0 + 30.0 + commentIndex * 65.0;
+
         final success = await roomRepository.addComment(
           opinionId: opinion.id,
           userId: currentUser.id,
           content: trimmed,
+          coordinateX: commentX,
+          coordinateY: commentY,
         );
         if (success) {
+          setState(() {
+            opinion.comments.add(RoomComment(
+              id: DateTime.now().millisecondsSinceEpoch.toString(),
+              content: trimmed,
+              coordinateX: commentX,
+              coordinateY: commentY,
+            ));
+          });
           _opinions = null;
           await _initializeOpinions(_roomId!);
-          return;
+          return true;
         }
       }
     }
 
     setState(() {
-      opinion.comments.add(trimmed);
+      opinion.comments.add(RoomComment(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        content: trimmed,
+      ));
     });
+    return true;
   }
 
   Future<void> _likeOpinion(RoomOpinion opinion) async {
@@ -442,8 +581,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
       );
     }
 
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double canvasWidth = screenWidth.clamp(320.0, 480.0);
+    const double canvasWidth = 1600.0;
 
     // Coordinate layout math
     double currentY = 220.0; // Y offset starting point
@@ -521,19 +659,33 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                   ],
                 ),
                 const SizedBox(height: 10),
-                Expanded(
-                  child: Text(
-                    _topicTitle,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E293B),
-                      height: 1.3,
-                    ),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
+                Text(
+                  _topicTitle,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1E293B),
+                    height: 1.3,
                   ),
+                  maxLines: _topicDescription.isEmpty ? 4 : 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
+                if (_topicDescription.isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  Expanded(
+                    child: Text(
+                      _topicDescription,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Color(0xFF64748B),
+                        height: 1.3,
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ] else
+                  const Spacer(),
               ],
             ),
           ),
@@ -541,15 +693,28 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
       ),
     );
 
-    final opinionsList = _opinions ?? [];
+    final opinionsList = List<RoomOpinion>.from(_opinions ?? []);
+    // Sort descending by relevance score (null relevance defaults to 0.5)
+    opinionsList.sort((a, b) => (b.relevanceScore ?? 0.5).compareTo(a.relevanceScore ?? 0.5));
 
     // Lay out opinions and comments sequentially
     for (int i = 0; i < opinionsList.length; i++) {
       final opinion = opinionsList[i];
       final bool isLeft = i % 2 == 0;
       const double cardWidth = 260.0;
-      final double cardX = isLeft ? 16.0 : (canvasWidth - cardWidth - 16.0);
+      
+      // Calculate horizontal position based on relevance
+      // Higher relevance -> closer to center line
+      // Lower relevance -> further from center line
+      final double relevance = opinion.relevanceScore ?? 0.5;
+      final double centerX = canvasWidth / 2;
+      final double maxDistX = 100.0;
+      final double distX = maxDistX * (1.0 - relevance);
+      final double cardX = isLeft ? centerX - cardWidth - distX : centerX + distX;
       final double cardY = currentY;
+
+      opinion.coordinateX = cardX;
+      opinion.coordinateY = cardY;
 
       // Opinion node center top
       final Offset opinionTopCenter = Offset(cardX + cardWidth / 2, cardY);
@@ -667,9 +832,13 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
 
       // Lay out comments
       for (int j = 0; j < opinion.comments.length; j++) {
-        final comment = opinion.comments[j];
+        final commentObj = opinion.comments[j];
+        final comment = commentObj.content;
         const double commentWidth = 200.0;
         final double commentX = isLeft ? cardX + 40.0 : cardX + 20.0;
+
+        commentObj.coordinateX = commentX;
+        commentObj.coordinateY = commentY;
 
         final Offset lineStart = Offset(
           isLeft ? cardX + 30.0 : cardX + cardWidth - 30.0,
@@ -1048,7 +1217,7 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  opinion.comments[index],
+                                  opinion.comments[index].content,
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: Color(0xFF475569),
@@ -1101,15 +1270,16 @@ class _RoomDiscussionPageState extends State<RoomDiscussionPage>
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               final text = commentFieldController.text;
                               if (text.trim().isNotEmpty) {
+                                commentFieldController.clear();
                                 // Add comment in parent page state
-                                _addComment(opinion, text);
-                                // Refresh current modal state
-                                setModalState(() {
-                                  commentFieldController.clear();
-                                });
+                                final success = await _addComment(opinion, text);
+                                if (success) {
+                                  // Refresh current modal state
+                                  setModalState(() {});
+                                }
                                 // Also trigger state rebuild on parent canvas page
                                 setState(() {});
                               }

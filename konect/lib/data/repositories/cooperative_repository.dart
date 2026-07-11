@@ -72,31 +72,36 @@ class CooperativeRepository {
   Future<String> getAdminCooperative(String userId) async {
     try {
       final client = SupabaseService().client;
-      final member = await client
-          .from('cooperative_members')
-          .select('cooperative_id')
-          .eq('user_id', userId)
+      
+      // 1. Cek karyawan_koperasi berdasarkan user_uuid atau karyawan_ref
+      final employee = await client
+          .from('karyawan_koperasi')
+          .select('koperasi_ref')
+          .or('user_uuid.eq.$userId,karyawan_ref.eq.$userId')
+          .limit(1)
           .maybeSingle();
-      if (member != null && member['cooperative_id'] != null) {
-        return member['cooperative_id'];
+      if (employee != null && employee['koperasi_ref'] != null) {
+        return employee['koperasi_ref'];
       }
 
+      // 2. Cek discussion_rooms berdasarkan created_by
       final room = await client
           .from('discussion_rooms')
-          .select('cooperative_id')
+          .select('koperasi_ref')
           .eq('created_by', userId)
           .limit(1)
           .maybeSingle();
-      if (room != null && room['cooperative_id'] != null) {
-        return room['cooperative_id'];
+      if (room != null && room['koperasi_ref'] != null) {
+        return room['koperasi_ref'];
       }
 
-      final coop = await client.from('cooperatives').select('id').limit(1).maybeSingle();
-      if (coop != null && coop['id'] != null) {
-        return coop['id'];
+      // 3. Fallback ke koperasi pertama di profil_koperasi
+      final coop = await client.from('profil_koperasi').select('koperasi_ref').limit(1).maybeSingle();
+      if (coop != null && coop['koperasi_ref'] != null) {
+        return coop['koperasi_ref'];
       }
     } catch (_) {}
-    return '00000000-0000-0000-0000-0000000000a1';
+    return 'KOPSUKB-001';
   }
 
   Future<bool> createArticle({
@@ -107,14 +112,33 @@ class CooperativeRepository {
   }) async {
     try {
       final client = SupabaseService().client;
+      
+      String actualCreatedBy = createdBy;
+      final RegExp uuidRegExp = RegExp(
+        r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+      );
+      if (!uuidRegExp.hasMatch(createdBy)) {
+        final karyawan = await client
+            .from('karyawan_koperasi')
+            .select('user_uuid')
+            .eq('karyawan_ref', createdBy)
+            .maybeSingle();
+        if (karyawan != null && karyawan['user_uuid'] != null) {
+          actualCreatedBy = karyawan['user_uuid'];
+        } else {
+          actualCreatedBy = '704a44f7-060f-47ad-9594-51f991ced8d9'; // fallback admin uuid
+        }
+      }
+
       await client.from('articles').insert({
-        'cooperative_id': cooperativeId,
+        'koperasi_ref': cooperativeId,
         'title': title,
         'content': content,
-        'created_by': createdBy,
+        'created_by': actualCreatedBy,
       });
       return true;
-    } catch (_) {
+    } catch (e) {
+      print('[createArticle] ERROR: $e');
       return false;
     }
   }

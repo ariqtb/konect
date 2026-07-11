@@ -71,20 +71,25 @@ class LocationOnboardingSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final bloc = context.read<LocationBloc>();
 
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        color: Colors.white,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 20,
+            offset: const Offset(0, -5),
+          ),
+        ],
       ),
       padding: EdgeInsets.only(
-        left: 24,
-        right: 24,
-        top: 16,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 32,
+        left: 28,
+        right: 28,
+        top: 14,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 28,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -93,94 +98,104 @@ class LocationOnboardingSheet extends StatelessWidget {
           // Drag handle
           Center(
             child: Container(
-              width: 40,
+              width: 36,
               height: 4,
               margin: const EdgeInsets.only(bottom: 24),
               decoration: BoxDecoration(
-                color: colorScheme.outline.withValues(alpha: 0.4),
+                color: const Color(0xFFE2E8F0), // Slate-200
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
           ),
 
-          // Icon header
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              color: colorScheme.primaryContainer.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: Icon(
-              Icons.location_on_rounded,
-              size: 44,
-              color: colorScheme.primary,
+          // Icon header (brand colored / active)
+          Center(
+            child: Container(
+              width: 72,
+              height: 72,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFEF2F2), // Very soft red-50
+                borderRadius: BorderRadius.circular(36),
+                border: Border.all(
+                  color: const Color(0xFFFEE2E2), // Red-100
+                  width: 1.5,
+                ),
+              ),
+              child: const Icon(
+                Icons.location_on_rounded,
+                size: 38,
+                color: Color(0xFFDC2626), // Premium brand red
+              ),
             ),
           ),
           const SizedBox(height: 20),
 
           // Title
-          Text(
-            'Temukan Koperasi di Sekitar Anda',
+          const Text(
+            'Akses Lokasi Diperlukan',
             textAlign: TextAlign.center,
-            style: theme.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: colorScheme.onSurface,
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w800,
+              color: Color(0xFF0F172A), // Slate-900
+              letterSpacing: -0.5,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
 
           // Subtitle
-          Text(
-            'Konect butuh akses lokasi untuk fitur-fitur berikut:',
+          const Text(
+            'Konect membutuhkan akses lokasi perangkat Anda untuk menjalankan fitur-fitur utama berikut:',
             textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
+            style: TextStyle(
+              fontSize: 13,
+              color: Color(0xFF64748B), // Slate-500
+              height: 1.4,
             ),
           ),
           const SizedBox(height: 24),
 
           // Benefits list
-          _BenefitItem(
+          const _BenefitItem(
             icon: Icons.store_mall_directory_rounded,
-            color: colorScheme.primary,
             title: 'Koperasi Desa Terdekat',
-            subtitle: 'Lihat koperasi yang paling dekat dengan lokasi Anda',
+            subtitle: 'Menampilkan profil koperasi aktif yang paling dekat dengan lokasi Anda.',
           ),
-          const SizedBox(height: 12),
-          _BenefitItem(
+          const SizedBox(height: 16),
+          const _BenefitItem(
             icon: Icons.forum_rounded,
-            color: colorScheme.secondary,
             title: 'Ruang Diskusi Aktif',
-            subtitle: 'Topik diskusi yang lagi berjalan di sekitar Anda',
+            subtitle: 'Mengikuti musyawarah dan topik rapat koordinasi warga di sekitar Anda.',
           ),
-          const SizedBox(height: 12),
-          _BenefitItem(
+          const SizedBox(height: 16),
+          const _BenefitItem(
             icon: Icons.verified_user_rounded,
-            color: colorScheme.tertiary,
-            title: 'Verifikasi Otomatis',
-            subtitle: 'Saat posting, sistem akan cek Anda di area koperasi',
+            title: 'Verifikasi Kehadiran',
+            subtitle: 'Validasi otomatis bahwa Anda berada di area cakupan koperasi saat berpendapat.',
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 28),
 
           // Primary CTA
           FilledButton(
             style: FilledButton.styleFrom(
+              backgroundColor: const Color(0xFFDC2626), // brand red
+              foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(14),
               ),
+              elevation: 0,
             ),
             onPressed: () {
               Navigator.of(context).pop();
               bloc.add(const LocationPermissionRequested());
             },
             child: const Text(
-              'Izinkan Lokasi',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              'Izinkan Akses Lokasi',
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
 
           // Secondary CTA
           TextButton(
@@ -188,24 +203,31 @@ class LocationOnboardingSheet extends StatelessWidget {
               PreferencesService.instance.markLocationPromptDismissed();
               Navigator.of(context).pop();
             },
-            child: Text(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+            ),
+            child: const Text(
               'Nanti Saja',
               style: TextStyle(
-                color: colorScheme.onSurfaceVariant,
+                color: Color(0xFF64748B), // Slate-500
                 fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
 
           // Privacy note
           const SizedBox(height: 8),
-          Text(
-            'Lokasi Anda hanya dipakai saat app dibuka dan tidak disimpan '
-            'ke server selain untuk verifikasi posting.',
+          const Text(
+            'Lokasi Anda hanya diproses secara lokal saat aplikasi dibuka untuk verifikasi jarak rapat, dan tidak disimpan secara permanen di server.',
             textAlign: TextAlign.center,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: colorScheme.outline,
+            style: TextStyle(
+              color: Color(0xFF94A3B8), // Slate-400
               fontSize: 11,
+              height: 1.3,
             ),
           ),
         ],
@@ -216,13 +238,11 @@ class LocationOnboardingSheet extends StatelessWidget {
 
 class _BenefitItem extends StatelessWidget {
   final IconData icon;
-  final Color color;
   final String title;
   final String subtitle;
 
   const _BenefitItem({
     required this.icon,
-    required this.color,
     required this.title,
     required this.subtitle,
   });
@@ -232,16 +252,21 @@ class _BenefitItem extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Monochrome icon container
         Container(
-          width: 36,
-          height: 36,
+          width: 38,
+          height: 38,
           decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.12),
+            color: const Color(0xFFF1F5F9), // Slate-100
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(icon, size: 20, color: color),
+          child: Icon(
+            icon,
+            size: 20,
+            color: const Color(0xFF475569), // Slate-600 (Monochrome)
+          ),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 14),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,16 +274,18 @@ class _BenefitItem extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                   fontSize: 14,
+                  color: Color(0xFF0F172A), // Slate-900
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 subtitle,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                style: const TextStyle(
+                  fontSize: 12.5,
+                  color: Color(0xFF64748B), // Slate-500
+                  height: 1.35,
                 ),
               ),
             ],

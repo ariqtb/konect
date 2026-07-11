@@ -34,28 +34,34 @@ class _CreateArticlePageState extends State<CreateArticlePage> {
   Future<void> _loadCooperative() async {
     try {
       final currentUser = await authRepository.getCurrentUser();
-      if (currentUser != null) {
-        _userId = currentUser.id;
-        final coopId = await cooperativeRepository.getAdminCooperative(currentUser.id);
-        _coopId = coopId;
-        
-        final client = SupabaseService().client;
-        final coop = await client
-            .from('cooperatives')
-            .select('name')
-            .eq('id', coopId)
-            .maybeSingle();
-            
-        setState(() {
-          _coopName = coop?['name'] ?? 'Koperasi Terkait';
-          _loadingCoop = false;
-        });
-      } else {
-        setState(() {
-          _coopName = 'Koperasi Terkait';
-          _loadingCoop = false;
-        });
+      if (currentUser == null || currentUser.email.startsWith('anon_') || currentUser.email == 'guest@konect.id') {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Akses ditolak: Anda harus masuk dengan email & password.'),
+              backgroundColor: Color(0xFFE14242),
+            ),
+          );
+          Navigator.pop(context);
+        }
+        return;
       }
+
+      _userId = currentUser.id;
+      final coopId = await cooperativeRepository.getAdminCooperative(currentUser.id);
+      _coopId = coopId;
+      
+      final client = SupabaseService().client;
+      final coop = await client
+          .from('profil_koperasi')
+          .select('nama_koperasi')
+          .eq('koperasi_ref', coopId)
+          .maybeSingle();
+          
+      setState(() {
+        _coopName = coop?['nama_koperasi'] ?? 'Koperasi Terkait';
+        _loadingCoop = false;
+      });
     } catch (_) {
       setState(() {
         _coopName = 'Koperasi Terkait';

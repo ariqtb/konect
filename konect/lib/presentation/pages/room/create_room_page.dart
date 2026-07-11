@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sp;
+import '../../blocs/auth/auth_bloc.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../../core/constants.dart';
@@ -16,7 +19,6 @@ class CreateRoomPage extends StatefulWidget {
 
 class _CreateRoomPageState extends State<CreateRoomPage> {
   final _formKey = GlobalKey<FormState>();
-  final _codeController = TextEditingController();
   final _topicController = TextEditingController();
   final _descController = TextEditingController();
 
@@ -28,35 +30,80 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
   bool _isLoadingCoops = true;
   bool _isCreatingRoom = false;
 
+  // Koperasi yang sudah diketahui dari akun karyawan (auto-locked)
+  String? _lockedKoperasiRef;
+  String? _lockedKoperasiName;
+
   @override
   void initState() {
     super.initState();
     _loadCooperatives();
   }
 
-  Future<void> _loadCooperatives() async {
-    try {
-      final list = await cooperativeRepository.getCooperatives(limit: 100);
-      setState(() {
-        _coops = list;
-        if (list.isNotEmpty) {
-          _selectedCoop = list.first;
-        }
-        _isLoadingCoops = false;
-      });
-    } catch (_) {
-      setState(() {
-        _isLoadingCoops = false;
-      });
-    }
-  }
-
   @override
   void dispose() {
-    _codeController.dispose();
     _topicController.dispose();
     _descController.dispose();
     super.dispose();
+  }
+
+  Future<void> _loadCooperatives() async {
+    // Cek apakah user yang login sudah punya koperasiRef (karyawan koperasi)
+    final authState = context.read<AuthBloc>().state;
+    if (authState is AuthAuthenticated && authState.user.koperasiRef != null) {
+      final koperasiRef = authState.user.koperasiRef!;
+
+      // Coba cari di daftar koperasi
+      try {
+        final coopList = await cooperativeRepository.getCooperatives(limit: 100);
+        final matched = coopList.where((c) => c.id == koperasiRef).toList();
+        if (matched.isNotEmpty) {
+          if (mounted) {
+            setState(() {
+              _lockedKoperasiRef = koperasiRef;
+              _lockedKoperasiName = matched.first.name;
+              _selectedCoop = matched.first;
+              _coops = coopList;
+              _isLoadingCoops = false;
+            });
+          }
+          return;
+        }
+      } catch (_) {}
+
+      // Fallback: ambil langsung dari profil_koperasi
+      try {
+        final client = sp.Supabase.instance.client;
+        final data = await client
+            .from('profil_koperasi')
+            .select('nama_koperasi')
+            .eq('koperasi_ref', koperasiRef)
+            .maybeSingle();
+        final namaKoperasi = data?['nama_koperasi'] as String? ?? 'Koperasi Terkait';
+        if (mounted) {
+          setState(() {
+            _lockedKoperasiRef = koperasiRef;
+            _lockedKoperasiName = namaKoperasi;
+            _isLoadingCoops = false;
+          });
+        }
+        return;
+      } catch (_) {}
+    }
+
+    // Tidak ada koperasi terkunci — load semua untuk dropdown
+    try {
+      final list = await cooperativeRepository.getCooperatives(limit: 100);
+      if (mounted) {
+        setState(() {
+          _coops = list;
+          if (list.isNotEmpty) _selectedCoop = list.first;
+          _isLoadingCoops = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() => _isLoadingCoops = false);
+    }
   }
 
   Future<void> _selectDateTime(BuildContext context, bool isStart) async {
@@ -73,7 +120,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: Color(0xFFDC2626), // brandRed
+              primary: Color(0xFFDC2626),
               onPrimary: Colors.white,
               onSurface: Color(0xFF1E293B),
             ),
@@ -93,7 +140,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
           return Theme(
             data: Theme.of(context).copyWith(
               colorScheme: const ColorScheme.light(
-                primary: Color(0xFFDC2626), // brandRed
+                primary: Color(0xFFDC2626),
                 onPrimary: Colors.white,
                 onSurface: Color(0xFF1E293B),
               ),
@@ -103,7 +150,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
         },
       );
 
-      if (pickedTime != null) {
+      if (pickedTime != null && mounted) {
         setState(() {
           final newDateTime = DateTime(
             pickedDate.year,
@@ -120,6 +167,11 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
         });
       }
     }
+  }
+
+  String _formatDateTime(DateTime dt) {
+    return '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year} '
+        '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
   }
 
   Widget _buildDateTimePicker(String label, DateTime? dateTime, bool isStart) {
@@ -149,9 +201,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  dateTime == null
-                      ? 'Pilih Waktu'
-                      : '${dateTime.day.toString().padLeft(2, '0')}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.year} ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}',
+                  dateTime == null ? 'Pilih Waktu' : _formatDateTime(dateTime),
                   style: TextStyle(
                     fontSize: 15,
                     color: dateTime == null
@@ -167,6 +217,148 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
         ),
       ],
     );
+  }
+
+  Widget _buildCoopSelector() {
+    if (_isLoadingCoops) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFDC2626)),
+          ),
+        ),
+      );
+    }
+
+    // Jika koperasi sudah terkunci dari akun karyawan — tampil read-only
+    if (_lockedKoperasiRef != null) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF1F5F9),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.storefront_outlined, size: 18, color: Color(0xFF64748B)),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                _lockedKoperasiName ?? _lockedKoperasiRef!,
+                style: const TextStyle(fontSize: 15, color: Color(0xFF334155)),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const Icon(Icons.lock_outline, size: 16, color: Color(0xFF94A3B8)),
+          ],
+        ),
+      );
+    }
+
+    // Dropdown jika koperasi belum terkunci
+    return DropdownButtonFormField<CooperativeItem>(
+      value: _selectedCoop,
+      style: const TextStyle(fontSize: 15, color: Color(0xFF0F172A)),
+      decoration: InputDecoration(
+        fillColor: const Color(0xFFF8FAFC),
+        filled: true,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
+        ),
+      ),
+      items: _coops.map((CooperativeItem coop) {
+        return DropdownMenuItem<CooperativeItem>(
+          value: coop,
+          child: Text(coop.name, overflow: TextOverflow.ellipsis),
+        );
+      }).toList(),
+      onChanged: (val) {
+        if (val != null) setState(() => _selectedCoop = val);
+      },
+    );
+  }
+
+  Future<void> _handleSubmit() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    if (_startDate == null || _endDate == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Silakan pilih waktu mulai dan selesai rapat')),
+      );
+      return;
+    }
+
+    if (_endDate!.isBefore(_startDate!)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Waktu selesai tidak boleh lebih awal dari waktu mulai')),
+      );
+      return;
+    }
+
+    // Tentukan koperasi yang dipakai
+    final String? finalCoopRef = _lockedKoperasiRef ?? _selectedCoop?.id;
+    if (finalCoopRef == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Silakan pilih koperasi penyelenggara')),
+      );
+      return;
+    }
+
+    setState(() => _isCreatingRoom = true);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Memulai rapat baru...')),
+    );
+
+    final currentUser = await authRepository.getCurrentUser();
+    if (currentUser == null) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Silakan login kembali')),
+        );
+        setState(() => _isCreatingRoom = false);
+      }
+      return;
+    }
+
+    print('[CreateRoom] currentUser.id=${currentUser.id} | role=${currentUser.role}');
+    print('[CreateRoom] koperasiRef=$finalCoopRef | karyawanRef=${currentUser.karyawanRef}');
+
+    final roomId = await roomRepository.createRoom(
+      coopRef: finalCoopRef,
+      title: _topicController.text.trim(),
+      description: _descController.text.trim(),
+      createdBy: currentUser.id,
+      startDate: _startDate!,
+      endDate: _endDate!,
+    );
+
+    if (!mounted) return;
+
+    if (roomId != null) {
+      Navigator.pushReplacementNamed(
+        context,
+        AppConstants.roomDiscussionRoute,
+        arguments: roomId,
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Gagal membuat room rapat. Silakan coba lagi.')),
+      );
+      setState(() => _isCreatingRoom = false);
+    }
   }
 
   @override
@@ -196,7 +388,6 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Fields Section
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -211,17 +402,15 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                     CustomTextField(
                       controller: _topicController,
                       labelText: 'Topik Rapat',
-                      hintText:
-                          'Contoh: Pembahasan Distribusi Sembako Tahap II',
+                      hintText: 'Contoh: Pembahasan Distribusi Sembako Tahap II',
                       validator: (val) {
-                        if (val == null || val.isEmpty) {
+                        if (val == null || val.trim().isEmpty) {
                           return 'Topik rapat tidak boleh kosong';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 16),
-                    // Coop Dropdown
                     const Text(
                       'Penyelenggara',
                       style: TextStyle(
@@ -231,54 +420,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    _isLoadingCoops
-                        ? const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFDC2626)),
-                              ),
-                            ),
-                          )
-                        : DropdownButtonFormField<CooperativeItem>(
-                            value: _selectedCoop,
-                            style: const TextStyle(
-                                fontSize: 15, color: Color(0xFF0F172A)),
-                            decoration: InputDecoration(
-                              fillColor: const Color(0xFFF8FAFC),
-                              filled: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 16),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide:
-                                    const BorderSide(color: Color(0xFFE2E8F0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide:
-                                    const BorderSide(color: Color(0xFFE2E8F0)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    color: Color(0xFFDC2626), width: 2),
-                              ),
-                            ),
-                            items: _coops.map((CooperativeItem coop) {
-                              return DropdownMenuItem<CooperativeItem>(
-                                value: coop,
-                                child: Text(coop.name, overflow: TextOverflow.ellipsis),
-                              );
-                            }).toList(),
-                            onChanged: (val) {
-                              if (val != null) {
-                                setState(() {
-                                  _selectedCoop = val;
-                                });
-                              }
-                            },
-                          ),
+                    _buildCoopSelector(),
                     const SizedBox(height: 16),
                     CustomTextField(
                       controller: _descController,
@@ -286,7 +428,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                       hintText: 'Tulis pokok bahasan rapat di sini...',
                       maxLines: 4,
                       validator: (val) {
-                        if (val == null || val.isEmpty) {
+                        if (val == null || val.trim().isEmpty) {
                           return 'Deskripsi tidak boleh kosong';
                         }
                         return null;
@@ -296,6 +438,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                     _buildDateTimePicker('Waktu Mulai', _startDate, true),
                     const SizedBox(height: 16),
                     _buildDateTimePicker('Waktu Selesai', _endDate, false),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
@@ -307,97 +450,17 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
       bottomNavigationBar: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
-              top: BorderSide(color: Colors.black.withOpacity(0.05), width: 1),
+              top: BorderSide(color: Color(0xFFF1F5F9), width: 1),
             ),
           ),
           child: CustomButton(
             text: _isCreatingRoom ? 'Memproses...' : 'Mulai Rapat Baru',
             icon: Icons.play_arrow_rounded,
             backgroundColor: const Color(0xFFDC2626),
-            onPressed: _isCreatingRoom
-                ? null
-                : () async {
-                    if (_formKey.currentState!.validate()) {
-                      if (_startDate == null || _endDate == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text(
-                                  'Silakan pilih waktu mulai dan selesai rapat')),
-                        );
-                        return;
-                      }
-
-                      if (_endDate!.isBefore(_startDate!)) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text(
-                                  'Waktu selesai tidak boleh lebih awal dari waktu mulai')),
-                        );
-                        return;
-                      }
-
-                      if (_selectedCoop == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text(
-                                  'Silakan pilih koperasi penyelenggara')),
-                        );
-                        return;
-                      }
-
-                      setState(() {
-                        _isCreatingRoom = true;
-                      });
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Memulai rapat baru...')),
-                      );
-
-                      final currentUser = await authRepository.getCurrentUser();
-                      if (currentUser == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Silakan login kembali')),
-                        );
-                        setState(() {
-                          _isCreatingRoom = false;
-                        });
-                        return;
-                      }
-
-                      final roomId = await roomRepository.createRoom(
-                        coopRef: _selectedCoop!.id,
-                        title: _topicController.text,
-                        description: _descController.text,
-                        createdBy: currentUser.id,
-                        startDate: _startDate!,
-                        endDate: _endDate!,
-                      );
-
-                      if (roomId != null) {
-                        if (mounted) {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            AppConstants.roomDiscussionRoute,
-                            arguments: roomId,
-                          );
-                        }
-                      } else {
-                        if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text(
-                                    'Gagal membuat room rapat. Silakan coba lagi.')),
-                          );
-                          setState(() {
-                            _isCreatingRoom = false;
-                          });
-                        }
-                      }
-                    }
-                  },
+            onPressed: _isCreatingRoom ? null : _handleSubmit,
           ),
         ),
       ),

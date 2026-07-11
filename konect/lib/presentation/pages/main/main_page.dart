@@ -96,8 +96,8 @@ class _MainPageState extends State<MainPage> {
         final client = SupabaseService().client;
         final roomResponse = await client
             .from('discussion_rooms')
-            .select('id, title, description, created_at, is_active, cooperatives!inner(legacy_ref)')
-            .eq('cooperatives.legacy_ref', closestCoop.id)
+            .select('id, title, description, created_at, is_active, profil_koperasi!inner(koperasi_ref)')
+            .eq('profil_koperasi.koperasi_ref', closestCoop.id)
             .eq('is_active', true)
             .order('created_at', ascending: false)
             .limit(1)
@@ -174,6 +174,10 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = context.read<AuthBloc>().state;
+    final bool isLoggedIn = authState is AuthAuthenticated;
+    final bool isKopdes = isLoggedIn && authState.user.isKopdes;
+
     return BlocListener<LocationBloc, LocationState>(
       listener: (context, state) {
         if (state is LocationReady) {
@@ -242,6 +246,12 @@ class _MainPageState extends State<MainPage> {
                     _buildNearestCoop(),
                     const SizedBox(height: 32),
                     _buildJoinRoom(),
+                    if (isLoggedIn &&
+                        !authState.user.email.startsWith('anon_') &&
+                        authState.user.email != 'guest@konect.id') ...[
+                      const SizedBox(height: 32),
+                      _buildAddProgressSection(),
+                    ],
                     const SizedBox(height: 32),
                     _buildHistorySection(),
                   ],
@@ -298,7 +308,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Akses layanan desa Anda hari ini.',
+                  'Diskusi Koperasi Desa di lokasi anda',
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.white.withValues(alpha: 0.8),
@@ -430,15 +440,6 @@ class _MainPageState extends State<MainPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Diskusi Koperasi Desa di lokasi anda',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 16),
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -773,8 +774,7 @@ class _MainPageState extends State<MainPage> {
   Widget _buildJoinRoom() {
     final authState = context.read<AuthBloc>().state;
     final bool isLoggedIn = authState is AuthAuthenticated;
-    final bool isKopdes = isLoggedIn &&
-        (authState.user.role == 'kopdes' || authState.user.role == 'admin');
+    final bool isKopdes = isLoggedIn && authState.user.isKopdes;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -800,27 +800,25 @@ class _MainPageState extends State<MainPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Masukkan Kode Ruang',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF111C2D),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  controller: _roomCodeController,
-                  decoration: const InputDecoration(
-                    hintText: 'Contoh: DESA-2024',
-                    hintStyle: TextStyle(color: Color(0xFFCBD5E1)),
-                  ),
-                ),
-                const SizedBox(height: 24),
-
-                // Kopdes/Admin: Buat Rapat (Primary) + atau + Gabung Rapat (Secondary)
-                // Masyarakat:   Gabung Rapat only (Primary)
                 if (isKopdes) ...[
+                  const Text(
+                    'Buat Rapat Baru',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF111C2D),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Mulai sesi musyawarah desa/koperasi baru di canvas.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF64748B),
+                      height: 1.4,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -851,18 +849,42 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.0),
-                    child: Center(
-                      child: Text(
-                        'atau',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF94A3B8),
-                          fontWeight: FontWeight.w500,
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Row(
+                      children: [
+                        Expanded(child: Divider(color: Color(0xFFE2E8F0))),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text(
+                            'atau',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF94A3B8),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
-                      ),
+                        Expanded(child: Divider(color: Color(0xFFE2E8F0))),
+                      ],
                     ),
                   ),
+                  const Text(
+                    'Masukkan Kode Ruang',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF111C2D),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    controller: _roomCodeController,
+                    decoration: const InputDecoration(
+                      hintText: 'Contoh: DESA-2024',
+                      hintStyle: TextStyle(color: Color(0xFFCBD5E1)),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -904,7 +926,23 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ] else ...[
-                  // Masyarakat: single primary red Gabung Rapat button
+                  const Text(
+                    'Masukkan Kode Ruang',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF111C2D),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    controller: _roomCodeController,
+                    decoration: const InputDecoration(
+                      hintText: 'Contoh: DESA-2024',
+                      hintStyle: TextStyle(color: Color(0xFFCBD5E1)),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -946,6 +984,86 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAddProgressSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Progress Koperasi',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF111C2D),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(28.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: const Color(0xFFE2E8F0)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Kirim Progress Baru',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF111C2D),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Posting berita, artikel, atau update perkembangan koperasi desa Anda.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF64748B),
+                    height: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppConstants.createArticleRoute);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.brandRed,
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.article_outlined, size: 22, color: Colors.white),
+                        SizedBox(width: 10),
+                        Text(
+                          'Tulis Progress Baru',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -1175,8 +1293,7 @@ class _MainPageState extends State<MainPage> {
   Widget _buildCenterActionButton() {
     final authState = context.read<AuthBloc>().state;
     final bool isLoggedIn = authState is AuthAuthenticated;
-    final bool isKopdes = isLoggedIn &&
-        (authState.user.role == 'kopdes' || authState.user.role == 'admin');
+    final bool isKopdes = isLoggedIn && authState.user.isKopdes;
 
     return Container(
       width: 64,

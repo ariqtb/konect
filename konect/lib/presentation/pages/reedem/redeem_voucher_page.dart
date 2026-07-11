@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/ticket_card.dart';
 
 class RedeemVoucherPage extends StatelessWidget {
-  const RedeemVoucherPage({super.key});
+  final Map<String, dynamic> voucherData;
+
+  const RedeemVoucherPage({super.key, required this.voucherData});
 
   @override
   Widget build(BuildContext context) {
+    final title = voucherData['title'] ?? 'Voucher Belanja';
+    final code = voucherData['code'] ?? 'VX-982-SML-71';
+    final expiry = voucherData['expiry'] ?? '30 Hari dari Sekarang';
+
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
@@ -59,10 +66,10 @@ class RedeemVoucherPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     // Voucher Title
-                    const Text(
-                      'Voucher Sembako Rp 15.000',
+                    Text(
+                      title,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF0F172A),
@@ -80,16 +87,23 @@ class RedeemVoucherPage extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          Image.network(
-                            'https://lh3.googleusercontent.com/aida-public/AB6AXuD4zmRUhIue-clf2qr1XGuyLSIqgjdaspGXwOvToGVfEv9FTpgYp_DLSmCumGlPI1zrGkavgktAHBn4bDiTrFBkCdbRFg0I6a9YmsuXEjovDgf_JTUl-rSiaQUnrtyys_cb6LioATpiG9CzIGNwcE9Jk-e0kcZBFNlVsMy758rJKAehOz2z7zbyr9HS1cXOVj_U1YPmqTYylpz9PBS7moBoF0JP_0vKpkd0SrcXqYka_dAPxnY7TotwnQ',
-                            width: 180,
-                            height: 180,
-                            fit: BoxFit.contain,
+                          QrImageView(
+                            data: code,
+                            version: QrVersions.auto,
+                            size: 180.0,
+                            eyeStyle: const QrEyeStyle(
+                              eyeShape: QrEyeShape.square,
+                              color: Color(0xFF1E293B),
+                            ),
+                            dataModuleStyle: const QrDataModuleStyle(
+                              dataModuleShape: QrDataModuleShape.square,
+                              color: Color(0xFF1E293B),
+                            ),
                           ),
                           const SizedBox(height: 16),
-                          const Text(
-                            'VX - 982 - SML - 71',
-                            style: TextStyle(
+                          Text(
+                            code,
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1.0,
@@ -113,16 +127,16 @@ class RedeemVoucherPage extends StatelessWidget {
                     const SizedBox(height: 50),
                     
                     // Expiry Info Row
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.calendar_today_outlined,
                           size: 16,
                           color: Color(0xFF94A3B8),
                         ),
-                        SizedBox(width: 8),
-                        Text(
+                        const SizedBox(width: 8),
+                        const Text(
                           'Berlaku hingga: ',
                           style: TextStyle(
                             fontSize: 14,
@@ -130,8 +144,8 @@ class RedeemVoucherPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '24 Okt 2024',
-                          style: TextStyle(
+                          expiry,
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF1E293B),
