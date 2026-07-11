@@ -142,6 +142,111 @@ class CooperativeRepository {
       return false;
     }
   }
+
+  /// Fetch cooperatives from profil_koperasi that have coordinates,
+  /// joining gerai_koperasi for store image. Returns all items;
+  /// distance calculation and sorting is done client-side.
+  Future<List<CooperativeItem>> getNearbyCooperatives() async {
+    try {
+      final client = SupabaseService().client;
+      final response = await client
+          .from('profil_koperasi')
+          .select('*, gerai_koperasi(foto_gerai, status_gerai)')
+          .not('latitude', 'is', null)
+          .not('longitude', 'is', null);
+
+      return (response as List<dynamic>).map((data) {
+        final name = data['nama_koperasi']?.toString() ?? 'Koperasi Tanpa Nama';
+        final category = data['kategori_usaha']?.toString() ?? 'Umum';
+        final address = data['alamat_lengkap']?.toString() ?? 'Alamat tidak tersedia';
+
+        // Get the first gerai image if available
+        String? imageUrl;
+        bool isOpen = data['status_registrasi'] == 'Approved';
+        final geraiList = data['gerai_koperasi'];
+        if (geraiList is List && geraiList.isNotEmpty) {
+          imageUrl = geraiList[0]['foto_gerai']?.toString();
+          // If any gerai is active, mark as open
+          if (geraiList.any((g) => g['status_gerai'] == 'Aktif')) {
+            isOpen = true;
+          }
+        }
+
+        return CooperativeItem(
+          id: data['koperasi_ref']?.toString() ?? '',
+          name: name,
+          category: category,
+          isOpen: isOpen,
+          address: address,
+          distance: '',
+          imageUrl: imageUrl ??
+              'https://ui-avatars.com/api/?name=${Uri.encodeComponent(name)}&background=random',
+          latitude: (data['latitude'] as num?)?.toDouble(),
+          longitude: (data['longitude'] as num?)?.toDouble(),
+        );
+      }).toList();
+    } catch (e) {
+      throw Exception('Failed to fetch nearby cooperatives: $e');
+    }
+  }
+
+  /// Fetch cooperatives from profil_koperasi with their gerai radius.
+  /// Returns a list of maps: { 'coop': CooperativeItem, 'radius': double? }
+  /// The radius comes from the largest gerai_koperasi.radius for each cooperative.
+  Future<List<Map<String, dynamic>>> getNearbyCooperativesWithRadius() async {
+    try {
+      final client = SupabaseService().client;
+      final response = await client
+          .from('profil_koperasi')
+          .select('*, gerai_koperasi(foto_gerai, status_gerai, radius)')
+          .not('latitude', 'is', null)
+          .not('longitude', 'is', null);
+
+      return (response as List<dynamic>).map((data) {
+        final name = data['nama_koperasi']?.toString() ?? 'Koperasi Tanpa Nama';
+        final category = data['kategori_usaha']?.toString() ?? 'Umum';
+        final address = data['alamat_lengkap']?.toString() ?? 'Alamat tidak tersedia';
+
+        String? imageUrl;
+        bool isOpen = data['status_registrasi'] == 'Approved';
+        double? maxRadius;
+        final geraiList = data['gerai_koperasi'];
+        if (geraiList is List && geraiList.isNotEmpty) {
+          imageUrl = geraiList[0]['foto_gerai']?.toString();
+          if (geraiList.any((g) => g['status_gerai'] == 'Aktif')) {
+            isOpen = true;
+          }
+          // Use the largest radius among all gerai for this cooperative
+          for (final g in geraiList) {
+            final r = (g['radius'] as num?)?.toDouble();
+            if (r != null && (maxRadius == null || r > maxRadius)) {
+              maxRadius = r;
+            }
+          }
+        }
+
+        final coop = CooperativeItem(
+          id: data['koperasi_ref']?.toString() ?? '',
+          name: name,
+          category: category,
+          isOpen: isOpen,
+          address: address,
+          distance: '',
+          imageUrl: imageUrl ??
+              'https://ui-avatars.com/api/?name=${Uri.encodeComponent(name)}&background=random',
+          latitude: (data['latitude'] as num?)?.toDouble(),
+          longitude: (data['longitude'] as num?)?.toDouble(),
+        );
+
+        return {
+          'coop': coop,
+          'radius': maxRadius,
+        };
+      }).toList();
+    } catch (e) {
+      throw Exception('Failed to fetch nearby cooperatives with radius: $e');
+    }
+  }
 }
 
 final cooperativeRepository = CooperativeRepository();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/location/location_bloc.dart';
 import '../../../core/constants.dart';
@@ -29,6 +30,8 @@ class _MainPageState extends State<MainPage> {
   double? _nearbyDistance;
   bool _isLoadingLocation = true;
   Map<String, dynamic>? _nearbyRoom;
+  List<CooperativeItem> _nearbyCoops = [];
+  bool _isLoadingNearbyCoops = true;
 
   @override
   void initState() {
@@ -67,13 +70,18 @@ class _MainPageState extends State<MainPage> {
   Future<void> _checkNearbyCooperativeWithPosition(double latitude, double longitude) async {
     debugPrint('[MainPage] _checkNearbyCooperativeWithPosition: user=($latitude, $longitude)');
     try {
-      final cooperatives = await cooperativeRepository.getCooperatives(page: 0, limit: 100);
-      debugPrint('[MainPage] fetched ${cooperatives.length} cooperatives');
+      // Fetch cooperatives from profil_koperasi with their gerai radius
+      final cooperatives = await cooperativeRepository.getNearbyCooperativesWithRadius();
+      debugPrint('[MainPage] fetched ${cooperatives.length} cooperatives from profil_koperasi');
       
       CooperativeItem? closestCoop;
       double minDistance = double.infinity;
+      double? matchedRadius;
 
-      for (final coop in cooperatives) {
+      for (final entry in cooperatives) {
+        final coop = entry['coop'] as CooperativeItem;
+        final radius = (entry['radius'] as double?) ?? 5000.0; // Default 5km
+
         if (coop.latitude != null && coop.longitude != null) {
           final dist = Geolocator.distanceBetween(
             latitude,
@@ -81,10 +89,11 @@ class _MainPageState extends State<MainPage> {
             coop.latitude!,
             coop.longitude!,
           );
-          debugPrint('[MainPage] coop "${coop.name}" (${coop.id}): lat=${coop.latitude}, lng=${coop.longitude}, dist=${dist.toStringAsFixed(1)}m');
-          if (dist <= 50.0 && dist < minDistance) {
+          debugPrint('[MainPage] coop "${coop.name}" (${coop.id}): lat=${coop.latitude}, lng=${coop.longitude}, dist=${dist.toStringAsFixed(1)}m, radius=${radius.toStringAsFixed(0)}m');
+          if (dist <= radius && dist < minDistance) {
             closestCoop = coop;
             minDistance = dist;
+            matchedRadius = radius;
           }
         } else {
           debugPrint('[MainPage] coop "${coop.name}" (${coop.id}): SKIPPED (null coordinates)');
@@ -92,12 +101,12 @@ class _MainPageState extends State<MainPage> {
       }
 
       if (closestCoop != null) {
-        debugPrint('[MainPage] closest coop: "${closestCoop.name}" at ${minDistance.toStringAsFixed(1)}m');
+        debugPrint('[MainPage] closest coop: "${closestCoop.name}" at ${minDistance.toStringAsFixed(1)}m (radius: ${matchedRadius?.toStringAsFixed(0)}m)');
         final client = SupabaseService().client;
         final roomResponse = await client
             .from('discussion_rooms')
-            .select('id, title, description, created_at, is_active, profil_koperasi!inner(koperasi_ref)')
-            .eq('profil_koperasi.koperasi_ref', closestCoop.id)
+            .select('id, title, description, created_at, is_active')
+            .eq('koperasi_ref', closestCoop.id)
             .eq('is_active', true)
             .order('created_at', ascending: false)
             .limit(1)
@@ -112,7 +121,7 @@ class _MainPageState extends State<MainPage> {
           });
         }
       } else {
-        debugPrint('[MainPage] NO coop found within 5000m radius');
+        debugPrint('[MainPage] NO coop found within radius');
         if (mounted) {
           setState(() {
             _nearbyCoop = null;
@@ -122,6 +131,9 @@ class _MainPageState extends State<MainPage> {
           });
         }
       }
+
+      // Also fetch nearby cooperatives for the "Koperasi Desa Terdekat" section
+      _fetchNearbyCooperatives(latitude, longitude);
     } catch (e) {
       debugPrint('[MainPage] ERROR in _checkNearbyCooperativeWithPosition: $e');
       if (mounted) {
@@ -130,6 +142,56 @@ class _MainPageState extends State<MainPage> {
           _nearbyCoop = null;
         });
       }
+    }
+  }
+
+  Future<void> _fetchNearbyCooperatives(double latitude, double longitude) async {
+    try {
+      final allCoops = await cooperativeRepository.getNearbyCooperatives();
+      debugPrint('[MainPage] fetched ${allCoops.length} cooperatives from profil_koperasi');
+
+      // Calculate distance and sort
+      final coopsWithDistance = <MapEntry<CooperativeItem, double>>[];
+      for (final coop in allCoops) {
+        if (coop.latitude != null && coop.longitude != null) {
+          final dist = Geolocator.distanceBetween(
+            latitude,
+            longitude,
+            coop.latitude!,
+            coop.longitude!,
+          );
+          coopsWithDistance.add(MapEntry(
+            coop.copyWith(distance: _formatDistance(dist)),
+            dist,
+          ));
+        }
+      }
+
+      // Sort by distance ascending
+      coopsWithDistance.sort((a, b) => a.value.compareTo(b.value));
+
+      if (mounted) {
+        setState(() {
+          _nearbyCoops = coopsWithDistance.map((e) => e.key).toList();
+          _isLoadingNearbyCoops = false;
+        });
+      }
+    } catch (e) {
+      debugPrint('[MainPage] ERROR in _fetchNearbyCooperatives: $e');
+      if (mounted) {
+        setState(() {
+          _nearbyCoops = [];
+          _isLoadingNearbyCoops = false;
+        });
+      }
+    }
+  }
+
+  String _formatDistance(double meters) {
+    if (meters < 1000) {
+      return '${meters.toStringAsFixed(0)}m';
+    } else {
+      return '${(meters / 1000).toStringAsFixed(1)}km';
     }
   }
 
@@ -317,20 +379,121 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: IconButton(
-              icon:
-                  const Icon(Icons.emoji_events_outlined, color: Colors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, AppConstants.leaderboardRoute);
-              },
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: IconButton(
+                  icon:
+                      const Icon(Icons.emoji_events_outlined, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppConstants.leaderboardRoute);
+                  },
+                ),
+              ),
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  final keys = prefs.getKeys();
+                  final Map<String, dynamic> prefsData = {};
+                  for (final key in keys) {
+                    prefsData[key] = prefs.get(key);
+                  }
+
+                  if (!context.mounted) return;
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      title: const Row(
+                        children: [
+                          Icon(Icons.settings_outlined, color: Colors.blue),
+                          SizedBox(width: 8),
+                          Text('Debug Local Cache'),
+                        ],
+                      ),
+                      content: SizedBox(
+                        width: double.maxFinite,
+                        child: keys.isEmpty
+                            ? const Text('Shared Preferences kosong.')
+                            : ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: keys.length,
+                                itemBuilder: (context, index) {
+                                  final key = keys.elementAt(index);
+                                  final val = prefsData[key];
+                                  return Card(
+                                    margin: const EdgeInsets.symmetric(vertical: 4),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            key,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                              color: Colors.blue,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            '$val',
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () async {
+                            await prefs.clear();
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Cache local berhasil dibersihkan!'),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            }
+                          },
+                          child: const Text(
+                            'Clear All',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Close'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 24,
+                  height: 44,
+                  color: Colors.transparent,
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -514,49 +677,43 @@ class _MainPageState extends State<MainPage> {
                     height: 1.4,
                   ),
                 ),
-                const SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (hasRoom) {
+                if (hasRoom) ...[
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
                         Navigator.pushNamed(
                           context,
                           AppConstants.roomDiscussionRoute,
                           arguments: _nearbyRoom!['id'],
                         );
-                      } else {
-                        Navigator.pushNamed(
-                          context,
-                          '/create-room',
-                          arguments: _nearbyCoop!.id,
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFDC2626),
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFDC2626),
+                        padding: const EdgeInsets.symmetric(vertical: 18),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Ikuti Diskusi',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Icon(Icons.arrow_forward_outlined, color: Colors.white, size: 20),
+                        ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          hasRoom ? 'Ikuti Diskusi' : 'Buat Ruang Diskusi',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        const Icon(Icons.arrow_forward_outlined, color: Colors.white, size: 20),
-                      ],
-                    ),
                   ),
-                ),
+                ],
               ],
             ),
           ),
@@ -590,21 +747,6 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildNearestCoop() {
-    final coops = [
-      {
-        'title': 'Koperasi Makmur Jaya',
-        'location': 'Dusun Utara, 400m',
-        'image':
-            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800',
-      },
-      {
-        'title': 'Koperasi Kreatif Mandiri',
-        'location': 'Dusun Timur, 1.2km',
-        'image':
-            'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800',
-      }
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -613,8 +755,8 @@ class _MainPageState extends State<MainPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: const Text(
+              const Expanded(
+                child: Text(
                   'Koperasi Desa Terdekat',
                   style: TextStyle(
                     fontSize: 20,
@@ -643,130 +785,216 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         const SizedBox(height: 16),
-        SizedBox(
-          height: 250,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            itemCount: coops.length,
-            itemBuilder: (context, index) {
-              final coop = coops[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    AppConstants.cooperativeDetailRoute,
-                    arguments: coop['title']!,
-                  );
-                },
-                child: Container(
-                  width: 280,
-                  margin: const EdgeInsets.only(right: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFFF1F5F9)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.02),
-                        blurRadius: 16,
-                        offset: const Offset(0, 4),
+        _isLoadingNearbyCoops
+            ? const SizedBox(
+                height: 250,
+                child: Center(
+                  child: CircularProgressIndicator(color: AppColors.brandRed),
+                ),
+              )
+            : _nearbyCoops.isEmpty
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
                       ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
+                      child: Column(
                         children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(16)),
-                            child: Image.network(
-                              coop['image'] ?? '',
-                              height: 150,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  height: 150,
-                                  color: Colors.grey[200],
-                                  child: const Icon(Icons.image_outlined,
-                                      color: Colors.grey),
-                                );
-                              },
+                          const Icon(Icons.store_outlined,
+                              size: 40, color: Color(0xFF94A3B8)),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Belum Ada Koperasi Terdekat',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF111C2D),
                             ),
                           ),
-                          Positioned(
-                            top: 16,
-                            left: 16,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: const Color(
-                                    0xCC10B981), // emerald-500 with opacity
-                                borderRadius: BorderRadius.circular(999),
-                              ),
-                              child: const Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 3,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  SizedBox(width: 6),
-                                  Text(
-                                    'Buka',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Tidak ditemukan koperasi desa di sekitar lokasi Anda.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Color(0xFF64748B),
+                              height: 1.4,
                             ),
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              coop['title']!,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF111C2D),
-                              ),
+                    ),
+                  )
+                : SizedBox(
+                    height: 260,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      itemCount: _nearbyCoops.length,
+                      itemBuilder: (context, index) {
+                        final coop = _nearbyCoops[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppConstants.cooperativeDetailRoute,
+                              arguments: coop.id,
+                            );
+                          },
+                          child: Container(
+                            width: 280,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              border:
+                                  Border.all(color: const Color(0xFFF1F5F9)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.02),
+                                  blurRadius: 16,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 6),
-                            Row(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Icon(Icons.location_on_outlined,
-                                    size: 16, color: Color(0xFF94A3B8)),
-                                const SizedBox(width: 4),
-                                Text(
-                                  coop['location']!,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF64748B),
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius:
+                                          const BorderRadius.vertical(
+                                              top: Radius.circular(16)),
+                                      child: Image.network(
+                                        coop.imageUrl,
+                                        height: 150,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Container(
+                                            height: 150,
+                                            color: Colors.grey[200],
+                                            child: const Icon(
+                                                Icons.image_outlined,
+                                                color: Colors.grey),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 12,
+                                      left: 12,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 5),
+                                        decoration: BoxDecoration(
+                                          color: coop.isOpen
+                                              ? const Color(0xCC10B981)
+                                              : const Color(0xCCEF4444),
+                                          borderRadius:
+                                              BorderRadius.circular(999),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 3,
+                                              backgroundColor: Colors.white,
+                                            ),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              coop.isOpen ? 'Buka' : 'Tutup',
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    if (coop.category.isNotEmpty)
+                                      Positioned(
+                                        top: 12,
+                                        right: 12,
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: Colors.black
+                                                .withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: Text(
+                                            coop.category,
+                                            style: const TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        coop.name,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF111C2D),
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                              Icons.location_on_outlined,
+                                              size: 14,
+                                              color: Color(0xFF94A3B8)),
+                                          const SizedBox(width: 4),
+                                          Expanded(
+                                            child: Text(
+                                              coop.distance.isNotEmpty
+                                                  ? '${coop.distance} • ${coop.address}'
+                                                  : coop.address,
+                                              style: const TextStyle(
+                                                fontSize: 13,
+                                                color: Color(0xFF64748B),
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        ),
       ],
     );
   }

@@ -24,6 +24,78 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).copyWith(
+      primaryColor: const Color(0xFFDC2626), // brandRed
+      colorScheme: Theme.of(context).colorScheme.copyWith(
+        primary: const Color(0xFFDC2626), // brandRed on focus
+        onSurface: const Color(0xFF000000), // text color/icon color
+        onSurfaceVariant: const Color(0xFF000000), // label/hint color before focus
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: const Color(0xFFFFFFFF),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        labelStyle: const TextStyle(color: Color(0xFF000000)),
+        floatingLabelStyle: const TextStyle(color: Color(0xFFDC2626)),
+        prefixIconColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.focused)) {
+            return const Color(0xFFDC2626);
+          }
+          return const Color(0xFF000000);
+        }),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: const BorderSide(color: Color(0xFF000000), width: 1.5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: const BorderSide(color: Color(0xFF000000), width: 1.5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: const BorderSide(color: Colors.red, width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: const BorderSide(color: Colors.red, width: 2),
+        ),
+      ),
+    );
+
+    final borderStyle = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(24),
+      borderSide: const BorderSide(color: Color(0xFFFFFFFF), width: 1.5),
+    );
+
+    final inputDecoration = InputDecoration(
+      filled: true,
+      fillColor: const Color(0xFF000000), // Black background when unfocused
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      labelStyle: const TextStyle(color: Color(0xFFFFFFFF)), // White label when unfocused
+      floatingLabelStyle: const TextStyle(color: Color(0xFFDC2626)),
+      prefixIconColor: WidgetStateColor.resolveWith((states) {
+        if (states.contains(WidgetState.focused)) {
+          return const Color(0xFFDC2626);
+        }
+        return const Color(0xFFFFFFFF); // White icon when unfocused
+      }),
+      border: borderStyle,
+      enabledBorder: borderStyle,
+      focusedBorder: borderStyle.copyWith(
+        borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
+      ),
+      errorBorder: borderStyle.copyWith(
+        borderSide: const BorderSide(color: Colors.red, width: 1),
+      ),
+      focusedErrorBorder: borderStyle.copyWith(
+        borderSide: const BorderSide(color: Colors.red, width: 2),
+      ),
+    );
+
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -40,66 +112,72 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Logo/Title
-                    Icon(
-                      Icons.people_alt,
-                      size: 80,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      AppConstants.appName,
-                      style: Theme.of(context).textTheme.headlineLarge,
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      AppConstants.appTagline,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
+              child: Theme(
+                data: customTheme,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Logo/Title
+                      Icon(
+                        Icons.people_alt,
+                        size: 80,
+                        color: const Color(0xFFDC2626),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 48),
+                      const SizedBox(height: 16),
+                      Text(
+                        AppConstants.appName,
+                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          color: const Color(0xFF000000),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        AppConstants.appTagline,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: const Color(0xFF64748B),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 48),
 
-                    // Email Field
-                    TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        prefixIcon: Icon(Icons.email_outlined),
+                      // Email Field
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        style: const TextStyle(color: Color(0xFFFFFFFF)),
+                        decoration: inputDecoration.copyWith(
+                          labelText: 'Email',
+                          prefixIcon: const Icon(Icons.email_outlined),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Email tidak boleh kosong';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Email tidak boleh kosong';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
-                    // Password Field
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        prefixIcon: Icon(Icons.lock_outline),
+                      // Password Field
+                      TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        style: const TextStyle(color: Color(0xFFFFFFFF)),
+                        decoration: inputDecoration.copyWith(
+                          labelText: 'Password',
+                          prefixIcon: const Icon(Icons.lock_outline),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password tidak boleh kosong';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Password tidak boleh kosong';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
                     // Login Button
                     BlocBuilder<AuthBloc, AuthState>(
@@ -133,6 +211,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+    ),
     );
   }
 

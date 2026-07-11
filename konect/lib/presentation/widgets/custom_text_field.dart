@@ -43,7 +43,7 @@ class CustomTextField extends StatelessWidget {
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF334155), // slate-700
+              color: Color(0xFF000000), // Pure black
             ),
           ),
           const SizedBox(height: 8),
@@ -58,22 +58,22 @@ class CustomTextField extends StatelessWidget {
           onFieldSubmitted: onSubmitted,
           style: const TextStyle(
             fontSize: 15,
-            color: Color(0xFF0F172A), // slate-900
+            color: Color(0xFF000000), // Pure black
           ),
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: const TextStyle(
               fontSize: 15,
-              color: Color(0xFF94A3B8), // slate-400
+              color: Color(0xFF000000), // Pure black
             ),
-            fillColor: const Color(0xFFF8FAFC), // slate-50/50
+            fillColor: Color(0xFF000000), // Pure black
             filled: true,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             prefixIcon: prefixIcon != null
                 ? Icon(
                     prefixIcon,
-                    color: const Color(0xFF64748B), // slate-500
+                    color: const Color(0xFF000000), // Pure black
                   )
                 : null,
             border: borderStyle,

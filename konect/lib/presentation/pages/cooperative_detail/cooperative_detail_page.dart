@@ -171,11 +171,7 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               );
             }
 
-            if (details.latitude != null && details.longitude != null) {
-              if (_distance != null && _distance! > 5000.0) {
-                return _buildLocationLockedScreen(details, const Color(0xFF1E293B), colorSecondaryContainer);
-              }
-            }
+            // Distance is computed for display only — no access restriction
 
             return SingleChildScrollView(
               child: Column(
@@ -845,8 +841,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                 (r) => r.title.toLowerCase() == 'mau connect',
                 orElse: () => const CoopDiscussionRoom(
                   id: '',
-                  title: 'mau connect',
-                  description: 'berikan keluh kesah kamu di sini!',
+                  title: 'Kritik dan Saran',
+                  description: 'Bagikan saran dan masukan untuk koperasi',
                   status: 'Aktif',
                   date: '',
                   membersCount: 0,
@@ -975,6 +971,7 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
     String value,
   ) {
     const Color colorNavy = Color(0xFF1E293B);
+    final displayValue = value.trim().isEmpty ? '-' : value;
 
     return Row(
       children: [
@@ -995,13 +992,13 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
               label,
               style: const TextStyle(
                 fontSize: 12,
-                color: Color(0xFF94A3B8),
+                color: Color(0xFF475569), // Changed from slate-400 to slate-600 for high contrast
                 fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 2),
             Text(
-              value,
+              displayValue,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
