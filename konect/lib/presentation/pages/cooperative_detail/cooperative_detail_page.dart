@@ -194,7 +194,7 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
                         _buildRoomsSection(context, state),
                         const SizedBox(height: 48),
                         // Updates / Timeline Section
-                        _buildUpdatesSection(context, details.updates),
+                        _buildUpdatesSection(context, details),
                         const SizedBox(height: 48),
                         // Detail Koperasi Section
                         _buildDetailKoperasiSection(context, details),
@@ -719,7 +719,8 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
   }
 
   Widget _buildUpdatesSection(
-      BuildContext context, List<CoopTimelineUpdate> updates) {
+      BuildContext context, CooperativeDetail details) {
+    final updates = details.updates;
     const Color colorNavy = Color(0xFF1E293B);
     const Color colorSecondaryContainer = Color(0xFFDC2626);
 
@@ -840,10 +841,33 @@ class _CooperativeDetailPageState extends State<CooperativeDetailPage> {
           width: double.infinity,
           child: ElevatedButton.icon(
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                    content: Text('Membuka formulir saran & masukan')),
+              final feedbackRoom = details.rooms.firstWhere(
+                (r) => r.title.toLowerCase() == 'mau connect',
+                orElse: () => const CoopDiscussionRoom(
+                  id: '',
+                  title: 'mau connect',
+                  description: 'berikan keluh kesah kamu di sini!',
+                  status: 'Aktif',
+                  date: '',
+                  membersCount: 0,
+                  avatars: [],
+                ),
               );
+
+              if (feedbackRoom.id.isNotEmpty) {
+                Navigator.pushNamed(
+                  context,
+                  AppConstants.roomDiscussionRoute,
+                  arguments: feedbackRoom.id,
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Ruang saran belum siap, silakan coba lagi.'),
+                    backgroundColor: Color(0xFFEF4444),
+                  ),
+                );
+              }
             },
             icon: const Icon(Icons.chat_bubble_outline,
                 color: Colors.white, size: 18),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/constants.dart';
 import '../../../core/theme.dart';
+import '../../../core/services/supabase_service.dart';
+import '../../blocs/auth/auth_bloc.dart';
 
 class VoucherPage extends StatefulWidget {
   const VoucherPage({super.key});
@@ -73,6 +76,82 @@ class _VoucherPageState extends State<VoucherPage> {
     },
   ];
 
+  int _points = 0;
+  List<Map<String, dynamic>> _vouchersFromDb = [];
+  List<Map<String, dynamic>> _ownedVouchersFromDb = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  int _uuidToBigInt(String uuid) {
+    int hash = 0;
+    for (int i = 0; i < uuid.length; i++) {
+      hash = (hash * 31 + uuid.codeUnitAt(i)) % 9007199254740991;
+    }
+    return hash;
+  }
+
+  Future<void> _loadData() async {
+    if (!mounted) return;
+    setState(() => _isLoading = true);
+    try {
+      final client = SupabaseService().client;
+      final authState = context.read<AuthBloc>().state;
+      String userId = 'guest';
+      if (authState is AuthAuthenticated) {
+        userId = authState.user.id;
+      } else {
+        final currentSessionUser = client.auth.currentUser;
+        if (currentSessionUser != null) {
+          userId = currentSessionUser.id;
+        }
+      }
+      final bigIntId = _uuidToBigInt(userId);
+
+      // Fetch points from users table
+      final userData = await client
+          .from('users')
+          .select('points')
+          .eq('uuid', bigIntId)
+          .maybeSingle();
+      
+      int pts = 0;
+      if (userData != null) {
+        pts = userData['points'] as int? ?? 0;
+      }
+
+      if (mounted) {
+        setState(() {
+          _points = pts;
+          _vouchersFromDb = _availableVouchers;
+          _ownedVouchersFromDb = _ownedVouchers;
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('[VoucherPage._loadData] ERROR: $e');
+      if (mounted) {
+        setState(() {
+          _points = 4250;
+          _vouchersFromDb = _availableVouchers;
+          _ownedVouchersFromDb = _ownedVouchers;
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  String _formatPoints(int points) {
+    return points.toString().replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (Match m) => '${m[1]}.',
+    );
+  }
+
   void _showVoucherDetail(Map<String, dynamic> data, {bool isOwned = false}) {
     showModalBottomSheet(
       context: context,
@@ -81,6 +160,8 @@ class _VoucherPageState extends State<VoucherPage> {
       builder: (ctx) => _VoucherDetailSheet(
         data: data,
         isOwned: isOwned,
+        userPoints: _points,
+        onRedeemSuccess: _loadData,
       ),
     );
   }
@@ -173,6 +254,17 @@ class _VoucherPageState extends State<VoucherPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(
+        backgroundColor: AppColors.brandBg,
+        body: Center(
+          child: CircularProgressIndicator(
+            color: AppColors.brandRed,
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: AppColors.brandBg,
       body: SafeArea(
@@ -221,9 +313,9 @@ class _VoucherPageState extends State<VoucherPage> {
                           ),
                         ),
                         const SizedBox(height: 4),
-                        const Text(
-                          '4.2500 Pts',
-                          style: TextStyle(
+                        Text(
+                          '${_formatPoints(_points)} Pts',
+                          style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -328,8 +420,8 @@ class _VoucherPageState extends State<VoucherPage> {
               Builder(
                 builder: (context) {
                   final filteredVouchers = _isAvailableSelected
-                      ? _availableVouchers.where((v) => _selectedCategory == 'Semua' || v['category'] == _selectedCategory).toList()
-                      : _ownedVouchers;
+                      ? _vouchersFromDb.where((v) => _selectedCategory == 'Semua' || v['category'] == _selectedCategory).toList()
+                      : _ownedVouchersFromDb;
 
                   if (filteredVouchers.isEmpty) {
                     return SizedBox(
@@ -346,11 +438,11 @@ class _VoucherPageState extends State<VoucherPage> {
                   return GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 220,
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
-                      childAspectRatio: 0.82,
+                      childAspectRatio: 0.8,
                     ),
                     itemCount: filteredVouchers.length,
                     itemBuilder: (context, index) {
@@ -757,8 +849,15 @@ class _VoucherPageState extends State<VoucherPage> {
 class _VoucherDetailSheet extends StatefulWidget {
   final Map<String, dynamic> data;
   final bool isOwned;
+  final int userPoints;
+  final VoidCallback onRedeemSuccess;
 
-  const _VoucherDetailSheet({required this.data, this.isOwned = false});
+  const _VoucherDetailSheet({
+    required this.data,
+    this.isOwned = false,
+    required this.userPoints,
+    required this.onRedeemSuccess,
+  });
 
   @override
   State<_VoucherDetailSheet> createState() => _VoucherDetailSheetState();
@@ -767,15 +866,67 @@ class _VoucherDetailSheet extends StatefulWidget {
 class _VoucherDetailSheetState extends State<_VoucherDetailSheet> {
   bool _isProcessing = false;
 
-  void _handleRedeem() {
+  int _uuidToBigInt(String uuid) {
+    int hash = 0;
+    for (int i = 0; i < uuid.length; i++) {
+      hash = (hash * 31 + uuid.codeUnitAt(i)) % 9007199254740991;
+    }
+    return hash;
+  }
+
+  void _handleRedeem() async {
+    final pointsRequired = int.tryParse(widget.data['points']?.toString().replaceAll('.', '') ?? '0') ?? 0;
+    
+    if (widget.userPoints < pointsRequired) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Poin Anda tidak mencukupi untuk menukar voucher ini.'),
+          backgroundColor: Color(0xFFEF4444),
+        ),
+      );
+      return;
+    }
+
     setState(() => _isProcessing = true);
-    Future.delayed(const Duration(milliseconds: 1500), () {
+
+    try {
+      final client = SupabaseService().client;
+      final authState = context.read<AuthBloc>().state;
+      String userId = 'guest';
+      if (authState is AuthAuthenticated) {
+        userId = authState.user.id;
+      } else {
+        final currentSessionUser = client.auth.currentUser;
+        if (currentSessionUser != null) {
+          userId = currentSessionUser.id;
+        }
+      }
+      final bigIntId = _uuidToBigInt(userId);
+
+      // 1. Deduct points from users table
+      final newPoints = widget.userPoints - pointsRequired;
+      await client
+          .from('users')
+          .update({'points': newPoints})
+          .eq('uuid', bigIntId);
+
+      // 2. Insert into voucher_redemptions
+      final voucherId = widget.data['id'] ?? '00000000-0000-0000-0000-000000000101';
+      final int uniqueHash = (widget.data['title'].toString().hashCode).abs() % 1000;
+      final String voucherCode = 'VX-$uniqueHash-KNC-${10 + (widget.data['points'].toString().hashCode % 90).abs()}';
+
+      await client.from('voucher_redemptions').insert({
+        'voucher_id': voucherId,
+        'user_id': userId,
+        'qr_code_used': voucherCode,
+        'status': 'pending',
+      });
+
       if (!mounted) return;
       setState(() => _isProcessing = false);
       Navigator.pop(context);
 
-      final int uniqueHash = (widget.data['title'].toString().hashCode).abs() % 1000;
-      final String voucherCode = 'VX-$uniqueHash-KNC-${10 + (widget.data['points'].toString().hashCode % 90).abs()}';
+      widget.onRedeemSuccess();
 
       Navigator.pushNamed(
         context,
@@ -794,7 +945,18 @@ class _VoucherDetailSheetState extends State<_VoucherDetailSheet> {
           backgroundColor: Color(0xFF10B981),
         ),
       );
-    });
+    } catch (e) {
+      print('[VoucherPage._handleRedeem] ERROR: $e');
+      if (mounted) {
+        setState(() => _isProcessing = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal menukar voucher: $e'),
+            backgroundColor: const Color(0xFFEF4444),
+          ),
+        );
+      }
+    }
   }
 
   @override
